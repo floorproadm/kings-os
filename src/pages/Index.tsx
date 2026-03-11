@@ -3,30 +3,27 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Star, Crown, Zap, Shield, Clock, CheckCircle, Phone, ChevronRight, Sparkles } from "lucide-react";
 import Layout from "@/components/Layout";
-import heroImg from "@/assets/hero-flooring.jpg";
-import serviceHardwood from "@/assets/service-hardwood.jpg";
-import serviceSanding from "@/assets/service-sanding.jpg";
-import serviceVinyl from "@/assets/service-vinyl.jpg";
-import serviceStaircase from "@/assets/service-staircase.jpg";
-import craftsman from "@/assets/craftsman.jpg";
+import heroImgDefault from "@/assets/hero-flooring.jpg";
+import serviceHardwoodDefault from "@/assets/service-hardwood.jpg";
+import serviceSandingDefault from "@/assets/service-sanding.jpg";
+import serviceVinylDefault from "@/assets/service-vinyl.jpg";
+import serviceStaircaseDefault from "@/assets/service-staircase.jpg";
+import craftsmanDefault from "@/assets/craftsman.jpg";
+import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
 };
 
-const stats = [
-  { value: "23+", label: "Years Experience" },
-  { value: "1,000+", label: "Projects Completed" },
-  { value: "5.0", label: "Google Rating", icon: <Star className="w-4 h-4 fill-gold text-gold" /> },
+const servicesMeta = [
+  { icon: <Sparkles className="w-6 h-6" />, title: "Sanding & Finish", desc: "Restore your floors to their original beauty with professional refinishing services.", features: ["Complete Floor Restoration", "Dust-Controlled Sanding", "Durable Protective Finish"], imgKey: "sanding" as const, path: "/services/sanding" },
+  { icon: <Crown className="w-6 h-6" />, title: "Hardwood Flooring", desc: "Timeless hardwood floors installed with precision and expert craftsmanship.", features: ["Professional Installation", "Solid & Engineered Hardwood", "Long-Lasting Durability"], imgKey: "hardwood" as const, path: "/services/hardwood" },
+  { icon: <Shield className="w-6 h-6" />, title: "Luxury Vinyl Plank", desc: "Modern waterproof flooring that combines durability with the natural look of wood.", features: ["100% Waterproof", "Scratch Resistance", "Perfect For Busy Homes"], imgKey: "vinyl" as const, path: "/services/vinyl" },
+  { icon: <Zap className="w-6 h-6" />, title: "Staircase Renovation", desc: "Upgrade your staircase with elegant hardwood steps and custom finishing.", features: ["Custom Hardwood Steps", "Modern Design Options", "Strong & Safe Construction"], imgKey: "staircase" as const, path: "/services/staircase" },
 ];
 
-const services = [
-  { icon: <Sparkles className="w-6 h-6" />, title: "Sanding & Finish", desc: "Restore your floors to their original beauty with professional refinishing services.", features: ["Complete Floor Restoration", "Dust-Controlled Sanding", "Durable Protective Finish"], img: serviceSanding, path: "/services/sanding" },
-  { icon: <Crown className="w-6 h-6" />, title: "Hardwood Flooring", desc: "Timeless hardwood floors installed with precision and expert craftsmanship.", features: ["Professional Installation", "Solid & Engineered Hardwood", "Long-Lasting Durability"], img: serviceHardwood, path: "/services/hardwood" },
-  { icon: <Shield className="w-6 h-6" />, title: "Luxury Vinyl Plank", desc: "Modern waterproof flooring that combines durability with the natural look of wood.", features: ["100% Waterproof", "Scratch Resistance", "Perfect For Busy Homes"], img: serviceVinyl, path: "/services/vinyl" },
-  { icon: <Zap className="w-6 h-6" />, title: "Staircase Renovation", desc: "Upgrade your staircase with elegant hardwood steps and custom finishing.", features: ["Custom Hardwood Steps", "Modern Design Options", "Strong & Safe Construction"], img: serviceStaircase, path: "/services/staircase" },
-];
+const defaultServiceImgs = { sanding: serviceSandingDefault, hardwood: serviceHardwoodDefault, vinyl: serviceVinylDefault, staircase: serviceStaircaseDefault };
 
 const whyCards = [
   { icon: <Crown className="w-8 h-8 text-gold" />, title: "Experienced Craftsmen", desc: "Our owner brings over two decades of hands-on flooring experience, ensuring every project is completed with true craftsmanship.", stat: "23+ Years" },
@@ -42,6 +39,10 @@ const testimonials = [
 ];
 
 export default function Index() {
+  const { config } = useSiteConfig();
+  const heroImg = config.heroImage || heroImgDefault;
+  const craftImg = config.craftImage || craftsmanDefault;
+
   return (
     <Layout>
       {/* Hero */}
@@ -53,25 +54,25 @@ export default function Index() {
         <div className="relative container mx-auto px-4 py-20">
           <motion.div className="max-w-2xl" initial="hidden" animate="visible">
             <motion.p variants={fadeUp} custom={0} className="text-gold font-semibold text-sm tracking-wider uppercase mb-4">
-              Flooring Experts Serving Johnson County and Surrounding Areas
+              {config.heroSubtitle}
             </motion.p>
             <motion.h1 variants={fadeUp} custom={1} className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
-              Transform Your Home with Expert Flooring{" "}
-              <span className="gold-gradient-text">Installation & Refinishing</span>
+              {config.heroTitle}{" "}
+              <span className="gold-gradient-text">{config.heroTitleHighlight}</span>
             </motion.h1>
             <motion.p variants={fadeUp} custom={2} className="text-lg text-muted-foreground mb-8 max-w-xl">
-              Whether you need new flooring installation or professional refinishing, our team delivers beautiful, durable floors that transform the look and value of your home.
+              {config.heroDescription}
             </motion.p>
             <motion.div variants={fadeUp} custom={3} className="flex flex-col sm:flex-row gap-4">
               <Button variant="gold" size="xl" asChild>
-                <Link to="/contact">Get Your Free Flooring Estimate</Link>
+                <Link to="/contact">{config.heroCta1}</Link>
               </Button>
               <Button variant="goldOutline" size="xl" asChild>
-                <a href="tel:9139153193">Call (913) 915-3193</a>
+                <a href={`tel:${config.heroPhone}`}>{config.heroCta2}</a>
               </Button>
             </motion.div>
             <motion.p variants={fadeUp} custom={4} className="mt-4 text-xs text-muted-foreground">
-              Free • No Obligation • Fast Response
+              {config.heroNote}
             </motion.p>
           </motion.div>
         </div>
@@ -81,11 +82,11 @@ export default function Index() {
       <section className="bg-secondary border-y border-border/50">
         <div className="container mx-auto px-4 py-6">
           <div className="grid grid-cols-3 gap-4 text-center">
-            {stats.map((s, i) => (
+            {config.stats.map((s, i) => (
               <div key={i}>
                 <div className="flex items-center justify-center gap-1">
                   <span className="text-2xl sm:text-3xl font-display font-bold text-gold">{s.value}</span>
-                  {s.icon}
+                  {i === 2 && <Star className="w-4 h-4 fill-gold text-gold" />}
                 </div>
                 <p className="text-xs sm:text-sm text-muted-foreground mt-1">{s.label}</p>
               </div>
@@ -99,22 +100,22 @@ export default function Index() {
         <div className="container mx-auto">
           <div className="text-center mb-14">
             <span className="inline-block px-4 py-1.5 rounded-full bg-gold/10 text-gold text-xs font-semibold tracking-wider uppercase mb-4">
-              ✨ Premium Flooring Services
+              {config.servicesBadge}
             </span>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-3">
-              Expert Flooring Installation & <span className="gold-gradient-text">Refinishing Services</span>
+              {config.servicesTitle} <span className="gold-gradient-text">{config.servicesTitleHighlight}</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Upgrade your home with professionally installed or beautifully refinished floors built to last.
+              {config.servicesSubtitle}
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((s, i) => (
+            {servicesMeta.map((s, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i}>
                 <Link to={s.path} className="group block elevated-card overflow-hidden hover:border-gold/40 transition-all duration-300">
                   <div className="h-48 overflow-hidden">
-                    <img src={s.img} alt={s.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={config.serviceImages[s.imgKey] || defaultServiceImgs[s.imgKey]} alt={s.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <div className="p-5">
                     <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center text-gold mb-3">
@@ -146,7 +147,7 @@ export default function Index() {
         <div className="container mx-auto">
           <div className="text-center mb-14">
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-3">
-              Why Choose <span className="gold-gradient-text">Hardwood Kings?</span>
+              {config.whyTitle} <span className="gold-gradient-text">{config.whyTitleHighlight}</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -168,22 +169,18 @@ export default function Index() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-6">
-                Craftsmanship That <span className="gold-gradient-text">Speaks for Itself</span>
+                {config.craftTitle} <span className="gold-gradient-text">{config.craftTitleHighlight}</span>
               </h2>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                With over 23 years of hands-on flooring experience, our owner Thiago Reis brings true artisan-level craftsmanship to every project. Every floor we install or restore reflects decades of dedication and expertise.
-              </p>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
-                The name Hardwood Kings comes from the family name Reis, meaning "Kings" — representing the pride, craftsmanship, and responsibility behind every project.
-              </p>
+              <p className="text-muted-foreground mb-6 leading-relaxed">{config.craftText1}</p>
+              <p className="text-muted-foreground mb-8 leading-relaxed">{config.craftText2}</p>
               <Button variant="goldOutline" size="lg" asChild>
                 <Link to="/about">Learn Our Story</Link>
               </Button>
             </div>
             <div className="relative">
-              <img src={craftsman} alt="Hardwood Kings craftsman at work" className="rounded-2xl shadow-2xl shadow-black/30" />
+              <img src={craftImg} alt="Hardwood Kings craftsman at work" className="rounded-2xl shadow-2xl shadow-black/30" />
               <div className="absolute -bottom-4 -left-4 bg-gold text-primary-foreground px-6 py-3 rounded-xl font-display font-bold text-lg shadow-lg">
-                23+ Years
+                {config.craftBadge}
               </div>
             </div>
           </div>
@@ -194,13 +191,11 @@ export default function Index() {
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto">
           <div className="text-center mb-14">
-            <span className="text-gold text-xs font-semibold tracking-wider uppercase mb-4 block">Testimonials</span>
+            <span className="text-gold text-xs font-semibold tracking-wider uppercase mb-4 block">{config.testimonialsLabel}</span>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-3">
-              See What Our <span className="gold-gradient-text">Customers</span> Are Saying
+              {config.testimonialsTitle} <span className="gold-gradient-text">{config.testimonialsTitleHighlight}</span> Are Saying
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Homeowners trust Hardwood Kings for high-quality flooring installation and refinishing services.
-            </p>
+            <p className="text-muted-foreground max-w-xl mx-auto">{config.testimonialsSubtitle}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
@@ -217,7 +212,7 @@ export default function Index() {
             <div className="inline-flex items-center gap-2 bg-card px-4 py-2 rounded-lg border border-border/50">
               <span className="text-sm font-bold text-foreground">EXCELLENT</span>
               <div className="flex gap-0.5">{[...Array(5)].map((_, j) => <Star key={j} className="w-3.5 h-3.5 fill-gold text-gold" />)}</div>
-              <span className="text-xs text-muted-foreground">Based on 35+ Reviews on Google</span>
+              <span className="text-xs text-muted-foreground">{config.testimonialsFooter}</span>
             </div>
           </div>
         </div>
@@ -226,18 +221,14 @@ export default function Index() {
       {/* CTA */}
       <section className="section-padding bg-gradient-to-br from-gold-dark via-gold to-gold-light">
         <div className="container mx-auto text-center">
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-primary-foreground mb-4">
-            Let's Build Something Beautiful, Together.
-          </h2>
-          <p className="text-primary-foreground/80 max-w-xl mx-auto mb-8">
-            Ready to transform your home? Get your free flooring estimate with fast response from our local experts.
-          </p>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-primary-foreground mb-4">{config.ctaTitle}</h2>
+          <p className="text-primary-foreground/80 max-w-xl mx-auto mb-8">{config.ctaSubtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="default" size="xl" className="bg-background text-foreground hover:bg-background/90" asChild>
-              <Link to="/contact">Get Your Free Estimate</Link>
+              <Link to="/contact">{config.ctaCta1}</Link>
             </Button>
             <Button variant="outline" size="xl" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" asChild>
-              <a href="tel:9139153193">Call (913) 915-3193</a>
+              <a href={`tel:${config.heroPhone}`}>{config.ctaCta2}</a>
             </Button>
           </div>
         </div>
@@ -246,10 +237,8 @@ export default function Index() {
       {/* Service Areas */}
       <section className="section-padding-sm">
         <div className="container mx-auto text-center">
-          <h3 className="font-display text-lg font-bold text-foreground mb-3">Service Areas in Johnson County</h3>
-          <p className="text-xs text-muted-foreground max-w-2xl mx-auto">
-            Overland Park • Olathe • Lenexa • Shawnee • Leawood • Prairie Village • Mission • Roeland Park • Fairway • Merriam • Kansas City, KS • Kansas City, MO • Lee's Summit
-          </p>
+          <h3 className="font-display text-lg font-bold text-foreground mb-3">{config.serviceAreasTitle}</h3>
+          <p className="text-xs text-muted-foreground max-w-2xl mx-auto">{config.serviceAreasText}</p>
         </div>
       </section>
     </Layout>
