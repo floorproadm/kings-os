@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
-import logoCrown from "@/assets/logo-crown.png";
+import logoCrownDefault from "@/assets/logo-crown.png";
+import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 export default function Footer() {
+  const { config } = useSiteConfig();
+  const logoSrc = config.logoImage || logoCrownDefault;
+
   return (
     <footer className="bg-dark-surface border-t border-border/30">
       <div className="container mx-auto section-padding">
@@ -10,16 +14,14 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <img src={logoCrown} alt="Hardwood Kings" className="h-10 w-10 object-contain" />
+              <img src={logoSrc} alt="Hardwood Kings" className="h-10 w-10 object-contain" />
               <div>
                 <span className="font-display text-lg font-bold text-foreground">Hardwood</span>
                 <span className="font-display text-lg font-bold text-gold ml-1">Kings</span>
               </div>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Premium Hardwood Flooring Installation & Refinishing in Johnson County and Surrounding Areas.
-            </p>
-            <p className="text-xs text-gold font-display italic">Floors Fit for Kings</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">{config.footerTagline}</p>
+            <p className="text-xs text-gold font-display italic">{config.footerSlogan}</p>
           </div>
 
           {/* Services */}
@@ -52,15 +54,15 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-gold" />
-                <a href="tel:9139153193" className="hover:text-gold transition-colors">(913) 915-3193</a>
+                <a href={`tel:${config.heroPhone || "9139153193"}`} className="hover:text-gold transition-colors">{config.phone}</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-gold" />
-                <a href="mailto:hardwoodkingsinc@gmail.com" className="hover:text-gold transition-colors">hardwoodkingsinc@gmail.com</a>
+                <a href={`mailto:${config.email}`} className="hover:text-gold transition-colors">{config.email}</a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-gold mt-0.5" />
-                <span>Johnson County, KS & Surrounding Areas</span>
+                <span>{config.servingArea}</span>
               </li>
             </ul>
           </div>

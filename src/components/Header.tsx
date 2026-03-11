@@ -1,8 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, Menu, X, ChevronDown } from "lucide-react";
-import logoCrown from "@/assets/logo-crown.png";
+import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import logoCrownDefault from "@/assets/logo-crown.png";
+import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const services = [
   { name: "Hardwood Floor Installation", path: "/services/hardwood" },
@@ -21,8 +22,9 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const location = useLocation();
+  const { config } = useSiteConfig();
+  const logoSrc = config.logoImage || logoCrownDefault;
 
   return (
     <>
@@ -30,14 +32,14 @@ export default function Header() {
       <div className="bg-secondary border-b border-border/50">
         <div className="container mx-auto flex items-center justify-between px-4 py-2 text-sm">
           <div className="flex items-center gap-4">
-            <a href="tel:9139153193" className="flex items-center gap-1.5 text-muted-foreground hover:text-gold transition-colors">
+            <a href={`tel:${config.heroPhone || "9139153193"}`} className="flex items-center gap-1.5 text-muted-foreground hover:text-gold transition-colors">
               <Phone className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Call or Text:</span>
-              <span className="font-semibold text-foreground">(913) 915-3193</span>
+              <span className="font-semibold text-foreground">{config.phone}</span>
             </a>
           </div>
           <div className="flex items-center gap-3 text-muted-foreground">
-            <span className="hidden md:inline text-xs">Serving <strong className="text-foreground">Johnson County & Surrounding Areas</strong></span>
+            <span className="hidden md:inline text-xs">Serving <strong className="text-foreground">{config.servingArea}</strong></span>
             <a href="https://instagram.com/hardwoodkings" target="_blank" rel="noopener" className="hover:text-gold transition-colors text-xs">Instagram</a>
             <a href="#" className="hover:text-gold transition-colors text-xs">Facebook</a>
           </div>
@@ -48,7 +50,7 @@ export default function Header() {
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/30">
         <div className="container mx-auto flex items-center justify-between px-4 py-3">
           <Link to="/" className="flex items-center gap-2">
-            <img src={logoCrown} alt="Hardwood Kings" className="h-10 w-10 object-contain" />
+            <img src={logoSrc} alt="Hardwood Kings" className="h-10 w-10 object-contain" />
             <div className="leading-tight">
               <span className="font-display text-lg font-bold text-foreground">Hardwood</span>
               <span className="font-display text-lg font-bold text-gold ml-1">Kings</span>
