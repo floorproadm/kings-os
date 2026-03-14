@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle, Droplets, Shield, Zap, Heart } from "lucide-react";
 import serviceVinyl from "@/assets/service-vinyl.jpg";
+import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
