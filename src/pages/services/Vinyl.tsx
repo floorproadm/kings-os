@@ -37,6 +37,9 @@ const comparison = [
 ];
 
 export default function VinylService() {
+  const { config } = useSiteConfig();
+  const p = config.vinylPage;
+
   return (
     <Layout>
       <section className="relative py-20 overflow-hidden">
@@ -46,13 +49,13 @@ export default function VinylService() {
         </div>
         <div className="relative container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">Luxury Vinyl Plank</p>
+            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">{p.heroLabel}</p>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
-              Beautiful Luxury Vinyl Plank <span className="gold-gradient-text">Flooring Installation</span>
+              {p.heroTitle} <span className="gold-gradient-text">{p.heroHighlight}</span>
             </h1>
-            <p className="text-muted-foreground mb-8">Waterproof, durable, and designed to look like real hardwood.</p>
+            <p className="text-muted-foreground mb-8">{p.heroDescription}</p>
             <Button variant="gold" size="xl" asChild>
-              <Link to="/contact">Get Your Free Estimate</Link>
+              <Link to="/contact">{p.heroCta}</Link>
             </Button>
           </div>
         </div>
