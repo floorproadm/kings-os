@@ -58,8 +58,8 @@ export default function HardwoodService() {
 
       <section className="section-padding">
         <div className="container mx-auto">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">Why Choose Our <span className="gold-gradient-text">Hardwood Flooring?</span></h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">Professionally installed hardwood floors that bring lasting beauty, durability, and value.</p>
+          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">{p.sectionTitle} <span className="gold-gradient-text">{p.sectionHighlight}</span></h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">{p.sectionSubtitle}</p>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div className="space-y-3">
