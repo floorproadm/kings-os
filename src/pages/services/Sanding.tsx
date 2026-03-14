@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle, Zap, Home, DollarSign, Clock, Shield, Crown } from "lucide-react";
 import serviceSanding from "@/assets/service-sanding.jpg";
+import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
