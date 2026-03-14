@@ -11,25 +11,11 @@ const fadeUp = {
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
 };
 
-const benefits = [
-  "Expert Professional Installation",
-  "Lifetime Structural Warranty",
-  "Increases Home Value",
-  "Custom Staining & Finishing Options",
-  "Minimal disruption installation process",
-];
-
-const features = [
-  { icon: <Trophy className="w-6 h-6 text-gold" />, title: "Premium Quality Materials", desc: "Only the finest hardwood species from trusted suppliers" },
-  { icon: <Shield className="w-6 h-6 text-gold" />, title: "Installation Guarantee", desc: "Every hardwood floor is backed by our commitment to quality and durability" },
-  { icon: <Crown className="w-6 h-6 text-gold" />, title: "Craftsmanship Guarantee", desc: "Professional installation standards designed for long-lasting results" },
-];
-
-const steps = [
-  { num: "01", title: "Free In-Home Consultation", desc: "We visit your home, evaluate the space, and help you choose the best hardwood flooring options." },
-  { num: "02", title: "Professional Installation", desc: "Our experienced installers prepare the subfloor and install your hardwood with expert craftsmanship." },
-  { num: "03", title: "Final Walkthrough & Inspection", desc: "We review the finished project with you to ensure every detail meets our quality standards." },
-];
+const iconMap: Record<number, React.ReactNode> = {
+  0: <Trophy className="w-6 h-6 text-gold" />,
+  1: <Shield className="w-6 h-6 text-gold" />,
+  2: <Crown className="w-6 h-6 text-gold" />,
+};
 
 export default function HardwoodService() {
   const { config } = useSiteConfig();
@@ -63,7 +49,7 @@ export default function HardwoodService() {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div className="space-y-3">
-              {benefits.map((b, i) => (
+              {p.benefits.map((b, i) => (
                 <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-gold flex-shrink-0" />
                   <span className="text-foreground font-medium">{b}</span>
@@ -71,9 +57,9 @@ export default function HardwoodService() {
               ))}
             </div>
             <div className="grid gap-4">
-              {features.map((f, i) => (
+              {p.features.map((f, i) => (
                 <div key={i} className="elevated-card p-5 flex gap-4 items-start">
-                  <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">{f.icon}</div>
+                  <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">{iconMap[i % 3]}</div>
                   <div>
                     <h3 className="font-display font-bold text-foreground mb-1">{f.title}</h3>
                     <p className="text-sm text-muted-foreground">{f.desc}</p>
@@ -89,7 +75,7 @@ export default function HardwoodService() {
         <div className="container mx-auto max-w-4xl">
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">Our Installation <span className="gold-gradient-text">Process</span></h2>
           <div className="space-y-6">
-            {steps.map((s, i) => (
+            {p.steps.map((s, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 flex gap-6 items-start">
                 <div className="text-3xl font-display font-bold text-gold/30">{s.num}</div>
                 <div>

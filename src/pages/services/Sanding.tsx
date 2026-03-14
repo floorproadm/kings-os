@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { CheckCircle, Zap, Home, DollarSign, Clock, Shield, Crown } from "lucide-react";
+import { Zap, Home, DollarSign, Clock } from "lucide-react";
 import serviceSanding from "@/assets/service-sanding.jpg";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
@@ -11,24 +11,12 @@ const fadeUp = {
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
 };
 
-const benefits = [
-  { icon: <Zap className="w-6 h-6 text-gold" />, title: "Long-Lasting Protection", desc: "Our professional sanding and finishing process protects your hardwood floors with a durable coating built to last for years." },
-  { icon: <Home className="w-6 h-6 text-gold" />, title: "Increase Home Value", desc: "Beautiful hardwood floors are one of the most desirable features for homeowners and future buyers." },
-  { icon: <DollarSign className="w-6 h-6 text-gold" />, title: "Save Thousands", desc: "Refinishing restores your existing hardwood floors at a fraction of the cost of installing brand-new flooring." },
-  { icon: <Clock className="w-6 h-6 text-gold" />, title: "Fast & Efficient", desc: "Most refinishing projects are completed in just a few days, transforming your floors without major disruption." },
-];
-
-const steps = [
-  { num: "01", title: "Professional Sanding", desc: "We carefully sand the entire floor surface to remove old finishes, scratches, stains, and imperfections." },
-  { num: "02", title: "Custom Stain Selection", desc: "Choose to keep the natural wood color or select from a range of beautiful stain options to match your home's style." },
-  { num: "03", title: "Premium Protective Finish", desc: "We apply three coats of premium Bona or Loba finish, creating a durable protective layer with your choice of sheen." },
-];
-
-const finishes = [
-  { name: "Matte Finish", desc: "Natural look with minimal sheen, hides minor imperfections", best: "High-traffic areas" },
-  { name: "Satin Finish", desc: "Perfect balance of durability and beauty with subtle luster", best: "Most popular choice" },
-  { name: "Semi-Gloss Finish", desc: "Higher sheen with excellent durability and easy cleaning", best: "Kitchens & bathrooms" },
-];
+const iconMap: Record<number, React.ReactNode> = {
+  0: <Zap className="w-6 h-6 text-gold" />,
+  1: <Home className="w-6 h-6 text-gold" />,
+  2: <DollarSign className="w-6 h-6 text-gold" />,
+  3: <Clock className="w-6 h-6 text-gold" />,
+};
 
 export default function SandingService() {
   const { config } = useSiteConfig();
@@ -62,9 +50,9 @@ export default function SandingService() {
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">{p.sectionTitle} <span className="gold-gradient-text">{p.sectionHighlight}</span></h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">{p.sectionSubtitle}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {benefits.map((b, i) => (
+            {p.benefits.map((b, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 text-center">
-                <div className="mx-auto w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-4">{b.icon}</div>
+                <div className="mx-auto w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-4">{iconMap[i % 4]}</div>
                 <h3 className="font-display font-bold text-foreground mb-2">{b.title}</h3>
                 <p className="text-sm text-muted-foreground">{b.desc}</p>
               </motion.div>
@@ -79,7 +67,7 @@ export default function SandingService() {
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">Our Refinishing <span className="gold-gradient-text">Process</span></h2>
           <p className="text-center text-muted-foreground mb-12">Professional refinishing that restores natural beauty and protects for years.</p>
           <div className="space-y-6">
-            {steps.map((s, i) => (
+            {p.steps.map((s, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 flex gap-6 items-start">
                 <div className="text-3xl font-display font-bold text-gold/30">{s.num}</div>
                 <div>
@@ -98,7 +86,7 @@ export default function SandingService() {
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">Finish <span className="gold-gradient-text">Options</span></h2>
           <p className="text-center text-muted-foreground mb-12">Choose the perfect finish for your lifestyle and aesthetic preferences.</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {finishes.map((f, i) => (
+            {p.finishes.map((f, i) => (
               <div key={i} className="elevated-card p-6 text-center">
                 <h3 className="font-display font-bold text-foreground mb-2">{f.name}</h3>
                 <p className="text-sm text-muted-foreground mb-3">{f.desc}</p>

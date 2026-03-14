@@ -11,28 +11,6 @@ const fadeUp = {
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
 };
 
-const services = [
-  { title: "Custom Staircase Installation", desc: "New staircase construction with custom design and premium materials.", tags: ["Custom Design", "Hardwood Treads & Risers", "Expert Installation"] },
-  { title: "Staircase Renovation & Refinishing", desc: "Transform outdated stairs with new hardwood components and professional refinishing.", tags: ["Tread Replacement", "Stair Sanding & Refinishing", "Safety Improvements"] },
-];
-
-const benefits = [
-  "Custom Design & Craftsmanship",
-  "Premium Hardwood Materials",
-  "Built for Safety & Code Compliance",
-  "Complete Staircase Transformation",
-  "Increase Your Home's Value",
-  "Professional Installation & Refinishing",
-];
-
-const styles = [
-  { name: "Traditional Oak", desc: "Classic styling with rich oak treads and elegant turned balusters", tags: ["Timeless Appeal", "Durable", "Warm Finish"] },
-  { name: "Modern Minimalist", desc: "Clean lines with sleek glass or metal railings for contemporary homes", tags: ["Contemporary", "Open Feel", "Premium Materials"] },
-  { name: "Rustic Farmhouse", desc: "Reclaimed wood styling with wrought iron accents for character", tags: ["Unique Character", "Mixed Materials", "Authentic Look"] },
-];
-
-const safety = ["Proper Tread Depth & Rise", "Non-Slip Surface Treatment", "Proper Lighting Integration", "Child Safety Considerations"];
-
 export default function StaircaseService() {
   const { config } = useSiteConfig();
   const p = config.staircasePage;
@@ -63,7 +41,7 @@ export default function StaircaseService() {
         <div className="container mx-auto max-w-4xl">
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">{p.sectionTitle} <span className="gold-gradient-text">{p.sectionHighlight}</span></h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {services.map((s, i) => (
+            {p.services.map((s, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6">
                 <h3 className="font-display text-lg font-bold text-foreground mb-2">{s.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{s.desc}</p>
@@ -84,7 +62,7 @@ export default function StaircaseService() {
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">Why Choose Our <span className="gold-gradient-text">Staircase Services?</span></h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div className="space-y-3">
-              {benefits.map((b, i) => (
+              {p.benefits.map((b, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-gold flex-shrink-0" />
                   <span className="text-foreground font-medium">{b}</span>
@@ -123,7 +101,7 @@ export default function StaircaseService() {
         <div className="container mx-auto max-w-4xl">
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">Popular Staircase <span className="gold-gradient-text">Styles</span></h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {styles.map((s, i) => (
+            {p.styles.map((s, i) => (
               <div key={i} className="elevated-card p-6 text-center">
                 <h3 className="font-display font-bold text-foreground mb-2">{s.name}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{s.desc}</p>
@@ -141,7 +119,7 @@ export default function StaircaseService() {
         <div className="container mx-auto max-w-3xl text-center">
           <h2 className="font-display text-2xl font-bold text-foreground mb-8">Safety & <span className="gold-gradient-text">Code Compliance</span></h2>
           <div className="grid grid-cols-2 gap-4">
-            {safety.map((s, i) => (
+            {p.safety.map((s, i) => (
               <div key={i} className="flex items-center gap-2 text-sm text-foreground">
                 <CheckCircle className="w-4 h-4 text-gold" /> {s}
               </div>
