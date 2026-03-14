@@ -32,6 +32,9 @@ const steps = [
 ];
 
 export default function HardwoodService() {
+  const { config } = useSiteConfig();
+  const p = config.hardwoodPage;
+
   return (
     <Layout>
       <section className="relative py-20 overflow-hidden">
@@ -41,13 +44,13 @@ export default function HardwoodService() {
         </div>
         <div className="relative container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">Hardwood Flooring</p>
+            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">{p.heroLabel}</p>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
-              Beautiful Hardwood Floors <span className="gold-gradient-text">Professionally Installed</span>
+              {p.heroTitle} <span className="gold-gradient-text">{p.heroHighlight}</span>
             </h1>
-            <p className="text-muted-foreground mb-8">Hardwood floors bring warmth, elegance, and long-term value to any home. Our professional installation ensures a flawless finish.</p>
+            <p className="text-muted-foreground mb-8">{p.heroDescription}</p>
             <Button variant="gold" size="xl" asChild>
-              <Link to="/contact">Get Your Free Estimate</Link>
+              <Link to="/contact">{p.heroCta}</Link>
             </Button>
           </div>
         </div>
