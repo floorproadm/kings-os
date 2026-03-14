@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle, Droplets, Shield, Zap, Heart } from "lucide-react";
 import serviceVinyl from "@/assets/service-vinyl.jpg";
+import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -36,6 +37,9 @@ const comparison = [
 ];
 
 export default function VinylService() {
+  const { config } = useSiteConfig();
+  const p = config.vinylPage;
+
   return (
     <Layout>
       <section className="relative py-20 overflow-hidden">
@@ -45,13 +49,13 @@ export default function VinylService() {
         </div>
         <div className="relative container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">Luxury Vinyl Plank</p>
+            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">{p.heroLabel}</p>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
-              Beautiful Luxury Vinyl Plank <span className="gold-gradient-text">Flooring Installation</span>
+              {p.heroTitle} <span className="gold-gradient-text">{p.heroHighlight}</span>
             </h1>
-            <p className="text-muted-foreground mb-8">Waterproof, durable, and designed to look like real hardwood.</p>
+            <p className="text-muted-foreground mb-8">{p.heroDescription}</p>
             <Button variant="gold" size="xl" asChild>
-              <Link to="/contact">Get Your Free Estimate</Link>
+              <Link to="/contact">{p.heroCta}</Link>
             </Button>
           </div>
         </div>
@@ -59,8 +63,8 @@ export default function VinylService() {
 
       <section className="section-padding">
         <div className="container mx-auto">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">Why Homeowners Choose <span className="gold-gradient-text">Luxury Vinyl</span></h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">Natural look of hardwood with modern durability and waterproof protection.</p>
+          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">{p.sectionTitle} <span className="gold-gradient-text">{p.sectionHighlight}</span></h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">{p.sectionSubtitle}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 text-center">
@@ -114,14 +118,14 @@ export default function VinylService() {
 
       <section className="section-padding bg-gradient-to-br from-gold-dark via-gold to-gold-light">
         <div className="container mx-auto text-center">
-          <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">Ready for Worry-Free Floors?</h2>
-          <p className="text-primary-foreground/80 mb-8">Experience the beauty of hardwood without the limitations.</p>
+          <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">{p.ctaTitle}</h2>
+          <p className="text-primary-foreground/80 mb-8">{p.ctaSubtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="default" size="xl" className="bg-background text-foreground hover:bg-background/90" asChild>
-              <Link to="/contact">Get Free Quote</Link>
+              <Link to="/contact">{p.ctaCta1}</Link>
             </Button>
             <Button variant="outline" size="xl" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" asChild>
-              <a href="tel:9139153193">Call (913) 915-3193</a>
+              <a href="tel:9139153193">{p.ctaCta2}</a>
             </Button>
           </div>
         </div>

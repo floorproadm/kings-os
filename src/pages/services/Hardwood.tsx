@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle, Crown, Shield, Trophy } from "lucide-react";
 import serviceHardwood from "@/assets/service-hardwood.jpg";
+import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -31,6 +32,9 @@ const steps = [
 ];
 
 export default function HardwoodService() {
+  const { config } = useSiteConfig();
+  const p = config.hardwoodPage;
+
   return (
     <Layout>
       <section className="relative py-20 overflow-hidden">
@@ -40,13 +44,13 @@ export default function HardwoodService() {
         </div>
         <div className="relative container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">Hardwood Flooring</p>
+            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">{p.heroLabel}</p>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
-              Beautiful Hardwood Floors <span className="gold-gradient-text">Professionally Installed</span>
+              {p.heroTitle} <span className="gold-gradient-text">{p.heroHighlight}</span>
             </h1>
-            <p className="text-muted-foreground mb-8">Hardwood floors bring warmth, elegance, and long-term value to any home. Our professional installation ensures a flawless finish.</p>
+            <p className="text-muted-foreground mb-8">{p.heroDescription}</p>
             <Button variant="gold" size="xl" asChild>
-              <Link to="/contact">Get Your Free Estimate</Link>
+              <Link to="/contact">{p.heroCta}</Link>
             </Button>
           </div>
         </div>
@@ -54,8 +58,8 @@ export default function HardwoodService() {
 
       <section className="section-padding">
         <div className="container mx-auto">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">Why Choose Our <span className="gold-gradient-text">Hardwood Flooring?</span></h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">Professionally installed hardwood floors that bring lasting beauty, durability, and value.</p>
+          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">{p.sectionTitle} <span className="gold-gradient-text">{p.sectionHighlight}</span></h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">{p.sectionSubtitle}</p>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div className="space-y-3">
@@ -100,14 +104,14 @@ export default function HardwoodService() {
 
       <section className="section-padding bg-gradient-to-br from-gold-dark via-gold to-gold-light">
         <div className="container mx-auto text-center">
-          <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">Ready to Upgrade Your Home?</h2>
-          <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">Get a free in-home flooring estimate and discover how premium hardwood flooring can transform your space.</p>
+          <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">{p.ctaTitle}</h2>
+          <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">{p.ctaSubtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="default" size="xl" className="bg-background text-foreground hover:bg-background/90" asChild>
-              <Link to="/contact">Get Your Free Estimate</Link>
+              <Link to="/contact">{p.ctaCta1}</Link>
             </Button>
             <Button variant="outline" size="xl" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" asChild>
-              <a href="tel:9139153193">Call (913) 915-3193</a>
+              <a href="tel:9139153193">{p.ctaCta2}</a>
             </Button>
           </div>
         </div>

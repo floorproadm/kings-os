@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle, Zap, Home, DollarSign, Clock, Shield, Crown } from "lucide-react";
 import serviceSanding from "@/assets/service-sanding.jpg";
+import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -30,6 +31,9 @@ const finishes = [
 ];
 
 export default function SandingService() {
+  const { config } = useSiteConfig();
+  const p = config.sandingPage;
+
   return (
     <Layout>
       {/* Hero */}
@@ -40,13 +44,13 @@ export default function SandingService() {
         </div>
         <div className="relative container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">Sanding & Refinishing</p>
+            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">{p.heroLabel}</p>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
-              Your Hardwood Floors Can Look <span className="gold-gradient-text">Beautiful Again</span>
+              {p.heroTitle} <span className="gold-gradient-text">{p.heroHighlight}</span>
             </h1>
-            <p className="text-muted-foreground mb-8">Bring your worn, scratched, or faded hardwood floors back to life with our professional refinishing process.</p>
+            <p className="text-muted-foreground mb-8">{p.heroDescription}</p>
             <Button variant="gold" size="xl" asChild>
-              <Link to="/contact">Get Your Free Estimate</Link>
+              <Link to="/contact">{p.heroCta}</Link>
             </Button>
           </div>
         </div>
@@ -55,8 +59,8 @@ export default function SandingService() {
       {/* Benefits */}
       <section className="section-padding">
         <div className="container mx-auto">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">Why Choose Our <span className="gold-gradient-text">Service?</span></h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">Restore the beauty of your hardwood floors and save thousands compared to replacing them.</p>
+          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">{p.sectionTitle} <span className="gold-gradient-text">{p.sectionHighlight}</span></h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">{p.sectionSubtitle}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((b, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 text-center">
@@ -108,14 +112,14 @@ export default function SandingService() {
       {/* CTA */}
       <section className="section-padding bg-gradient-to-br from-gold-dark via-gold to-gold-light">
         <div className="container mx-auto text-center">
-          <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">Ready to Restore Your Hardwood Floors?</h2>
-          <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">Get a free flooring estimate and see how our professional refinishing can bring your floors back to life.</p>
+          <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">{p.ctaTitle}</h2>
+          <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">{p.ctaSubtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="default" size="xl" className="bg-background text-foreground hover:bg-background/90" asChild>
-              <Link to="/contact">Get Your Free Estimate</Link>
+              <Link to="/contact">{p.ctaCta1}</Link>
             </Button>
             <Button variant="outline" size="xl" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" asChild>
-              <Link to="/gallery">View Our Projects</Link>
+              <Link to="/gallery">{p.ctaCta2}</Link>
             </Button>
           </div>
         </div>

@@ -1,5 +1,20 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
 
+export interface ServicePageConfig {
+  heroLabel: string;
+  heroTitle: string;
+  heroHighlight: string;
+  heroDescription: string;
+  heroCta: string;
+  sectionTitle: string;
+  sectionHighlight: string;
+  sectionSubtitle: string;
+  ctaTitle: string;
+  ctaSubtitle: string;
+  ctaCta1: string;
+  ctaCta2: string;
+}
+
 export interface SiteConfig {
   // Hero
   heroSubtitle: string;
@@ -74,6 +89,12 @@ export interface SiteConfig {
   craftImage: string;
   logoImage: string;
   serviceImages: { sanding: string; hardwood: string; vinyl: string; staircase: string };
+
+  // Service pages
+  hardwoodPage: ServicePageConfig;
+  vinylPage: ServicePageConfig;
+  sandingPage: ServicePageConfig;
+  staircasePage: ServicePageConfig;
 }
 
 const defaultConfig: SiteConfig = {
@@ -142,6 +163,63 @@ const defaultConfig: SiteConfig = {
   craftImage: "",
   logoImage: "",
   serviceImages: { sanding: "", hardwood: "", vinyl: "", staircase: "" },
+
+  hardwoodPage: {
+    heroLabel: "Hardwood Flooring",
+    heroTitle: "Beautiful Hardwood Floors",
+    heroHighlight: "Professionally Installed",
+    heroDescription: "Hardwood floors bring warmth, elegance, and long-term value to any home. Our professional installation ensures a flawless finish.",
+    heroCta: "Get Your Free Estimate",
+    sectionTitle: "Why Choose Our",
+    sectionHighlight: "Hardwood Flooring?",
+    sectionSubtitle: "Professionally installed hardwood floors that bring lasting beauty, durability, and value.",
+    ctaTitle: "Ready to Upgrade Your Home?",
+    ctaSubtitle: "Get a free in-home flooring estimate and discover how premium hardwood flooring can transform your space.",
+    ctaCta1: "Get Your Free Estimate",
+    ctaCta2: "Call (913) 915-3193",
+  },
+  vinylPage: {
+    heroLabel: "Luxury Vinyl Plank",
+    heroTitle: "Beautiful Luxury Vinyl Plank",
+    heroHighlight: "Flooring Installation",
+    heroDescription: "Waterproof, durable, and designed to look like real hardwood.",
+    heroCta: "Get Your Free Estimate",
+    sectionTitle: "Why Homeowners Choose",
+    sectionHighlight: "Luxury Vinyl",
+    sectionSubtitle: "Natural look of hardwood with modern durability and waterproof protection.",
+    ctaTitle: "Ready for Worry-Free Floors?",
+    ctaSubtitle: "Experience the beauty of hardwood without the limitations.",
+    ctaCta1: "Get Free Quote",
+    ctaCta2: "Call (913) 915-3193",
+  },
+  sandingPage: {
+    heroLabel: "Sanding & Refinishing",
+    heroTitle: "Your Hardwood Floors Can Look",
+    heroHighlight: "Beautiful Again",
+    heroDescription: "Bring your worn, scratched, or faded hardwood floors back to life with our professional refinishing process.",
+    heroCta: "Get Your Free Estimate",
+    sectionTitle: "Why Choose Our",
+    sectionHighlight: "Service?",
+    sectionSubtitle: "Restore the beauty of your hardwood floors and save thousands compared to replacing them.",
+    ctaTitle: "Ready to Restore Your Hardwood Floors?",
+    ctaSubtitle: "Get a free flooring estimate and see how our professional refinishing can bring your floors back to life.",
+    ctaCta1: "Get Your Free Estimate",
+    ctaCta2: "View Our Projects",
+  },
+  staircasePage: {
+    heroLabel: "Staircase Services",
+    heroTitle: "Custom Staircase Installation &",
+    heroHighlight: "Refinishing",
+    heroDescription: "Create a stunning focal point with our custom staircase design and installation services.",
+    heroCta: "Get Design Consultation",
+    sectionTitle: "Our Staircase",
+    sectionHighlight: "Services",
+    sectionSubtitle: "",
+    ctaTitle: "Ready to Transform Your Staircase?",
+    ctaSubtitle: "Let's create a stunning centerpiece for your home.",
+    ctaCta1: "Get Design Consultation",
+    ctaCta2: "Call (913) 915-3193",
+  },
 };
 
 interface SiteConfigContextType {
