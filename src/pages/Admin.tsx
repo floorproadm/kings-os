@@ -183,6 +183,7 @@ export default function Admin() {
         <Tabs defaultValue="texts" className="space-y-6">
           <TabsList className="bg-card border border-border/50">
             <TabsTrigger value="texts" className="gap-1.5"><Type className="w-4 h-4" /> Texts</TabsTrigger>
+            <TabsTrigger value="services-pages" className="gap-1.5"><FileText className="w-4 h-4" /> Service Pages</TabsTrigger>
             <TabsTrigger value="colors" className="gap-1.5"><Palette className="w-4 h-4" /> Colors & Styles</TabsTrigger>
             <TabsTrigger value="images" className="gap-1.5"><Image className="w-4 h-4" /> Images</TabsTrigger>
             <TabsTrigger value="info" className="gap-1.5"><Settings className="w-4 h-4" /> Company Info</TabsTrigger>
