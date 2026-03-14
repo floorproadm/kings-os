@@ -34,6 +34,9 @@ const styles = [
 const safety = ["Proper Tread Depth & Rise", "Non-Slip Surface Treatment", "Proper Lighting Integration", "Child Safety Considerations"];
 
 export default function StaircaseService() {
+  const { config } = useSiteConfig();
+  const p = config.staircasePage;
+
   return (
     <Layout>
       <section className="relative py-20 overflow-hidden">
@@ -43,13 +46,13 @@ export default function StaircaseService() {
         </div>
         <div className="relative container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">Staircase Services</p>
+            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">{p.heroLabel}</p>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
-              Custom Staircase Installation & <span className="gold-gradient-text">Refinishing</span>
+              {p.heroTitle} <span className="gold-gradient-text">{p.heroHighlight}</span>
             </h1>
-            <p className="text-muted-foreground mb-8">Create a stunning focal point with our custom staircase design and installation services.</p>
+            <p className="text-muted-foreground mb-8">{p.heroDescription}</p>
             <Button variant="gold" size="xl" asChild>
-              <Link to="/contact">Get Design Consultation</Link>
+              <Link to="/contact">{p.heroCta}</Link>
             </Button>
           </div>
         </div>
