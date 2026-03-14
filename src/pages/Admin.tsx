@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LogOut, Save, RotateCcw, Check, Upload, Palette, Type, Image, Settings, Eye } from "lucide-react";
+import { LogOut, Save, RotateCcw, Check, Upload, Palette, Type, Image, Settings, Eye, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useRef } from "react";
