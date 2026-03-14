@@ -31,6 +31,9 @@ const finishes = [
 ];
 
 export default function SandingService() {
+  const { config } = useSiteConfig();
+  const p = config.sandingPage;
+
   return (
     <Layout>
       {/* Hero */}
@@ -41,13 +44,13 @@ export default function SandingService() {
         </div>
         <div className="relative container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">Sanding & Refinishing</p>
+            <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">{p.heroLabel}</p>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
-              Your Hardwood Floors Can Look <span className="gold-gradient-text">Beautiful Again</span>
+              {p.heroTitle} <span className="gold-gradient-text">{p.heroHighlight}</span>
             </h1>
-            <p className="text-muted-foreground mb-8">Bring your worn, scratched, or faded hardwood floors back to life with our professional refinishing process.</p>
+            <p className="text-muted-foreground mb-8">{p.heroDescription}</p>
             <Button variant="gold" size="xl" asChild>
-              <Link to="/contact">Get Your Free Estimate</Link>
+              <Link to="/contact">{p.heroCta}</Link>
             </Button>
           </div>
         </div>
