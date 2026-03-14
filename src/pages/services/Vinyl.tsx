@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { CheckCircle, Droplets, Shield, Zap, Heart } from "lucide-react";
+import { Droplets, Shield, Zap, Heart } from "lucide-react";
 import serviceVinyl from "@/assets/service-vinyl.jpg";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
@@ -11,30 +11,12 @@ const fadeUp = {
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
 };
 
-const features = [
-  { icon: <Droplets className="w-6 h-6 text-gold" />, title: "100% Waterproof", desc: "Ideal for kitchens, bathrooms, basements, and moisture-prone areas." },
-  { icon: <Shield className="w-6 h-6 text-gold" />, title: "Built for High Traffic", desc: "Designed to withstand heavy foot traffic in homes and commercial spaces." },
-  { icon: <Zap className="w-6 h-6 text-gold" />, title: "Fast Installation", desc: "Most projects completed quickly with minimal disruption." },
-  { icon: <Heart className="w-6 h-6 text-gold" />, title: "Comfortable Underfoot", desc: "Softer and warmer than tile or traditional hardwood." },
-];
-
-const rooms = [
-  { room: "Kitchen", benefits: "Waterproof spill protection • Easy to clean", tag: "Perfect choice" },
-  { room: "Bathroom", benefits: "100% moisture resistant • Anti-slip surface", tag: "Ideal solution" },
-  { room: "Basement", benefits: "Moisture barrier • Temperature stable", tag: "Best option" },
-  { room: "Living Areas", benefits: "Beautiful wood look • Pet friendly", tag: "Excellent choice" },
-  { room: "Office & Retail", benefits: "High foot traffic • Professional look", tag: "Commercial Use" },
-  { room: "Rental Properties", benefits: "Durable • Low maintenance • Cost effective", tag: "Property Owners" },
-];
-
-const comparison = [
-  { feature: "Water Resistance", vinyl: "100% waterproof", hardwood: "Not recommended for moisture" },
-  { feature: "Durability", vinyl: "Scratch & dent resistant", hardwood: "Can scratch but refinishable" },
-  { feature: "Maintenance", vinyl: "Very easy to clean", hardwood: "Requires more care" },
-  { feature: "Installation", vinyl: "Faster installation", hardwood: "More complex" },
-  { feature: "Longevity", vinyl: "15–25 years", hardwood: "Decades with refinishing" },
-  { feature: "Appearance", vinyl: "Realistic wood look", hardwood: "Natural real wood" },
-];
+const iconMap: Record<number, React.ReactNode> = {
+  0: <Droplets className="w-6 h-6 text-gold" />,
+  1: <Shield className="w-6 h-6 text-gold" />,
+  2: <Zap className="w-6 h-6 text-gold" />,
+  3: <Heart className="w-6 h-6 text-gold" />,
+};
 
 export default function VinylService() {
   const { config } = useSiteConfig();
@@ -66,9 +48,9 @@ export default function VinylService() {
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">{p.sectionTitle} <span className="gold-gradient-text">{p.sectionHighlight}</span></h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">{p.sectionSubtitle}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((f, i) => (
+            {p.features.map((f, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 text-center">
-                <div className="mx-auto w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-4">{f.icon}</div>
+                <div className="mx-auto w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-4">{iconMap[i % 4]}</div>
                 <h3 className="font-display font-bold text-foreground mb-2">{f.title}</h3>
                 <p className="text-sm text-muted-foreground">{f.desc}</p>
               </motion.div>
@@ -82,7 +64,7 @@ export default function VinylService() {
         <div className="container mx-auto max-w-4xl">
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">Perfect for Every <span className="gold-gradient-text">Room</span></h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {rooms.map((r, i) => (
+            {p.rooms.map((r, i) => (
               <div key={i} className="elevated-card p-5">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-display font-bold text-foreground">{r.room}</h3>
@@ -105,7 +87,7 @@ export default function VinylService() {
               <span className="text-gold">Luxury Vinyl ✅</span>
               <span>Hardwood</span>
             </div>
-            {comparison.map((c, i) => (
+            {p.comparison.map((c, i) => (
               <div key={i} className={`grid grid-cols-3 p-4 text-sm ${i % 2 === 0 ? 'bg-card' : 'bg-secondary/30'}`}>
                 <span className="text-foreground font-medium">{c.feature}</span>
                 <span className="text-gold">{c.vinyl}</span>

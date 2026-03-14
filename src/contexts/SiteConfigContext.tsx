@@ -15,6 +15,31 @@ export interface ServicePageConfig {
   ctaCta2: string;
 }
 
+export interface HardwoodPageConfig extends ServicePageConfig {
+  benefits: string[];
+  features: { title: string; desc: string }[];
+  steps: { num: string; title: string; desc: string }[];
+}
+
+export interface SandingPageConfig extends ServicePageConfig {
+  benefits: { title: string; desc: string }[];
+  steps: { num: string; title: string; desc: string }[];
+  finishes: { name: string; desc: string; best: string }[];
+}
+
+export interface VinylPageConfig extends ServicePageConfig {
+  features: { title: string; desc: string }[];
+  rooms: { room: string; benefits: string; tag: string }[];
+  comparison: { feature: string; vinyl: string; hardwood: string }[];
+}
+
+export interface StaircasePageConfig extends ServicePageConfig {
+  services: { title: string; desc: string; tags: string[] }[];
+  benefits: string[];
+  styles: { name: string; desc: string; tags: string[] }[];
+  safety: string[];
+}
+
 export interface SiteConfig {
   // Hero
   heroSubtitle: string;
@@ -70,7 +95,7 @@ export interface SiteConfig {
   footerTagline: string;
   footerSlogan: string;
 
-  // Colors (CSS custom properties overrides)
+  // Colors
   colorPrimary: string;
   colorGold: string;
   colorGoldLight: string;
@@ -84,17 +109,17 @@ export interface SiteConfig {
   buttonRadius: string;
   buttonBorderWidth: string;
 
-  // Images (base64 or URL)
+  // Images
   heroImage: string;
   craftImage: string;
   logoImage: string;
   serviceImages: { sanding: string; hardwood: string; vinyl: string; staircase: string };
 
   // Service pages
-  hardwoodPage: ServicePageConfig;
-  vinylPage: ServicePageConfig;
-  sandingPage: ServicePageConfig;
-  staircasePage: ServicePageConfig;
+  hardwoodPage: HardwoodPageConfig;
+  vinylPage: VinylPageConfig;
+  sandingPage: SandingPageConfig;
+  staircasePage: StaircasePageConfig;
 }
 
 const defaultConfig: SiteConfig = {
@@ -177,7 +202,25 @@ const defaultConfig: SiteConfig = {
     ctaSubtitle: "Get a free in-home flooring estimate and discover how premium hardwood flooring can transform your space.",
     ctaCta1: "Get Your Free Estimate",
     ctaCta2: "Call (913) 915-3193",
+    benefits: [
+      "Expert Professional Installation",
+      "Lifetime Structural Warranty",
+      "Increases Home Value",
+      "Custom Staining & Finishing Options",
+      "Minimal disruption installation process",
+    ],
+    features: [
+      { title: "Premium Quality Materials", desc: "Only the finest hardwood species from trusted suppliers" },
+      { title: "Installation Guarantee", desc: "Every hardwood floor is backed by our commitment to quality and durability" },
+      { title: "Craftsmanship Guarantee", desc: "Professional installation standards designed for long-lasting results" },
+    ],
+    steps: [
+      { num: "01", title: "Free In-Home Consultation", desc: "We visit your home, evaluate the space, and help you choose the best hardwood flooring options." },
+      { num: "02", title: "Professional Installation", desc: "Our experienced installers prepare the subfloor and install your hardwood with expert craftsmanship." },
+      { num: "03", title: "Final Walkthrough & Inspection", desc: "We review the finished project with you to ensure every detail meets our quality standards." },
+    ],
   },
+
   vinylPage: {
     heroLabel: "Luxury Vinyl Plank",
     heroTitle: "Beautiful Luxury Vinyl Plank",
@@ -191,7 +234,30 @@ const defaultConfig: SiteConfig = {
     ctaSubtitle: "Experience the beauty of hardwood without the limitations.",
     ctaCta1: "Get Free Quote",
     ctaCta2: "Call (913) 915-3193",
+    features: [
+      { title: "100% Waterproof", desc: "Ideal for kitchens, bathrooms, basements, and moisture-prone areas." },
+      { title: "Built for High Traffic", desc: "Designed to withstand heavy foot traffic in homes and commercial spaces." },
+      { title: "Fast Installation", desc: "Most projects completed quickly with minimal disruption." },
+      { title: "Comfortable Underfoot", desc: "Softer and warmer than tile or traditional hardwood." },
+    ],
+    rooms: [
+      { room: "Kitchen", benefits: "Waterproof spill protection • Easy to clean", tag: "Perfect choice" },
+      { room: "Bathroom", benefits: "100% moisture resistant • Anti-slip surface", tag: "Ideal solution" },
+      { room: "Basement", benefits: "Moisture barrier • Temperature stable", tag: "Best option" },
+      { room: "Living Areas", benefits: "Beautiful wood look • Pet friendly", tag: "Excellent choice" },
+      { room: "Office & Retail", benefits: "High foot traffic • Professional look", tag: "Commercial Use" },
+      { room: "Rental Properties", benefits: "Durable • Low maintenance • Cost effective", tag: "Property Owners" },
+    ],
+    comparison: [
+      { feature: "Water Resistance", vinyl: "100% waterproof", hardwood: "Not recommended for moisture" },
+      { feature: "Durability", vinyl: "Scratch & dent resistant", hardwood: "Can scratch but refinishable" },
+      { feature: "Maintenance", vinyl: "Very easy to clean", hardwood: "Requires more care" },
+      { feature: "Installation", vinyl: "Faster installation", hardwood: "More complex" },
+      { feature: "Longevity", vinyl: "15–25 years", hardwood: "Decades with refinishing" },
+      { feature: "Appearance", vinyl: "Realistic wood look", hardwood: "Natural real wood" },
+    ],
   },
+
   sandingPage: {
     heroLabel: "Sanding & Refinishing",
     heroTitle: "Your Hardwood Floors Can Look",
@@ -205,7 +271,24 @@ const defaultConfig: SiteConfig = {
     ctaSubtitle: "Get a free flooring estimate and see how our professional refinishing can bring your floors back to life.",
     ctaCta1: "Get Your Free Estimate",
     ctaCta2: "View Our Projects",
+    benefits: [
+      { title: "Long-Lasting Protection", desc: "Our professional sanding and finishing process protects your hardwood floors with a durable coating built to last for years." },
+      { title: "Increase Home Value", desc: "Beautiful hardwood floors are one of the most desirable features for homeowners and future buyers." },
+      { title: "Save Thousands", desc: "Refinishing restores your existing hardwood floors at a fraction of the cost of installing brand-new flooring." },
+      { title: "Fast & Efficient", desc: "Most refinishing projects are completed in just a few days, transforming your floors without major disruption." },
+    ],
+    steps: [
+      { num: "01", title: "Professional Sanding", desc: "We carefully sand the entire floor surface to remove old finishes, scratches, stains, and imperfections." },
+      { num: "02", title: "Custom Stain Selection", desc: "Choose to keep the natural wood color or select from a range of beautiful stain options to match your home's style." },
+      { num: "03", title: "Premium Protective Finish", desc: "We apply three coats of premium Bona or Loba finish, creating a durable protective layer with your choice of sheen." },
+    ],
+    finishes: [
+      { name: "Matte Finish", desc: "Natural look with minimal sheen, hides minor imperfections", best: "High-traffic areas" },
+      { name: "Satin Finish", desc: "Perfect balance of durability and beauty with subtle luster", best: "Most popular choice" },
+      { name: "Semi-Gloss Finish", desc: "Higher sheen with excellent durability and easy cleaning", best: "Kitchens & bathrooms" },
+    ],
   },
+
   staircasePage: {
     heroLabel: "Staircase Services",
     heroTitle: "Custom Staircase Installation &",
@@ -219,6 +302,24 @@ const defaultConfig: SiteConfig = {
     ctaSubtitle: "Let's create a stunning centerpiece for your home.",
     ctaCta1: "Get Design Consultation",
     ctaCta2: "Call (913) 915-3193",
+    services: [
+      { title: "Custom Staircase Installation", desc: "New staircase construction with custom design and premium materials.", tags: ["Custom Design", "Hardwood Treads & Risers", "Expert Installation"] },
+      { title: "Staircase Renovation & Refinishing", desc: "Transform outdated stairs with new hardwood components and professional refinishing.", tags: ["Tread Replacement", "Stair Sanding & Refinishing", "Safety Improvements"] },
+    ],
+    benefits: [
+      "Custom Design & Craftsmanship",
+      "Premium Hardwood Materials",
+      "Built for Safety & Code Compliance",
+      "Complete Staircase Transformation",
+      "Increase Your Home's Value",
+      "Professional Installation & Refinishing",
+    ],
+    styles: [
+      { name: "Traditional Oak", desc: "Classic styling with rich oak treads and elegant turned balusters", tags: ["Timeless Appeal", "Durable", "Warm Finish"] },
+      { name: "Modern Minimalist", desc: "Clean lines with sleek glass or metal railings for contemporary homes", tags: ["Contemporary", "Open Feel", "Premium Materials"] },
+      { name: "Rustic Farmhouse", desc: "Reclaimed wood styling with wrought iron accents for character", tags: ["Unique Character", "Mixed Materials", "Authentic Look"] },
+    ],
+    safety: ["Proper Tread Depth & Rise", "Non-Slip Surface Treatment", "Proper Lighting Integration", "Child Safety Considerations"],
   },
 };
 
@@ -248,7 +349,18 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
   const [config, setConfig] = useState<SiteConfig>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) return { ...defaultConfig, ...JSON.parse(stored) };
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        // Deep merge service pages to include new array fields
+        return {
+          ...defaultConfig,
+          ...parsed,
+          hardwoodPage: { ...defaultConfig.hardwoodPage, ...parsed.hardwoodPage },
+          vinylPage: { ...defaultConfig.vinylPage, ...parsed.vinylPage },
+          sandingPage: { ...defaultConfig.sandingPage, ...parsed.sandingPage },
+          staircasePage: { ...defaultConfig.staircasePage, ...parsed.staircasePage },
+        };
+      }
     } catch {}
     return defaultConfig;
   });
@@ -274,7 +386,6 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
     setSavedConfig(defaultConfig);
   }, []);
 
-  // Auto-save with debounce
   useEffect(() => {
     if (!autoSaveEnabled || !hasUnsavedChanges) return;
     if (autoSaveTimer.current) clearTimeout(autoSaveTimer.current);
@@ -285,7 +396,6 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
     return () => { if (autoSaveTimer.current) clearTimeout(autoSaveTimer.current); };
   }, [config, autoSaveEnabled, hasUnsavedChanges]);
 
-  // Apply color overrides to CSS custom properties
   useEffect(() => {
     const root = document.documentElement;
     root.style.setProperty("--primary", config.colorPrimary);

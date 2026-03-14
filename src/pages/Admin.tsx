@@ -1,19 +1,18 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
-import { useSiteConfig } from "@/contexts/SiteConfigContext";
+import { useSiteConfig, HardwoodPageConfig, SandingPageConfig, VinylPageConfig, StaircasePageConfig } from "@/contexts/SiteConfigContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LogOut, Save, RotateCcw, Check, Upload, Palette, Type, Image, Settings, Eye, FileText } from "lucide-react";
+import { LogOut, Save, RotateCcw, Check, Upload, Palette, Type, Image, Settings, Eye, FileText, Plus, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useRef } from "react";
 
 function ColorInput({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
-  // Convert HSL string to hex for color picker
   const hslToHex = (hsl: string) => {
     try {
       const [h, s, l] = hsl.split(" ").map((v) => parseFloat(v.replace("%", "")));
@@ -115,6 +114,17 @@ function TextField({ label, value, onChange, multiline }: { label: string; value
   );
 }
 
+function ArrayItemHeader({ index, onRemove, label }: { index: number; onRemove: () => void; label: string }) {
+  return (
+    <div className="flex items-center justify-between">
+      <span className="text-xs font-semibold text-muted-foreground uppercase">{label} #{index + 1}</span>
+      <Button variant="ghost" size="sm" onClick={onRemove} className="h-7 w-7 p-0 text-destructive hover:text-destructive">
+        <Trash2 className="w-3.5 h-3.5" />
+      </Button>
+    </div>
+  );
+}
+
 export default function Admin() {
   const { isAuthenticated, logout } = useAdminAuth();
   const { config, updateConfig, saveConfig, resetConfig, hasUnsavedChanges, autoSaveEnabled, setAutoSaveEnabled } = useSiteConfig();
@@ -137,6 +147,41 @@ export default function Admin() {
       resetConfig();
       toast({ title: "Reset complete", description: "All settings restored to defaults." });
     }
+  };
+
+  // Helper to update nested page config
+  const updateHardwood = (partial: Partial<HardwoodPageConfig>) => updateConfig({ hardwoodPage: { ...config.hardwoodPage, ...partial } });
+  const updateSanding = (partial: Partial<SandingPageConfig>) => updateConfig({ sandingPage: { ...config.sandingPage, ...partial } });
+  const updateVinyl = (partial: Partial<VinylPageConfig>) => updateConfig({ vinylPage: { ...config.vinylPage, ...partial } });
+  const updateStaircase = (partial: Partial<StaircasePageConfig>) => updateConfig({ staircasePage: { ...config.staircasePage, ...partial } });
+
+  const renderServicePageFields = (pageKey: "hardwoodPage" | "vinylPage" | "sandingPage" | "staircasePage") => {
+    const page = config[pageKey];
+    const update = (field: string, value: string) => {
+      updateConfig({ [pageKey]: { ...page, [field]: value } });
+    };
+    return (
+      <>
+        <div className="grid grid-cols-2 gap-4">
+          <TextField label="Hero Label" value={page.heroLabel} onChange={(v) => update("heroLabel", v)} />
+          <TextField label="Hero CTA Button" value={page.heroCta} onChange={(v) => update("heroCta", v)} />
+        </div>
+        <TextField label="Hero Title" value={page.heroTitle} onChange={(v) => update("heroTitle", v)} />
+        <TextField label="Hero Highlight" value={page.heroHighlight} onChange={(v) => update("heroHighlight", v)} />
+        <TextField label="Hero Description" value={page.heroDescription} onChange={(v) => update("heroDescription", v)} multiline />
+        <div className="grid grid-cols-2 gap-4">
+          <TextField label="Section Title" value={page.sectionTitle} onChange={(v) => update("sectionTitle", v)} />
+          <TextField label="Section Highlight" value={page.sectionHighlight} onChange={(v) => update("sectionHighlight", v)} />
+        </div>
+        <TextField label="Section Subtitle" value={page.sectionSubtitle} onChange={(v) => update("sectionSubtitle", v)} multiline />
+        <TextField label="CTA Title" value={page.ctaTitle} onChange={(v) => update("ctaTitle", v)} />
+        <TextField label="CTA Subtitle" value={page.ctaSubtitle} onChange={(v) => update("ctaSubtitle", v)} multiline />
+        <div className="grid grid-cols-2 gap-4">
+          <TextField label="CTA Button 1" value={page.ctaCta1} onChange={(v) => update("ctaCta1", v)} />
+          <TextField label="CTA Button 2" value={page.ctaCta2} onChange={(v) => update("ctaCta2", v)} />
+        </div>
+      </>
+    );
   };
 
   return (
@@ -265,40 +310,375 @@ export default function Admin() {
 
           {/* SERVICE PAGES TAB */}
           <TabsContent value="services-pages" className="space-y-6">
-            {(["hardwoodPage", "vinylPage", "sandingPage", "staircasePage"] as const).map((pageKey) => {
-              const labels: Record<string, string> = {
-                hardwoodPage: "Hardwood Flooring",
-                vinylPage: "Luxury Vinyl Plank",
-                sandingPage: "Sanding & Refinishing",
-                staircasePage: "Staircase Services",
-              };
-              const page = config[pageKey];
-              const update = (field: string, value: string) => {
-                updateConfig({ [pageKey]: { ...page, [field]: value } });
-              };
-              return (
-                <FieldGroup key={pageKey} title={labels[pageKey]}>
-                  <div className="grid grid-cols-2 gap-4">
-                    <TextField label="Hero Label" value={page.heroLabel} onChange={(v) => update("heroLabel", v)} />
-                    <TextField label="Hero CTA Button" value={page.heroCta} onChange={(v) => update("heroCta", v)} />
+            {/* HARDWOOD */}
+            <FieldGroup title="Hardwood Flooring — Texts">
+              {renderServicePageFields("hardwoodPage")}
+            </FieldGroup>
+            <FieldGroup title="Hardwood — Benefits (checklist)">
+              {config.hardwoodPage.benefits.map((b, i) => (
+                <div key={i} className="flex gap-2 items-start">
+                  <div className="flex-1">
+                    <ArrayItemHeader index={i} label="Benefit" onRemove={() => {
+                      const arr = [...config.hardwoodPage.benefits];
+                      arr.splice(i, 1);
+                      updateHardwood({ benefits: arr });
+                    }} />
+                    <Input value={b} onChange={(e) => {
+                      const arr = [...config.hardwoodPage.benefits];
+                      arr[i] = e.target.value;
+                      updateHardwood({ benefits: arr });
+                    }} className="text-sm mt-1" />
                   </div>
-                  <TextField label="Hero Title" value={page.heroTitle} onChange={(v) => update("heroTitle", v)} />
-                  <TextField label="Hero Highlight" value={page.heroHighlight} onChange={(v) => update("heroHighlight", v)} />
-                  <TextField label="Hero Description" value={page.heroDescription} onChange={(v) => update("heroDescription", v)} multiline />
-                  <div className="grid grid-cols-2 gap-4">
-                    <TextField label="Section Title" value={page.sectionTitle} onChange={(v) => update("sectionTitle", v)} />
-                    <TextField label="Section Highlight" value={page.sectionHighlight} onChange={(v) => update("sectionHighlight", v)} />
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateHardwood({ benefits: [...config.hardwoodPage.benefits, "New benefit"] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Benefit
+              </Button>
+            </FieldGroup>
+            <FieldGroup title="Hardwood — Features (cards)">
+              {config.hardwoodPage.features.map((f, i) => (
+                <div key={i} className="border border-border/30 rounded-lg p-3 space-y-2">
+                  <ArrayItemHeader index={i} label="Feature" onRemove={() => {
+                    const arr = [...config.hardwoodPage.features];
+                    arr.splice(i, 1);
+                    updateHardwood({ features: arr });
+                  }} />
+                  <TextField label="Title" value={f.title} onChange={(v) => {
+                    const arr = [...config.hardwoodPage.features];
+                    arr[i] = { ...arr[i], title: v };
+                    updateHardwood({ features: arr });
+                  }} />
+                  <TextField label="Description" value={f.desc} onChange={(v) => {
+                    const arr = [...config.hardwoodPage.features];
+                    arr[i] = { ...arr[i], desc: v };
+                    updateHardwood({ features: arr });
+                  }} multiline />
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateHardwood({ features: [...config.hardwoodPage.features, { title: "New Feature", desc: "Description" }] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Feature
+              </Button>
+            </FieldGroup>
+            <FieldGroup title="Hardwood — Installation Steps">
+              {config.hardwoodPage.steps.map((s, i) => (
+                <div key={i} className="border border-border/30 rounded-lg p-3 space-y-2">
+                  <ArrayItemHeader index={i} label="Step" onRemove={() => {
+                    const arr = [...config.hardwoodPage.steps];
+                    arr.splice(i, 1);
+                    updateHardwood({ steps: arr });
+                  }} />
+                  <div className="grid grid-cols-4 gap-2">
+                    <TextField label="Number" value={s.num} onChange={(v) => {
+                      const arr = [...config.hardwoodPage.steps];
+                      arr[i] = { ...arr[i], num: v };
+                      updateHardwood({ steps: arr });
+                    }} />
+                    <div className="col-span-3">
+                      <TextField label="Title" value={s.title} onChange={(v) => {
+                        const arr = [...config.hardwoodPage.steps];
+                        arr[i] = { ...arr[i], title: v };
+                        updateHardwood({ steps: arr });
+                      }} />
+                    </div>
                   </div>
-                  <TextField label="Section Subtitle" value={page.sectionSubtitle} onChange={(v) => update("sectionSubtitle", v)} multiline />
-                  <TextField label="CTA Title" value={page.ctaTitle} onChange={(v) => update("ctaTitle", v)} />
-                  <TextField label="CTA Subtitle" value={page.ctaSubtitle} onChange={(v) => update("ctaSubtitle", v)} multiline />
-                  <div className="grid grid-cols-2 gap-4">
-                    <TextField label="CTA Button 1" value={page.ctaCta1} onChange={(v) => update("ctaCta1", v)} />
-                    <TextField label="CTA Button 2" value={page.ctaCta2} onChange={(v) => update("ctaCta2", v)} />
+                  <TextField label="Description" value={s.desc} onChange={(v) => {
+                    const arr = [...config.hardwoodPage.steps];
+                    arr[i] = { ...arr[i], desc: v };
+                    updateHardwood({ steps: arr });
+                  }} multiline />
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateHardwood({ steps: [...config.hardwoodPage.steps, { num: String(config.hardwoodPage.steps.length + 1).padStart(2, "0"), title: "New Step", desc: "Description" }] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Step
+              </Button>
+            </FieldGroup>
+
+            {/* SANDING */}
+            <FieldGroup title="Sanding & Refinishing — Texts">
+              {renderServicePageFields("sandingPage")}
+            </FieldGroup>
+            <FieldGroup title="Sanding — Benefits">
+              {config.sandingPage.benefits.map((b, i) => (
+                <div key={i} className="border border-border/30 rounded-lg p-3 space-y-2">
+                  <ArrayItemHeader index={i} label="Benefit" onRemove={() => {
+                    const arr = [...config.sandingPage.benefits];
+                    arr.splice(i, 1);
+                    updateSanding({ benefits: arr });
+                  }} />
+                  <TextField label="Title" value={b.title} onChange={(v) => {
+                    const arr = [...config.sandingPage.benefits];
+                    arr[i] = { ...arr[i], title: v };
+                    updateSanding({ benefits: arr });
+                  }} />
+                  <TextField label="Description" value={b.desc} onChange={(v) => {
+                    const arr = [...config.sandingPage.benefits];
+                    arr[i] = { ...arr[i], desc: v };
+                    updateSanding({ benefits: arr });
+                  }} multiline />
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateSanding({ benefits: [...config.sandingPage.benefits, { title: "New Benefit", desc: "Description" }] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Benefit
+              </Button>
+            </FieldGroup>
+            <FieldGroup title="Sanding — Process Steps">
+              {config.sandingPage.steps.map((s, i) => (
+                <div key={i} className="border border-border/30 rounded-lg p-3 space-y-2">
+                  <ArrayItemHeader index={i} label="Step" onRemove={() => {
+                    const arr = [...config.sandingPage.steps];
+                    arr.splice(i, 1);
+                    updateSanding({ steps: arr });
+                  }} />
+                  <div className="grid grid-cols-4 gap-2">
+                    <TextField label="Number" value={s.num} onChange={(v) => {
+                      const arr = [...config.sandingPage.steps];
+                      arr[i] = { ...arr[i], num: v };
+                      updateSanding({ steps: arr });
+                    }} />
+                    <div className="col-span-3">
+                      <TextField label="Title" value={s.title} onChange={(v) => {
+                        const arr = [...config.sandingPage.steps];
+                        arr[i] = { ...arr[i], title: v };
+                        updateSanding({ steps: arr });
+                      }} />
+                    </div>
                   </div>
-                </FieldGroup>
-              );
-            })}
+                  <TextField label="Description" value={s.desc} onChange={(v) => {
+                    const arr = [...config.sandingPage.steps];
+                    arr[i] = { ...arr[i], desc: v };
+                    updateSanding({ steps: arr });
+                  }} multiline />
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateSanding({ steps: [...config.sandingPage.steps, { num: String(config.sandingPage.steps.length + 1).padStart(2, "0"), title: "New Step", desc: "Description" }] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Step
+              </Button>
+            </FieldGroup>
+            <FieldGroup title="Sanding — Finish Options">
+              {config.sandingPage.finishes.map((f, i) => (
+                <div key={i} className="border border-border/30 rounded-lg p-3 space-y-2">
+                  <ArrayItemHeader index={i} label="Finish" onRemove={() => {
+                    const arr = [...config.sandingPage.finishes];
+                    arr.splice(i, 1);
+                    updateSanding({ finishes: arr });
+                  }} />
+                  <TextField label="Name" value={f.name} onChange={(v) => {
+                    const arr = [...config.sandingPage.finishes];
+                    arr[i] = { ...arr[i], name: v };
+                    updateSanding({ finishes: arr });
+                  }} />
+                  <TextField label="Description" value={f.desc} onChange={(v) => {
+                    const arr = [...config.sandingPage.finishes];
+                    arr[i] = { ...arr[i], desc: v };
+                    updateSanding({ finishes: arr });
+                  }} multiline />
+                  <TextField label="Best For" value={f.best} onChange={(v) => {
+                    const arr = [...config.sandingPage.finishes];
+                    arr[i] = { ...arr[i], best: v };
+                    updateSanding({ finishes: arr });
+                  }} />
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateSanding({ finishes: [...config.sandingPage.finishes, { name: "New Finish", desc: "Description", best: "Best for..." }] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Finish
+              </Button>
+            </FieldGroup>
+
+            {/* VINYL */}
+            <FieldGroup title="Luxury Vinyl Plank — Texts">
+              {renderServicePageFields("vinylPage")}
+            </FieldGroup>
+            <FieldGroup title="Vinyl — Features">
+              {config.vinylPage.features.map((f, i) => (
+                <div key={i} className="border border-border/30 rounded-lg p-3 space-y-2">
+                  <ArrayItemHeader index={i} label="Feature" onRemove={() => {
+                    const arr = [...config.vinylPage.features];
+                    arr.splice(i, 1);
+                    updateVinyl({ features: arr });
+                  }} />
+                  <TextField label="Title" value={f.title} onChange={(v) => {
+                    const arr = [...config.vinylPage.features];
+                    arr[i] = { ...arr[i], title: v };
+                    updateVinyl({ features: arr });
+                  }} />
+                  <TextField label="Description" value={f.desc} onChange={(v) => {
+                    const arr = [...config.vinylPage.features];
+                    arr[i] = { ...arr[i], desc: v };
+                    updateVinyl({ features: arr });
+                  }} multiline />
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateVinyl({ features: [...config.vinylPage.features, { title: "New Feature", desc: "Description" }] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Feature
+              </Button>
+            </FieldGroup>
+            <FieldGroup title="Vinyl — Room Guide">
+              {config.vinylPage.rooms.map((r, i) => (
+                <div key={i} className="border border-border/30 rounded-lg p-3 space-y-2">
+                  <ArrayItemHeader index={i} label="Room" onRemove={() => {
+                    const arr = [...config.vinylPage.rooms];
+                    arr.splice(i, 1);
+                    updateVinyl({ rooms: arr });
+                  }} />
+                  <div className="grid grid-cols-2 gap-2">
+                    <TextField label="Room Name" value={r.room} onChange={(v) => {
+                      const arr = [...config.vinylPage.rooms];
+                      arr[i] = { ...arr[i], room: v };
+                      updateVinyl({ rooms: arr });
+                    }} />
+                    <TextField label="Tag" value={r.tag} onChange={(v) => {
+                      const arr = [...config.vinylPage.rooms];
+                      arr[i] = { ...arr[i], tag: v };
+                      updateVinyl({ rooms: arr });
+                    }} />
+                  </div>
+                  <TextField label="Benefits" value={r.benefits} onChange={(v) => {
+                    const arr = [...config.vinylPage.rooms];
+                    arr[i] = { ...arr[i], benefits: v };
+                    updateVinyl({ rooms: arr });
+                  }} />
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateVinyl({ rooms: [...config.vinylPage.rooms, { room: "New Room", benefits: "Benefits here", tag: "Tag" }] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Room
+              </Button>
+            </FieldGroup>
+            <FieldGroup title="Vinyl — Comparison Table">
+              {config.vinylPage.comparison.map((c, i) => (
+                <div key={i} className="border border-border/30 rounded-lg p-3 space-y-2">
+                  <ArrayItemHeader index={i} label="Row" onRemove={() => {
+                    const arr = [...config.vinylPage.comparison];
+                    arr.splice(i, 1);
+                    updateVinyl({ comparison: arr });
+                  }} />
+                  <TextField label="Feature" value={c.feature} onChange={(v) => {
+                    const arr = [...config.vinylPage.comparison];
+                    arr[i] = { ...arr[i], feature: v };
+                    updateVinyl({ comparison: arr });
+                  }} />
+                  <div className="grid grid-cols-2 gap-2">
+                    <TextField label="Vinyl" value={c.vinyl} onChange={(v) => {
+                      const arr = [...config.vinylPage.comparison];
+                      arr[i] = { ...arr[i], vinyl: v };
+                      updateVinyl({ comparison: arr });
+                    }} />
+                    <TextField label="Hardwood" value={c.hardwood} onChange={(v) => {
+                      const arr = [...config.vinylPage.comparison];
+                      arr[i] = { ...arr[i], hardwood: v };
+                      updateVinyl({ comparison: arr });
+                    }} />
+                  </div>
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateVinyl({ comparison: [...config.vinylPage.comparison, { feature: "Feature", vinyl: "Vinyl", hardwood: "Hardwood" }] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Row
+              </Button>
+            </FieldGroup>
+
+            {/* STAIRCASE */}
+            <FieldGroup title="Staircase Services — Texts">
+              {renderServicePageFields("staircasePage")}
+            </FieldGroup>
+            <FieldGroup title="Staircase — Services">
+              {config.staircasePage.services.map((s, i) => (
+                <div key={i} className="border border-border/30 rounded-lg p-3 space-y-2">
+                  <ArrayItemHeader index={i} label="Service" onRemove={() => {
+                    const arr = [...config.staircasePage.services];
+                    arr.splice(i, 1);
+                    updateStaircase({ services: arr });
+                  }} />
+                  <TextField label="Title" value={s.title} onChange={(v) => {
+                    const arr = [...config.staircasePage.services];
+                    arr[i] = { ...arr[i], title: v };
+                    updateStaircase({ services: arr });
+                  }} />
+                  <TextField label="Description" value={s.desc} onChange={(v) => {
+                    const arr = [...config.staircasePage.services];
+                    arr[i] = { ...arr[i], desc: v };
+                    updateStaircase({ services: arr });
+                  }} multiline />
+                  <TextField label="Tags (comma separated)" value={s.tags.join(", ")} onChange={(v) => {
+                    const arr = [...config.staircasePage.services];
+                    arr[i] = { ...arr[i], tags: v.split(",").map(t => t.trim()).filter(Boolean) };
+                    updateStaircase({ services: arr });
+                  }} />
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateStaircase({ services: [...config.staircasePage.services, { title: "New Service", desc: "Description", tags: ["Tag"] }] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Service
+              </Button>
+            </FieldGroup>
+            <FieldGroup title="Staircase — Benefits (checklist)">
+              {config.staircasePage.benefits.map((b, i) => (
+                <div key={i} className="flex gap-2 items-start">
+                  <div className="flex-1">
+                    <ArrayItemHeader index={i} label="Benefit" onRemove={() => {
+                      const arr = [...config.staircasePage.benefits];
+                      arr.splice(i, 1);
+                      updateStaircase({ benefits: arr });
+                    }} />
+                    <Input value={b} onChange={(e) => {
+                      const arr = [...config.staircasePage.benefits];
+                      arr[i] = e.target.value;
+                      updateStaircase({ benefits: arr });
+                    }} className="text-sm mt-1" />
+                  </div>
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateStaircase({ benefits: [...config.staircasePage.benefits, "New benefit"] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Benefit
+              </Button>
+            </FieldGroup>
+            <FieldGroup title="Staircase — Styles">
+              {config.staircasePage.styles.map((s, i) => (
+                <div key={i} className="border border-border/30 rounded-lg p-3 space-y-2">
+                  <ArrayItemHeader index={i} label="Style" onRemove={() => {
+                    const arr = [...config.staircasePage.styles];
+                    arr.splice(i, 1);
+                    updateStaircase({ styles: arr });
+                  }} />
+                  <TextField label="Name" value={s.name} onChange={(v) => {
+                    const arr = [...config.staircasePage.styles];
+                    arr[i] = { ...arr[i], name: v };
+                    updateStaircase({ styles: arr });
+                  }} />
+                  <TextField label="Description" value={s.desc} onChange={(v) => {
+                    const arr = [...config.staircasePage.styles];
+                    arr[i] = { ...arr[i], desc: v };
+                    updateStaircase({ styles: arr });
+                  }} multiline />
+                  <TextField label="Tags (comma separated)" value={s.tags.join(", ")} onChange={(v) => {
+                    const arr = [...config.staircasePage.styles];
+                    arr[i] = { ...arr[i], tags: v.split(",").map(t => t.trim()).filter(Boolean) };
+                    updateStaircase({ styles: arr });
+                  }} />
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateStaircase({ styles: [...config.staircasePage.styles, { name: "New Style", desc: "Description", tags: ["Tag"] }] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Style
+              </Button>
+            </FieldGroup>
+            <FieldGroup title="Staircase — Safety Items">
+              {config.staircasePage.safety.map((s, i) => (
+                <div key={i} className="flex gap-2 items-start">
+                  <div className="flex-1">
+                    <ArrayItemHeader index={i} label="Safety" onRemove={() => {
+                      const arr = [...config.staircasePage.safety];
+                      arr.splice(i, 1);
+                      updateStaircase({ safety: arr });
+                    }} />
+                    <Input value={s} onChange={(e) => {
+                      const arr = [...config.staircasePage.safety];
+                      arr[i] = e.target.value;
+                      updateStaircase({ safety: arr });
+                    }} className="text-sm mt-1" />
+                  </div>
+                </div>
+              ))}
+              <Button variant="outline" size="sm" onClick={() => updateStaircase({ safety: [...config.staircasePage.safety, "New safety item"] })}>
+                <Plus className="w-4 h-4 mr-1" /> Add Safety Item
+              </Button>
+            </FieldGroup>
           </TabsContent>
 
           {/* COLORS TAB */}
