@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle, Crown, Shield, Trophy } from "lucide-react";
 import serviceHardwood from "@/assets/service-hardwood.jpg";
+import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
