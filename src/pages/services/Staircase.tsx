@@ -61,7 +61,7 @@ export default function StaircaseService() {
       {/* Services */}
       <section className="section-padding">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">Our Staircase <span className="gold-gradient-text">Services</span></h2>
+          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">{p.sectionTitle} <span className="gold-gradient-text">{p.sectionHighlight}</span></h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map((s, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6">
