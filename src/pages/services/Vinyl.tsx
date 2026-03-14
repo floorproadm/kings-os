@@ -118,14 +118,14 @@ export default function VinylService() {
 
       <section className="section-padding bg-gradient-to-br from-gold-dark via-gold to-gold-light">
         <div className="container mx-auto text-center">
-          <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">Ready for Worry-Free Floors?</h2>
-          <p className="text-primary-foreground/80 mb-8">Experience the beauty of hardwood without the limitations.</p>
+          <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">{p.ctaTitle}</h2>
+          <p className="text-primary-foreground/80 mb-8">{p.ctaSubtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="default" size="xl" className="bg-background text-foreground hover:bg-background/90" asChild>
-              <Link to="/contact">Get Free Quote</Link>
+              <Link to="/contact">{p.ctaCta1}</Link>
             </Button>
             <Button variant="outline" size="xl" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" asChild>
-              <a href="tel:9139153193">Call (913) 915-3193</a>
+              <a href="tel:9139153193">{p.ctaCta2}</a>
             </Button>
           </div>
         </div>
