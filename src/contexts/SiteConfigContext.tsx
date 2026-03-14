@@ -1,5 +1,20 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
 
+export interface ServicePageConfig {
+  heroLabel: string;
+  heroTitle: string;
+  heroHighlight: string;
+  heroDescription: string;
+  heroCta: string;
+  sectionTitle: string;
+  sectionHighlight: string;
+  sectionSubtitle: string;
+  ctaTitle: string;
+  ctaSubtitle: string;
+  ctaCta1: string;
+  ctaCta2: string;
+}
+
 export interface SiteConfig {
   // Hero
   heroSubtitle: string;
@@ -74,6 +89,12 @@ export interface SiteConfig {
   craftImage: string;
   logoImage: string;
   serviceImages: { sanding: string; hardwood: string; vinyl: string; staircase: string };
+
+  // Service pages
+  hardwoodPage: ServicePageConfig;
+  vinylPage: ServicePageConfig;
+  sandingPage: ServicePageConfig;
+  staircasePage: ServicePageConfig;
 }
 
 const defaultConfig: SiteConfig = {
