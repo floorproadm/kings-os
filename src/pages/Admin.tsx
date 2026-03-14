@@ -263,6 +263,44 @@ export default function Admin() {
             </FieldGroup>
           </TabsContent>
 
+          {/* SERVICE PAGES TAB */}
+          <TabsContent value="services-pages" className="space-y-6">
+            {(["hardwoodPage", "vinylPage", "sandingPage", "staircasePage"] as const).map((pageKey) => {
+              const labels: Record<string, string> = {
+                hardwoodPage: "Hardwood Flooring",
+                vinylPage: "Luxury Vinyl Plank",
+                sandingPage: "Sanding & Refinishing",
+                staircasePage: "Staircase Services",
+              };
+              const page = config[pageKey];
+              const update = (field: string, value: string) => {
+                updateConfig({ [pageKey]: { ...page, [field]: value } });
+              };
+              return (
+                <FieldGroup key={pageKey} title={labels[pageKey]}>
+                  <div className="grid grid-cols-2 gap-4">
+                    <TextField label="Hero Label" value={page.heroLabel} onChange={(v) => update("heroLabel", v)} />
+                    <TextField label="Hero CTA Button" value={page.heroCta} onChange={(v) => update("heroCta", v)} />
+                  </div>
+                  <TextField label="Hero Title" value={page.heroTitle} onChange={(v) => update("heroTitle", v)} />
+                  <TextField label="Hero Highlight" value={page.heroHighlight} onChange={(v) => update("heroHighlight", v)} />
+                  <TextField label="Hero Description" value={page.heroDescription} onChange={(v) => update("heroDescription", v)} multiline />
+                  <div className="grid grid-cols-2 gap-4">
+                    <TextField label="Section Title" value={page.sectionTitle} onChange={(v) => update("sectionTitle", v)} />
+                    <TextField label="Section Highlight" value={page.sectionHighlight} onChange={(v) => update("sectionHighlight", v)} />
+                  </div>
+                  <TextField label="Section Subtitle" value={page.sectionSubtitle} onChange={(v) => update("sectionSubtitle", v)} multiline />
+                  <TextField label="CTA Title" value={page.ctaTitle} onChange={(v) => update("ctaTitle", v)} />
+                  <TextField label="CTA Subtitle" value={page.ctaSubtitle} onChange={(v) => update("ctaSubtitle", v)} multiline />
+                  <div className="grid grid-cols-2 gap-4">
+                    <TextField label="CTA Button 1" value={page.ctaCta1} onChange={(v) => update("ctaCta1", v)} />
+                    <TextField label="CTA Button 2" value={page.ctaCta2} onChange={(v) => update("ctaCta2", v)} />
+                  </div>
+                </FieldGroup>
+              );
+            })}
+          </TabsContent>
+
           {/* COLORS TAB */}
           <TabsContent value="colors" className="space-y-6">
             <FieldGroup title="Main Colors">
