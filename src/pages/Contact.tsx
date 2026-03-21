@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Phone, Mail, Clock, Shield, MapPin } from "lucide-react";
+import { CheckCircle, Phone, Mail, Clock, Shield, MapPin, ChevronDown } from "lucide-react";
 import Layout from "@/components/Layout";
 import { useState } from "react";
 
