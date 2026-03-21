@@ -30,6 +30,16 @@ export default function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const location = useLocation();
   const { config } = useSiteConfig();
+  const scrolled = useScroll(10);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
