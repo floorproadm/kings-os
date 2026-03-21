@@ -196,6 +196,37 @@ export function LeadDetailModal({
   onDelete,
 }: LeadDetailModalProps) {
   const [deleting, setDeleting] = useState(false);
+  const [notes, setNotes] = useState(lead?.internal_notes || "");
+  const [notesSaved, setNotesSaved] = useState(true);
+  const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Sync notes when lead changes
+  useEffect(() => {
+    if (lead) {
+      setNotes(lead.internal_notes || "");
+      setNotesSaved(true);
+    }
+  }, [lead?.id, lead?.internal_notes]);
+
+  const saveNotes = useCallback(async (value: string) => {
+    if (!lead) return;
+    const { error } = await supabase
+      .from("leads")
+      .update({ internal_notes: value || null } as any)
+      .eq("id", lead.id);
+    if (error) {
+      toast.error("Failed to save notes");
+    } else {
+      setNotesSaved(true);
+    }
+  }, [lead?.id]);
+
+  const handleNotesChange = (value: string) => {
+    setNotes(value);
+    setNotesSaved(false);
+    if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+    saveTimerRef.current = setTimeout(() => saveNotes(value), 1200);
+  };
 
   if (!lead) return null;
 
