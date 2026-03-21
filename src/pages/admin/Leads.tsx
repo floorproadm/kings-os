@@ -295,14 +295,26 @@ export default function Leads() {
 }
 
 /* ─── Board Card ─── */
-function BoardCard({ lead, onClick }: { lead: any; onClick: () => void }) {
+function BoardCard({ lead, isDragging, onClick, onDragStart, onDragEnd }: {
+  lead: any;
+  isDragging?: boolean;
+  onClick: () => void;
+  onDragStart?: (e: DragEvent<HTMLDivElement>) => void;
+  onDragEnd?: () => void;
+}) {
   const status = lead.status || "new";
   const config = statusConfig[status] || statusConfig.new;
 
   return (
     <div
+      draggable
       onClick={onClick}
-      className="p-3 rounded-lg border bg-card cursor-pointer transition-all hover:shadow-md hover:border-primary/40"
+      onDragStart={onDragStart as any}
+      onDragEnd={onDragEnd}
+      className={cn(
+        "p-3 rounded-lg border bg-card cursor-grab transition-all hover:shadow-md hover:border-primary/40",
+        isDragging && "opacity-40 scale-95 ring-2 ring-primary/30"
+      )}
     >
       {/* Row 1: Avatar + Name */}
       <div className="flex items-center gap-2">
