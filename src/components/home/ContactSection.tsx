@@ -251,31 +251,30 @@ export default function ContactSection() {
 
     setLoading(true);
 
-    // TODO Fase 4: replace with Supabase insert
-    // await supabase.from("leads").insert({
-    //   org_id: KINGS_ORG_ID,
-    //   name: `${form.firstName} ${form.lastName}`,
-    //   email: form.email,
-    //   phone: form.phone,
-    //   address: form.city,
-    //   service: form.service,
-    //   source: "website",
-    //   message: [
-    //     `SF: ${form.squareFootage}`,
-    //     `Stairs: ${form.hasStairs ? `Yes (${form.stairsCount})` : "No"}`,
-    //     `Existing: ${form.existingCustomer ? "Yes" : "No"}`,
-    //     `Heard via: ${form.hearAboutUs}`,
-    //     form.message,
-    //   ].filter(Boolean).join(" | "),
-    // });
-
-    console.log("KINGS OS — Lead submitted:", {
-      ...form,
+    const { error } = await supabase.from("leads").insert({
+      org_id: HK_ORG_ID,
       name: `${form.firstName} ${form.lastName}`,
+      email: form.email,
+      phone: form.phone,
+      address: form.city,
+      service: form.service,
       source: "website",
+      status: "new",
+      message: [
+        `SF: ${form.squareFootage}`,
+        `Stairs: ${form.hasStairs ? `Yes (${form.stairsCount})` : "No"}`,
+        `Existing: ${form.existingCustomer ? "Yes" : "No"}`,
+        `Heard via: ${form.hearAboutUs}`,
+        form.message,
+      ].filter(Boolean).join(" | "),
     });
 
-    await new Promise((r) => setTimeout(r, 1200)); // simulate async
+    if (error) {
+      console.error("Lead insert error:", error);
+      setLoading(false);
+      return;
+    }
+
     setLoading(false);
     setSubmitted(true);
   };

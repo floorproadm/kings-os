@@ -102,25 +102,25 @@ export default function LeadCapturePopup() {
     if (!validate()) return;
     setLoading(true);
 
-    // TODO Fase 4: replace with Supabase insert
-    // await supabase.from("leads").insert({
-    //   org_id: KINGS_ORG_ID,
-    //   name: form.name,
-    //   phone: form.phone,
-    //   address: form.city,
-    //   service: "Free Estimate Request",
-    //   source: "popup",
-    //   status: "new",
-    // });
+    const { error } = await supabase.from("leads").insert({
+      org_id: HK_ORG_ID,
+      name: form.name,
+      phone: form.phone,
+      address: form.zipcode,
+      service: "Free Estimate Request",
+      source: "popup",
+      status: "new",
+    });
 
-    console.log("KINGS OS — Popup lead:", { ...form, source: "popup" });
+    if (error) {
+      console.error("Lead insert error:", error);
+      setLoading(false);
+      return;
+    }
 
-    await new Promise((r) => setTimeout(r, 1000));
     setLoading(false);
     setSubmitted(true);
     setCookie(COOKIE_DAYS);
-
-    // Auto-close after 3s
     setTimeout(() => setVisible(false), 3000);
   };
 
