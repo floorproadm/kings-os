@@ -37,11 +37,32 @@ export default function AboutSection() {
               </p>
             </div>
 
-            <div className="mt-8 p-4 elevated-card inline-block">
-              <p className="font-display font-bold text-foreground text-lg">
-                T. Reis
-              </p>
-              <p className="text-gold text-sm">Founder & Operator — Thiago Reis</p>
+            <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+              <div className="p-4 elevated-card inline-block">
+                <p className="font-display font-bold text-foreground text-lg">
+                  T. Reis
+                </p>
+                <p className="text-gold text-sm">Founder & Operator — Thiago Reis</p>
+              </div>
+
+              {/* Founder photo between card and location — mobile/tablet only */}
+              <div className="relative w-40 sm:w-48 lg:hidden mx-auto sm:mx-0">
+                <img
+                  src={founderImg}
+                  alt="Thiago Reis — Founder of Hardwood Kings"
+                  className="w-full rounded-2xl object-cover"
+                />
+                <div className="absolute inset-0 rounded-2xl pointer-events-none"
+                  style={{
+                    background: `
+                      linear-gradient(to top, hsl(var(--background)) 0%, transparent 25%),
+                      linear-gradient(to bottom, hsl(var(--background)) 0%, transparent 25%),
+                      linear-gradient(to left, hsl(var(--background)) 0%, transparent 20%),
+                      linear-gradient(to right, hsl(var(--background)) 0%, transparent 20%)
+                    `
+                  }}
+                />
+              </div>
             </div>
 
             <div className="mt-8">
@@ -62,19 +83,19 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
+          {/* Founder photo — desktop only */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative flex justify-center lg:justify-end">
-            <div className="relative w-80 sm:w-96 lg:w-[500px]">
+            className="hidden lg:flex relative justify-end">
+            <div className="relative w-[500px]">
               <img
                 src={founderImg}
                 alt="Thiago Reis — Founder of Hardwood Kings"
                 className="w-full rounded-2xl object-cover"
               />
-              {/* Gradient fade on all edges */}
               <div className="absolute inset-0 rounded-2xl pointer-events-none"
                 style={{
                   background: `
