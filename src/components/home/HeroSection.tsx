@@ -13,7 +13,7 @@ const fadeUp = {
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center bg-background overflow-hidden">
+    <section className="relative min-h-[75vh] sm:min-h-screen flex items-center bg-background overflow-hidden">
       {/* Subtle wood-grain texture overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `repeating-linear-gradient(90deg, hsl(var(--gold)) 0px, transparent 1px, transparent 40px),
@@ -21,7 +21,7 @@ export default function HeroSection() {
       }} />
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
 
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
         <motion.div className="max-w-3xl" initial="hidden" animate="visible">
           <motion.p
             variants={fadeUp}
