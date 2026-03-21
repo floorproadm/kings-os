@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { HK_ORG_ID } from "@/lib/constants";
 
 const roles = ["Realtor", "Builder", "Property Manager", "Other"];
 
@@ -14,15 +16,30 @@ export default function B2BForm() {
   const update = (field: string, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    console.log("B2B form:", form);
-    setTimeout(() => {
-      setLoading(false);
+    const fullMessage = [
+      form.company ? `Company: ${form.company}` : "",
+      form.role ? `Role: ${form.role}` : "",
+      form.message,
+    ].filter(Boolean).join("\n");
+
+    const { error } = await supabase.from("leads").insert({
+      org_id: HK_ORG_ID,
+      name: form.name,
+      email: form.email || null,
+      phone: form.phone || null,
+      message: fullMessage || null,
+      source: "b2b",
+    });
+    setLoading(false);
+    if (error) {
+      toast.error("Something went wrong. Please try again.");
+    } else {
       toast.success("Thank you! We'll reach out shortly.");
       setForm({ name: "", company: "", role: "", email: "", phone: "", message: "" });
-    }, 800);
+    }
   };
 
   const inputCls =
