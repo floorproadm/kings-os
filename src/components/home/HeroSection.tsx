@@ -20,10 +20,11 @@ export default function HeroSection() {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover object-center"
         src="/videos/hero-bg.mp4"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/60" />
+      <div className="absolute inset-0 bg-background/[0.36]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
         <motion.div className="max-w-3xl" initial="hidden" animate="visible">
