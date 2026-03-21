@@ -26,7 +26,7 @@ export default function HeroSection() {
       {/* Gradient overlay: top transparent → bottom fully opaque */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background" />
 
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 pb-24 sm:pb-32 pt-40 sm:pt-60">
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-32 pt-[55vh] sm:pt-60">
         <motion.div className="max-w-3xl" initial="hidden" animate="visible">
           <motion.p
             variants={fadeUp}
