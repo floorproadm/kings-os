@@ -217,7 +217,7 @@ export default function LeadCapturePopup() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#C9A84C] hover:bg-[#F5E6C0] disabled:opacity-60 text-[#1A1A0F] font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 mt-2"
+                  className="w-full bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 disabled:opacity-60 text-primary-foreground font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 mt-2 shadow-lg shadow-gold/20"
                 >
                   {loading ? (
                     <>
