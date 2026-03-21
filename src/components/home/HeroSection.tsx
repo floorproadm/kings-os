@@ -20,7 +20,7 @@ export default function HeroSection() {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-contain object-[center_20%] md:[object-position:center_top] lg:[object-position:100%_top]"
+        className="absolute inset-0 w-full h-full object-contain object-[center_30%] md:[object-position:center_top] lg:[object-position:100%_top]"
         src="/videos/hero-bg.mp4" />
       
       {/* Gradient overlays: smooth fade on all edges */}
