@@ -86,7 +86,7 @@ export default function ServicesSection() {
                     <img
                       src={serviceBgMap[s.title]}
                       alt=""
-                      className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-500 group-hover:scale-105"
+                      className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60 transition-opacity duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-dark-surface via-dark-surface/80 to-transparent" />
