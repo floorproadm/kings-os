@@ -25,6 +25,7 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const location = useLocation();
   const { config } = useSiteConfig();
 
