@@ -6,9 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Search, LayoutGrid, List, Phone, Mail, MapPin, Calendar } from "lucide-react";
+import { Search, LayoutGrid, List, Phone, Mail, MapPin, Calendar, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LeadDetailModal } from "@/components/admin/LeadDetailModal";
+import { NewLeadModal } from "@/components/admin/NewLeadModal";
+import { Button } from "@/components/ui/button";
 
 const STATUSES = ["all", "new", "contacted", "quoted", "closed", "lost"];
 const BOARD_STATUSES = ["new", "contacted", "quoted", "closed", "lost"] as const;
@@ -41,6 +43,7 @@ export default function Leads() {
   const [selectedLead, setSelectedLead] = useState<any | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dragOverColumn, setDragOverColumn] = useState<string | null>(null);
+  const [showNewLead, setShowNewLead] = useState(false);
   const [draggingId, setDraggingId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -141,6 +144,14 @@ export default function Leads() {
               <span className="text-[10px] sm:text-xs text-muted-foreground block">Total Leads</span>
               <span className="text-lg sm:text-xl font-bold text-foreground">{totalLeads}</span>
             </div>
+            <Button
+              size="sm"
+              onClick={() => setShowNewLead(true)}
+              className="bg-primary text-primary-foreground text-xs h-8 gap-1.5"
+            >
+              <UserPlus className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">New Lead</span>
+            </Button>
           </div>
 
           {/* View Toggle */}
@@ -290,6 +301,7 @@ export default function Leads() {
         onStatusChange={handleStatusChange}
         onDelete={(id) => setLeads((prev) => prev.filter((l) => l.id !== id))}
       />
+      <NewLeadModal open={showNewLead} onOpenChange={setShowNewLead} onSuccess={fetchLeads} />
     </div>
   );
 }
