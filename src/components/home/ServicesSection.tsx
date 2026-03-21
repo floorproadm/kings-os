@@ -1,7 +1,16 @@
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import {
   TreePine, Paintbrush, ArrowUpDown, Trash2, Layers, Fence, Sparkles,
+  Hammer, Wrench, Home, Shield, Star, Zap,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+const iconMap: Record<string, LucideIcon> = {
+  TreePine, Paintbrush, ArrowUpDown, Trash2, Layers, Fence, Sparkles,
+  Hammer, Wrench, Home, Shield, Star, Zap,
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -10,17 +19,31 @@ const fadeUp = {
   }),
 };
 
-const services = [
-  { icon: TreePine, title: "Hardwood Floor Installation", desc: "Premium solid and engineered hardwood installed with precision." },
-  { icon: Paintbrush, title: "Sanding, Staining & Refinishing", desc: "Restore your floors to their original beauty with expert refinishing." },
-  { icon: ArrowUpDown, title: "Staircase Design & Finishing", desc: "Custom hardwood staircases that elevate your home's elegance." },
-  { icon: Trash2, title: "Demolition & Replacement", desc: "Full removal of old flooring and preparation for new installation." },
-  { icon: Layers, title: "Vinyl & Engineered Wood Installation", desc: "Durable, waterproof options with the look of natural wood." },
-  { icon: Fence, title: "Deck & Handrail Refinishing", desc: "Extend your craftsmanship outdoors with deck and rail restoration." },
-  { icon: Sparkles, title: "Wash & Polish", desc: "Professional deep clean and polish to maintain your floor's shine." },
-];
+interface ServiceRow {
+  id: string;
+  title: string;
+  description: string;
+  icon_name: string;
+  image_url: string | null;
+  display_order: number;
+}
 
 export default function ServicesSection() {
+  const { data: services } = useQuery({
+    queryKey: ["public-services"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("services")
+        .select("id, title, description, icon_name, image_url, display_order")
+        .eq("is_active", true)
+        .order("display_order", { ascending: true });
+      if (error) throw error;
+      return data as ServiceRow[];
+    },
+  });
+
+  const items = services ?? [];
+
   return (
     <section id="services" className="section-padding bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,27 +58,47 @@ export default function ServicesSection() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {services.map((s, i) => (
-            <motion.div
-              key={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              custom={i}
-              className="elevated-card p-6 group hover:border-gold/40 transition-colors duration-300 cursor-default"
-            >
-              <div className="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center text-gold mb-4 group-hover:bg-gold/20 transition-colors">
-                <s.icon className="w-6 h-6" />
-              </div>
-              <h3 className="font-display text-lg font-bold text-foreground mb-2">
-                {s.title}
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {s.desc}
-              </p>
-            </motion.div>
-          ))}
+          {items.map((s, i) => {
+            const Icon = iconMap[s.icon_name] ?? Sparkles;
+            return (
+              <motion.div
+                key={s.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                custom={i}
+                className="elevated-card group hover:border-gold/40 transition-colors duration-300 cursor-default overflow-hidden"
+              >
+                {/* Service image */}
+                {s.image_url && (
+                  <div className="w-full h-40 overflow-hidden">
+                    <img
+                      src={s.image_url}
+                      alt={s.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+
+                <div className="p-6">
+                  {/* Icon fallback when no image */}
+                  {!s.image_url && (
+                    <div className="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center text-gold mb-4 group-hover:bg-gold/20 transition-colors">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                  )}
+                  <h3 className="font-display text-lg font-bold text-foreground mb-2">
+                    {s.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {s.description}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
