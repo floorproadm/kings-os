@@ -1,10 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X, ChevronDown, Facebook, Instagram } from "lucide-react";
+import { Phone, ChevronDown, Facebook, Instagram } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoCrown from "@/assets/logo-crown.webp";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
+import { useScroll } from "@/components/ui/use-scroll";
+import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
 
 const services = [
   { name: "Hardwood Floor Installation", path: "/services/hardwood" },
