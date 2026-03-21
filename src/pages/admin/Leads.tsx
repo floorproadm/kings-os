@@ -43,6 +43,7 @@ export default function Leads() {
   const [selectedLead, setSelectedLead] = useState<any | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dragOverColumn, setDragOverColumn] = useState<string | null>(null);
+  const [showNewLead, setShowNewLead] = useState(false);
   const [draggingId, setDraggingId] = useState<string | null>(null);
 
   useEffect(() => {
