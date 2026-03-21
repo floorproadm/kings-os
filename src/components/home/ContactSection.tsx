@@ -288,7 +288,7 @@ export default function ContactSection() {
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
 
           {/* Left — Copy */}
           <div className="lg:sticky lg:top-24">
