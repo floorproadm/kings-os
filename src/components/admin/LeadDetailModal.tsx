@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   Dialog,
   DialogContent,
@@ -38,6 +38,8 @@ import {
   ExternalLink,
   Copy,
   Clock,
+  StickyNote,
+  Check,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -101,6 +103,7 @@ interface Lead {
   referral_code?: string | null;
   status?: string | null;
   created_at?: string | null;
+  internal_notes?: string | null;
 }
 
 interface LeadDetailModalProps {
@@ -193,6 +196,37 @@ export function LeadDetailModal({
   onDelete,
 }: LeadDetailModalProps) {
   const [deleting, setDeleting] = useState(false);
+  const [notes, setNotes] = useState(lead?.internal_notes || "");
+  const [notesSaved, setNotesSaved] = useState(true);
+  const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Sync notes when lead changes
+  useEffect(() => {
+    if (lead) {
+      setNotes(lead.internal_notes || "");
+      setNotesSaved(true);
+    }
+  }, [lead?.id, lead?.internal_notes]);
+
+  const saveNotes = useCallback(async (value: string) => {
+    if (!lead) return;
+    const { error } = await supabase
+      .from("leads")
+      .update({ internal_notes: value || null } as any)
+      .eq("id", lead.id);
+    if (error) {
+      toast.error("Failed to save notes");
+    } else {
+      setNotesSaved(true);
+    }
+  }, [lead?.id]);
+
+  const handleNotesChange = (value: string) => {
+    setNotes(value);
+    setNotesSaved(false);
+    if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+    saveTimerRef.current = setTimeout(() => saveNotes(value), 1200);
+  };
 
   if (!lead) return null;
 
@@ -370,6 +404,34 @@ export function LeadDetailModal({
               </div>
             </div>
           )}
+
+          {/* Internal Notes */}
+          <div className="space-y-2.5">
+            <div className="flex items-center justify-between">
+              <h4 className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground/50 flex items-center gap-1.5">
+                <StickyNote className="w-3 h-3" />
+                Internal Notes
+              </h4>
+              {notesSaved ? (
+                <span className="flex items-center gap-1 text-[10px] text-green-500/70">
+                  <Check className="w-3 h-3" />
+                  Saved
+                </span>
+              ) : (
+                <span className="text-[10px] text-muted-foreground/50 animate-pulse">
+                  Saving...
+                </span>
+              )}
+            </div>
+            <textarea
+              value={notes}
+              onChange={(e) => handleNotesChange(e.target.value)}
+              placeholder="Add private notes about this lead..."
+              rows={3}
+              maxLength={2000}
+              className="w-full text-sm bg-muted/30 border border-border/30 rounded-lg px-3 py-2.5 resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 transition-all placeholder:text-muted-foreground/40 text-foreground"
+            />
+          </div>
 
           {/* Timeline - Created Date */}
           {lead.created_at && (
