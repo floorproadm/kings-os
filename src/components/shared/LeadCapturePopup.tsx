@@ -212,9 +212,9 @@ export default function LeadCapturePopup() {
 
                 <input
                   className={inputCls}
-                  placeholder="Your city (Overland Park, Shawnee...)"
-                  value={form.city}
-                  onChange={(e) => set("city", e.target.value)}
+                  placeholder="Your zipcode"
+                  value={form.zipcode}
+                  onChange={(e) => set("zipcode", e.target.value)}
                 />
 
                 <button
