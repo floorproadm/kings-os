@@ -1,0 +1,1 @@
+CREATE POLICY "leads: org delete" ON public.leads FOR DELETE TO authenticated USING (org_id = get_user_org_id());

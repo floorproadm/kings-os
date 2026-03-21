@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Phone, Mail, MapPin, MessageSquare, Tag, Calendar, Globe } from "lucide-react";
+import { Phone, Mail, MapPin, MessageSquare, Tag, Calendar, Globe, Trash2, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -35,6 +38,7 @@ interface LeadDetailModalProps {
   isOpen: boolean;
   onClose: () => void;
   onStatusChange: (id: string, status: string) => void;
+  onDelete: (id: string) => void;
 }
 
 function InfoRow({ icon: Icon, label, value, href }: { icon: any; label: string; value?: string | null; href?: string }) {
@@ -57,7 +61,9 @@ function InfoRow({ icon: Icon, label, value, href }: { icon: any; label: string;
   );
 }
 
-export function LeadDetailModal({ lead, isOpen, onClose, onStatusChange }: LeadDetailModalProps) {
+export function LeadDetailModal({ lead, isOpen, onClose, onStatusChange, onDelete }: LeadDetailModalProps) {
+  const [deleting, setDeleting] = useState(false);
+
   if (!lead) return null;
 
   const status = lead.status || "new";
@@ -70,6 +76,19 @@ export function LeadDetailModal({ lead, isOpen, onClose, onStatusChange }: LeadD
     } else {
       toast.success("Status updated");
       onStatusChange(lead.id, newStatus);
+    }
+  };
+
+  const handleDelete = async () => {
+    setDeleting(true);
+    const { error } = await supabase.from("leads").delete().eq("id", lead.id);
+    setDeleting(false);
+    if (error) {
+      toast.error("Failed to delete lead");
+    } else {
+      toast.success("Lead deleted");
+      onClose();
+      onDelete(lead.id);
     }
   };
 
@@ -122,22 +141,52 @@ export function LeadDetailModal({ lead, isOpen, onClose, onStatusChange }: LeadD
           )}
         </div>
 
-        {/* Footer: Status Updater */}
+        {/* Footer: Status + Delete */}
         <div className="px-6 py-4 border-t border-border/50 bg-muted/20">
           <div className="flex items-center justify-between gap-3">
-            <span className="text-xs font-medium text-muted-foreground">Update Status</span>
-            <Select value={status} onValueChange={handleStatusChange}>
-              <SelectTrigger className="w-[160px] h-9">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {STATUSES.map((s) => (
-                  <SelectItem key={s} value={s}>
-                    <span className="capitalize">{s}</span>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive hover:bg-destructive/10 gap-1.5">
+                  <Trash2 className="w-3.5 h-3.5" />
+                  Delete
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Delete this lead?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will permanently delete <strong>{lead.name}</strong>. This action cannot be undone.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={handleDelete}
+                    disabled={deleting}
+                    className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                  >
+                    {deleting && <Loader2 className="w-4 h-4 animate-spin mr-1" />}
+                    Yes, delete
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium text-muted-foreground">Status</span>
+              <Select value={status} onValueChange={handleStatusChange}>
+                <SelectTrigger className="w-[140px] h-9">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {STATUSES.map((s) => (
+                    <SelectItem key={s} value={s}>
+                      <span className="capitalize">{s}</span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       </DialogContent>

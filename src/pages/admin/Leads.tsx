@@ -216,6 +216,7 @@ export default function Leads() {
         isOpen={isModalOpen}
         onClose={() => { setIsModalOpen(false); setSelectedLead(null); }}
         onStatusChange={handleStatusChange}
+        onDelete={(id) => setLeads((prev) => prev.filter((l) => l.id !== id))}
       />
     </div>
   );
