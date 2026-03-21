@@ -502,7 +502,7 @@ export default function ContactSection() {
                       <button
                         type="button"
                         onClick={() => setStep(1)}
-                        className="flex items-center gap-1.5 px-4 py-3 border border-[#C9A84C]/30 text-[#F5F0E8]/60 hover:text-[#F5F0E8] hover:border-[#C9A84C]/60 rounded-xl text-sm font-semibold transition-all duration-200"
+                        className="flex items-center gap-1.5 px-4 py-3 border border-[#C9A84C]/30 text-[#F5F0E8]/60 hover:text-[#F5F0E8] hover:border-[#C9A84C]/60 rounded-full text-sm font-semibold transition-all duration-200"
                       >
                         <ChevronLeft size={16} />
                         Back
