@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, Phone, Mail, Clock, Shield, MapPin, ChevronDown } from "lucide-react";
 import Layout from "@/components/Layout";
 import { useState } from "react";
-
+import { supabase } from "@/integrations/supabase/client";
+import { HK_ORG_ID } from "@/lib/constants";
+import { useToast } from "@/hooks/use-toast";
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
@@ -28,10 +30,31 @@ const whyPoints = [
 export default function Contact() {
   const [form, setForm] = useState({ name: "", phone: "", email: "", city: "", service: "", timeline: "" });
   const [whyOpen, setWhyOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Would integrate with backend
+    setSubmitting(true);
+
+    const { error } = await supabase.from("leads").insert({
+      org_id: HK_ORG_ID,
+      name: form.name,
+      phone: form.phone,
+      email: form.email || null,
+      service: form.service || null,
+      message: form.timeline ? `City: ${form.city || "N/A"} | Timeline: ${form.timeline}` : form.city ? `City: ${form.city}` : null,
+      source: "contact-page",
+      status: "new",
+    });
+
+    if (error) {
+      console.error("Lead insert error:", error);
+      toast({ title: "Error", description: "Could not submit your request. Please try again.", variant: "destructive" });
+      setSubmitting(false);
+      return;
+    }
+
     window.location.href = "/thank-you";
   };
 
@@ -102,8 +125,8 @@ export default function Contact() {
                       <option>Just Planning</option>
                     </select>
                   </div>
-                  <Button variant="gold" size="xl" className="w-full" type="submit">
-                    Get Your Free Estimate
+                  <Button variant="gold" size="xl" className="w-full" type="submit" disabled={submitting}>
+                    {submitting ? "Submitting..." : "Get Your Free Estimate"}
                   </Button>
                   <p className="text-xs text-center text-muted-foreground">100% Free Estimate • No Obligation • We Respect Your Privacy</p>
                 </form>
