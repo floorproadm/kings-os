@@ -32,7 +32,7 @@ export default function HeroSection() {
           <motion.p
             variants={fadeUp}
             custom={0}
-            className="text-gold font-semibold text-sm tracking-[0.2em] uppercase mb-6 text-center">
+            className="text-gold font-semibold text-sm lg:text-base tracking-[0.2em] uppercase mb-6 text-center">
             
             T. Reis — Hardwood Specialist in Johnson County
           </motion.p>
@@ -40,7 +40,7 @@ export default function HeroSection() {
           <motion.h1
             variants={fadeUp}
             custom={1}
-            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6 text-center xl:text-7xl mx-0 px-0">
+            className="font-display text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[1.1] mb-6 text-center mx-0 px-0">
             
             Elevate Your Home with Expert{" "}
             <span className="gold-gradient-text">Hardwood Flooring</span>
@@ -49,12 +49,12 @@ export default function HeroSection() {
           <motion.p
             variants={fadeUp}
             custom={2}
-            className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl text-center">
+            className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-10 max-w-2xl text-center">
             
                                  Installation · Refinishing · Stairs · Decks Johnson County, KS
           </motion.p>
 
-          <motion.div variants={fadeUp} custom={3} className="gap-4 text-center items-center justify-center md:flex-row flex flex-col">
+          <motion.div variants={fadeUp} custom={3} className="gap-4 text-center items-center justify-center flex flex-col lg:flex-row">
             <Button variant="gold" size="xl" asChild>
               <a href="tel:+19139153193">
                 <Phone className="w-4 h-4 mr-2" />
