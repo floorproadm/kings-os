@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, Share2, Settings, ExternalLink } from "lucide-react";
+import { LayoutDashboard, Users, Share2, Settings, ExternalLink, ImageIcon } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import {
@@ -18,6 +18,7 @@ const navItems = [
   { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
   { title: "Leads", url: "/admin/leads", icon: Users },
   { title: "Referrals", url: "/admin/referrals", icon: Share2 },
+  { title: "Gallery", url: "/admin/gallery", icon: ImageIcon },
   { title: "Settings", url: "/admin/settings", icon: Settings },
 ];
 

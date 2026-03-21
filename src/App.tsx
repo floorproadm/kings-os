@@ -32,6 +32,7 @@ const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
 const AdminLeads = lazy(() => import("./pages/admin/Leads"));
 const AdminReferrals = lazy(() => import("./pages/admin/Referrals"));
 const AdminSettings = lazy(() => import("./pages/admin/Settings"));
+const AdminGallery = lazy(() => import("./pages/admin/Gallery"));
 
 const queryClient = new QueryClient();
 
@@ -78,6 +79,7 @@ const App = () => (
             <Route path="/admin" element={<AdminRoute><Suspense fallback={<AdminFallback />}><Dashboard /></Suspense></AdminRoute>} />
             <Route path="/admin/leads" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminLeads /></Suspense></AdminRoute>} />
             <Route path="/admin/referrals" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminReferrals /></Suspense></AdminRoute>} />
+            <Route path="/admin/gallery" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminGallery /></Suspense></AdminRoute>} />
             <Route path="/admin/settings" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminSettings /></Suspense></AdminRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>

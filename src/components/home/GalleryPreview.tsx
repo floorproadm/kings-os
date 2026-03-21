@@ -1,16 +1,43 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ImageIcon } from "lucide-react";
+import { ImageIcon, Loader2 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
 
-const tabs = [
-  "Decks & Handrails",
-  "Installation",
-  "Sanding & Refinishing",
-  "Staircases",
+const CATEGORIES = [
+  { value: "hardwood", label: "Hardwood" },
+  { value: "sanding", label: "Sanding & Refinishing" },
+  { value: "vinyl", label: "Vinyl & LVP" },
+  { value: "staircase", label: "Staircases" },
+  { value: "deck", label: "Decks & Handrails" },
 ];
+
+interface GalleryImage {
+  id: string;
+  category: string;
+  title: string | null;
+  image_url: string;
+  display_order: number;
+}
 
 export default function GalleryPreview() {
   const [active, setActive] = useState(0);
+
+  const { data: images = [], isLoading } = useQuery({
+    queryKey: ["gallery-images-public"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("gallery_images")
+        .select("*")
+        .eq("is_active", true)
+        .order("display_order", { ascending: true });
+      if (error) throw error;
+      return data as GalleryImage[];
+    },
+  });
+
+  const filtered = images.filter((img) => img.category === CATEGORIES[active].value);
 
   return (
     <section id="gallery" className="section-padding bg-background">
@@ -27,7 +54,7 @@ export default function GalleryPreview() {
 
         {/* Tabs */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {tabs.map((t, i) => (
+          {CATEGORIES.map((t, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
@@ -37,12 +64,12 @@ export default function GalleryPreview() {
                   : "bg-card text-muted-foreground hover:text-foreground border border-border/30"
               }`}
             >
-              {t}
+              {t.label}
             </button>
           ))}
         </div>
 
-        {/* Placeholder grid */}
+        {/* Grid */}
         <motion.div
           key={active}
           initial={{ opacity: 0 }}
@@ -50,16 +77,53 @@ export default function GalleryPreview() {
           transition={{ duration: 0.3 }}
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
         >
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="aspect-[4/3] rounded-xl border-2 border-dashed border-gold/20 flex flex-col items-center justify-center gap-2 bg-card/50"
-            >
-              <ImageIcon className="w-8 h-8 text-gold/30" />
-              <span className="text-xs text-muted-foreground">Photo coming soon</span>
+          {isLoading ? (
+            <div className="col-span-full flex justify-center py-12">
+              <Loader2 className="w-6 h-6 animate-spin text-gold" />
             </div>
-          ))}
+          ) : filtered.length === 0 ? (
+            [...Array(4)].map((_, i) => (
+              <div
+                key={i}
+                className="aspect-[4/3] rounded-xl border-2 border-dashed border-gold/20 flex flex-col items-center justify-center gap-2 bg-card/50"
+              >
+                <ImageIcon className="w-8 h-8 text-gold/30" />
+                <span className="text-xs text-muted-foreground">Photo coming soon</span>
+              </div>
+            ))
+          ) : (
+            filtered.slice(0, 8).map((img) => (
+              <div
+                key={img.id}
+                className="group relative aspect-[4/3] rounded-xl overflow-hidden elevated-card"
+              >
+                <img
+                  src={img.image_url}
+                  alt={img.title || ""}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                {img.title && (
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                    <p className="text-white text-sm font-medium truncate">{img.title}</p>
+                  </div>
+                )}
+              </div>
+            ))
+          )}
         </motion.div>
+
+        {/* View All Link */}
+        {images.length > 0 && (
+          <div className="text-center mt-8">
+            <Link
+              to="/gallery"
+              className="inline-flex items-center gap-2 text-gold font-semibold hover:underline"
+            >
+              View Full Gallery →
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
