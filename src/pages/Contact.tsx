@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, Phone, Mail, Clock, Shield, MapPin, ChevronDown } from "lucide-react";
 import Layout from "@/components/Layout";
 import { useState } from "react";
-
+import { supabase } from "@/integrations/supabase/client";
+import { HK_ORG_ID } from "@/lib/constants";
+import { useToast } from "@/hooks/use-toast";
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
