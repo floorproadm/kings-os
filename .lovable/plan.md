@@ -1,44 +1,49 @@
 
 
-## Integração Google Reviews — Análise e Plano
+## 4 Correções Cirúrgicas — Plano de Implementação
 
-### Realidade técnica
+### FIX 1 — Contact form salvar lead no Supabase
+**Arquivo:** `src/pages/Contact.tsx`
+- Adicionar imports: `supabase` client e `HK_ORG_ID`
+- Tornar `handleSubmit` async
+- Inserir lead na tabela `leads` antes do redirect, com `source: "contact-page"`
+- Mostrar toast de erro se falhar, só redirecionar após sucesso
 
-O Google **não oferece uma API pública gratuita** para puxar reviews diretamente. As opções disponíveis:
+### FIX 2 — Criar 3 páginas de serviço faltantes
+**Arquivos novos:**
+- `src/pages/services/Demolition.tsx` — Demolition & Replacement
+- `src/pages/services/Deck.tsx` — Deck & Handrail Refinishing
+- `src/pages/services/Wash.tsx` — Wash & Polish
 
-| Método | Limitação |
-|--------|-----------|
-| **Google Places API** (Maps Platform) | Retorna no máximo **5 reviews**. Requer API key com billing ativo no Google Cloud. Custo: ~$17/1000 requests. |
-| **Scraping direto** | Viola os Termos de Serviço do Google. Bloqueado rapidamente. |
-| **Widgets de terceiros** (Elfsight, Trustmary) | Embed externo — funciona, mas adiciona scripts de terceiros e geralmente é pago (~$5-15/mês). |
+Cada página seguirá a mesma estrutura de `Hardwood.tsx`: hero com gradient, seção de benefits, features cards, steps de processo, e CTA final. Conteúdo estático (sem dependência de `useSiteConfig`).
 
-### Recomendação
+**Arquivo editado:** `src/App.tsx` — registrar 3 novas rotas (`/services/demolition`, `/services/deck`, `/services/wash`)
 
-Dado que vocês têm **8 reviews verificados** e o Google Places API só retorna 5, a melhor abordagem é:
+### FIX 3 — Deletar arquivos legados inseguros
+**Arquivos deletados:**
+- `src/pages/Admin.tsx`
+- `src/pages/AdminLogin.tsx`
+- `src/contexts/AdminAuthContext.tsx`
 
-**Opção A (Recomendada)** — Redesign visual da seção atual para parecer integrada ao Google, usando os 8 reviews reais já existentes. Isso inclui:
-- Layout em carrossel com setas (como na imagem de referência)
-- Cards estilo Google: avatar com inicial, nome, "X months ago", ícone Google colorido, estrelas amarelas com badge verificado
-- Badge lateral "EXCELLENT · 5 estrelas · Based on 10 reviews · Google" com logo Google colorida
-- Subtítulo descritivo abaixo do heading
-- "Read more" truncando textos longos com expand
+Nenhum arquivo ativo importa deles (confirmado via search). Remoção segura.
 
-**Opção B** — Integrar via Google Places API (edge function + API key). Limitado a 5 reviews e custo recorrente.
+### FIX 4 — Footer usar logo oficial
+**Arquivo:** `src/components/Footer.tsx`
+- Substituir import `Crown` por `import logoCrown from "@/assets/logo-crown.webp"`
+- Trocar `<Crown className="w-8 h-8 text-gold" />` por `<img src={logoCrown} alt="Hardwood Kings" className="h-8 w-auto" />`
 
-### Plano de implementação (Opção A)
+---
 
-1. **Reescrever `TestimonialsSection.tsx`** com novo layout:
-   - Seção com fundo `gold-light`
-   - Badge "Testimonials" no topo
-   - Heading serif + subtítulo descritivo
-   - Layout: badge Google à esquerda + carrossel Embla à direita
-   - Cards com avatar circular (inicial do nome), nome truncado, ícone Google, tempo relativo, 5 estrelas + verified badge, texto truncado com "Read more"
-   - Setas de navegação prev/next
-
-2. **Usar o componente Carousel existente** (`src/components/ui/carousel.tsx`) com Embla para o carrossel responsivo (3 cards desktop, 1 mobile).
-
-3. **Manter os 8 reviews reais** como dados estáticos — sem dependência de API externa, sem custo, sem rate limits.
-
-### Resultado
-Visualmente idêntico a um widget de Google Reviews real, mas com controle total sobre o conteúdo e zero dependências externas.
+### Resumo de arquivos
+| Ação | Arquivo |
+|------|---------|
+| Editado | `src/pages/Contact.tsx` |
+| Editado | `src/App.tsx` |
+| Editado | `src/components/Footer.tsx` |
+| Criado | `src/pages/services/Demolition.tsx` |
+| Criado | `src/pages/services/Deck.tsx` |
+| Criado | `src/pages/services/Wash.tsx` |
+| Deletado | `src/pages/Admin.tsx` |
+| Deletado | `src/pages/AdminLogin.tsx` |
+| Deletado | `src/contexts/AdminAuthContext.tsx` |
 
