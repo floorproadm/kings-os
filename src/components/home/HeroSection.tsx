@@ -21,7 +21,7 @@ export default function HeroSection() {
       }} />
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
 
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
         <motion.div className="max-w-3xl" initial="hidden" animate="visible">
           <motion.p
             variants={fadeUp}
