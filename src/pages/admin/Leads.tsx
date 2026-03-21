@@ -144,6 +144,14 @@ export default function Leads() {
               <span className="text-[10px] sm:text-xs text-muted-foreground block">Total Leads</span>
               <span className="text-lg sm:text-xl font-bold text-foreground">{totalLeads}</span>
             </div>
+            <Button
+              size="sm"
+              onClick={() => setShowNewLead(true)}
+              className="bg-primary text-primary-foreground text-xs h-8 gap-1.5"
+            >
+              <UserPlus className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">New Lead</span>
+            </Button>
           </div>
 
           {/* View Toggle */}
