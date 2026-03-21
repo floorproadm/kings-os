@@ -32,6 +32,7 @@ const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
 const AdminLeads = lazy(() => import("./pages/admin/Leads"));
 const AdminReferrals = lazy(() => import("./pages/admin/Referrals"));
 const AdminSettings = lazy(() => import("./pages/admin/Settings"));
+const AdminGallery = lazy(() => import("./pages/admin/Gallery"));
 
 const queryClient = new QueryClient();
 
