@@ -68,7 +68,7 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="relative flex justify-center lg:justify-end">
-            <div className="relative w-72 sm:w-80 lg:w-[420px]">
+            <div className="relative w-80 sm:w-96 lg:w-[500px]">
               <img
                 src={founderImg}
                 alt="Thiago Reis — Founder of Hardwood Kings"
