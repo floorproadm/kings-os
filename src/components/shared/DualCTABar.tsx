@@ -52,9 +52,9 @@ export default function DualCTABar({
         {/* Primary CTA — Schedule / Estimate */}
         <button
           onClick={scrollToContact}
-          className={`flex items-center gap-2.5 font-bold text-sm px-7 py-3.5 rounded-xl transition-all duration-200 ${
+          className={`flex items-center gap-2.5 font-bold text-sm px-7 py-3.5 rounded-xl transition-all duration-200 shadow-lg ${
             isDark
-              ? "bg-[#C9A84C] hover:bg-[#F5E6C0] text-[#1A1A0F]"
+              ? "bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 text-primary-foreground shadow-gold/20"
               : "bg-[#1A1A0F] hover:bg-[#2a2a1a] text-[#F5F0E8]"
           }`}
         >
