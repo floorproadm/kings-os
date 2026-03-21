@@ -42,10 +42,10 @@
 
     /* Brand: #C9A84C gold */
     --gold: 44 54% 54%;
-    /* Brand: #F5E6C0 gold-light */
-    --gold-light: 43 73% 86%;
-    /* Brand: #7A5C1E gold-dark */
-    --gold-dark: 40 61% 30%;
+    /* Brand: #fccf93 gold-light (crown logo) */
+    --gold-light: 36 96% 78%;
+    /* Brand: #51351e gold-dark (crown logo) */
+    --gold-dark: 24 48% 22%;
 
     --dark-surface: 60 27% 7%;
     --dark-elevated: 60 20% 11%;
