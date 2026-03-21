@@ -141,22 +141,52 @@ export function LeadDetailModal({ lead, isOpen, onClose, onStatusChange, onDelet
           )}
         </div>
 
-        {/* Footer: Status Updater */}
+        {/* Footer: Status + Delete */}
         <div className="px-6 py-4 border-t border-border/50 bg-muted/20">
           <div className="flex items-center justify-between gap-3">
-            <span className="text-xs font-medium text-muted-foreground">Update Status</span>
-            <Select value={status} onValueChange={handleStatusChange}>
-              <SelectTrigger className="w-[160px] h-9">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {STATUSES.map((s) => (
-                  <SelectItem key={s} value={s}>
-                    <span className="capitalize">{s}</span>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive hover:bg-destructive/10 gap-1.5">
+                  <Trash2 className="w-3.5 h-3.5" />
+                  Delete
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Delete this lead?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will permanently delete <strong>{lead.name}</strong>. This action cannot be undone.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={handleDelete}
+                    disabled={deleting}
+                    className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                  >
+                    {deleting && <Loader2 className="w-4 h-4 animate-spin mr-1" />}
+                    Yes, delete
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium text-muted-foreground">Status</span>
+              <Select value={status} onValueChange={handleStatusChange}>
+                <SelectTrigger className="w-[140px] h-9">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {STATUSES.map((s) => (
+                    <SelectItem key={s} value={s}>
+                      <span className="capitalize">{s}</span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       </DialogContent>
