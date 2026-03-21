@@ -7,8 +7,8 @@ const fadeUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15, duration: 0.6 },
-  }),
+    transition: { delay: i * 0.15, duration: 0.6 }
+  })
 };
 
 export default function HeroSection() {
@@ -21,8 +21,8 @@ export default function HeroSection() {
         muted
         playsInline
         className="absolute inset-0 w-full h-full object-contain object-top md:[object-position:center_top] lg:[object-position:100%_top]"
-        src="/videos/hero-bg.mp4"
-      />
+        src="/videos/hero-bg.mp4" />
+      
       {/* Gradient overlays: smooth fade on all edges */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent via-15% to-black to-90%" />
       <div className="absolute inset-0 md:hidden bg-gradient-to-r from-black/60 via-transparent to-black/60" />
@@ -32,16 +32,16 @@ export default function HeroSection() {
           <motion.p
             variants={fadeUp}
             custom={0}
-            className="text-gold font-semibold text-sm tracking-[0.2em] uppercase mb-6"
-          >
+            className="text-gold font-semibold text-sm tracking-[0.2em] uppercase mb-6 text-center">
+            
             T. Reis — Hardwood Specialist in Johnson County
           </motion.p>
 
           <motion.h1
             variants={fadeUp}
             custom={1}
-            className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] mb-6"
-          >
+            className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] mb-6 text-center">
+            
             Elevate Your Home with Expert{" "}
             <span className="gold-gradient-text">Hardwood Flooring</span>
           </motion.h1>
@@ -49,9 +49,9 @@ export default function HeroSection() {
           <motion.p
             variants={fadeUp}
             custom={2}
-            className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl"
-          >
-            Installation · Refinishing · Stairs · Decks — Johnson County, KS
+            className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl text-center">
+            
+            Installation · Refinishing · Stairs · Decks Johnson County, KS
           </motion.p>
 
           <motion.div variants={fadeUp} custom={3} className="flex flex-col md:flex-row gap-4">
@@ -75,10 +75,10 @@ export default function HeroSection() {
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <ArrowDown className="w-5 h-5 text-gold/40" />
+        transition={{ duration: 2, repeat: Infinity }}>
+        
+        <ArrowDown className="w-5 text-gold/40 my-0 py-0 h-[20px]" />
       </motion.div>
-    </section>
-  );
+    </section>);
+
 }
