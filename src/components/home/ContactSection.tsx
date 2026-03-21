@@ -392,7 +392,7 @@ export default function ContactSection() {
                     <button
                       type="button"
                       onClick={handleNext}
-                      className="w-full bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 text-primary-foreground font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 mt-2 shadow-lg shadow-gold/20"
+                      className="w-full bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 text-primary-foreground font-bold py-4 rounded-full flex items-center justify-center gap-2 transition-all duration-200 mt-2 shadow-lg shadow-gold/20"
                     >
                       Next: Project Details
                       <ChevronRight size={18} />
