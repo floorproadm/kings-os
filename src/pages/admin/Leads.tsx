@@ -6,9 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Search, LayoutGrid, List, Phone, Mail, MapPin, Calendar } from "lucide-react";
+import { Search, LayoutGrid, List, Phone, Mail, MapPin, Calendar, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LeadDetailModal } from "@/components/admin/LeadDetailModal";
+import { NewLeadModal } from "@/components/admin/NewLeadModal";
+import { Button } from "@/components/ui/button";
 
 const STATUSES = ["all", "new", "contacted", "quoted", "closed", "lost"];
 const BOARD_STATUSES = ["new", "contacted", "quoted", "closed", "lost"] as const;
