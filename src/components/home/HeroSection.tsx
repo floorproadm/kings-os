@@ -40,7 +40,7 @@ export default function HeroSection() {
           <motion.h1
             variants={fadeUp}
             custom={1}
-            className="font-display text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[1.1] mb-6 text-center mx-0 px-0">
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6 text-center mx-0 px-0">
             
             Elevate Your Home with Expert{" "}
             <span className="gold-gradient-text">Hardwood Flooring</span>
