@@ -13,7 +13,7 @@ const fadeUp = {
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[75vh] sm:min-h-screen flex items-end sm:items-end bg-background overflow-hidden">
+    <section className="relative h-[70vh] sm:h-[80vh] flex items-end bg-background overflow-hidden">
       {/* Background video */}
       <video
         autoPlay
