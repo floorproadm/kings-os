@@ -1,7 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X, ChevronDown, Crown } from "lucide-react";
+import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import logoCrown from "@/assets/logo-crown.webp";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const services = [
