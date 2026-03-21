@@ -141,6 +141,77 @@ export type Database = {
         }
         Relationships: []
       }
+      partners: {
+        Row: {
+          company_name: string
+          contact_name: string | null
+          created_at: string
+          email: string | null
+          id: string
+          last_contacted_at: string | null
+          next_action_date: string | null
+          next_action_note: string | null
+          notes: string | null
+          org_id: string
+          partner_type: string
+          phone: string | null
+          photo_url: string | null
+          service_zone: string | null
+          status: string
+          total_converted: number
+          total_referrals: number
+          updated_at: string
+        }
+        Insert: {
+          company_name: string
+          contact_name?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          last_contacted_at?: string | null
+          next_action_date?: string | null
+          next_action_note?: string | null
+          notes?: string | null
+          org_id: string
+          partner_type?: string
+          phone?: string | null
+          photo_url?: string | null
+          service_zone?: string | null
+          status?: string
+          total_converted?: number
+          total_referrals?: number
+          updated_at?: string
+        }
+        Update: {
+          company_name?: string
+          contact_name?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          last_contacted_at?: string | null
+          next_action_date?: string | null
+          next_action_note?: string | null
+          notes?: string | null
+          org_id?: string
+          partner_type?: string
+          phone?: string | null
+          photo_url?: string | null
+          service_zone?: string | null
+          status?: string
+          total_converted?: number
+          total_referrals?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partners_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string | null
