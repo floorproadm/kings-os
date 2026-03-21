@@ -71,12 +71,8 @@ export default function Header() {
       {/* Main Nav */}
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/30">
         <div className="container mx-auto flex items-center justify-between px-4 py-3">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logoCrown} alt="Hardwood Kings" className="w-8 h-8" />
-            <div className="leading-tight">
-              <span className="font-display text-lg font-bold text-foreground">HARDWOOD</span>
-              <span className="font-display text-lg font-bold text-gold ml-1">KINGS</span>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img src={logoCrown} alt="Hardwood Kings" className="w-10 h-10" />
           </Link>
 
           {/* Desktop Nav */}
