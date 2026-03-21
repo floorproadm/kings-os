@@ -37,32 +37,30 @@ export default function AboutSection() {
               </p>
             </div>
 
-            <div className="mt-8 flex flex-col items-start gap-6">
-              <div className="p-4 elevated-card inline-block">
-                <p className="font-display font-bold text-foreground text-lg">
-                  T. Reis
-                </p>
-                <p className="text-gold text-sm">Founder & Operator — Thiago Reis</p>
-              </div>
+            {/* Founder photo — mobile/tablet only */}
+            <div className="relative w-40 sm:w-48 lg:hidden mt-8">
+              <img
+                src={founderImg}
+                alt="Thiago Reis — Founder of Hardwood Kings"
+                className="w-full rounded-2xl object-cover"
+              />
+              <div className="absolute inset-0 rounded-2xl pointer-events-none"
+                style={{
+                  background: `
+                    linear-gradient(to top, hsl(var(--background)) 0%, transparent 25%),
+                    linear-gradient(to bottom, hsl(var(--background)) 0%, transparent 25%),
+                    linear-gradient(to left, hsl(var(--background)) 0%, transparent 20%),
+                    linear-gradient(to right, hsl(var(--background)) 0%, transparent 20%)
+                  `
+                }}
+              />
+            </div>
 
-              {/* Founder photo between card and location — mobile/tablet only */}
-              <div className="relative w-40 sm:w-48 lg:hidden mx-auto sm:mx-0">
-                <img
-                  src={founderImg}
-                  alt="Thiago Reis — Founder of Hardwood Kings"
-                  className="w-full rounded-2xl object-cover"
-                />
-                <div className="absolute inset-0 rounded-2xl pointer-events-none"
-                  style={{
-                    background: `
-                      linear-gradient(to top, hsl(var(--background)) 0%, transparent 25%),
-                      linear-gradient(to bottom, hsl(var(--background)) 0%, transparent 25%),
-                      linear-gradient(to left, hsl(var(--background)) 0%, transparent 20%),
-                      linear-gradient(to right, hsl(var(--background)) 0%, transparent 20%)
-                    `
-                  }}
-                />
-              </div>
+            <div className="mt-4 lg:mt-8 p-4 elevated-card inline-block">
+              <p className="font-display font-bold text-foreground text-lg">
+                T. Reis
+              </p>
+              <p className="text-gold text-sm">Founder & Operator — Thiago Reis</p>
             </div>
 
             <div className="mt-8">
