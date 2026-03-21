@@ -45,7 +45,7 @@ function useCountUp(end: number, duration = 2000) {
 
 export default function StatsBar() {
   return (
-    <section className="py-8 sm:py-10 bg-secondary-foreground">
+    <section className="py-8 sm:py-10 bg-destructive-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-3 gap-4 text-center">
           {stats.map((s, i) => {
