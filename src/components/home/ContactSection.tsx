@@ -510,7 +510,7 @@ export default function ContactSection() {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="flex-1 bg-[#C9A84C] hover:bg-[#F5E6C0] disabled:opacity-60 text-[#1A1A0F] font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-200"
+                        className="flex-1 bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 disabled:opacity-60 text-primary-foreground font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 shadow-lg shadow-gold/20"
                       >
                         {loading ? (
                           <>
