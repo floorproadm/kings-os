@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, Crown } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
+import logoCrown from "@/assets/logo-crown.webp";
 
 const serviceLinks = [
   { name: "Hardwood Installation", path: "/services/hardwood" },
