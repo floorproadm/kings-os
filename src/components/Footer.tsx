@@ -28,7 +28,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <Crown className="w-8 h-8 text-gold" />
+              <img src={logoCrown} alt="Hardwood Kings" className="h-8 w-auto" />
               <div>
                 <span className="font-display text-lg font-bold text-foreground">HARDWOOD</span>
                 <span className="font-display text-lg font-bold text-gold ml-1">KINGS</span>

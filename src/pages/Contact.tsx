@@ -125,8 +125,8 @@ export default function Contact() {
                       <option>Just Planning</option>
                     </select>
                   </div>
-                  <Button variant="gold" size="xl" className="w-full" type="submit">
-                    Get Your Free Estimate
+                  <Button variant="gold" size="xl" className="w-full" type="submit" disabled={submitting}>
+                    {submitting ? "Submitting..." : "Get Your Free Estimate"}
                   </Button>
                   <p className="text-xs text-center text-muted-foreground">100% Free Estimate • No Obligation • We Respect Your Privacy</p>
                 </form>
