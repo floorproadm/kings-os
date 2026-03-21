@@ -4,6 +4,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SiteConfigProvider } from "@/contexts/SiteConfigContext";
+import { lazy, Suspense } from "react";
+import { Loader2 } from "lucide-react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Contact from "./pages/Contact";
@@ -23,9 +25,29 @@ import HardwoodService from "./pages/services/Hardwood";
 import VinylService from "./pages/services/Vinyl";
 import StaircaseService from "./pages/services/Staircase";
 import Login from "./pages/Login";
-import Admin from "./pages/Admin";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
+const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
+const AdminLeads = lazy(() => import("./pages/admin/Leads"));
+const AdminReferrals = lazy(() => import("./pages/admin/Referrals"));
+const AdminSettings = lazy(() => import("./pages/admin/Settings"));
 
 const queryClient = new QueryClient();
+
+const AdminFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-background">
+    <Loader2 className="w-8 h-8 text-gold animate-spin" />
+  </div>
+);
+
+const AdminRoute = ({ children }: { children: React.ReactNode }) => (
+  <ProtectedRoute>
+    <Suspense fallback={<AdminFallback />}>
+      <AdminLayout>{children}</AdminLayout>
+    </Suspense>
+  </ProtectedRoute>
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -53,8 +75,10 @@ const App = () => (
             <Route path="/services/vinyl" element={<VinylService />} />
             <Route path="/services/staircase" element={<StaircaseService />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/admin/login" element={<Login />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin" element={<AdminRoute><Suspense fallback={<AdminFallback />}><Dashboard /></Suspense></AdminRoute>} />
+            <Route path="/admin/leads" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminLeads /></Suspense></AdminRoute>} />
+            <Route path="/admin/referrals" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminReferrals /></Suspense></AdminRoute>} />
+            <Route path="/admin/settings" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminSettings /></Suspense></AdminRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
