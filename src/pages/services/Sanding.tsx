@@ -98,7 +98,7 @@ export default function SandingService() {
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-gradient-to-br from-gold-dark via-gold to-gold-light">
+      <section className="section-padding bg-gradient-to-r from-[#fccf93] via-gold to-[#51351e]">
         <div className="container mx-auto text-center">
           <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">{p.ctaTitle}</h2>
           <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">{p.ctaSubtitle}</p>
