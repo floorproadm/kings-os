@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AdminAuthProvider } from "@/contexts/AdminAuthContext";
 import { SiteConfigProvider } from "@/contexts/SiteConfigContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -23,7 +22,7 @@ import SandingService from "./pages/services/Sanding";
 import HardwoodService from "./pages/services/Hardwood";
 import VinylService from "./pages/services/Vinyl";
 import StaircaseService from "./pages/services/Staircase";
-import AdminLogin from "./pages/AdminLogin";
+import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
@@ -31,36 +30,35 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <AdminAuthProvider>
-        <SiteConfigProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/b2b" element={<B2B />} />
-              <Route path="/referral/:code" element={<ReferralLanding />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/diagnostic" element={<Diagnostic />} />
-              <Route path="/referral" element={<Referral />} />
-              <Route path="/quiz" element={<Quiz />} />
-              <Route path="/thank-you" element={<ThankYou />} />
-              <Route path="/builders" element={<Builders />} />
-              <Route path="/realtors" element={<Realtors />} />
-              <Route path="/services/sanding" element={<SandingService />} />
-              <Route path="/services/hardwood" element={<HardwoodService />} />
-              <Route path="/services/vinyl" element={<VinylService />} />
-              <Route path="/services/staircase" element={<StaircaseService />} />
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </SiteConfigProvider>
-      </AdminAuthProvider>
+      <SiteConfigProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/b2b" element={<B2B />} />
+            <Route path="/referral/:code" element={<ReferralLanding />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/diagnostic" element={<Diagnostic />} />
+            <Route path="/referral" element={<Referral />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/thank-you" element={<ThankYou />} />
+            <Route path="/builders" element={<Builders />} />
+            <Route path="/realtors" element={<Realtors />} />
+            <Route path="/services/sanding" element={<SandingService />} />
+            <Route path="/services/hardwood" element={<HardwoodService />} />
+            <Route path="/services/vinyl" element={<VinylService />} />
+            <Route path="/services/staircase" element={<StaircaseService />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin/login" element={<Login />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </SiteConfigProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
