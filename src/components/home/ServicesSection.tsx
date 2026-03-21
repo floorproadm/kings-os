@@ -78,7 +78,7 @@ export default function ServicesSection() {
                 viewport={{ once: true }}
                 variants={fadeUp}
                 custom={i}
-                className="elevated-card group hover:border-gold/40 transition-colors duration-300 cursor-default overflow-hidden relative"
+                className="elevated-card group hover:border-gold/40 transition-colors duration-300 cursor-default overflow-hidden relative w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.875rem)] xl:w-[calc(25%-0.9375rem)]"
               >
                 {/* Background image with gradient overlay */}
                 {serviceBgMap[s.title] && (
