@@ -176,10 +176,7 @@ export default function LeadCapturePopup() {
                   </span>
                 </div>
                 <h2 className="text-2xl font-bold text-[#F5F0E8] leading-tight">
-                  Get a{" "}
-                  <span className="text-[#C9A84C]">Free In-Home Estimate</span>
-                  <br />
-                  for Your Johnson County Home
+                  Get a <span className="text-[#C9A84C]">Free In-Home Estimate</span>
                 </h2>
                 <p className="text-[#F5F0E8]/50 text-sm mt-2">
                   No commitment. No pressure. Just expert advice from Thiago.
