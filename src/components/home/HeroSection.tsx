@@ -14,12 +14,16 @@ const fadeUp = {
 export default function HeroSection() {
   return (
     <section className="relative min-h-[75vh] sm:min-h-screen flex items-center bg-background overflow-hidden">
-      {/* Subtle wood-grain texture overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `repeating-linear-gradient(90deg, hsl(var(--gold)) 0px, transparent 1px, transparent 40px),
-          repeating-linear-gradient(0deg, hsl(var(--gold)) 0px, transparent 1px, transparent 80px)`,
-      }} />
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+      {/* Background video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/videos/hero-bg.mp4"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/60" />
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
         <motion.div className="max-w-3xl" initial="hidden" animate="visible">
