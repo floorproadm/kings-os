@@ -10,6 +10,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import { X, Phone, CheckCircle2, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { HK_ORG_ID } from "@/lib/constants";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
