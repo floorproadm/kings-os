@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import {
-  TreePine, Paintbrush, Stairs, Trash2, Layers, Fence, Sparkles,
+  TreePine, Paintbrush, ArrowUpDown, Trash2, Layers, Fence, Sparkles,
 } from "lucide-react";
 
 const fadeUp = {
