@@ -40,6 +40,8 @@ export default function Leads() {
   const [viewMode, setViewMode] = useState<ViewMode>("board");
   const [selectedLead, setSelectedLead] = useState<any | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [dragOverColumn, setDragOverColumn] = useState<string | null>(null);
+  const [draggingId, setDraggingId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchLeads();
@@ -61,6 +63,50 @@ export default function Leads() {
     setSelectedLead(lead);
     setIsModalOpen(true);
   };
+
+  // Drag & Drop handlers
+  const handleDragStart = useCallback((e: DragEvent, leadId: string) => {
+    e.dataTransfer.setData("text/plain", leadId);
+    e.dataTransfer.effectAllowed = "move";
+    setDraggingId(leadId);
+  }, []);
+
+  const handleDragOver = useCallback((e: DragEvent, status: string) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    setDragOverColumn(status);
+  }, []);
+
+  const handleDragLeave = useCallback(() => {
+    setDragOverColumn(null);
+  }, []);
+
+  const handleDrop = useCallback(async (e: DragEvent, newStatus: string) => {
+    e.preventDefault();
+    setDragOverColumn(null);
+    setDraggingId(null);
+    const leadId = e.dataTransfer.getData("text/plain");
+    if (!leadId) return;
+
+    const lead = leads.find((l) => l.id === leadId);
+    if (!lead || lead.status === newStatus) return;
+
+    // Optimistic update
+    setLeads((prev) => prev.map((l) => (l.id === leadId ? { ...l, status: newStatus } : l)));
+
+    const { error } = await supabase.from("leads").update({ status: newStatus }).eq("id", leadId);
+    if (error) {
+      toast.error("Failed to move lead");
+      setLeads((prev) => prev.map((l) => (l.id === leadId ? { ...l, status: lead.status } : l)));
+    } else {
+      toast.success(`Moved to ${statusConfig[newStatus]?.label || newStatus}`);
+    }
+  }, [leads]);
+
+  const handleDragEnd = useCallback(() => {
+    setDragOverColumn(null);
+    setDraggingId(null);
+  }, []);
 
   const filtered = useMemo(() => leads.filter((l) => {
     const matchSearch =
