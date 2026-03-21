@@ -202,7 +202,16 @@ export default function Leads() {
               const stageLeads = leadsByStatus[status] || [];
 
               return (
-                <div key={status} className="w-[220px] sm:w-[250px] flex-shrink-0 flex flex-col">
+                <div
+                  key={status}
+                  className={cn(
+                    "w-[220px] sm:w-[250px] flex-shrink-0 flex flex-col transition-all duration-200",
+                    dragOverColumn === status && "scale-[1.02]"
+                  )}
+                  onDragOver={(e) => handleDragOver(e, status)}
+                  onDragLeave={handleDragLeave}
+                  onDrop={(e) => handleDrop(e, status)}
+                >
                   {/* Column Header */}
                   <div className={cn("flex items-center justify-between px-3 py-2.5 rounded-t-xl border border-b-0", config.headerBg)}>
                     <span className={cn("font-semibold text-xs", config.text)}>{config.label}</span>
@@ -212,14 +221,31 @@ export default function Leads() {
                   </div>
 
                   {/* Column Body */}
-                  <div className="flex-1 border border-t-0 rounded-b-xl bg-muted/20">
+                  <div className={cn(
+                    "flex-1 border border-t-0 rounded-b-xl transition-colors duration-200",
+                    dragOverColumn === status
+                      ? "bg-primary/5 border-primary/30 ring-2 ring-primary/20"
+                      : "bg-muted/20"
+                  )}>
                     <div className="max-h-[60vh] overflow-y-auto">
                       <div className="p-1.5 space-y-1.5">
                         {stageLeads.length === 0 ? (
-                          <div className="text-center py-16 text-muted-foreground/60 text-xs">No leads</div>
+                          <div className={cn(
+                            "text-center py-16 text-xs transition-colors",
+                            dragOverColumn === status ? "text-primary/60" : "text-muted-foreground/60"
+                          )}>
+                            {dragOverColumn === status ? "Drop here" : "No leads"}
+                          </div>
                         ) : (
                           stageLeads.map((lead) => (
-                            <BoardCard key={lead.id} lead={lead} onClick={() => handleCardClick(lead)} />
+                            <BoardCard
+                              key={lead.id}
+                              lead={lead}
+                              isDragging={draggingId === lead.id}
+                              onClick={() => handleCardClick(lead)}
+                              onDragStart={(e) => handleDragStart(e, lead.id)}
+                              onDragEnd={handleDragEnd}
+                            />
                           ))
                         )}
                       </div>
