@@ -12,6 +12,16 @@ const iconMap: Record<string, LucideIcon> = {
   Hammer, Wrench, Home, Shield, Star, Zap,
 };
 
+const serviceBgMap: Record<string, string> = {
+  "Hardwood Floor Installation": "/images/services/hardwood-installation.jpg",
+  "Sanding, Staining & Refinishing": "/images/services/sanding-refinishing.jpg",
+  "Staircase Design & Finishing": "/images/services/staircase.jpg",
+  "Demolition & Replacement": "/images/services/demolition.jpg",
+  "Vinyl & Engineered Wood Installation": "/images/services/vinyl.jpg",
+  "Deck & Handrail Refinishing": "/images/services/deck.jpg",
+  "Wash & Polish": "/images/services/wash-polish.jpg",
+};
+
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
