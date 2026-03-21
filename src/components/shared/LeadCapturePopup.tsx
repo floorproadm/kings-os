@@ -16,7 +16,7 @@ import { X, Phone, CheckCircle2, Loader2 } from "lucide-react";
 interface PopupFormData {
   name: string;
   phone: string;
-  city: string;
+  zipcode: string;
 }
 
 // ─── Cookie helpers ───────────────────────────────────────────────────────────
