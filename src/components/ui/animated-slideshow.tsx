@@ -84,14 +84,12 @@ export const TextStaggerHover = ({
   const handleMouse = () => changeSlide(index)
   return (
     <motion.p
-      ref={ref}
       onMouseEnter={handleMouse}
       className={cn(
         "flex flex-wrap cursor-pointer transition-opacity duration-300",
         isActive ? "opacity-100" : "opacity-40",
         className
       )}
-      {...props}
     >
       {characters.map((char, index) => (
         <WordStaggerHover key={index}>
