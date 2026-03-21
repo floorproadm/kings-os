@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -6,17 +6,30 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Search } from "lucide-react";
+import { Search, LayoutGrid, List, Phone, Mail, MapPin, Calendar } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { LeadDetailModal } from "@/components/admin/LeadDetailModal";
 
 const STATUSES = ["all", "new", "contacted", "quoted", "closed", "lost"];
-const SOURCES = ["all", "website", "b2b", "referral"];
+const BOARD_STATUSES = ["new", "contacted", "quoted", "closed", "lost"] as const;
+const SOURCES = ["all", "website", "b2b", "referral", "contact-page", "popup"];
 
-const statusColors: Record<string, string> = {
-  new: "bg-blue-500/20 text-blue-400 border-blue-500/30",
-  contacted: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-  quoted: "bg-purple-500/20 text-purple-400 border-purple-500/30",
-  closed: "bg-green-500/20 text-green-400 border-green-500/30",
-  lost: "bg-red-500/20 text-red-400 border-red-500/30",
+type ViewMode = "board" | "list";
+
+const statusConfig: Record<string, { bg: string; text: string; label: string; headerBg: string }> = {
+  new: { bg: "bg-blue-500/15", text: "text-blue-400", label: "New", headerBg: "bg-blue-500/10 border-blue-500/20" },
+  contacted: { bg: "bg-yellow-500/15", text: "text-yellow-400", label: "Contacted", headerBg: "bg-yellow-500/10 border-yellow-500/20" },
+  quoted: { bg: "bg-purple-500/15", text: "text-purple-400", label: "Quoted", headerBg: "bg-purple-500/10 border-purple-500/20" },
+  closed: { bg: "bg-green-500/15", text: "text-green-400", label: "Closed", headerBg: "bg-green-500/10 border-green-500/20" },
+  lost: { bg: "bg-red-500/15", text: "text-red-400", label: "Lost", headerBg: "bg-red-500/10 border-red-500/20" },
+};
+
+const sourceLabels: Record<string, string> = {
+  website: "Website",
+  "contact-page": "Contact",
+  popup: "Popup",
+  b2b: "B2B",
+  referral: "Referral",
 };
 
 export default function Leads() {
@@ -24,7 +37,9 @@ export default function Leads() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [sourceFilter, setSourceFilter] = useState("all");
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<ViewMode>("board");
+  const [selectedLead, setSelectedLead] = useState<any | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchLeads();
@@ -35,17 +50,19 @@ export default function Leads() {
     setLeads(data || []);
   };
 
-  const updateStatus = async (id: string, status: string) => {
-    const { error } = await supabase.from("leads").update({ status }).eq("id", id);
-    if (error) {
-      toast.error("Failed to update status");
-    } else {
-      toast.success("Status updated");
-      setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)));
+  const handleStatusChange = (id: string, status: string) => {
+    setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)));
+    if (selectedLead?.id === id) {
+      setSelectedLead((prev: any) => prev ? { ...prev, status } : prev);
     }
   };
 
-  const filtered = leads.filter((l) => {
+  const handleCardClick = (lead: any) => {
+    setSelectedLead(lead);
+    setIsModalOpen(true);
+  };
+
+  const filtered = useMemo(() => leads.filter((l) => {
     const matchSearch =
       !search ||
       l.name?.toLowerCase().includes(search.toLowerCase()) ||
@@ -54,98 +71,299 @@ export default function Leads() {
     const matchStatus = statusFilter === "all" || l.status === statusFilter;
     const matchSource = sourceFilter === "all" || l.source === sourceFilter;
     return matchSearch && matchStatus && matchSource;
-  });
+  }), [leads, search, statusFilter, sourceFilter]);
+
+  const leadsByStatus = useMemo(() => {
+    const grouped: Record<string, any[]> = {};
+    BOARD_STATUSES.forEach((s) => { grouped[s] = []; });
+    filtered.forEach((lead) => {
+      const s = lead.status || "new";
+      if (grouped[s]) grouped[s].push(lead);
+    });
+    return grouped;
+  }, [filtered]);
+
+  const totalLeads = filtered.length;
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col sm:flex-row gap-3">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input placeholder="Search name, phone, email..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+    <div className="space-y-3">
+      {/* Top Bar */}
+      <div className="bg-card border rounded-xl px-3 sm:px-4 py-3 space-y-2">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div>
+              <span className="text-[10px] sm:text-xs text-muted-foreground block">Total Leads</span>
+              <span className="text-lg sm:text-xl font-bold text-foreground">{totalLeads}</span>
+            </div>
+          </div>
+
+          {/* View Toggle */}
+          <div className="flex items-center border rounded-lg overflow-hidden flex-shrink-0">
+            <button
+              onClick={() => setViewMode("board")}
+              className={cn(
+                "flex items-center gap-1 px-2.5 sm:px-3 py-1.5 text-xs font-medium transition-colors",
+                viewMode === "board"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-card text-muted-foreground hover:text-foreground"
+              )}
+            >
+              <LayoutGrid className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Board</span>
+            </button>
+            <button
+              onClick={() => setViewMode("list")}
+              className={cn(
+                "flex items-center gap-1 px-2.5 sm:px-3 py-1.5 text-xs font-medium transition-colors border-l",
+                viewMode === "list"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-card text-muted-foreground hover:text-foreground"
+              )}
+            >
+              <List className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">List</span>
+            </button>
+          </div>
         </div>
-        <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-full sm:w-[150px]"><SelectValue /></SelectTrigger>
-          <SelectContent>
-            {STATUSES.map((s) => (<SelectItem key={s} value={s}>{s === "all" ? "All Status" : s}</SelectItem>))}
-          </SelectContent>
-        </Select>
-        <Select value={sourceFilter} onValueChange={setSourceFilter}>
-          <SelectTrigger className="w-full sm:w-[150px]"><SelectValue /></SelectTrigger>
-          <SelectContent>
-            {SOURCES.map((s) => (<SelectItem key={s} value={s}>{s === "all" ? "All Sources" : s}</SelectItem>))}
-          </SelectContent>
-        </Select>
+
+        {/* Filters */}
+        <div className="flex flex-col sm:flex-row gap-2">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input placeholder="Search name, phone, email..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9 h-8 text-xs" />
+          </div>
+          <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <SelectTrigger className="w-full sm:w-[130px] h-8 text-xs"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {STATUSES.map((s) => (<SelectItem key={s} value={s}>{s === "all" ? "All Status" : <span className="capitalize">{s}</span>}</SelectItem>))}
+            </SelectContent>
+          </Select>
+          <Select value={sourceFilter} onValueChange={setSourceFilter}>
+            <SelectTrigger className="w-full sm:w-[130px] h-8 text-xs"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {SOURCES.map((s) => (<SelectItem key={s} value={s}>{s === "all" ? "All Sources" : sourceLabels[s] || s}</SelectItem>))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
-      <Card className="bg-card border-border">
-        <CardContent className="p-0">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead className="hidden sm:table-cell">Phone</TableHead>
-                <TableHead className="hidden md:table-cell">Email</TableHead>
-                <TableHead className="hidden md:table-cell">Service</TableHead>
-                <TableHead className="hidden lg:table-cell">Source</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="hidden sm:table-cell">Date</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filtered.length === 0 ? (
-                <TableRow><TableCell colSpan={7} className="text-center text-muted-foreground py-8">No leads found</TableCell></TableRow>
-              ) : (
-                filtered.map((lead) => (
-                  <>
-                    <TableRow key={lead.id} className="cursor-pointer" onClick={() => setExpandedId(expandedId === lead.id ? null : lead.id)}>
-                      <TableCell className="font-medium">{lead.name}</TableCell>
-                      <TableCell className="hidden sm:table-cell">{lead.phone || "—"}</TableCell>
-                      <TableCell className="hidden md:table-cell">{lead.email || "—"}</TableCell>
-                      <TableCell className="hidden md:table-cell">{lead.service || "—"}</TableCell>
-                      <TableCell className="hidden lg:table-cell">{lead.source || "—"}</TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className={statusColors[lead.status || "new"]}>{lead.status || "new"}</Badge>
-                      </TableCell>
-                      <TableCell className="hidden sm:table-cell text-muted-foreground text-xs">
-                        {lead.created_at ? new Date(lead.created_at).toLocaleDateString() : "—"}
-                      </TableCell>
-                    </TableRow>
-                    {expandedId === lead.id && (
-                      <TableRow key={`${lead.id}-detail`}>
-                        <TableCell colSpan={7} className="bg-secondary/30 p-4">
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                            <div>
-                              <p className="text-muted-foreground text-xs mb-1">Address</p>
-                              <p>{lead.address || "—"}</p>
-                            </div>
-                            <div>
-                              <p className="text-muted-foreground text-xs mb-1">Referral Code</p>
-                              <p>{lead.referral_code || "—"}</p>
-                            </div>
-                            <div className="sm:col-span-2">
-                              <p className="text-muted-foreground text-xs mb-1">Message</p>
-                              <p>{lead.message || "—"}</p>
-                            </div>
-                            <div>
-                              <p className="text-muted-foreground text-xs mb-1">Update Status</p>
-                              <Select value={lead.status || "new"} onValueChange={(val) => updateStatus(lead.id, val)}>
-                                <SelectTrigger className="w-[160px]"><SelectValue /></SelectTrigger>
-                                <SelectContent>
-                                  {STATUSES.filter((s) => s !== "all").map((s) => (<SelectItem key={s} value={s}>{s}</SelectItem>))}
-                                </SelectContent>
-                              </Select>
-                            </div>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    )}
-                  </>
-                ))
-              )}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+      {/* Board View */}
+      {viewMode === "board" && (
+        <div className="overflow-x-auto pb-2 -mx-1 px-1">
+          <div className="flex gap-3 min-w-max">
+            {BOARD_STATUSES.map((status) => {
+              const config = statusConfig[status];
+              const stageLeads = leadsByStatus[status] || [];
+
+              return (
+                <div key={status} className="w-[220px] sm:w-[250px] flex-shrink-0 flex flex-col">
+                  {/* Column Header */}
+                  <div className={cn("flex items-center justify-between px-3 py-2.5 rounded-t-xl border border-b-0", config.headerBg)}>
+                    <span className={cn("font-semibold text-xs", config.text)}>{config.label}</span>
+                  </div>
+                  <div className={cn("flex items-center justify-between px-3 py-1.5 border-x text-xs border-b", config.headerBg)}>
+                    <span className="text-muted-foreground font-medium">{stageLeads.length} leads</span>
+                  </div>
+
+                  {/* Column Body */}
+                  <div className="flex-1 border border-t-0 rounded-b-xl bg-muted/20">
+                    <div className="max-h-[60vh] overflow-y-auto">
+                      <div className="p-1.5 space-y-1.5">
+                        {stageLeads.length === 0 ? (
+                          <div className="text-center py-16 text-muted-foreground/60 text-xs">No leads</div>
+                        ) : (
+                          stageLeads.map((lead) => (
+                            <BoardCard key={lead.id} lead={lead} onClick={() => handleCardClick(lead)} />
+                          ))
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* List View */}
+      {viewMode === "list" && (
+        <div className="space-y-1.5">
+          {/* Desktop Header */}
+          <div className="hidden md:grid grid-cols-[2fr_100px_140px_140px_100px_90px] gap-3 px-5 py-3 text-[10px] font-bold text-muted-foreground/70 uppercase tracking-widest">
+            <span>Lead</span>
+            <span>Status</span>
+            <span>Phone</span>
+            <span>Service</span>
+            <span>Source</span>
+            <span className="text-right">Date</span>
+          </div>
+          <div className="max-h-[60vh] overflow-y-auto space-y-1.5 px-0.5">
+            {filtered.length === 0 ? (
+              <div className="text-center py-16 text-muted-foreground/60 text-xs">No leads found</div>
+            ) : (
+              filtered.map((lead) => (
+                <ListRow key={lead.id} lead={lead} onClick={() => handleCardClick(lead)} />
+              ))
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Lead Detail Modal */}
+      <LeadDetailModal
+        lead={selectedLead}
+        isOpen={isModalOpen}
+        onClose={() => { setIsModalOpen(false); setSelectedLead(null); }}
+        onStatusChange={handleStatusChange}
+      />
     </div>
+  );
+}
+
+/* ─── Board Card ─── */
+function BoardCard({ lead, onClick }: { lead: any; onClick: () => void }) {
+  const status = lead.status || "new";
+  const config = statusConfig[status] || statusConfig.new;
+
+  return (
+    <div
+      onClick={onClick}
+      className="p-3 rounded-lg border bg-card cursor-pointer transition-all hover:shadow-md hover:border-primary/40"
+    >
+      {/* Row 1: Avatar + Name */}
+      <div className="flex items-center gap-2">
+        <div className={cn("w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold flex-shrink-0", config.bg, config.text)}>
+          {lead.name.charAt(0).toUpperCase()}
+        </div>
+        <span className="font-semibold text-xs text-foreground truncate flex-1">{lead.name}</span>
+      </div>
+
+      {/* Row 2: Contact */}
+      <div className="flex items-center gap-2 mt-1.5 text-[10px] text-muted-foreground">
+        {lead.phone && (
+          <a href={`tel:${lead.phone}`} onClick={(e) => e.stopPropagation()} className="flex items-center gap-0.5 hover:text-primary transition-colors">
+            <Phone className="w-2.5 h-2.5 flex-shrink-0" />
+            <span className="truncate max-w-[90px]">{lead.phone}</span>
+          </a>
+        )}
+        {lead.source && (
+          <Badge variant="outline" className="text-[9px] px-1 py-0 h-3.5">
+            {sourceLabels[lead.source] || lead.source}
+          </Badge>
+        )}
+      </div>
+
+      {/* Row 3: Service */}
+      {lead.service && (
+        <div className="mt-1.5">
+          <Badge variant="secondary" className="text-[9px] px-1.5 py-0 h-4">
+            {lead.service}
+          </Badge>
+        </div>
+      )}
+
+      {/* Row 4: Date */}
+      <div className="flex items-center gap-1 mt-1.5 pt-1.5 border-t text-[10px] text-muted-foreground">
+        <Calendar className="w-2.5 h-2.5" />
+        {lead.created_at ? new Date(lead.created_at).toLocaleDateString() : "—"}
+      </div>
+    </div>
+  );
+}
+
+/* ─── List Row ─── */
+function ListRow({ lead, onClick }: { lead: any; onClick: () => void }) {
+  const status = lead.status || "new";
+  const config = statusConfig[status] || statusConfig.new;
+
+  return (
+    <>
+      {/* Desktop */}
+      <div
+        onClick={onClick}
+        className={cn(
+          "hidden md:grid grid-cols-[2fr_100px_140px_140px_100px_90px] gap-3 px-5 py-3.5 rounded-xl border bg-card cursor-pointer transition-all duration-200",
+          "hover:shadow-lg hover:shadow-primary/5 hover:border-primary/30 hover:-translate-y-[1px]"
+        )}
+      >
+        <div className="flex items-center gap-3 min-w-0">
+          <div className={cn("w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold flex-shrink-0", config.bg, config.text)}>
+            {lead.name.charAt(0).toUpperCase()}
+          </div>
+          <div className="flex flex-col min-w-0">
+            <span className="font-semibold text-sm text-foreground truncate leading-tight">{lead.name}</span>
+            {lead.email && <span className="text-[10px] text-muted-foreground truncate">{lead.email}</span>}
+          </div>
+        </div>
+        <div className="flex items-center">
+          <Badge className={cn("text-[10px] px-2 py-0.5 h-5 font-semibold rounded-md border-0", config.bg, config.text)}>
+            {config.label}
+          </Badge>
+        </div>
+        <div className="flex items-center">
+          {lead.phone ? (
+            <a href={`tel:${lead.phone}`} onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5 text-[11px] text-muted-foreground hover:text-primary transition-colors group">
+              <div className="w-6 h-6 rounded-md bg-muted/60 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                <Phone className="w-3 h-3" />
+              </div>
+              <span className="truncate">{lead.phone}</span>
+            </a>
+          ) : <span className="text-[10px] text-muted-foreground/40">—</span>}
+        </div>
+        <div className="flex items-center">
+          {lead.service ? (
+            <Badge variant="secondary" className="text-[9px] px-2 py-0.5 h-5 bg-muted/80 text-muted-foreground font-medium">
+              {lead.service}
+            </Badge>
+          ) : <span className="text-[10px] text-muted-foreground/40">—</span>}
+        </div>
+        <div className="flex items-center">
+          {lead.source ? (
+            <Badge variant="outline" className="text-[9px] px-1.5 py-0 h-4 border-muted-foreground/20">
+              {sourceLabels[lead.source] || lead.source}
+            </Badge>
+          ) : <span className="text-[10px] text-muted-foreground/40">—</span>}
+        </div>
+        <div className="flex items-center justify-end">
+          <span className="text-[10px] text-muted-foreground">
+            {lead.created_at ? new Date(lead.created_at).toLocaleDateString() : "—"}
+          </span>
+        </div>
+      </div>
+
+      {/* Mobile */}
+      <div
+        onClick={onClick}
+        className="md:hidden rounded-xl border bg-card p-3.5 cursor-pointer transition-all duration-200 hover:shadow-md active:scale-[0.99]"
+      >
+        <div className="flex items-center gap-3">
+          <div className={cn("w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0", config.bg, config.text)}>
+            {lead.name.charAt(0).toUpperCase()}
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-semibold text-sm text-foreground truncate">{lead.name}</span>
+              <Badge className={cn("text-[9px] px-1.5 py-0 h-4 font-semibold rounded border-0 flex-shrink-0", config.bg, config.text)}>
+                {config.label}
+              </Badge>
+            </div>
+            <div className="flex items-center gap-2 mt-1">
+              {lead.phone && (
+                <a href={`tel:${lead.phone}`} onClick={(e) => e.stopPropagation()} className="flex items-center gap-1 text-[11px] text-muted-foreground hover:text-primary">
+                  <Phone className="w-3 h-3" />
+                  <span>{lead.phone}</span>
+                </a>
+              )}
+              {lead.source && (
+                <Badge variant="outline" className="text-[9px] px-1 py-0 h-3.5 border-muted-foreground/20">
+                  {sourceLabels[lead.source] || lead.source}
+                </Badge>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
