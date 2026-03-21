@@ -13,7 +13,7 @@ const fadeUp = {
 const services = [
   { icon: TreePine, title: "Hardwood Floor Installation", desc: "Premium solid and engineered hardwood installed with precision." },
   { icon: Paintbrush, title: "Sanding, Staining & Refinishing", desc: "Restore your floors to their original beauty with expert refinishing." },
-  { icon: Stairs, title: "Staircase Design & Finishing", desc: "Custom hardwood staircases that elevate your home's elegance." },
+  { icon: ArrowUpDown, title: "Staircase Design & Finishing", desc: "Custom hardwood staircases that elevate your home's elegance." },
   { icon: Trash2, title: "Demolition & Replacement", desc: "Full removal of old flooring and preparation for new installation." },
   { icon: Layers, title: "Vinyl & Engineered Wood Installation", desc: "Durable, waterproof options with the look of natural wood." },
   { icon: Fence, title: "Deck & Handrail Refinishing", desc: "Extend your craftsmanship outdoors with deck and rail restoration." },
