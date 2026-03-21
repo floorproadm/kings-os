@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import logoCrown from "@/assets/logo-crown.webp";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
@@ -24,6 +25,7 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const location = useLocation();
   const { config } = useSiteConfig();
 
@@ -154,20 +156,36 @@ export default function Header() {
                 {l.name}
               </Link>
             ))}
-            <div className="pt-2 border-t border-border/30">
-              <p className="px-3 py-1 text-xs text-muted-foreground font-semibold uppercase tracking-wider">
+            <div className="border-t border-border/30">
+              <button
+                onClick={() => setServicesOpen(!servicesOpen)}
+                className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-semibold uppercase tracking-wider text-muted-foreground"
+              >
                 Services
-              </p>
-              {services.map((s) => (
-                <Link
-                  key={s.path}
-                  to={s.path}
-                  onClick={() => setMobileOpen(false)}
-                  className="block px-3 py-2 text-sm text-muted-foreground hover:text-gold"
-                >
-                  {s.name}
-                </Link>
-              ))}
+                <ChevronDown className={`w-4 h-4 text-gold transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
+              </button>
+              <AnimatePresence initial={false}>
+                {servicesOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    {services.map((s) => (
+                      <Link
+                        key={s.path}
+                        to={s.path}
+                        onClick={() => setMobileOpen(false)}
+                        className="block px-3 py-2 text-sm text-muted-foreground hover:text-gold"
+                      >
+                        {s.name}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
             <div className="pt-3">
               <Button variant="gold" className="w-full" asChild>
