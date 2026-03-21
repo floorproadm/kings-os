@@ -13,7 +13,7 @@ const fadeUp = {
 
 export default function HeroSection() {
   return (
-    <section className="relative h-[100svh] md:h-[80vh] flex items-end bg-background overflow-hidden">
+    <section className="relative h-[100svh] md:h-[80vh] flex items-end bg-[#1A1A0F] overflow-hidden">
       {/* Background video */}
       <video
         autoPlay
@@ -24,8 +24,8 @@ export default function HeroSection() {
         src="/videos/hero-bg.mp4"
       />
       {/* Gradient overlays: smooth fade on all edges */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent via-15% to-background to-90%" />
-      <div className="absolute inset-0 md:hidden bg-gradient-to-r from-background/60 via-transparent to-background/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A0F] via-transparent via-15% to-[#1A1A0F] to-90%" />
+      <div className="absolute inset-0 md:hidden bg-gradient-to-r from-[#1A1A0F]/60 via-transparent to-[#1A1A0F]/60" />
 
       <div className="relative container mx-auto px-4 md:px-6 lg:px-8 pb-12 md:pb-32 pt-0 md:pt-60">
         <motion.div className="max-w-3xl" initial="hidden" animate="visible">
