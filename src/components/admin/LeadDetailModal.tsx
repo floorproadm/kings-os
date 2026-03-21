@@ -103,6 +103,7 @@ interface Lead {
   referral_code?: string | null;
   status?: string | null;
   created_at?: string | null;
+  internal_notes?: string | null;
 }
 
 interface LeadDetailModalProps {
