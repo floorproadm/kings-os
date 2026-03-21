@@ -30,10 +30,31 @@ const whyPoints = [
 export default function Contact() {
   const [form, setForm] = useState({ name: "", phone: "", email: "", city: "", service: "", timeline: "" });
   const [whyOpen, setWhyOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Would integrate with backend
+    setSubmitting(true);
+
+    const { error } = await supabase.from("leads").insert({
+      org_id: HK_ORG_ID,
+      name: form.name,
+      phone: form.phone,
+      email: form.email || null,
+      service: form.service || null,
+      message: form.timeline ? `City: ${form.city || "N/A"} | Timeline: ${form.timeline}` : form.city ? `City: ${form.city}` : null,
+      source: "contact-page",
+      status: "new",
+    });
+
+    if (error) {
+      console.error("Lead insert error:", error);
+      toast({ title: "Error", description: "Could not submit your request. Please try again.", variant: "destructive" });
+      setSubmitting(false);
+      return;
+    }
+
     window.location.href = "/thank-you";
   };
 
