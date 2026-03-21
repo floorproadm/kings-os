@@ -172,11 +172,6 @@ export default function LeadCapturePopup() {
             <>
               {/* Header */}
               <div className="mb-6">
-                <div className="inline-flex items-center gap-2 bg-[#C9A84C]/15 border border-[#C9A84C]/30 rounded-full px-3 py-1 mb-4">
-                  <span className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase">
-                    Free Offer
-                  </span>
-                </div>
                 <h2 className="text-2xl font-bold text-[#F5F0E8] leading-tight">
                   Get a <span className="text-[#C9A84C]">Free In-Home Estimate</span>
                 </h2>
