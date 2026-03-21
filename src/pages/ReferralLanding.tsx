@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Star, Phone, Send, Clock, Heart, Home, ShieldCheck, Gem, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { HK_ORG_ID } from "@/lib/constants";
 import Layout from "@/components/Layout";
 
 const services = [
@@ -34,15 +36,44 @@ export default function ReferralLanding() {
   const update = (field: string, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    console.log({ ...form, referral_code: code });
-    setTimeout(() => {
-      setLoading(false);
+
+    // Validate referral code exists
+    if (code) {
+      const { data: codeData } = await supabase
+        .from("referral_codes")
+        .select("code")
+        .eq("code", code)
+        .eq("active", true)
+        .maybeSingle();
+
+      if (!codeData) {
+        toast.error("Invalid referral code.");
+        setLoading(false);
+        return;
+      }
+    }
+
+    const { error } = await supabase.from("leads").insert({
+      org_id: HK_ORG_ID,
+      name: form.name,
+      phone: form.phone || null,
+      email: form.email || null,
+      address: form.address || null,
+      service: form.service || null,
+      message: form.message || null,
+      source: "referral",
+      referral_code: code || null,
+    });
+    setLoading(false);
+    if (error) {
+      toast.error("Something went wrong. Please try again.");
+    } else {
       toast.success("Thank you! We'll contact you shortly.");
       setForm({ name: "", phone: "", email: "", address: "", service: "", message: "" });
-    }, 800);
+    }
   };
 
   const inputCls =
@@ -50,27 +81,18 @@ export default function ReferralLanding() {
 
   return (
     <Layout>
-      {/* Hero */}
       <section className="section-padding bg-background text-center">
         <div className="container mx-auto px-4 max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <p className="text-gold text-sm tracking-[0.2em] uppercase font-semibold mb-4">
-              You Were Referred
-            </p>
+            <p className="text-gold text-sm tracking-[0.2em] uppercase font-semibold mb-4">You Were Referred</p>
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
               You Were Referred to Johnson County's Best{" "}
               <span className="gold-gradient-text">Hardwood Specialist</span>
             </h1>
-            <p className="text-muted-foreground text-lg mb-6">
-              Your neighbor trusts us. Now let us show you why.
-            </p>
-
-            {/* Social proof */}
+            <p className="text-muted-foreground text-lg mb-6">Your neighbor trusts us. Now let us show you why.</p>
             <div className="inline-flex items-center gap-3 bg-card px-5 py-2.5 rounded-full border border-border/30">
               <div className="flex gap-0.5">
-                {[...Array(5)].map((_, j) => (
-                  <Star key={j} className="w-4 h-4 fill-gold text-gold" />
-                ))}
+                {[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 fill-gold text-gold" />)}
               </div>
               <span className="text-sm text-foreground font-semibold">24+ years experience</span>
               <span className="text-muted-foreground text-sm flex items-center gap-1">
@@ -81,13 +103,10 @@ export default function ReferralLanding() {
         </div>
       </section>
 
-      {/* Form */}
       <section className="section-padding bg-secondary/30">
         <div className="container mx-auto px-4 max-w-xl">
           <form onSubmit={handleSubmit} className="elevated-card p-6 sm:p-8 space-y-4">
-            <h2 className="font-display text-xl font-bold text-foreground mb-2 text-center">
-              Get Your Free Estimate
-            </h2>
+            <h2 className="font-display text-xl font-bold text-foreground mb-2 text-center">Get Your Free Estimate</h2>
             <input required placeholder="Your Name *" value={form.name} onChange={(e) => update("name", e.target.value)} className={inputCls} />
             <input required placeholder="Phone Number *" value={form.phone} onChange={(e) => update("phone", e.target.value)} className={inputCls} />
             <input type="email" placeholder="Email" value={form.email} onChange={(e) => update("email", e.target.value)} className={inputCls} />
@@ -104,7 +123,6 @@ export default function ReferralLanding() {
         </div>
       </section>
 
-      {/* Trust signals */}
       <section className="section-padding bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -118,13 +136,10 @@ export default function ReferralLanding() {
         </div>
       </section>
 
-      {/* Footer CTA */}
       <section className="section-padding-sm bg-card text-center">
         <p className="text-muted-foreground">
           Questions? Call us:{" "}
-          <a href="tel:+19139153193" className="text-gold font-bold hover:underline">
-            (913) 915-3193
-          </a>
+          <a href="tel:+19139153193" className="text-gold font-bold hover:underline">(913) 915-3193</a>
         </p>
       </section>
     </Layout>
