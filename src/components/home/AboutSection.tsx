@@ -68,11 +68,24 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="relative flex justify-center lg:justify-end">
-            <img
-              src={founderImg}
-              alt="Thiago Reis — Founder of Hardwood Kings"
-              className="w-72 sm:w-80 lg:w-full max-w-md rounded-2xl object-cover"
-            />
+            <div className="relative w-72 sm:w-80 lg:w-[420px]">
+              <img
+                src={founderImg}
+                alt="Thiago Reis — Founder of Hardwood Kings"
+                className="w-full rounded-2xl object-cover"
+              />
+              {/* Gradient fade on all edges */}
+              <div className="absolute inset-0 rounded-2xl pointer-events-none"
+                style={{
+                  background: `
+                    linear-gradient(to top, hsl(var(--background)) 0%, transparent 25%),
+                    linear-gradient(to bottom, hsl(var(--background)) 0%, transparent 25%),
+                    linear-gradient(to left, hsl(var(--background)) 0%, transparent 20%),
+                    linear-gradient(to right, hsl(var(--background)) 0%, transparent 20%)
+                  `
+                }}
+              />
+            </div>
           </motion.div>
         </div>
       </div>
