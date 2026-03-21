@@ -67,7 +67,7 @@ export default function ServicesSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="flex flex-wrap justify-center gap-5">
           {items.map((s, i) => {
             const Icon = iconMap[s.icon_name] ?? Sparkles;
             return (
@@ -78,7 +78,7 @@ export default function ServicesSection() {
                 viewport={{ once: true }}
                 variants={fadeUp}
                 custom={i}
-                className="elevated-card group hover:border-gold/40 transition-colors duration-300 cursor-default overflow-hidden relative"
+                className="elevated-card group hover:border-gold/40 transition-colors duration-300 cursor-default overflow-hidden relative w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.875rem)] xl:w-[calc(25%-0.9375rem)]"
               >
                 {/* Background image with gradient overlay */}
                 {serviceBgMap[s.title] && (
