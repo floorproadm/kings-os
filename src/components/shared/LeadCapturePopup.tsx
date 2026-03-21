@@ -45,7 +45,7 @@ export default function LeadCapturePopup() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Partial<PopupFormData>>({});
-  const [form, setForm] = useState<PopupFormData>({ name: "", phone: "", city: "" });
+  const [form, setForm] = useState<PopupFormData>({ name: "", phone: "", zipcode: "" });
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hasShown = useRef(false);
 
