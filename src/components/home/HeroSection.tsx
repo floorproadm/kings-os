@@ -23,12 +23,9 @@ export default function HeroSection() {
         className="absolute inset-0 w-full h-full object-contain sm:object-cover object-top"
         src="/videos/hero-bg.mp4"
       />
-      {/* Gradient: bottom to top — video fades from fully visible at bottom to hidden at top */}
-      <div className="absolute inset-0 sm:hidden bg-gradient-to-t from-transparent to-background" />
-      {/* Desktop gradient */}
-      <div className="absolute inset-0 hidden sm:block bg-gradient-to-b from-background via-transparent via-15% to-background to-90%" />
-      {/* Bottom fade for text area */}
-      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background to-transparent" />
+      {/* Gradient overlays: smooth fade on all edges */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent via-15% to-background to-90%" />
+      <div className="absolute inset-0 sm:hidden bg-gradient-to-r from-background/60 via-transparent to-background/60" />
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-32 pt-0 sm:pt-60">
         <motion.div className="max-w-3xl" initial="hidden" animate="visible">
