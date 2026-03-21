@@ -12,6 +12,16 @@ const iconMap: Record<string, LucideIcon> = {
   Hammer, Wrench, Home, Shield, Star, Zap,
 };
 
+const serviceBgMap: Record<string, string> = {
+  "Hardwood Floor Installation": "/images/services/hardwood-installation.jpg",
+  "Sanding, Staining & Refinishing": "/images/services/sanding-refinishing.jpg",
+  "Staircase Design & Finishing": "/images/services/staircase.jpg",
+  "Demolition & Replacement": "/images/services/demolition.jpg",
+  "Vinyl & Engineered Wood Installation": "/images/services/vinyl.jpg",
+  "Deck & Handrail Refinishing": "/images/services/deck.jpg",
+  "Wash & Polish": "/images/services/wash-polish.jpg",
+};
+
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
@@ -68,11 +78,24 @@ export default function ServicesSection() {
                 viewport={{ once: true }}
                 variants={fadeUp}
                 custom={i}
-                className="elevated-card group hover:border-gold/40 transition-colors duration-300 cursor-default overflow-hidden"
+                className="elevated-card group hover:border-gold/40 transition-colors duration-300 cursor-default overflow-hidden relative"
               >
-                {/* Service image */}
+                {/* Background image with gradient overlay */}
+                {serviceBgMap[s.title] && (
+                  <>
+                    <img
+                      src={serviceBgMap[s.title]}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark-surface via-dark-surface/80 to-transparent" />
+                  </>
+                )}
+
+                {/* Service image (uploaded by admin) */}
                 {s.image_url && (
-                  <div className="w-full h-40 overflow-hidden">
+                  <div className="relative w-full h-40 overflow-hidden">
                     <img
                       src={s.image_url}
                       alt={s.title}
@@ -82,7 +105,7 @@ export default function ServicesSection() {
                   </div>
                 )}
 
-                <div className="p-6">
+                <div className="relative p-6">
                   {/* Icon fallback when no image */}
                   {!s.image_url && (
                     <div className="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center text-gold mb-4 group-hover:bg-gold/20 transition-colors">
