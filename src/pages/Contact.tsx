@@ -113,21 +113,6 @@ export default function Contact() {
             {/* Sidebar */}
             <div className="lg:col-span-2 space-y-6">
               <div className="elevated-card p-6">
-                <h3 className="font-display text-lg font-bold text-foreground mb-4">Why Choose Hardwood Kings?</h3>
-                <ul className="space-y-4">
-                  {whyPoints.map((p, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-semibold text-sm text-foreground">{p.title}</p>
-                        <p className="text-xs text-muted-foreground">{p.desc}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="elevated-card p-6">
                 <h3 className="font-display text-lg font-bold text-foreground mb-4">Contact Directly</h3>
                 <div className="space-y-3">
                   <a href="tel:9139153193" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-gold transition-colors">
@@ -140,6 +125,35 @@ export default function Contact() {
                     <MapPin className="w-4 h-4 text-gold" /> Johnson County, KS
                   </div>
                 </div>
+              </div>
+
+              {/* Why Choose — Toggle */}
+              <div className="elevated-card overflow-hidden">
+                <button
+                  onClick={() => setWhyOpen(!whyOpen)}
+                  className="w-full flex items-center justify-between p-6 text-left"
+                >
+                  <h3 className="font-display text-lg font-bold text-foreground">Why Choose Hardwood Kings?</h3>
+                  <ChevronDown className={`w-5 h-5 text-gold transition-transform duration-300 ${whyOpen ? "rotate-180" : ""}`} />
+                </button>
+                <motion.div
+                  initial={false}
+                  animate={{ height: whyOpen ? "auto" : 0, opacity: whyOpen ? 1 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <ul className="space-y-4 px-6 pb-6">
+                    {whyPoints.map((p, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="font-semibold text-sm text-foreground">{p.title}</p>
+                          <p className="text-xs text-muted-foreground">{p.desc}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
               </div>
             </div>
           </div>
