@@ -17,6 +17,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         gold: "bg-gradient-to-r from-gold-dark via-gold to-gold-light text-primary-foreground font-bold hover:opacity-90 shadow-lg shadow-gold/20",
         goldOutline: "border-2 border-gold text-gold hover:bg-gold/10 font-bold",
+        goldGhost: "text-gold hover:bg-gold/10 font-medium",
       },
       size: {
         default: "h-10 px-4 py-2",

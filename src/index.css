@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,50 +6,58 @@
 
 @layer base {
   :root {
-    --background: 30 10% 6%;
-    --foreground: 40 20% 92%;
+    /* Brand: #1A1A0F dark bg */
+    --background: 60 27% 8%;
+    /* Brand: #F5F0E8 off-white text */
+    --foreground: 37 39% 94%;
 
-    --card: 30 8% 10%;
-    --card-foreground: 40 20% 92%;
+    --card: 60 20% 11%;
+    --card-foreground: 37 39% 94%;
 
-    --popover: 30 8% 10%;
-    --popover-foreground: 40 20% 92%;
+    --popover: 60 20% 11%;
+    --popover-foreground: 37 39% 94%;
 
-    --primary: 40 70% 50%;
-    --primary-foreground: 30 10% 6%;
+    /* Brand: #C9A84C gold */
+    --primary: 44 54% 54%;
+    --primary-foreground: 60 27% 8%;
 
-    --secondary: 30 8% 14%;
-    --secondary-foreground: 40 20% 85%;
+    --secondary: 60 15% 14%;
+    --secondary-foreground: 37 30% 85%;
 
-    --muted: 30 6% 18%;
-    --muted-foreground: 30 10% 55%;
+    --muted: 60 10% 18%;
+    --muted-foreground: 40 12% 55%;
 
-    --accent: 40 70% 50%;
-    --accent-foreground: 30 10% 6%;
+    /* Brand: #C9A84C gold accent */
+    --accent: 44 54% 54%;
+    --accent-foreground: 60 27% 8%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 30 8% 20%;
-    --input: 30 8% 16%;
-    --ring: 40 70% 50%;
+    --border: 60 10% 20%;
+    --input: 60 10% 16%;
+    --ring: 44 54% 54%;
 
     --radius: 0.5rem;
 
-    --gold: 40 70% 50%;
-    --gold-light: 40 80% 65%;
-    --gold-dark: 35 60% 35%;
-    --dark-surface: 30 8% 8%;
-    --dark-elevated: 30 8% 12%;
+    /* Brand: #C9A84C gold */
+    --gold: 44 54% 54%;
+    /* Brand: #F5E6C0 gold-light */
+    --gold-light: 43 73% 86%;
+    /* Brand: #7A5C1E gold-dark */
+    --gold-dark: 40 61% 30%;
 
-    --sidebar-background: 30 10% 6%;
-    --sidebar-foreground: 40 20% 92%;
-    --sidebar-primary: 40 70% 50%;
-    --sidebar-primary-foreground: 30 10% 6%;
-    --sidebar-accent: 30 8% 14%;
-    --sidebar-accent-foreground: 40 20% 92%;
-    --sidebar-border: 30 8% 20%;
-    --sidebar-ring: 40 70% 50%;
+    --dark-surface: 60 27% 7%;
+    --dark-elevated: 60 20% 11%;
+
+    --sidebar-background: 60 27% 8%;
+    --sidebar-foreground: 37 39% 94%;
+    --sidebar-primary: 44 54% 54%;
+    --sidebar-primary-foreground: 60 27% 8%;
+    --sidebar-accent: 60 15% 14%;
+    --sidebar-accent-foreground: 37 39% 94%;
+    --sidebar-border: 60 10% 20%;
+    --sidebar-ring: 44 54% 54%;
   }
 }
 
