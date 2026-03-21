@@ -147,7 +147,7 @@ export default function Header() {
             className="lg:hidden text-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <MenuToggleIcon open={mobileOpen} className="w-6 h-6" />
           </button>
         </div>
 
