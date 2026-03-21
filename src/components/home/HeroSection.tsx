@@ -20,12 +20,12 @@ export default function HeroSection() {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-contain sm:object-cover object-top"
+        className="absolute inset-0 w-full h-full object-cover object-top"
         src="/videos/hero-bg.mp4"
       />
-      {/* Gradient overlay: top transparent → bottom fully opaque */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-20% to-background" />
-      <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-background to-transparent" />
+      {/* Gradient overlays: smooth fade on all edges */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent via-15% to-background to-90%" />
+      <div className="absolute inset-0 sm:hidden bg-gradient-to-r from-background/60 via-transparent to-background/60" />
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-32 pt-0 sm:pt-60">
         <motion.div className="max-w-3xl" initial="hidden" animate="visible">
