@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback, DragEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -40,6 +40,8 @@ export default function Leads() {
   const [viewMode, setViewMode] = useState<ViewMode>("board");
   const [selectedLead, setSelectedLead] = useState<any | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [dragOverColumn, setDragOverColumn] = useState<string | null>(null);
+  const [draggingId, setDraggingId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchLeads();
@@ -61,6 +63,50 @@ export default function Leads() {
     setSelectedLead(lead);
     setIsModalOpen(true);
   };
+
+  // Drag & Drop handlers
+  const handleDragStart = useCallback((e: DragEvent, leadId: string) => {
+    e.dataTransfer.setData("text/plain", leadId);
+    e.dataTransfer.effectAllowed = "move";
+    setDraggingId(leadId);
+  }, []);
+
+  const handleDragOver = useCallback((e: DragEvent, status: string) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    setDragOverColumn(status);
+  }, []);
+
+  const handleDragLeave = useCallback(() => {
+    setDragOverColumn(null);
+  }, []);
+
+  const handleDrop = useCallback(async (e: DragEvent, newStatus: string) => {
+    e.preventDefault();
+    setDragOverColumn(null);
+    setDraggingId(null);
+    const leadId = e.dataTransfer.getData("text/plain");
+    if (!leadId) return;
+
+    const lead = leads.find((l) => l.id === leadId);
+    if (!lead || lead.status === newStatus) return;
+
+    // Optimistic update
+    setLeads((prev) => prev.map((l) => (l.id === leadId ? { ...l, status: newStatus } : l)));
+
+    const { error } = await supabase.from("leads").update({ status: newStatus }).eq("id", leadId);
+    if (error) {
+      toast.error("Failed to move lead");
+      setLeads((prev) => prev.map((l) => (l.id === leadId ? { ...l, status: lead.status } : l)));
+    } else {
+      toast.success(`Moved to ${statusConfig[newStatus]?.label || newStatus}`);
+    }
+  }, [leads]);
+
+  const handleDragEnd = useCallback(() => {
+    setDragOverColumn(null);
+    setDraggingId(null);
+  }, []);
 
   const filtered = useMemo(() => leads.filter((l) => {
     const matchSearch =
@@ -156,7 +202,16 @@ export default function Leads() {
               const stageLeads = leadsByStatus[status] || [];
 
               return (
-                <div key={status} className="w-[220px] sm:w-[250px] flex-shrink-0 flex flex-col">
+                <div
+                  key={status}
+                  className={cn(
+                    "w-[220px] sm:w-[250px] flex-shrink-0 flex flex-col transition-all duration-200",
+                    dragOverColumn === status && "scale-[1.02]"
+                  )}
+                  onDragOver={(e) => handleDragOver(e, status)}
+                  onDragLeave={handleDragLeave}
+                  onDrop={(e) => handleDrop(e, status)}
+                >
                   {/* Column Header */}
                   <div className={cn("flex items-center justify-between px-3 py-2.5 rounded-t-xl border border-b-0", config.headerBg)}>
                     <span className={cn("font-semibold text-xs", config.text)}>{config.label}</span>
@@ -166,14 +221,31 @@ export default function Leads() {
                   </div>
 
                   {/* Column Body */}
-                  <div className="flex-1 border border-t-0 rounded-b-xl bg-muted/20">
+                  <div className={cn(
+                    "flex-1 border border-t-0 rounded-b-xl transition-colors duration-200",
+                    dragOverColumn === status
+                      ? "bg-primary/5 border-primary/30 ring-2 ring-primary/20"
+                      : "bg-muted/20"
+                  )}>
                     <div className="max-h-[60vh] overflow-y-auto">
                       <div className="p-1.5 space-y-1.5">
                         {stageLeads.length === 0 ? (
-                          <div className="text-center py-16 text-muted-foreground/60 text-xs">No leads</div>
+                          <div className={cn(
+                            "text-center py-16 text-xs transition-colors",
+                            dragOverColumn === status ? "text-primary/60" : "text-muted-foreground/60"
+                          )}>
+                            {dragOverColumn === status ? "Drop here" : "No leads"}
+                          </div>
                         ) : (
                           stageLeads.map((lead) => (
-                            <BoardCard key={lead.id} lead={lead} onClick={() => handleCardClick(lead)} />
+                            <BoardCard
+                              key={lead.id}
+                              lead={lead}
+                              isDragging={draggingId === lead.id}
+                              onClick={() => handleCardClick(lead)}
+                              onDragStart={(e) => handleDragStart(e, lead.id)}
+                              onDragEnd={handleDragEnd}
+                            />
                           ))
                         )}
                       </div>
@@ -223,14 +295,26 @@ export default function Leads() {
 }
 
 /* ─── Board Card ─── */
-function BoardCard({ lead, onClick }: { lead: any; onClick: () => void }) {
+function BoardCard({ lead, isDragging, onClick, onDragStart, onDragEnd }: {
+  lead: any;
+  isDragging?: boolean;
+  onClick: () => void;
+  onDragStart?: (e: DragEvent<HTMLDivElement>) => void;
+  onDragEnd?: () => void;
+}) {
   const status = lead.status || "new";
   const config = statusConfig[status] || statusConfig.new;
 
   return (
     <div
+      draggable
       onClick={onClick}
-      className="p-3 rounded-lg border bg-card cursor-pointer transition-all hover:shadow-md hover:border-primary/40"
+      onDragStart={onDragStart as any}
+      onDragEnd={onDragEnd}
+      className={cn(
+        "p-3 rounded-lg border bg-card cursor-grab transition-all hover:shadow-md hover:border-primary/40",
+        isDragging && "opacity-40 scale-95 ring-2 ring-primary/30"
+      )}
     >
       {/* Row 1: Avatar + Name */}
       <div className="flex items-center gap-2">
