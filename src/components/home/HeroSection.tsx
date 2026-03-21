@@ -54,7 +54,7 @@ export default function HeroSection() {
             Installation · Refinishing · Stairs · Decks — Johnson County, KS
           </motion.p>
 
-          <motion.div variants={fadeUp} custom={3} className="flex flex-col sm:flex-row gap-4">
+          <motion.div variants={fadeUp} custom={3} className="flex flex-col md:flex-row gap-4">
             <Button variant="gold" size="xl" asChild>
               <a href="tel:+19139153193">
                 <Phone className="w-4 h-4 mr-2" />
