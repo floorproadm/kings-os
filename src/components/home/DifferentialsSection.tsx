@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Clock, Heart, Home, ShieldCheck, Gem } from "lucide-react";
+import { HoverSlider, TextStaggerHover } from "@/components/ui/animated-slideshow";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -27,7 +28,7 @@ export default function DifferentialsSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        <HoverSlider className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
           {differentials.map((d, i) =>
           <motion.div
             key={i}
@@ -41,16 +42,20 @@ export default function DifferentialsSection() {
               <div className="mx-auto w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center mb-4">
                 <d.icon className="w-7 h-7 text-gold" />
               </div>
-              <h3 className="font-display text-base font-bold text-foreground mb-2">
-                {d.title}
-              </h3>
+              <TextStaggerHover
+                text={d.title}
+                index={i}
+                className="font-display text-base font-bold text-foreground mb-2 justify-center"
+              />
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {d.desc}
               </p>
             </motion.div>
           )}
-        </div>
+        </HoverSlider>
       </div>
     </section>);
+
+}
 
 }

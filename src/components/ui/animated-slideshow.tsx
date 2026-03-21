@@ -74,8 +74,8 @@ const WordStaggerHover = React.forwardRef<
 WordStaggerHover.displayName = "WordStaggerHover"
 
 export const TextStaggerHover = React.forwardRef<
-  HTMLElement,
-  React.HTMLAttributes<HTMLElement> & TextStaggerHoverProps
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement> & TextStaggerHoverProps
 >(({ text, index, children, className, ...props }, ref) => {
   const { activeSlide, changeSlide } = useHoverSliderContext()
   const { characters } = splitText(text)
