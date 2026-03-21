@@ -18,6 +18,7 @@ const navItems = [
   { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
   { title: "Leads", url: "/admin/leads", icon: Users },
   { title: "Referrals", url: "/admin/referrals", icon: Share2 },
+  { title: "Gallery", url: "/admin/gallery", icon: ImageIcon },
   { title: "Settings", url: "/admin/settings", icon: Settings },
 ];
 
