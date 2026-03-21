@@ -300,7 +300,7 @@ export default function ContactSection() {
               <span className="text-[#C9A84C]">Beautiful,</span>{" "}
               Together.
             </h2>
-            <ul className="space-y-3 mb-10">
+            <ul className="space-y-3 mb-4 lg:mb-10">
               {[
                 "Flexible scheduling — weekdays & weekends",
                 "Clear communication from first call to final coat",
