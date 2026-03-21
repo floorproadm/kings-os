@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import { Phone, Menu, X, ChevronDown, Facebook, Instagram } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoCrown from "@/assets/logo-crown.webp";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
@@ -36,7 +36,7 @@ export default function Header() {
         <div className="container mx-auto flex items-center justify-between px-4 py-2 text-sm">
           <div className="flex items-center gap-4">
             <a
-              href="tel:+19139153193"
+              href="sms:+19139153193?body=Hi! I'm interested in a flooring estimate from your website."
               className="flex items-center gap-1.5 text-muted-foreground hover:text-gold transition-colors"
             >
               <Phone className="w-3.5 h-3.5" />
@@ -44,25 +44,25 @@ export default function Header() {
               <span className="font-semibold text-foreground">(913) 915-3193</span>
             </a>
           </div>
-          <div className="flex items-center gap-3 text-muted-foreground">
-            <span className="hidden md:inline text-xs">
+          <div className="flex items-center gap-2">
+            <span className="hidden md:inline text-xs text-muted-foreground">
               Serving <strong className="text-foreground">Johnson County, KS</strong>
             </span>
             <a
               href="https://instagram.com/hardwoodkingsinc"
               target="_blank"
-              rel="noopener"
-              className="hover:text-gold transition-colors text-xs"
+              rel="noopener noreferrer"
+              className="w-7 h-7 bg-foreground/10 text-muted-foreground flex items-center justify-center rounded hover:bg-gold/20 hover:text-gold transition-colors"
             >
-              Instagram
+              <Instagram className="w-3.5 h-3.5" />
             </a>
             <a
               href="https://facebook.com/hardwoodkingsinc"
               target="_blank"
-              rel="noopener"
-              className="hover:text-gold transition-colors text-xs"
+              rel="noopener noreferrer"
+              className="w-7 h-7 bg-foreground/10 text-muted-foreground flex items-center justify-center rounded hover:bg-gold/20 hover:text-gold transition-colors"
             >
-              Facebook
+              <Facebook className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
