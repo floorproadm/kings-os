@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import logoCrown from "@/assets/logo-crown.webp";
+import logoFull from "@/assets/logo-full.webp";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const services = [
