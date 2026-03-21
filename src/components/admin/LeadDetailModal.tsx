@@ -61,7 +61,9 @@ function InfoRow({ icon: Icon, label, value, href }: { icon: any; label: string;
   );
 }
 
-export function LeadDetailModal({ lead, isOpen, onClose, onStatusChange }: LeadDetailModalProps) {
+export function LeadDetailModal({ lead, isOpen, onClose, onStatusChange, onDelete }: LeadDetailModalProps) {
+  const [deleting, setDeleting] = useState(false);
+
   if (!lead) return null;
 
   const status = lead.status || "new";
@@ -74,6 +76,19 @@ export function LeadDetailModal({ lead, isOpen, onClose, onStatusChange }: LeadD
     } else {
       toast.success("Status updated");
       onStatusChange(lead.id, newStatus);
+    }
+  };
+
+  const handleDelete = async () => {
+    setDeleting(true);
+    const { error } = await supabase.from("leads").delete().eq("id", lead.id);
+    setDeleting(false);
+    if (error) {
+      toast.error("Failed to delete lead");
+    } else {
+      toast.success("Lead deleted");
+      onClose();
+      onDelete(lead.id);
     }
   };
 
