@@ -117,8 +117,8 @@ export const TextStaggerHover = ({
       ))}
     </motion.p>
   )
-})
-TextStaggerHover.displayName = "TextStaggerHover"
+}
+
 
 export const clipPathVariants = {
   visible: {
