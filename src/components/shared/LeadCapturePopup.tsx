@@ -140,7 +140,7 @@ export default function LeadCapturePopup() {
       <div className="relative w-full max-w-md bg-[#1A1A0F] border border-[#C9A84C]/30 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
 
         {/* Gold top bar */}
-        <div className="h-1 w-full bg-gradient-to-r from-[#C9A84C] via-[#F5E6C0] to-[#C9A84C]" />
+        <div className="h-1 w-full gold-gradient-bg" />
 
         {/* Close button */}
         <button
