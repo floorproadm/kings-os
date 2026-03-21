@@ -301,6 +301,7 @@ export default function Leads() {
         onStatusChange={handleStatusChange}
         onDelete={(id) => setLeads((prev) => prev.filter((l) => l.id !== id))}
       />
+      <NewLeadModal open={showNewLead} onOpenChange={setShowNewLead} onSuccess={fetchLeads} />
     </div>
   );
 }
