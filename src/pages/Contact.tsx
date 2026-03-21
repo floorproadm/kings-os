@@ -27,6 +27,7 @@ const whyPoints = [
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", phone: "", email: "", city: "", service: "", timeline: "" });
+  const [whyOpen, setWhyOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
