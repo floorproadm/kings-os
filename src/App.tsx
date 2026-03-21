@@ -89,6 +89,7 @@ const App = () => (
             <Route path="/admin/referrals" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminReferrals /></Suspense></AdminRoute>} />
             <Route path="/admin/gallery" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminGallery /></Suspense></AdminRoute>} />
             <Route path="/admin/partners" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminPartners /></Suspense></AdminRoute>} />
+            <Route path="/admin/services" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminServices /></Suspense></AdminRoute>} />
             <Route path="/admin/settings" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminSettings /></Suspense></AdminRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>

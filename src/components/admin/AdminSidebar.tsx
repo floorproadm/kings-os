@@ -20,6 +20,7 @@ const navItems = [
   { title: "Partners", url: "/admin/partners", icon: Handshake },
   { title: "Referrals", url: "/admin/referrals", icon: Share2 },
   { title: "Gallery", url: "/admin/gallery", icon: ImageIcon },
+  { title: "Services", url: "/admin/services", icon: Wrench },
   { title: "Settings", url: "/admin/settings", icon: Settings },
 ];
 
