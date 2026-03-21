@@ -37,7 +37,7 @@ export default function AboutSection() {
               </p>
             </div>
 
-            <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div className="mt-8 flex flex-col items-start gap-6">
               <div className="p-4 elevated-card inline-block">
                 <p className="font-display font-bold text-foreground text-lg">
                   T. Reis
