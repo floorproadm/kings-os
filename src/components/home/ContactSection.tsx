@@ -392,7 +392,7 @@ export default function ContactSection() {
                     <button
                       type="button"
                       onClick={handleNext}
-                      className="w-full bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 text-primary-foreground font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 mt-2 shadow-lg shadow-gold/20"
+                      className="w-full bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 text-primary-foreground font-bold py-4 rounded-full flex items-center justify-center gap-2 transition-all duration-200 mt-2 shadow-lg shadow-gold/20"
                     >
                       Next: Project Details
                       <ChevronRight size={18} />
@@ -502,7 +502,7 @@ export default function ContactSection() {
                       <button
                         type="button"
                         onClick={() => setStep(1)}
-                        className="flex items-center gap-1.5 px-4 py-3 border border-[#C9A84C]/30 text-[#F5F0E8]/60 hover:text-[#F5F0E8] hover:border-[#C9A84C]/60 rounded-xl text-sm font-semibold transition-all duration-200"
+                        className="flex items-center gap-1.5 px-4 py-3 border border-[#C9A84C]/30 text-[#F5F0E8]/60 hover:text-[#F5F0E8] hover:border-[#C9A84C]/60 rounded-full text-sm font-semibold transition-all duration-200"
                       >
                         <ChevronLeft size={16} />
                         Back
@@ -510,7 +510,7 @@ export default function ContactSection() {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="flex-1 bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 disabled:opacity-60 text-primary-foreground font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 shadow-lg shadow-gold/20"
+                        className="flex-1 bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 disabled:opacity-60 text-primary-foreground font-bold py-3 rounded-full flex items-center justify-center gap-2 transition-all duration-200 shadow-lg shadow-gold/20"
                       >
                         {loading ? (
                           <>
