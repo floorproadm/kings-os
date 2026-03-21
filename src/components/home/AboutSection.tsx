@@ -3,8 +3,8 @@ import { MapPin } from "lucide-react";
 import craftsmanImg from "@/assets/craftsman.jpg";
 
 const areas = [
-  "Shawnee", "Overland Park", "Olathe", "Leawood", "Lenexa", "Prairie Village",
-];
+"Shawnee", "Overland Park", "Olathe", "Leawood", "Lenexa", "Prairie Village"];
+
 
 export default function AboutSection() {
   return (
@@ -15,8 +15,8 @@ export default function AboutSection() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+            transition={{ duration: 0.6 }}>
+            
             <p className="text-gold text-sm tracking-[0.2em] uppercase font-semibold mb-4">
               About Us
             </p>
@@ -50,14 +50,14 @@ export default function AboutSection() {
                 Proudly serving Johnson County, KS
               </p>
               <div className="flex flex-wrap gap-2">
-                {areas.map((a) => (
-                  <span
-                    key={a}
-                    className="px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold"
-                  >
+                {areas.map((a) =>
+                <span
+                  key={a}
+                  className="px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold">
+                  
                     {a}
                   </span>
-                ))}
+                )}
               </div>
             </div>
           </motion.div>
@@ -67,20 +67,20 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative"
-          >
+            className="relative">
+            
             <img
               src={craftsmanImg}
               alt="T. Reis — Founder of Hardwood Kings"
               className="rounded-2xl shadow-2xl shadow-black/30"
-              loading="lazy"
-            />
-            <div className="absolute -bottom-4 -left-4 bg-gold text-primary-foreground px-6 py-3 rounded-xl font-display font-bold text-lg shadow-lg">
-              24+ Years
-            </div>
+              loading="lazy" />
+            
+            
+
+            
           </motion.div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 }
