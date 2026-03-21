@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
-import craftsmanImg from "@/assets/craftsman.jpg";
+import founderImg from "@/assets/founder-thiago.png";
 
 const areas = [
 "Shawnee", "Overland Park", "Olathe", "Leawood", "Lenexa", "Prairie Village"];
@@ -67,17 +67,12 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative">
-            
-            
-
-
-
-            
-            
-            
-
-            
+            className="relative flex justify-center lg:justify-end">
+            <img
+              src={founderImg}
+              alt="Thiago Reis — Founder of Hardwood Kings"
+              className="w-72 sm:w-80 lg:w-full max-w-md rounded-2xl object-cover"
+            />
           </motion.div>
         </div>
       </div>
