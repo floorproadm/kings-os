@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle, Crown, Shield, Trophy } from "lucide-react";
+import { FeatureSteps } from "@/components/ui/feature-steps";
 import serviceHardwood from "@/assets/service-hardwood.jpg";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
