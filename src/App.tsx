@@ -5,23 +5,26 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AdminAuthProvider } from "@/contexts/AdminAuthContext";
 import { SiteConfigProvider } from "@/contexts/SiteConfigContext";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
-import Contact from "./pages/Contact.tsx";
-import About from "./pages/About.tsx";
-import Gallery from "./pages/Gallery.tsx";
-import Diagnostic from "./pages/Diagnostic.tsx";
-import Referral from "./pages/Referral.tsx";
-import Quiz from "./pages/Quiz.tsx";
-import ThankYou from "./pages/ThankYou.tsx";
-import Builders from "./pages/Builders.tsx";
-import Realtors from "./pages/Realtors.tsx";
-import SandingService from "./pages/services/Sanding.tsx";
-import HardwoodService from "./pages/services/Hardwood.tsx";
-import VinylService from "./pages/services/Vinyl.tsx";
-import StaircaseService from "./pages/services/Staircase.tsx";
-import AdminLogin from "./pages/AdminLogin.tsx";
-import Admin from "./pages/Admin.tsx";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Gallery from "./pages/Gallery";
+import Services from "./pages/Services";
+import B2B from "./pages/B2B";
+import ReferralLanding from "./pages/ReferralLanding";
+import Diagnostic from "./pages/Diagnostic";
+import Referral from "./pages/Referral";
+import Quiz from "./pages/Quiz";
+import ThankYou from "./pages/ThankYou";
+import Builders from "./pages/Builders";
+import Realtors from "./pages/Realtors";
+import SandingService from "./pages/services/Sanding";
+import HardwoodService from "./pages/services/Hardwood";
+import VinylService from "./pages/services/Vinyl";
+import StaircaseService from "./pages/services/Staircase";
+import AdminLogin from "./pages/AdminLogin";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +38,9 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/b2b" element={<B2B />} />
+              <Route path="/referral/:code" element={<ReferralLanding />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/about" element={<About />} />
               <Route path="/gallery" element={<Gallery />} />
