@@ -1,12 +1,6 @@
 import { motion } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star } from "lucide-react";
 import { useState } from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  type CarouselApi } from
-"@/components/ui/carousel";
 
 const reviews = [
 { name: "Cristian Perez", text: "I was extremely impressed with the professionalism and quality of work delivered. The hardwood flooring came out beautiful — precise installation, great attention to detail, and completed on schedule.", time: "2 months ago" },
@@ -18,11 +12,9 @@ const reviews = [
 { name: "Jeanne Siemion", text: "Reliable, professional hardwood flooring contractor that does excellent work. I recommend Hardwood Kings to all my family and friends!", time: "8 months ago" },
 { name: "Aline Haro", text: "Excellent work. Very professional.", time: "9 months ago" }];
 
-
 const avatarColors = [
 "bg-red-600", "bg-blue-600", "bg-green-600", "bg-purple-600",
 "bg-orange-500", "bg-teal-600", "bg-pink-600", "bg-indigo-600"];
-
 
 function GoogleIcon({ className }: {className?: string;}) {
   return (
@@ -32,21 +24,20 @@ function GoogleIcon({ className }: {className?: string;}) {
       <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
       <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
     </svg>);
-
 }
 
-function ReviewCard({ review, index, expanded, onToggle
-
-
-
-
-}: {review: typeof reviews[0];index: number;expanded: boolean;onToggle: () => void;}) {
+function ReviewCard({ review, index, expanded, onToggle }: {
+  review: typeof reviews[0];
+  index: number;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
   const initial = review.name.charAt(0).toUpperCase();
   const isLong = review.text.length > 120;
   const displayText = isLong && !expanded ? review.text.slice(0, 120) + "..." : review.text;
 
   return (
-    <div className="bg-background rounded-xl p-5 border border-border/30 shadow-lg shadow-black/10 flex flex-col h-full">
+    <div className="bg-background rounded-xl p-5 border border-border/30 shadow-lg shadow-black/10 flex flex-col h-full w-[340px] shrink-0">
       {/* Header */}
       <div className="flex items-center gap-3 mb-3">
         <div className={`w-9 h-9 rounded-full ${avatarColors[index % avatarColors.length]} flex items-center justify-center text-white font-bold text-sm shrink-0`}>
@@ -76,12 +67,11 @@ function ReviewCard({ review, index, expanded, onToggle
           {expanded ? "Show less" : "Read more"}
         </button>
       }
-    </div>);
-
+    </div>
+  );
 }
 
 export default function TestimonialsSection() {
-  const [api, setApi] = useState<CarouselApi>();
   const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
 
   const toggleCard = (i: number) => {
@@ -124,50 +114,34 @@ export default function TestimonialsSection() {
           </p>
         </motion.div>
 
-        {/* Carousel */}
-        <div className="relative">
-          <Carousel
-            setApi={setApi}
-            opts={{ align: "start", loop: true }}
-            className="w-full">
-            
-            <CarouselContent className="-ml-4">
-              {reviews.map((r, i) =>
-              <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                  <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05, duration: 0.4 }}
-                  className="h-full">
-                  
-                    <ReviewCard
+        {/* Marquee */}
+        <div className="relative overflow-hidden">
+          {/* Fade edges */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-20 z-10 bg-gradient-to-r from-destructive-foreground to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-20 z-10 bg-gradient-to-l from-destructive-foreground to-transparent" />
+
+          <div
+            className="flex gap-4 animate-marquee hover:[animation-play-state:paused]"
+            style={{ "--duration": "40s", "--gap": "1rem" } as React.CSSProperties}
+          >
+            {/* Duplicate reviews for seamless loop */}
+            {[...Array(4)].map((_, setIndex) =>
+              reviews.map((r, i) => {
+                const globalIndex = setIndex * reviews.length + i;
+                return (
+                  <ReviewCard
+                    key={`${setIndex}-${i}`}
                     review={r}
                     index={i}
-                    expanded={expandedCards.has(i)}
-                    onToggle={() => toggleCard(i)} />
-                  
-                  </motion.div>
-                </CarouselItem>
-              )}
-            </CarouselContent>
-          </Carousel>
-
-          {/* Navigation arrows */}
-          <button
-            onClick={() => api?.scrollPrev()}
-            className="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background border border-border/30 shadow-md flex items-center justify-center text-foreground hover:bg-muted transition-colors z-10">
-            
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            onClick={() => api?.scrollNext()}
-            className="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background border border-border/30 shadow-md flex items-center justify-center text-foreground hover:bg-muted transition-colors z-10">
-            
-            <ChevronRight className="w-5 h-5" />
-          </button>
+                    expanded={expandedCards.has(globalIndex)}
+                    onToggle={() => toggleCard(globalIndex)}
+                  />
+                );
+              })
+            )}
+          </div>
         </div>
       </div>
-    </section>);
-
+    </section>
+  );
 }
