@@ -81,10 +81,10 @@ export default function Header() {
       </div>
 
       {/* Main Nav */}
-      <header className={`border-b border-border/30 transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md shadow-lg shadow-black/10" : "bg-background/80 backdrop-blur-sm"}`}>
-        <div className="container mx-auto flex items-center justify-between px-4 py-3">
+      <header className={`border-b border-border/30 transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md shadow-lg shadow-black/10 py-1" : "bg-background/80 backdrop-blur-sm py-3"}`}>
+        <div className="container mx-auto flex items-center justify-between px-4 transition-all duration-300">
           <Link to="/" className="flex items-center">
-            <img src={logoCrown} alt="Hardwood Kings" className="w-10 h-10" />
+            <img src={logoCrown} alt="Hardwood Kings" className={`transition-all duration-300 ${scrolled ? "w-8 h-8" : "w-10 h-10"}`} />
           </Link>
 
           {/* Desktop Nav */}
