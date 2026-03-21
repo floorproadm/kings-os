@@ -38,6 +38,7 @@ interface LeadDetailModalProps {
   isOpen: boolean;
   onClose: () => void;
   onStatusChange: (id: string, status: string) => void;
+  onDelete: (id: string) => void;
 }
 
 function InfoRow({ icon: Icon, label, value, href }: { icon: any; label: string; value?: string | null; href?: string }) {
