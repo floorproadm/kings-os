@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
-import craftsmanImg from "@/assets/craftsman.jpg";
+import founderImg from "@/assets/founder-thiago.png";
 
 const areas = [
 "Shawnee", "Overland Park", "Olathe", "Leawood", "Lenexa", "Prairie Village"];
