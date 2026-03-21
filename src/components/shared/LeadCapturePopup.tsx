@@ -16,7 +16,7 @@ import { X, Phone, CheckCircle2, Loader2 } from "lucide-react";
 interface PopupFormData {
   name: string;
   phone: string;
-  city: string;
+  zipcode: string;
 }
 
 // ─── Cookie helpers ───────────────────────────────────────────────────────────
@@ -45,7 +45,7 @@ export default function LeadCapturePopup() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Partial<PopupFormData>>({});
-  const [form, setForm] = useState<PopupFormData>({ name: "", phone: "", city: "" });
+  const [form, setForm] = useState<PopupFormData>({ name: "", phone: "", zipcode: "" });
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hasShown = useRef(false);
 
@@ -176,10 +176,7 @@ export default function LeadCapturePopup() {
                   </span>
                 </div>
                 <h2 className="text-2xl font-bold text-[#F5F0E8] leading-tight">
-                  Get a{" "}
-                  <span className="text-[#C9A84C]">Free In-Home Estimate</span>
-                  <br />
-                  for Your Johnson County Home
+                  Get a <span className="text-[#C9A84C]">Free In-Home Estimate</span>
                 </h2>
                 <p className="text-[#F5F0E8]/50 text-sm mt-2">
                   No commitment. No pressure. Just expert advice from Thiago.
@@ -215,9 +212,9 @@ export default function LeadCapturePopup() {
 
                 <input
                   className={inputCls}
-                  placeholder="Your city (Overland Park, Shawnee...)"
-                  value={form.city}
-                  onChange={(e) => set("city", e.target.value)}
+                  placeholder="Your zipcode"
+                  value={form.zipcode}
+                  onChange={(e) => set("zipcode", e.target.value)}
                 />
 
                 <button
