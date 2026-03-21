@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle, Crown, Shield, Trophy } from "lucide-react";
+import { FeatureSteps } from "@/components/ui/feature-steps";
 import serviceHardwood from "@/assets/service-hardwood.jpg";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
@@ -56,17 +57,14 @@ export default function HardwoodService() {
                 </motion.div>
               ))}
             </div>
-            <div className="grid gap-4">
-              {p.features.map((f, i) => (
-                <div key={i} className="elevated-card p-5 flex gap-4 items-start">
-                  <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">{iconMap[i % 3]}</div>
-                  <div>
-                    <h3 className="font-display font-bold text-foreground mb-1">{f.title}</h3>
-                    <p className="text-sm text-muted-foreground">{f.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <FeatureSteps
+              features={p.features.map((f, i) => ({
+                step: `Step ${i + 1}`,
+                title: f.title,
+                content: f.desc,
+              }))}
+              autoPlayInterval={4000}
+            />
           </div>
         </div>
       </section>
