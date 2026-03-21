@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, Share2, Settings, ExternalLink, ImageIcon, Handshake } from "lucide-react";
+import { LayoutDashboard, Users, Share2, Settings, ExternalLink, ImageIcon, Handshake, Wrench } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import {
