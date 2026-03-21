@@ -69,11 +69,11 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
             className="relative">
             
-            <img
-              src={craftsmanImg}
-              alt="T. Reis — Founder of Hardwood Kings"
-              className="rounded-2xl shadow-2xl shadow-black/30"
-              loading="lazy" />
+            
+
+
+
+            
             
             
 
