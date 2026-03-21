@@ -313,21 +313,6 @@ export default function ContactSection() {
               ))}
             </ul>
 
-            {/* Dual CTA — Empire Today model */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-5 bg-[#111108] rounded-xl border border-[#C9A84C]/15">
-              <a
-                href="tel:+19139153193"
-                className="flex items-center gap-2.5 bg-[#C9A84C] hover:bg-[#F5E6C0] text-[#1A1A0F] font-bold text-sm px-5 py-3 rounded-lg transition-colors duration-200 whitespace-nowrap"
-              >
-                <Phone size={15} />
-                Call Now
-              </a>
-              <div className="text-[#F5F0E8]/50 text-xs">or</div>
-              <div>
-                <p className="text-[#F5F0E8] font-semibold text-sm">(913) 915-3193</p>
-                <p className="text-[#F5F0E8]/40 text-xs">Mon–Sat · 8am–6pm · Johnson County, KS</p>
-              </div>
-            </div>
           </div>
 
           {/* Right — Form */}
