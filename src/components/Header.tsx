@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import logoCrown from "@/assets/logo-crown.webp";
-import logoFull from "@/assets/logo-full.webp";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
 const services = [
@@ -70,8 +69,12 @@ export default function Header() {
       {/* Main Nav */}
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/30">
         <div className="container mx-auto flex items-center justify-between px-4 py-3">
-          <Link to="/" className="flex items-center">
-            <img src={logoFull} alt="Hardwood King's Inc. Flooring" className="h-14" />
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logoCrown} alt="Hardwood Kings" className="w-8 h-8" />
+            <div className="leading-tight">
+              <span className="font-display text-lg font-bold text-foreground">HARDWOOD</span>
+              <span className="font-display text-lg font-bold text-gold ml-1">KINGS</span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
