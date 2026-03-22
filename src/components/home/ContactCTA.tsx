@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { HK_ORG_ID } from "@/lib/constants";
+import { formatPhone } from "@/lib/formatPhone";
 
 const services = [
   "Hardwood Floor Installation",
