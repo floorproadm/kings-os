@@ -38,10 +38,10 @@ export default function Diagnostic() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-gold/10 text-gold text-xs font-semibold tracking-wider uppercase mb-4">
             Premium Decision Service
           </span>
-          <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
+          <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
             Before We Touch Your Floors,<br />
             <span className="gold-gradient-text">We Study Them.</span>
-          </h1>
+          </motion.h1>
           <p className="text-muted-foreground max-w-xl mx-auto mb-6">
             Know exactly what your floors need — and what they don't — before a single board is touched.
           </p>
