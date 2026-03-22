@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { formatPhone } from "@/lib/formatPhone";
 import { Partner, STAGE_CONFIG, PIPELINE_STAGES, PARTNER_TYPES, isAtRisk } from "@/hooks/admin/usePartnersData";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
