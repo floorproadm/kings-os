@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { AlertTriangle, CheckCircle, X } from "lucide-react";
 import { motion } from "framer-motion";
+import { blurIn } from "@/lib/animations";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
