@@ -87,8 +87,8 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="hidden lg:flex relative justify-end">
-            <div className="relative w-full">
+            className="hidden lg:flex relative justify-end -mr-8">
+            <div className="relative w-[120%]">
               <img
                 src={founderImg}
                 alt="Thiago Reis — Founder of Hardwood Kings"
