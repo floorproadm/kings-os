@@ -42,7 +42,7 @@ export default function DualCTABar({
         {label && (
           <p
             className={`text-sm font-semibold tracking-wide ${
-              isDark ? "text-[#F5F0E8]/60" : "text-[#1A1A0F]/70"
+              isDark ? "text-foreground/60" : "text-background/70"
             } sm:mr-4`}
           >
             {label}
