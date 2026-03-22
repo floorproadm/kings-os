@@ -60,11 +60,9 @@ export default function DifferentialsSection() {
                 <div className="mx-auto w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center mb-4">
                   <d.icon className="w-7 h-7 text-gold" />
                 </div>
-                <TextStaggerHover
-                  text={d.title}
-                  index={i}
-                  className="font-display text-sm font-bold text-foreground mb-2 justify-center text-balance"
-                />
+                <h3 className="font-display text-sm font-bold text-foreground mb-2 text-balance">
+                  {d.title}
+                </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {d.desc}
                 </p>
