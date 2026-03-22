@@ -108,7 +108,7 @@ export default function VinylService() {
             <Button variant="default" size="xl" className="bg-background text-foreground hover:bg-background/90" asChild>
               <Link to="/contact">{p.ctaCta1}</Link>
             </Button>
-            <Button variant="outline" size="xl" className="bg-transparent border-2 border-black text-black hover:bg-background hover:border-gold/25 hover:text-gold gold-gradient-text transition-colors" asChild>
+            <Button variant="outline" size="xl" className="bg-background border-2 border-gold/25 gold-gradient-text hover:bg-gold/10 transition-colors" asChild>
               <a href="tel:9139153193">{p.ctaCta2}</a>
             </Button>
           </div>
