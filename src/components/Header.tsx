@@ -5,6 +5,7 @@ import { Phone, ChevronDown, Facebook, Instagram, Star } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoCrown from "@/assets/logo-crown.webp";
 import nextdoorIcon from "@/assets/nextdoor-icon.png";
+import googleReviewIcon from "@/assets/google-review-icon.png";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 import { useScroll } from "@/components/ui/use-scroll";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
@@ -93,7 +94,7 @@ export default function Header() {
               className="w-7 h-7 bg-background/15 text-background/70 flex items-center justify-center rounded hover:bg-background/25 hover:text-background transition-colors"
               aria-label="Google Reviews"
             >
-              <Star className="w-3.5 h-3.5" />
+              <img src={googleReviewIcon} alt="Google Reviews" className="w-4 h-4 rounded-full" />
             </a>
           </div>
         </div>
