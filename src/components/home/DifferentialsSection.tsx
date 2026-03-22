@@ -63,7 +63,7 @@ export default function DifferentialsSection() {
                 <TextStaggerHover
                   text={d.title}
                   index={i}
-                  className="font-display text-sm font-bold text-foreground mb-2 justify-center"
+                  className="font-display text-sm font-bold text-foreground mb-2 justify-center text-balance"
                 />
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {d.desc}
