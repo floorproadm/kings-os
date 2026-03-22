@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Phone, CheckCircle, ImageIcon } from "lucide-react";
+import { blurIn } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import {
