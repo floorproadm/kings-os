@@ -63,24 +63,23 @@ export default function AdminGallery() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const { data: images = [], isLoading } = useQuery({
-    queryKey: ["gallery-images", filterCategory],
+  const { data: allImages = [], isLoading } = useQuery({
+    queryKey: ["gallery-images"],
     queryFn: async () => {
-      let query = supabase
+      const { data, error } = await supabase
         .from("gallery_images")
         .select("*")
         .order("display_order", { ascending: true })
         .order("created_at", { ascending: false });
 
-      if (filterCategory !== "all") {
-        query = query.eq("category", filterCategory);
-      }
-
-      const { data, error } = await query;
       if (error) throw error;
       return data as GalleryImage[];
     },
   });
+
+  const images = filterCategory === "all"
+    ? allImages
+    : allImages.filter((i) => i.category === filterCategory);
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
