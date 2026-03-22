@@ -79,11 +79,11 @@ function HeroBackground({ media }: { media: Record<string, HeroMedia | null> }) 
       {media.tablet ? (
         media.tablet.media_type === "video" ? (
           <video autoPlay loop muted playsInline
-            className="absolute inset-0 w-full h-full object-cover hidden md:block lg:hidden"
+            className="absolute inset-0 w-full h-full object-cover object-[center_40%] hidden md:block lg:hidden"
             src={media.tablet.media_url} />
         ) : (
           <img src={media.tablet.media_url} alt="Hero"
-            className="absolute inset-0 w-full h-full object-cover hidden md:block lg:hidden" />
+            className="absolute inset-0 w-full h-full object-cover object-[center_40%] hidden md:block lg:hidden" />
         )
       ) : (
         <video autoPlay loop muted playsInline
