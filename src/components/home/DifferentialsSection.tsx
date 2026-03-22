@@ -43,7 +43,7 @@ export default function DifferentialsSection() {
             <RevealCard
               className="rounded-xl h-full"
               overlay={
-                <div className="bg-gradient-to-br from-gold-light to-gold-dark h-full w-full rounded-xl p-6 text-center flex flex-col items-center justify-center">
+                <div className="bg-gradient-to-br from-gold-light to-gold-dark h-full w-full rounded-xl p-6 text-center flex flex-col items-center justify-center [word-break:keep-all]">
                   <div className="mx-auto w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mb-4">
                     <d.icon className="w-7 h-7 text-background" />
                   </div>
