@@ -31,9 +31,9 @@ export default function Builders() {
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto text-center">
           <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">For Builders & Contractors</p>
-          <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
+          <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
             Reliable Flooring Partner for <span className="gold-gradient-text">Builders & Contractors</span>
-          </h1>
+          </motion.h1>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">Hardwood, vinyl, and staircase installation for builders who need reliable timelines, professional craftsmanship, and competitive contractor pricing.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="gold" size="xl" asChild>
