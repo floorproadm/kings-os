@@ -24,8 +24,8 @@
     --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 90%;
 
-    --muted: 60 10% 18%;
-    --muted-foreground: 40 12% 55%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 55%;
 
     /* Brand: #C9A84C gold accent */
     --accent: 44 54% 54%;
