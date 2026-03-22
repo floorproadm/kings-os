@@ -47,7 +47,7 @@ export default function DifferentialsSection() {
                   <div className="mx-auto w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mb-4">
                     <d.icon className="w-7 h-7 text-background" />
                   </div>
-                  <h3 className="font-display text-sm font-bold text-background mb-2">
+                  <h3 className="font-display text-sm font-bold text-background mb-2 text-balance">
                     {d.title}
                   </h3>
                   <p className="text-xs text-background/70 leading-relaxed">
