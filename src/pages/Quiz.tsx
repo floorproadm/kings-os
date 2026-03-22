@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { ChevronRight, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { formatPhone } from "@/lib/formatPhone";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
