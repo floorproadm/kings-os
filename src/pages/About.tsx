@@ -85,7 +85,7 @@ export default function About() {
       {/* Promise */}
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto max-w-3xl text-center">
-          <h2 className="font-display text-3xl font-bold text-foreground mb-6">Our <span className="gold-gradient-text">Promise</span></h2>
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl font-bold text-foreground mb-6">Our <span className="gold-gradient-text">Promise</span></motion.h2>
           <p className="text-muted-foreground leading-relaxed mb-4">When you choose Hardwood Kings, you're not hiring just another contractor. You are trusting a family-owned flooring company with over two decades of experience that treats every project as if it were our own home.</p>
           <p className="text-muted-foreground leading-relaxed">Our mission is simple: Deliver results with <strong className="text-gold">pride, precision, and integrity</strong>.</p>
         </div>
