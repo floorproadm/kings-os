@@ -6,10 +6,26 @@ import {
   TreePine, Paintbrush, ArrowUpDown, Trash2, Layers, Fence, Sparkles,
 } from "lucide-react";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
+const cardVariants = {
+  hidden: (i: number) => ({
+    opacity: 0,
+    x: i % 2 === 0 ? -60 : 60,
+    y: 20,
+  }),
   visible: (i: number) => ({
-    opacity: 1, y: 0, transition: { delay: i * 0.08, duration: 0.5 },
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: { duration: 0.6 },
+  }),
+};
+
+const bulletVariants = {
+  hidden: { opacity: 0, x: -15 },
+  visible: (j: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { delay: 0.3 + j * 0.08, duration: 0.4 },
   }),
 };
 
@@ -113,8 +129,8 @@ export default function Services() {
               key={i}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
+              viewport={{ once: true, margin: "-50px" }}
+              variants={cardVariants}
               custom={i}
               className={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center elevated-card overflow-hidden ${
                 i % 2 === 1 ? "lg:direction-rtl" : ""
@@ -138,10 +154,18 @@ export default function Services() {
                 </h2>
                 <ul className="space-y-3 mb-6">
                   {s.bullets.map((b, j) => (
-                    <li key={j} className="flex items-start gap-3 text-muted-foreground">
+                    <motion.li
+                      key={j}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={bulletVariants}
+                      custom={j}
+                      className="flex items-start gap-3 text-muted-foreground"
+                    >
                       <CheckCircle className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" />
                       <span className="text-sm">{b}</span>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
                 <Button variant="gold" size="lg" asChild>
