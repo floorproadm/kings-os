@@ -88,7 +88,7 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="hidden lg:flex relative justify-end">
-            <div className="relative w-[500px]">
+            <div className="relative w-full">
               <img
                 src={founderImg}
                 alt="Thiago Reis — Founder of Hardwood Kings"
