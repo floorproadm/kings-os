@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { HK_ORG_ID } from "@/lib/constants";
+import { motion } from "framer-motion";
 
 const roles = ["Realtor", "Builder", "Property Manager", "Other"];
 
@@ -48,10 +49,23 @@ export default function B2BForm() {
   return (
     <section className="section-padding gold-gradient-bg">
       <div className="container mx-auto px-4 max-w-2xl">
-        <h2 className="font-display text-3xl font-bold text-primary-foreground text-center mb-8">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="font-display text-3xl font-bold text-primary-foreground text-center mb-8"
+        >
           Become a Trade Partner
-        </h2>
-        <form onSubmit={handleSubmit} className="bg-background rounded-2xl p-6 sm:p-8 space-y-4 border border-border/30 shadow-2xl">
+        </motion.h2>
+        <motion.form
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.15, duration: 0.5 }}
+          className="bg-background rounded-2xl p-6 sm:p-8 space-y-4 border border-border/30 shadow-2xl"
+        >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input required placeholder="Your Name *" value={form.name} onChange={(e) => update("name", e.target.value)} className={inputCls} />
             <input placeholder="Company Name" value={form.company} onChange={(e) => update("company", e.target.value)} className={inputCls} />
@@ -68,7 +82,7 @@ export default function B2BForm() {
           <Button type="submit" variant="gold" size="xl" className="w-full" disabled={loading}>
             {loading ? "Sending..." : <><Send className="w-4 h-4 mr-2" /> Submit Partnership Request</>}
           </Button>
-        </form>
+        </motion.form>
       </div>
     </section>
   );

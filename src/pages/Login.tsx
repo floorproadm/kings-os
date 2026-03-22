@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Lock, Mail, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -26,16 +27,46 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="w-full max-w-sm p-8 elevated-card">
+      <motion.div
+        initial={{ opacity: 0, y: 30, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-sm p-8 elevated-card"
+      >
         <div className="text-center mb-8">
-          <div className="w-16 h-16 mx-auto rounded-full bg-gold/10 flex items-center justify-center mb-4">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            className="w-16 h-16 mx-auto rounded-full bg-gold/10 flex items-center justify-center mb-4"
+          >
             <Lock className="w-8 h-8 text-gold" />
-          </div>
-          <h1 className="font-display text-2xl font-bold text-foreground">Kings OS</h1>
-          <p className="text-sm text-muted-foreground mt-1">Admin Login · Hardwood Kings</p>
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="font-display text-2xl font-bold text-foreground"
+          >
+            Kings OS
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-sm text-muted-foreground mt-1"
+          >
+            Admin Login · Hardwood Kings
+          </motion.p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <motion.form
+          onSubmit={handleSubmit}
+          className="space-y-4"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.4 }}
+        >
           <div className="relative">
             <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
@@ -61,14 +92,19 @@ export default function Login() {
           <Button variant="gold" className="w-full" type="submit" disabled={loading}>
             {loading ? "Signing in..." : "Login"}
           </Button>
-        </form>
+        </motion.form>
 
-        <div className="mt-6 text-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="mt-6 text-center"
+        >
           <a href="/" className="text-sm text-muted-foreground hover:text-gold transition-colors inline-flex items-center gap-1">
             <ArrowLeft className="w-3 h-3" /> Back to site
           </a>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
