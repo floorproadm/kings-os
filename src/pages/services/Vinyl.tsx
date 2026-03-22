@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Droplets, Shield, Zap, Heart } from "lucide-react";
+import { FeatureSteps } from "@/components/ui/feature-steps";
 import serviceVinyl from "@/assets/service-vinyl.jpg";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
