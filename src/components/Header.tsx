@@ -44,27 +44,27 @@ export default function Header() {
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
       {/* Top Bar */}
-      <div className="bg-secondary border-b border-border/50">
+      <div className="bg-gradient-to-r from-gold-dark via-gold to-gold-light border-b border-gold/30">
         <div className="container mx-auto flex items-center justify-between px-4 py-2 text-sm">
           <div className="flex items-center gap-4">
             <a
               href="sms:+19139153193?body=Hi! I'm interested in a flooring estimate from your website."
-              className="flex items-center gap-1.5 text-muted-foreground hover:text-gold transition-colors"
+              className="flex items-center gap-1.5 text-background/70 hover:text-background transition-colors"
             >
               <Phone className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Call or Text:</span>
-              <span className="font-semibold text-foreground">(913) 915-3193</span>
+              <span className="font-semibold text-background">(913) 915-3193</span>
             </a>
           </div>
           <div className="flex items-center gap-2">
-            <span className="hidden md:inline text-xs text-muted-foreground">
-              Serving <strong className="text-foreground">Johnson County, KS</strong>
+            <span className="hidden md:inline text-xs text-background/70">
+              Serving <strong className="text-background">Johnson County, KS</strong>
             </span>
             <a
               href="https://instagram.com/hardwoodkingsinc"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-7 h-7 bg-foreground/10 text-muted-foreground flex items-center justify-center rounded hover:bg-gold/20 hover:text-gold transition-colors"
+              className="w-7 h-7 bg-background/15 text-background/70 flex items-center justify-center rounded hover:bg-background/25 hover:text-background transition-colors"
             >
               <Instagram className="w-3.5 h-3.5" />
             </a>
@@ -72,7 +72,7 @@ export default function Header() {
               href="https://facebook.com/hardwoodkingsinc"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-7 h-7 bg-foreground/10 text-muted-foreground flex items-center justify-center rounded hover:bg-gold/20 hover:text-gold transition-colors"
+              className="w-7 h-7 bg-background/15 text-background/70 flex items-center justify-center rounded hover:bg-background/25 hover:text-background transition-colors"
             >
               <Facebook className="w-3.5 h-3.5" />
             </a>
