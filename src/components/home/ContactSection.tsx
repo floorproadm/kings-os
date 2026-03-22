@@ -359,6 +359,7 @@ export default function ContactSection() {
                         type="email"
                         className={inputCls}
                         placeholder="you@example.com"
+                        maxLength={100}
                         value={form.email}
                         onChange={(e) => set("email", e.target.value)}
                       />
