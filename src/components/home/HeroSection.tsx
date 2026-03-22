@@ -17,7 +17,7 @@ const blurInHero = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { delay: i * 0.15, duration: 0.7, ease: "easeOut" }
+    transition: { delay: i * 0.15, duration: 0.7, ease: "easeOut" as const }
   })
 };
 
