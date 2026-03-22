@@ -319,7 +319,7 @@ export default function ContactSection() {
 
           {/* Right — Form */}
           <MovingBorderContainer
-            duration={6000}
+            duration={10000}
             borderRadius="1rem"
             containerClassName="w-full"
             className="p-8 flex-col items-stretch"
