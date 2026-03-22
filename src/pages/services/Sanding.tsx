@@ -94,10 +94,10 @@ export default function SandingService() {
           <p className="text-center text-muted-foreground mb-12">Choose the perfect finish for your lifestyle and aesthetic preferences.</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {p.finishes.map((f, i) => (
-              <div key={i} className="elevated-card p-6 text-center">
+              <div key={i} className="rounded-2xl border border-gold/15 bg-background p-6 text-center shadow-[0_0_15px_rgba(201,168,76,0.06)]">
                 <h3 className="font-display font-bold text-foreground mb-2">{f.name}</h3>
-                <p className="text-sm text-muted-foreground mb-3">{f.desc}</p>
-                <span className="inline-block px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold">{f.best}</span>
+                <p className="text-sm text-muted-foreground mb-4">{f.desc}</p>
+                <span className="inline-block px-4 py-1.5 rounded-full border border-gold/25 bg-gold/5 text-gold text-xs font-semibold uppercase tracking-wider">{f.best}</span>
               </div>
             ))}
           </div>
