@@ -196,10 +196,15 @@ export function NewLeadModal({ open, onOpenChange, onSuccess }: NewLeadModalProp
               </Label>
               <Input
                 id="nl-zip"
+                type="tel"
+                inputMode="numeric"
                 value={form.address}
-                onChange={(e) => handleChange("address", e.target.value)}
-                placeholder="07XXX"
-                maxLength={20}
+                onChange={(e) => {
+                  const digits = e.target.value.replace(/\D/g, "").slice(0, 5);
+                  handleChange("address", digits);
+                }}
+                placeholder="66062"
+                maxLength={5}
               />
             </div>
           </div>
