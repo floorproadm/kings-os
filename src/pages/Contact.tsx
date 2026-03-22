@@ -89,11 +89,11 @@ export default function Contact() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">Name *</label>
-                      <input type="text" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
+                      <input type="text" required maxLength={100} value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
                     </div>
                     <div>
                       <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">Phone *</label>
-                      <input type="tel" required value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
+                      <input type="tel" required value={form.phone} onChange={e => setForm({...form, phone: formatPhone(e.target.value)})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
