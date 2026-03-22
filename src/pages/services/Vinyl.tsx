@@ -64,16 +64,16 @@ export default function VinylService() {
       {/* Room Guide */}
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">Perfect for Every <span className="gold-gradient-text">Room</span></h2>
+          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display text-3xl font-bold text-foreground text-center mb-12">Perfect for Every <span className="gold-gradient-text">Room</span></motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {p.rooms.map((r, i) => (
-              <div key={i} className="bg-background border border-gold/15 rounded-xl p-5">
+              <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} className="bg-background border border-gold/15 rounded-xl p-5">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-display font-bold text-foreground">{r.room}</h3>
                   <span className="text-xs px-2 py-0.5 rounded-full bg-gold/10 text-gold">{r.tag}</span>
                 </div>
                 <p className="text-sm text-muted-foreground">{r.benefits}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
