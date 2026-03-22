@@ -97,7 +97,7 @@ export default function Footer() {
           <p>© 2026 Hardwood Kings Inc. All Rights Reserved.</p>
           <div className="flex items-center gap-4">
             <a
-              href="https://instagram.com/hardwoodkingsinc"
+              href="https://www.instagram.com/hardwoodkingsinc/"
               target="_blank"
               rel="noopener"
               className="hover:text-gold transition-colors"
@@ -105,7 +105,7 @@ export default function Footer() {
               Instagram
             </a>
             <a
-              href="https://facebook.com/hardwoodkingsinc"
+              href="https://www.facebook.com/hardwoodkingsinc"
               target="_blank"
               rel="noopener"
               className="hover:text-gold transition-colors"
@@ -113,7 +113,15 @@ export default function Footer() {
               Facebook
             </a>
             <a
-              href="https://g.co/kgs/a7HT8TK"
+              href="https://nextdoor.com/pages/hardwood-kings-inc-long-branch-nj/"
+              target="_blank"
+              rel="noopener"
+              className="hover:text-gold transition-colors"
+            >
+              Nextdoor
+            </a>
+            <a
+              href="https://www.google.com/search?sca_esv=f91f1cbd7359997a&hl=pt-BR&authuser=0&sxsrf=ANbL-n6GStV_RhIRf-ybDvOhjmEC5v2N0g:1774180100341&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOVv4CiFKtVRPgHwths1eRQQjU-S6awDYMp2_XVF84YsIhOi3A2eE1BCSn10CIbfg0ANGl7If3GrVI-OhY9u-fZ88NoVslEtmYnQmU9YQe_o2zKf3TQ%3D%3D&q=Hardwood+Kings+INC+Coment%C3%A1rios&sa=X&ved=2ahUKEwif3Jf1t7OTAxXSk4kEHeb0LzMQ0bkNegQIIhAF&biw=1920&bih=945"
               target="_blank"
               rel="noopener"
               className="hover:text-gold transition-colors"

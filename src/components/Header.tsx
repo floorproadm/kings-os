@@ -61,7 +61,7 @@ export default function Header() {
               Serving <strong className="text-background">Johnson County, KS</strong>
             </span>
             <a
-              href="https://instagram.com/hardwoodkingsinc"
+              href="https://www.instagram.com/hardwoodkingsinc/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-7 h-7 bg-background/15 text-background/70 flex items-center justify-center rounded hover:bg-background/25 hover:text-background transition-colors"
@@ -69,7 +69,7 @@ export default function Header() {
               <Instagram className="w-3.5 h-3.5" />
             </a>
             <a
-              href="https://facebook.com/hardwoodkingsinc"
+              href="https://www.facebook.com/hardwoodkingsinc"
               target="_blank"
               rel="noopener noreferrer"
               className="w-7 h-7 bg-background/15 text-background/70 flex items-center justify-center rounded hover:bg-background/25 hover:text-background transition-colors"
