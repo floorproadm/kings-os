@@ -2,6 +2,12 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { CheckCircle, Gift } from "lucide-react";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
+};
 
 const nextSteps = [
   { num: "1", title: "Personal Project Consultation", desc: "One of our flooring specialists will review your information and contact you." },
@@ -21,22 +27,55 @@ export default function ThankYou() {
     <Layout>
       <section className="section-padding">
         <div className="container mx-auto max-w-3xl text-center">
-          <div className="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-6">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
+            className="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-6"
+          >
             <CheckCircle className="w-8 h-8 text-gold" />
-          </div>
-          <h1 className="font-display text-4xl font-bold text-foreground mb-4">Thank You!</h1>
-          <p className="text-muted-foreground mb-12">Your request has been successfully received. A flooring specialist from Hardwood Kings will contact you within <strong className="text-gold">24 hours</strong> with personalized recommendations.</p>
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="font-display text-4xl font-bold text-foreground mb-4"
+          >
+            Thank You!
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="text-muted-foreground mb-12"
+          >
+            Your request has been successfully received. A flooring specialist from Hardwood Kings will contact you within <strong className="text-gold">24 hours</strong> with personalized recommendations.
+          </motion.p>
 
-          <h2 className="font-display text-2xl font-bold text-foreground mb-8">What Happens Next</h2>
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="font-display text-2xl font-bold text-foreground mb-8"
+          >
+            What Happens Next
+          </motion.h2>
           <div className="space-y-4 text-left">
             {nextSteps.map((s, i) => (
-              <div key={i} className="elevated-card p-5 flex gap-4 items-start">
+              <motion.div
+                key={i}
+                initial="hidden"
+                animate="visible"
+                variants={fadeUp}
+                custom={i + 4}
+                className="elevated-card p-5 flex gap-4 items-start"
+              >
                 <div className="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0 text-gold font-bold text-sm">{s.num}</div>
                 <div>
                   <h3 className="font-display font-bold text-foreground mb-1">{s.title}</h3>
                   <p className="text-sm text-muted-foreground">{s.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -45,10 +84,23 @@ export default function ThankYou() {
       {/* Referral */}
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto max-w-3xl text-center">
-          <Gift className="w-10 h-10 text-gold mx-auto mb-4" />
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Know Someone Who Needs New Floors?</h2>
-          <p className="text-muted-foreground mb-8">Refer friends or family to Hardwood Kings and earn <strong className="text-gold">5%</strong> of every completed project.</p>
-          <div className="elevated-card overflow-hidden max-w-sm mx-auto mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <Gift className="w-10 h-10 text-gold mx-auto mb-4" />
+            <h2 className="font-display text-2xl font-bold text-foreground mb-4">Know Someone Who Needs New Floors?</h2>
+            <p className="text-muted-foreground mb-8">Refer friends or family to Hardwood Kings and earn <strong className="text-gold">5%</strong> of every completed project.</p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="elevated-card overflow-hidden max-w-sm mx-auto mb-8"
+          >
             <div className="grid grid-cols-2 bg-gold/10 p-3 text-sm font-semibold text-foreground">
               <span>Project Value</span>
               <span className="text-gold text-right">Your Reward</span>
@@ -59,7 +111,7 @@ export default function ThankYou() {
                 <span className="text-gold font-bold text-right">{r.reward}</span>
               </div>
             ))}
-          </div>
+          </motion.div>
           <Button variant="gold" size="lg" asChild>
             <Link to="/referral">Learn More About Referrals</Link>
           </Button>
