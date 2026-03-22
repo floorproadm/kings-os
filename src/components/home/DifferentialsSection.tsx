@@ -26,7 +26,7 @@ export default function DifferentialsSection() {
           <motion.h2 initial={{ opacity: 0, y: 20, filter: "blur(10px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut" }} className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-gold-dark leading-tight text-center">
             We Don't Just Meet Expectations.{" "}
             <span className="text-gold">We Exceed Them.</span>
-          </h2>
+          </motion.h2>
         </div>
 
         <HoverSlider className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
