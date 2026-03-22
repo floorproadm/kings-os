@@ -154,10 +154,18 @@ export default function Services() {
                 </h2>
                 <ul className="space-y-3 mb-6">
                   {s.bullets.map((b, j) => (
-                    <li key={j} className="flex items-start gap-3 text-muted-foreground">
+                    <motion.li
+                      key={j}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={bulletVariants}
+                      custom={j}
+                      className="flex items-start gap-3 text-muted-foreground"
+                    >
                       <CheckCircle className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" />
                       <span className="text-sm">{b}</span>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
                 <Button variant="gold" size="lg" asChild>
