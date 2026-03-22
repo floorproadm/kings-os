@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 import founderImg from "@/assets/founder-thiago.png";
-import GradientBlobCard from "@/components/ui/gradient-blob-card";
+import { MovingBorderContainer } from "@/components/ui/moving-border";
 
 const areas = [
 "Shawnee", "Overland Park", "Olathe", "Leawood", "Lenexa", "Prairie Village"];
