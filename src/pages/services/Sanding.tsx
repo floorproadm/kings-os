@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Zap, Home, DollarSign, Clock } from "lucide-react";
+import { FeatureSteps } from "@/components/ui/feature-steps";
 import serviceSanding from "@/assets/service-sanding.jpg";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
@@ -49,15 +50,15 @@ export default function SandingService() {
         <div className="container mx-auto">
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">{p.sectionTitle} <span className="gold-gradient-text">{p.sectionHighlight}</span></h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">{p.sectionSubtitle}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {p.benefits.map((b, i) => (
-              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 text-center">
-                <div className="mx-auto w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-4">{iconMap[i % 4]}</div>
-                <h3 className="font-display font-bold text-foreground mb-2">{b.title}</h3>
-                <p className="text-sm text-muted-foreground">{b.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+          <FeatureSteps
+            features={p.benefits.map((b, i) => ({
+              step: `Step ${i + 1}`,
+              title: b.title,
+              content: b.desc,
+            }))}
+            autoPlayInterval={4000}
+            className="max-w-2xl mx-auto"
+          />
         </div>
       </section>
 

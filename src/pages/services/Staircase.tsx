@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle, Shield, TrendingUp, Sparkles } from "lucide-react";
+import { FeatureSteps } from "@/components/ui/feature-steps";
 import serviceStaircase from "@/assets/service-staircase.jpg";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
@@ -40,19 +41,15 @@ export default function StaircaseService() {
       <section className="section-padding">
         <div className="container mx-auto max-w-4xl">
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">{p.sectionTitle} <span className="gold-gradient-text">{p.sectionHighlight}</span></h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {p.services.map((s, i) => (
-              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6">
-                <h3 className="font-display text-lg font-bold text-foreground mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{s.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {s.tags.map((t, j) => (
-                    <span key={j} className="text-xs px-2.5 py-1 rounded-full bg-gold/10 text-gold">{t}</span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <FeatureSteps
+            features={p.services.map((s, i) => ({
+              step: `Step ${i + 1}`,
+              title: s.title,
+              content: s.desc,
+            }))}
+            autoPlayInterval={4000}
+            className="max-w-2xl mx-auto"
+          />
         </div>
       </section>
 

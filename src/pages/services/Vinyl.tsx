@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Droplets, Shield, Zap, Heart } from "lucide-react";
+import { FeatureSteps } from "@/components/ui/feature-steps";
 import serviceVinyl from "@/assets/service-vinyl.jpg";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
@@ -47,15 +48,15 @@ export default function VinylService() {
         <div className="container mx-auto">
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">{p.sectionTitle} <span className="gold-gradient-text">{p.sectionHighlight}</span></h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">{p.sectionSubtitle}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {p.features.map((f, i) => (
-              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 text-center">
-                <div className="mx-auto w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-4">{iconMap[i % 4]}</div>
-                <h3 className="font-display font-bold text-foreground mb-2">{f.title}</h3>
-                <p className="text-sm text-muted-foreground">{f.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+          <FeatureSteps
+            features={p.features.map((f, i) => ({
+              step: `Step ${i + 1}`,
+              title: f.title,
+              content: f.desc,
+            }))}
+            autoPlayInterval={4000}
+            className="max-w-2xl mx-auto"
+          />
         </div>
       </section>
 
