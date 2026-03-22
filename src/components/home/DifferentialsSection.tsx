@@ -56,7 +56,7 @@ export default function DifferentialsSection() {
                 </div>
               }
             >
-              <div className="bg-background rounded-xl p-6 text-center border border-border/30 shadow-lg shadow-black/10 h-full flex flex-col items-center justify-center">
+              <div className="bg-background rounded-xl p-6 text-center border border-border/30 shadow-lg shadow-black/10 h-full flex flex-col items-center justify-center [word-break:keep-all]">
                 <div className="mx-auto w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center mb-4">
                   <d.icon className="w-7 h-7 text-gold" />
                 </div>
