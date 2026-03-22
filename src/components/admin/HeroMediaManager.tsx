@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Monitor, Tablet, Smartphone, Upload, Trash2, Loader2, Film, Image, Crop } from "lucide-react";
+import { Monitor, Tablet, Smartphone, Upload, Trash2, Loader2, Film, Image, Crop, Camera } from "lucide-react";
 import ImageCropDialog from "./ImageCropDialog";
 
 interface HeroMedia {
@@ -14,9 +14,9 @@ interface HeroMedia {
 }
 
 const DEVICES = [
-  { key: "desktop", label: "Desktop", icon: Monitor, hint: "Recomendado: 1920×1080", aspect: 16 / 9 },
-  { key: "tablet", label: "Tablet", icon: Tablet, hint: "Recomendado: 1024×768", aspect: 4 / 3 },
-  { key: "mobile", label: "Mobile", icon: Smartphone, hint: "Recomendado: 390×844", aspect: 9 / 19.5 },
+  { key: "desktop", label: "Desktop", icon: Monitor, hint: "1920×1080", aspect: 16 / 9 },
+  { key: "tablet", label: "Tablet", icon: Tablet, hint: "1024×768", aspect: 4 / 3 },
+  { key: "mobile", label: "Mobile", icon: Smartphone, hint: "390×844", aspect: 9 / 19.5 },
 ] as const;
 
 export default function HeroMediaManager() {
@@ -27,7 +27,7 @@ export default function HeroMediaManager() {
   const [cropState, setCropState] = useState<{
     device: string;
     imageSrc: string;
-    originalFile: File;
+    originalFile: File | null;
     aspect: number;
   } | null>(null);
 
@@ -98,11 +98,38 @@ export default function HeroMediaManager() {
     setCropState(null);
   };
 
-  const handleUploadOriginal = () => {
-    if (!cropState) return;
+  const handleSkipCrop = () => {
+    if (!cropState || !cropState.originalFile) return;
     const ext = cropState.originalFile.name.split(".").pop() || "jpg";
     uploadFile(cropState.device, cropState.originalFile, ext, "image");
     setCropState(null);
+  };
+
+  // Capture frame from video for cropping
+  const captureVideoFrame = (device: string, videoUrl: string, aspect: number) => {
+    const video = document.createElement("video");
+    video.crossOrigin = "anonymous";
+    video.src = videoUrl;
+    video.muted = true;
+    video.currentTime = 1; // capture at 1 second
+    video.onloadeddata = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      ctx.drawImage(video, 0, 0);
+      const dataUrl = canvas.toDataURL("image/png");
+      setCropState({
+        device,
+        imageSrc: dataUrl,
+        originalFile: null,
+        aspect,
+      });
+    };
+    video.onerror = () => {
+      toast.error("Não foi possível capturar frame do vídeo");
+    };
   };
 
   const handleDelete = async (device: string) => {
@@ -130,14 +157,13 @@ export default function HeroMediaManager() {
             <Film className="w-4 h-4 text-gold" /> Hero Background Media
           </CardTitle>
           <p className="text-xs text-muted-foreground">
-            Upload vídeo ou imagem de fundo do hero para cada dispositivo. Imagens podem ser recortadas antes do upload.
+            Upload vídeo ou imagem de fundo do hero. Imagens abrem o recorte automaticamente. Para vídeos, use "Capturar Frame" para extrair uma imagem.
           </p>
         </CardHeader>
         <CardContent className="space-y-4">
-          {DEVICES.map(({ key, label, icon: Icon, hint }) => {
+          {DEVICES.map(({ key, label, icon: Icon, hint, aspect }) => {
             const item = media[key];
             const isLoading = uploading === key;
-            const deviceConfig = DEVICES.find(d => d.key === key)!;
 
             return (
               <div key={key} className="border border-border rounded-lg p-4 space-y-3">
@@ -169,7 +195,7 @@ export default function HeroMediaManager() {
                   </div>
                 )}
 
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <Button variant="goldOutline" size="sm" className="relative" disabled={isLoading}>
                     {isLoading ? (
                       <Loader2 className="w-4 h-4 animate-spin mr-1" />
@@ -184,11 +210,13 @@ export default function HeroMediaManager() {
                       disabled={isLoading}
                       onChange={(e) => {
                         const file = e.target.files?.[0];
-                        if (file) handleFileSelect(key, file, deviceConfig.aspect);
+                        if (file) handleFileSelect(key, file, aspect);
                         e.target.value = "";
                       }}
                     />
                   </Button>
+
+                  {/* Crop button for images */}
                   {item && item.media_type === "image" && (
                     <Button
                       variant="goldOutline"
@@ -198,14 +226,27 @@ export default function HeroMediaManager() {
                         setCropState({
                           device: key,
                           imageSrc: item.media_url,
-                          originalFile: new File([], "existing"),
-                          aspect: deviceConfig.aspect,
+                          originalFile: null,
+                          aspect,
                         });
                       }}
                     >
                       <Crop className="w-4 h-4 mr-1" /> Recortar
                     </Button>
                   )}
+
+                  {/* Capture frame from video for cropping */}
+                  {item && item.media_type === "video" && (
+                    <Button
+                      variant="goldOutline"
+                      size="sm"
+                      disabled={isLoading}
+                      onClick={() => captureVideoFrame(key, item.media_url, aspect)}
+                    >
+                      <Camera className="w-4 h-4 mr-1" /> Capturar Frame
+                    </Button>
+                  )}
+
                   {item && (
                     <Button variant="destructive" size="sm" onClick={() => handleDelete(key)} disabled={isLoading}>
                       <Trash2 className="w-4 h-4 mr-1" /> Remover
@@ -225,6 +266,7 @@ export default function HeroMediaManager() {
           imageSrc={cropState.imageSrc}
           aspectRatio={cropState.aspect}
           onCropComplete={handleCropComplete}
+          onSkipCrop={cropState.originalFile ? handleSkipCrop : undefined}
         />
       )}
     </>

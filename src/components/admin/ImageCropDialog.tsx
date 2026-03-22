@@ -3,7 +3,7 @@ import ReactCrop, { type Crop, type PixelCrop, centerCrop, makeAspectCrop } from
 import "react-image-crop/dist/ReactCrop.css";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Loader2, Crop as CropIcon } from "lucide-react";
+import { Loader2, Crop as CropIcon, ImageIcon } from "lucide-react";
 
 interface ImageCropDialogProps {
   open: boolean;
@@ -11,6 +11,7 @@ interface ImageCropDialogProps {
   imageSrc: string;
   aspectRatio?: number;
   onCropComplete: (croppedBlob: Blob) => void;
+  onSkipCrop?: () => void;
 }
 
 function centerAspectCrop(mediaWidth: number, mediaHeight: number, aspect: number): Crop {
@@ -32,6 +33,7 @@ export default function ImageCropDialog({
   imageSrc,
   aspectRatio,
   onCropComplete,
+  onSkipCrop,
 }: ImageCropDialogProps) {
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
@@ -41,11 +43,18 @@ export default function ImageCropDialog({
   const onImageLoad = useCallback(
     (e: React.SyntheticEvent<HTMLImageElement>) => {
       const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
-      if (aspectRatio) {
-        setCrop(centerAspectCrop(width, height, aspectRatio));
-      } else {
-        setCrop(centerAspectCrop(width, height, 16 / 9));
-      }
+      const ar = aspectRatio || 16 / 9;
+      const newCrop = centerAspectCrop(width, height, ar);
+      setCrop(newCrop);
+      // Auto-set completedCrop so the button is enabled immediately
+      const pixelCrop: PixelCrop = {
+        unit: "px",
+        x: (newCrop.x! / 100) * width,
+        y: (newCrop.y! / 100) * height,
+        width: (newCrop.width! / 100) * width,
+        height: (newCrop.height! / 100) * height,
+      };
+      setCompletedCrop(pixelCrop);
     },
     [aspectRatio],
   );
@@ -63,7 +72,10 @@ export default function ImageCropDialog({
     canvas.height = completedCrop.height * scaleY;
 
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) {
+      setSaving(false);
+      return;
+    }
 
     ctx.drawImage(
       image,
@@ -86,7 +98,7 @@ export default function ImageCropDialog({
         }
       },
       "image/webp",
-      0.9,
+      0.92,
     );
   };
 
@@ -100,10 +112,10 @@ export default function ImageCropDialog({
           </DialogTitle>
         </DialogHeader>
 
-        <div className="flex items-center justify-center max-h-[60vh] overflow-auto">
+        <div className="flex items-center justify-center max-h-[60vh] overflow-auto bg-black/30 rounded-md p-2">
           <ReactCrop
             crop={crop}
-            onChange={(c) => setCrop(c)}
+            onChange={(_, percentCrop) => setCrop(percentCrop)}
             onComplete={(c) => setCompletedCrop(c)}
             aspect={aspectRatio}
           >
@@ -113,16 +125,23 @@ export default function ImageCropDialog({
               alt="Crop preview"
               onLoad={onImageLoad}
               className="max-h-[55vh] w-auto"
+              crossOrigin="anonymous"
             />
           </ReactCrop>
         </div>
 
-        <DialogFooter className="gap-2">
+        <DialogFooter className="flex-col sm:flex-row gap-2">
+          {onSkipCrop && (
+            <Button variant="ghost" onClick={onSkipCrop} className="mr-auto">
+              <ImageIcon className="w-4 h-4 mr-1" />
+              Enviar sem recortar
+            </Button>
+          )}
           <Button variant="ghost" onClick={() => onOpenChange(false)}>
             Cancelar
           </Button>
           <Button variant="gold" onClick={handleConfirm} disabled={saving || !completedCrop}>
-            {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1" /> : null}
+            {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1" /> : <CropIcon className="w-4 h-4 mr-1" />}
             Aplicar Recorte
           </Button>
         </DialogFooter>
