@@ -112,10 +112,10 @@ export default function Services() {
           <p className="text-gold text-sm tracking-[0.2em] uppercase font-semibold mb-4">
             What We Do
           </p>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-4">
+          <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-4">
             Expert Hardwood Services in{" "}
             <span className="gold-gradient-text">Johnson County</span>
-          </h1>
+          </motion.h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             7 specialized services delivered with 24+ years of craftsmanship.
           </p>
