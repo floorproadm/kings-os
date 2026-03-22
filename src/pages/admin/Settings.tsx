@@ -93,6 +93,8 @@ export default function SettingsPage() {
         </CardContent>
       </Card>
 
+      <HeroMediaManager />
+
       <Card className="bg-card border-border">
         <CardContent className="pt-6">
           <Button variant="destructive" onClick={handleLogout} className="gap-2">
