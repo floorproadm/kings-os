@@ -6,36 +6,36 @@
 
 @layer base {
   :root {
-    /* Brand: #1A1A0F dark bg */
-    --background: 60 27% 8%;
-    /* Brand: #F5F0E8 off-white text */
-    --foreground: 37 39% 94%;
+    /* Brand: #000000 pure black bg */
+    --background: 0 0% 0%;
+    /* Brand: #FFFFFF white text */
+    --foreground: 0 0% 100%;
 
-    --card: 60 20% 11%;
-    --card-foreground: 37 39% 94%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 60 20% 11%;
-    --popover-foreground: 37 39% 94%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
 
     /* Brand: #C9A84C gold */
     --primary: 44 54% 54%;
-    --primary-foreground: 60 27% 8%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 60 15% 14%;
-    --secondary-foreground: 37 30% 85%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 90%;
 
-    --muted: 60 10% 18%;
-    --muted-foreground: 40 12% 55%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 55%;
 
     /* Brand: #C9A84C gold accent */
     --accent: 44 54% 54%;
-    --accent-foreground: 60 27% 8%;
+    --accent-foreground: 0 0% 0%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 60 10% 20%;
-    --input: 60 10% 16%;
+    --border: 0 0% 18%;
+    --input: 0 0% 12%;
     --ring: 44 54% 54%;
 
     --radius: 0.5rem;
@@ -47,16 +47,16 @@
     /* Brand: #51351e gold-dark (crown logo) */
     --gold-dark: 24 48% 22%;
 
-    --dark-surface: 60 27% 7%;
-    --dark-elevated: 60 20% 11%;
+    --dark-surface: 0 0% 3%;
+    --dark-elevated: 0 0% 7%;
 
-    --sidebar-background: 60 27% 8%;
-    --sidebar-foreground: 37 39% 94%;
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
     --sidebar-primary: 44 54% 54%;
-    --sidebar-primary-foreground: 60 27% 8%;
-    --sidebar-accent: 60 15% 14%;
-    --sidebar-accent-foreground: 37 39% 94%;
-    --sidebar-border: 60 10% 20%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 18%;
     --sidebar-ring: 44 54% 54%;
   }
 }

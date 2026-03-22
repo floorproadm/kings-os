@@ -70,14 +70,14 @@ export default function SandingService() {
           <div className="space-y-4">
             {p.steps.map((s, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i}
-                className="relative rounded-2xl border border-gold/20 bg-[#1A1A0F] p-5 flex gap-4 items-center overflow-hidden shadow-[0_0_15px_rgba(201,168,76,0.08)]"
+                className="relative rounded-2xl border border-gold/20 bg-background p-5 flex gap-4 items-center overflow-hidden shadow-[0_0_15px_rgba(201,168,76,0.08)]"
               >
                 <div className="w-10 h-10 rounded-full bg-gold/15 border border-gold/30 flex items-center justify-center shrink-0">
                   <CheckCircle className="w-5 h-5 text-gold" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-display font-bold text-[#F5F0E8] text-sm mb-1">{s.title}</h3>
-                  <p className="text-xs text-[#F5F0E8]/60">{s.desc}</p>
+                  <h3 className="font-display font-bold text-foreground text-sm mb-1">{s.title}</h3>
+                  <p className="text-xs text-foreground/60">{s.desc}</p>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#fccf93] via-gold to-[#51351e]" />
               </motion.div>
@@ -112,7 +112,7 @@ export default function SandingService() {
             <Button variant="default" size="xl" className="bg-background text-foreground hover:bg-background/90" asChild>
               <Link to="/contact">{p.ctaCta1}</Link>
             </Button>
-            <Button variant="outline" size="xl" className="bg-[#1A1A0F] border-0 text-[#F5F0E8] hover:bg-[#2a2a1a]" asChild>
+            <Button variant="outline" size="xl" className="bg-background border-0 text-foreground hover:bg-muted" asChild>
               <Link to="/gallery">{p.ctaCta2}</Link>
             </Button>
           </div>

@@ -137,7 +137,7 @@ export default function LeadCapturePopup() {
       onClick={(e) => e.target === e.currentTarget && dismiss()}
     >
       {/* Modal */}
-      <div className="relative w-full max-w-md bg-[#1A1A0F] border border-[#C9A84C]/30 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+      <div className="relative w-full max-w-md bg-background border border-gold/30 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
 
         {/* Gold top bar */}
         <div className="h-1 w-full gold-gradient-bg" />

@@ -284,7 +284,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="bg-[#1A1A0F] py-24 px-4"
+      className="bg-background py-24 px-4"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}

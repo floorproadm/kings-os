@@ -32,8 +32,8 @@ export default function DualCTABar({
     <div
       className={`w-full py-5 px-4 ${
         isDark
-          ? "bg-[#111108] border-y border-[#C9A84C]/15"
-          : "bg-gradient-to-r from-[#fccf93]/80 via-gold/70 to-[#51351e]/80"
+          ? "bg-background border-y border-gold/15"
+          : "bg-gradient-to-r from-gold-light/80 via-gold/70 to-gold-dark/80"
       }`}
     >
       <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
@@ -42,7 +42,7 @@ export default function DualCTABar({
         {label && (
           <p
             className={`text-sm font-semibold tracking-wide ${
-              isDark ? "text-[#F5F0E8]/60" : "text-[#1A1A0F]/70"
+              isDark ? "text-foreground/60" : "text-background/70"
             } sm:mr-4`}
           >
             {label}
@@ -55,7 +55,7 @@ export default function DualCTABar({
           className={`flex items-center gap-2.5 font-bold text-sm px-7 py-3.5 rounded-full transition-all duration-200 shadow-lg ${
             isDark
               ? "bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 text-primary-foreground shadow-gold/20"
-              : "bg-[#1A1A0F] hover:bg-[#2a2a1a] text-[#F5F0E8]"
+              : "bg-background hover:bg-muted text-foreground"
           }`}
         >
           <Calendar size={15} />
@@ -65,7 +65,7 @@ export default function DualCTABar({
         {/* Divider */}
         <span
           className={`text-sm font-light ${
-            isDark ? "text-[#F5F0E8]/30" : "text-[#1A1A0F]/40"
+            isDark ? "text-foreground/30" : "text-background/40"
           } hidden sm:block`}
         >
           or
@@ -76,8 +76,8 @@ export default function DualCTABar({
           href="tel:+19139153193"
           className={`flex items-center gap-2.5 font-bold text-sm px-6 py-3.5 rounded-full border-2 transition-all duration-200 ${
             isDark
-              ? "border-[#C9A84C]/40 text-[#C9A84C] hover:border-[#C9A84C] hover:bg-[#C9A84C]/10"
-              : "border-[#1A1A0F]/40 text-[#1A1A0F] hover:border-[#1A1A0F] hover:bg-[#1A1A0F]/10"
+              ? "border-gold/40 text-gold hover:border-gold hover:bg-gold/10"
+              : "border-background/40 text-background hover:border-background hover:bg-background/10"
           }`}
         >
           <Phone size={15} />
