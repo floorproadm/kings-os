@@ -66,13 +66,13 @@ export default function StackedCards({ cards }: StackedCardsProps) {
 
   const getCardClassName = (index: number, baseClassName: string) => {
     if (focusedIndex === 0 && index === 1) {
-      return baseClassName + " !translate-y-20 sm:!translate-y-32 !translate-x-14 sm:!translate-x-24";
+      return baseClassName + " !translate-y-16 sm:!translate-y-24 !translate-x-10 sm:!translate-x-16";
     }
     if (focusedIndex === 0 && index === 2) {
-      return baseClassName + " !translate-y-28 sm:!translate-y-44 !translate-x-24 sm:!translate-x-40";
+      return baseClassName + " !translate-y-24 sm:!translate-y-36 !translate-x-16 sm:!translate-x-28";
     }
     if (focusedIndex === 1 && index === 2) {
-      return baseClassName + " !translate-y-24 sm:!translate-y-40 !translate-x-24 sm:!translate-x-40";
+      return baseClassName + " !translate-y-20 sm:!translate-y-32 !translate-x-16 sm:!translate-x-28";
     }
     return baseClassName;
   };
