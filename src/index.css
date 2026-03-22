@@ -6,9 +6,9 @@
 
 @layer base {
   :root {
-    /* Brand: #1A1A0F dark bg */
-    --background: 60 27% 8%;
-    /* Brand: #F5F0E8 off-white text */
+    /* Brand: #000000 pure black bg */
+    --background: 0 0% 0%;
+    /* Brand: #FFFFFF white text */
     --foreground: 37 39% 94%;
 
     --card: 60 20% 11%;
