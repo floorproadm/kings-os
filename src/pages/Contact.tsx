@@ -7,6 +7,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { HK_ORG_ID } from "@/lib/constants";
 import { useToast } from "@/hooks/use-toast";
+import { blurIn } from "@/lib/animations";
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
