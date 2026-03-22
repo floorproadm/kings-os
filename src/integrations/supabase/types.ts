@@ -55,6 +55,39 @@ export type Database = {
           },
         ]
       }
+      hero_media: {
+        Row: {
+          created_at: string
+          device: string
+          id: string
+          is_active: boolean
+          media_type: string
+          media_url: string
+          org_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          device: string
+          id?: string
+          is_active?: boolean
+          media_type?: string
+          media_url: string
+          org_id?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          device?: string
+          id?: string
+          is_active?: boolean
+          media_type?: string
+          media_url?: string
+          org_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           address: string | null
