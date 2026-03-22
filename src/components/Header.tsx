@@ -44,7 +44,7 @@ export default function Header() {
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
       {/* Top Bar */}
-      <div className="bg-secondary border-b border-border/50">
+      <div className="bg-gradient-to-r from-gold-dark via-gold to-gold-light border-b border-gold/30">
         <div className="container mx-auto flex items-center justify-between px-4 py-2 text-sm">
           <div className="flex items-center gap-4">
             <a
