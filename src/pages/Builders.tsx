@@ -90,7 +90,7 @@ export default function Builders() {
             <Button variant="default" size="xl" className="bg-background text-foreground hover:bg-background/90" asChild>
               <Link to="/contact">Start Partnership Today</Link>
             </Button>
-            <Button variant="outline" size="xl" className="border-[#1A1A0F]/40 text-[#1A1A0F] hover:border-[#1A1A0F] hover:bg-[#1A1A0F]/10" asChild>
+            <Button variant="outline" size="xl" className="bg-white/90 border-white/30 text-[#1A1A0F] hover:bg-white" asChild>
               <a href="tel:9139153193">Call (913) 915-3193</a>
             </Button>
           </div>

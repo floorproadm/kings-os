@@ -107,7 +107,7 @@ export default function SandingService() {
             <Button variant="default" size="xl" className="bg-background text-foreground hover:bg-background/90" asChild>
               <Link to="/contact">{p.ctaCta1}</Link>
             </Button>
-            <Button variant="outline" size="xl" className="border-[#1A1A0F]/40 text-[#1A1A0F] hover:border-[#1A1A0F] hover:bg-[#1A1A0F]/10" asChild>
+            <Button variant="outline" size="xl" className="bg-white/90 border-white/30 text-[#1A1A0F] hover:bg-white" asChild>
               <Link to="/gallery">{p.ctaCta2}</Link>
             </Button>
           </div>
