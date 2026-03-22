@@ -122,7 +122,7 @@ export default function TestimonialsSection() {
 
           <div
             className="flex gap-4 animate-marquee hover:[animation-play-state:paused]"
-            style={{ "--duration": "40s", "--gap": "1rem" } as React.CSSProperties}
+            style={{ "--duration": "20s", "--gap": "1rem" } as React.CSSProperties}
           >
             {/* Duplicate reviews for seamless loop */}
             {[...Array(4)].map((_, setIndex) =>
