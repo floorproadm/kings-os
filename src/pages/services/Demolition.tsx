@@ -106,7 +106,7 @@ export default function DemolitionService() {
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto">Let us handle the heavy lifting. Get a free estimate for your demolition and replacement project.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact"><Button variant="gold" size="xl">Get Your Free Estimate</Button></Link>
-            <a href="tel:9139153193"><Button variant="outline" size="xl" className="bg-background border-2 border-black gold-gradient-text hover:border-gold/50 hover:shadow-[0_0_15px_rgba(201,168,76,0.15)] transition-all">Call (913) 915-3193</Button></a>
+            <a href="tel:9139153193"><Button variant="outline" size="xl" className="bg-background border-2 border-black text-black hover:border-gold/50 hover:gold-gradient-text hover:shadow-[0_0_15px_rgba(201,168,76,0.15)] transition-all">Call (913) 915-3193</Button></a>
           </div>
         </div>
       </section>
