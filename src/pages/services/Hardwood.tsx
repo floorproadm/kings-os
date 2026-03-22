@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle, Crown, Shield, Trophy } from "lucide-react";
 import { FeatureSteps } from "@/components/ui/feature-steps";
-import { StackedCards } from "@/components/ui/twitter-testimonial-cards";
 import serviceHardwood from "@/assets/service-hardwood.jpg";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
@@ -73,14 +72,16 @@ export default function HardwoodService() {
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto max-w-4xl">
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">Our Installation <span className="gold-gradient-text">Process</span></h2>
-          <div className="flex justify-center py-8">
-            <StackedCards
-              cards={p.steps.map((s) => ({
-                number: s.num,
-                title: s.title,
-                content: s.desc,
-              }))}
-            />
+          <div className="space-y-6">
+            {p.steps.map((s, i) => (
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 flex gap-6 items-start">
+                <div className="text-3xl font-display font-bold text-gold/30">{s.num}</div>
+                <div>
+                  <h3 className="font-display font-bold text-foreground mb-2">{s.title}</h3>
+                  <p className="text-sm text-muted-foreground">{s.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
