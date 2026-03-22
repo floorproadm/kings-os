@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Clock, Heart, Home, ShieldCheck, Gem } from "lucide-react";
 import { HoverSlider, TextStaggerHover } from "@/components/ui/animated-slideshow";
+import { RevealCard } from "@/components/ui/reveal-card";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -37,20 +38,38 @@ export default function DifferentialsSection() {
             viewport={{ once: true }}
             variants={fadeUp}
             custom={i}
-            className="bg-background rounded-xl p-6 text-center border border-border/30 shadow-lg shadow-black/10">
-            
-              <div className="mx-auto w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center mb-4">
-                <d.icon className="w-7 h-7 text-gold" />
+          >
+            <RevealCard
+              className="rounded-xl"
+              overlay={
+                <div className="bg-gradient-to-br from-[#fccf93] to-[#51351e] h-full w-full rounded-xl p-6 text-center flex flex-col items-center justify-center">
+                  <div className="mx-auto w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mb-4">
+                    <d.icon className="w-7 h-7 text-[#1A1A0F]" />
+                  </div>
+                  <h3 className="font-display text-base font-bold text-[#1A1A0F] mb-2">
+                    {d.title}
+                  </h3>
+                  <p className="text-sm text-[#1A1A0F]/70 leading-relaxed">
+                    {d.desc}
+                  </p>
+                </div>
+              }
+            >
+              <div className="bg-background rounded-xl p-6 text-center border border-border/30 shadow-lg shadow-black/10">
+                <div className="mx-auto w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center mb-4">
+                  <d.icon className="w-7 h-7 text-gold" />
+                </div>
+                <TextStaggerHover
+                  text={d.title}
+                  index={i}
+                  className="font-display text-base font-bold text-foreground mb-2 justify-center"
+                />
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {d.desc}
+                </p>
               </div>
-              <TextStaggerHover
-                text={d.title}
-                index={i}
-                className="font-display text-base font-bold text-foreground mb-2 justify-center"
-              />
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {d.desc}
-              </p>
-            </motion.div>
+            </RevealCard>
+          </motion.div>
           )}
         </HoverSlider>
       </div>
