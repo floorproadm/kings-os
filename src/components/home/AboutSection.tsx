@@ -39,7 +39,7 @@ export default function AboutSection() {
             </div>
 
             {/* Founder photo — mobile/tablet only */}
-            <div className="relative w-72 sm:w-96 lg:hidden mt-8">
+            <div className="relative w-72 sm:w-96 lg:hidden mt-8 mx-auto">
               <img
                 src={founderImg}
                 alt="Thiago Reis — Founder of Hardwood Kings"
