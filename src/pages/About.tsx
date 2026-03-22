@@ -29,9 +29,9 @@ export default function About() {
     <Layout>
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto text-center">
-          <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
+          <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
             About <span className="gold-gradient-text">Hardwood Kings</span>
-          </h1>
+          </motion.h1>
         </div>
       </section>
 
