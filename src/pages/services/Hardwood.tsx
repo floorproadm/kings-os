@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle, Crown, Shield, Trophy } from "lucide-react";
 import { FeatureSteps } from "@/components/ui/feature-steps";
+import { StackedCards } from "@/components/ui/stacked-cards";
 import serviceHardwood from "@/assets/service-hardwood.jpg";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 
