@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, ChevronDown, Facebook, Instagram } from "lucide-react";
+import { Phone, ChevronDown, Facebook, Instagram, Star } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoCrown from "@/assets/logo-crown.webp";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
