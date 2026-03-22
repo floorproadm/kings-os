@@ -108,7 +108,7 @@ export default function Header() {
               <button className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 Services <ChevronDown className="w-3.5 h-3.5" />
               </button>
-              <div className="absolute top-full left-0 mt-1 w-64 bg-card border border-border rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
+              <div className="absolute top-full left-0 mt-1 w-64 bg-card/70 backdrop-blur-xl border border-border/40 rounded-xl shadow-2xl shadow-black/30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
                 {services.map((s) => (
                   <Link
                     key={s.path}
