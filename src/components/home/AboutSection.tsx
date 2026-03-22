@@ -39,7 +39,7 @@ export default function AboutSection() {
             </div>
 
             {/* Founder photo — mobile/tablet only */}
-            <div className="relative w-56 sm:w-72 lg:hidden mt-8">
+            <div className="relative w-72 sm:w-96 lg:hidden mt-8">
               <img
                 src={founderImg}
                 alt="Thiago Reis — Founder of Hardwood Kings"
@@ -48,10 +48,10 @@ export default function AboutSection() {
               <div className="absolute inset-0 rounded-2xl pointer-events-none"
                 style={{
                   background: `
-                    linear-gradient(to top, hsl(var(--background)) 0%, transparent 25%),
-                    linear-gradient(to bottom, hsl(var(--background)) 0%, transparent 25%),
-                    linear-gradient(to left, hsl(var(--background)) 0%, transparent 20%),
-                    linear-gradient(to right, hsl(var(--background)) 0%, transparent 20%)
+                    linear-gradient(to top, hsl(var(--background)) 0%, transparent 35%),
+                    linear-gradient(to bottom, hsl(var(--background)) 0%, transparent 35%),
+                    linear-gradient(to left, hsl(var(--background)) 0%, transparent 30%),
+                    linear-gradient(to right, hsl(var(--background)) 0%, transparent 30%)
                   `
                 }}
               />
