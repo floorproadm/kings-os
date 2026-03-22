@@ -76,8 +76,8 @@ export default function DualCTABar({
           href="tel:+19139153193"
           className={`flex items-center gap-2.5 font-bold text-sm px-6 py-3.5 rounded-full border-2 transition-all duration-200 ${
             isDark
-              ? "border-[#C9A84C]/40 text-[#C9A84C] hover:border-[#C9A84C] hover:bg-[#C9A84C]/10"
-              : "border-[#1A1A0F]/40 text-[#1A1A0F] hover:border-[#1A1A0F] hover:bg-[#1A1A0F]/10"
+              ? "border-gold/40 text-gold hover:border-gold hover:bg-gold/10"
+              : "border-background/40 text-background hover:border-background hover:bg-background/10"
           }`}
         >
           <Phone size={15} />
