@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { DollarSign, Clock, Shield, Users, Zap, TrendingUp, CheckCircle, Phone } from "lucide-react";
+import { blurIn } from "@/lib/animations";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -30,9 +31,9 @@ export default function Builders() {
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto text-center">
           <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">For Builders & Contractors</p>
-          <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
+          <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
             Reliable Flooring Partner for <span className="gold-gradient-text">Builders & Contractors</span>
-          </h1>
+          </motion.h1>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">Hardwood, vinyl, and staircase installation for builders who need reliable timelines, professional craftsmanship, and competitive contractor pricing.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="gold" size="xl" asChild>
@@ -47,7 +48,7 @@ export default function Builders() {
 
       <section className="section-padding">
         <div className="container mx-auto">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">Why Builders Choose <span className="gold-gradient-text">Hardwood Kings</span></h2>
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl font-bold text-foreground text-center mb-12">Why Builders Choose <span className="gold-gradient-text">Hardwood Kings</span></motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {cards.map((c, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6">
@@ -67,7 +68,7 @@ export default function Builders() {
 
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">How Our Partnership <span className="gold-gradient-text">Works</span></h2>
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl font-bold text-foreground text-center mb-12">How Our Partnership <span className="gold-gradient-text">Works</span></motion.h2>
           <div className="space-y-6">
             {steps.map((s, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 flex gap-6 items-start">

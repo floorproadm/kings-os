@@ -7,6 +7,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { HK_ORG_ID } from "@/lib/constants";
 import { useToast } from "@/hooks/use-toast";
+import { blurIn } from "@/lib/animations";
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
@@ -63,9 +64,9 @@ export default function Contact() {
       {/* Hero */}
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto text-center">
-          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Get Your Free Flooring Estimate — <span className="gold-gradient-text">Fast Response</span>
-          </h1>
+          </motion.h1>
           <div className="flex flex-wrap justify-center gap-4 mt-6 text-sm text-muted-foreground">
             <span className="flex items-center gap-1.5"><CheckCircle className="w-4 h-4 text-gold" /> Free Estimates</span>
             <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-gold" /> Fast Response</span>

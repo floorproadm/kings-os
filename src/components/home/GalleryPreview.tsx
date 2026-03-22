@@ -46,10 +46,10 @@ export default function GalleryPreview() {
           <p className="text-gold text-sm tracking-[0.2em] uppercase font-semibold mb-4">
             Portfolio
           </p>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
+          <motion.h2 initial={{ opacity: 0, y: 20, filter: "blur(10px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut" }} className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
             See Our Work{" "}
             <span className="gold-gradient-text">in Action</span>
-          </h2>
+          </motion.h2>
         </div>
 
         {/* Tabs */}

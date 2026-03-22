@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { blurIn } from "@/lib/animations";
 import { CheckCircle, Crown, Shield, Trophy } from "lucide-react";
 import { FeatureSteps } from "@/components/ui/feature-steps";
 import serviceHardwood from "@/assets/service-hardwood.jpg";
@@ -32,9 +33,9 @@ export default function HardwoodService() {
         <div className="relative container mx-auto px-4">
           <div className="max-w-2xl">
             <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">{p.heroLabel}</p>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
+            <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
               {p.heroTitle} <span className="gold-gradient-text">{p.heroHighlight}</span>
-            </h1>
+            </motion.h1>
             <p className="text-muted-foreground mb-8">{p.heroDescription}</p>
             <Button variant="gold" size="xl" asChild>
               <Link to="/contact">{p.heroCta}</Link>

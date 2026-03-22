@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { ImageIcon, Loader2, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { blurIn } from "@/lib/animations";
 
 const CATEGORIES = [
   { value: "all", label: "All" },
@@ -55,9 +56,9 @@ export default function Gallery() {
     <Layout>
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto text-center">
-          <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
+          <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
             Our <span className="gold-gradient-text">Gallery</span>
-          </h1>
+          </motion.h1>
           <p className="text-muted-foreground">See our craftsmanship in action</p>
         </div>
       </section>

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { AlertTriangle, CheckCircle, X } from "lucide-react";
 import { motion } from "framer-motion";
+import { blurIn } from "@/lib/animations";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -37,10 +38,10 @@ export default function Diagnostic() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-gold/10 text-gold text-xs font-semibold tracking-wider uppercase mb-4">
             Premium Decision Service
           </span>
-          <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
+          <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
             Before We Touch Your Floors,<br />
             <span className="gold-gradient-text">We Study Them.</span>
-          </h1>
+          </motion.h1>
           <p className="text-muted-foreground max-w-xl mx-auto mb-6">
             Know exactly what your floors need — and what they don't — before a single board is touched.
           </p>
@@ -80,7 +81,7 @@ export default function Diagnostic() {
 
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">The Diagnostic <span className="gold-gradient-text">Process</span></h2>
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl font-bold text-foreground text-center mb-12">The Diagnostic <span className="gold-gradient-text">Process</span></motion.h2>
           <div className="space-y-6">
             {steps.map((s, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 flex gap-6 items-start">

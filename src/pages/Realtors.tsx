@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { TrendingUp, Camera, Clock, DollarSign, Calendar, Shield, Star, Zap, Image } from "lucide-react";
+import { blurIn } from "@/lib/animations";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -35,9 +36,9 @@ export default function Realtors() {
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto text-center">
           <p className="text-gold font-semibold text-sm uppercase tracking-wider mb-3">For Real Estate Professionals</p>
-          <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
+          <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
             Flooring Partner for <span className="gold-gradient-text">Johnson County Realtors</span>
-          </h1>
+          </motion.h1>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">Transform outdated floors into a powerful selling feature. Fast refinishing, professional installation, and realtor-friendly pricing.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="gold" size="xl" asChild>
@@ -52,7 +53,7 @@ export default function Realtors() {
 
       <section className="section-padding">
         <div className="container mx-auto">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">Turn Problem Properties into <span className="gold-gradient-text">Premium Listings</span></h2>
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl font-bold text-foreground text-center mb-4">Turn Problem Properties into <span className="gold-gradient-text">Premium Listings</span></motion.h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">Scratched or outdated floors can turn buyers away. Our services transform those floors into a major selling feature.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {cards.map((c, i) => (

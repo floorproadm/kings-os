@@ -11,6 +11,16 @@ const fadeUp = {
   })
 };
 
+const blurInHero = {
+  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { delay: i * 0.15, duration: 0.7, ease: "easeOut" as const }
+  })
+};
+
 export default function HeroSection() {
   return (
     <section className="relative h-[100svh] md:h-[80vh] flex items-end bg-black overflow-hidden">
@@ -38,7 +48,7 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.h1
-            variants={fadeUp}
+            variants={blurInHero}
             custom={1}
             className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6 text-center mx-0 px-0">
             

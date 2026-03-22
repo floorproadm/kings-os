@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Phone, CheckCircle, ImageIcon } from "lucide-react";
+import { blurIn } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import {
@@ -111,10 +112,10 @@ export default function Services() {
           <p className="text-gold text-sm tracking-[0.2em] uppercase font-semibold mb-4">
             What We Do
           </p>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-4">
+          <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-4">
             Expert Hardwood Services in{" "}
             <span className="gold-gradient-text">Johnson County</span>
-          </h1>
+          </motion.h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             7 specialized services delivered with 24+ years of craftsmanship.
           </p>
@@ -183,9 +184,9 @@ export default function Services() {
       {/* Bottom CTA */}
       <section className="section-padding gold-gradient-bg text-center">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-primary-foreground mb-4">
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl sm:text-4xl font-bold text-primary-foreground mb-4">
             Ready to Start? Get Your Free Estimate
-          </h2>
+          </motion.h2>
           <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
             Call us today for a free in-home consultation.
           </p>

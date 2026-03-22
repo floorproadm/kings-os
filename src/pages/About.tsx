@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Crown, Heart, Eye, Users, Star, CheckCircle } from "lucide-react";
 import Layout from "@/components/Layout";
 import craftsman from "@/assets/craftsman.jpg";
+import { blurIn } from "@/lib/animations";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -28,9 +29,9 @@ export default function About() {
     <Layout>
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto text-center">
-          <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
+          <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
             About <span className="gold-gradient-text">Hardwood Kings</span>
-          </h1>
+          </motion.h1>
         </div>
       </section>
 
@@ -68,7 +69,7 @@ export default function About() {
       {/* Values */}
       <section className="section-padding">
         <div className="container mx-auto">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">Our <span className="gold-gradient-text">Values</span></h2>
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl font-bold text-foreground text-center mb-12">Our <span className="gold-gradient-text">Values</span></motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((v, i) =>
             <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 text-center">
@@ -84,7 +85,7 @@ export default function About() {
       {/* Promise */}
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto max-w-3xl text-center">
-          <h2 className="font-display text-3xl font-bold text-foreground mb-6">Our <span className="gold-gradient-text">Promise</span></h2>
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl font-bold text-foreground mb-6">Our <span className="gold-gradient-text">Promise</span></motion.h2>
           <p className="text-muted-foreground leading-relaxed mb-4">When you choose Hardwood Kings, you're not hiring just another contractor. You are trusting a family-owned flooring company with over two decades of experience that treats every project as if it were our own home.</p>
           <p className="text-muted-foreground leading-relaxed">Our mission is simple: Deliver results with <strong className="text-gold">pride, precision, and integrity</strong>.</p>
         </div>
@@ -107,7 +108,7 @@ export default function About() {
       {/* CTA */}
       <section className="section-padding bg-gradient-to-r from-gold-light/80 via-gold/70 to-gold-dark/80">
         <div className="container mx-auto text-center">
-          <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">Ready to Transform Your Floors?</h2>
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl font-bold text-primary-foreground mb-4">Ready to Transform Your Floors?</motion.h2>
           <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">Request your free in-home consultation today.</p>
           <Button variant="default" size="xl" className="bg-background text-foreground hover:bg-background/90" asChild>
             <Link to="/contact">Get Your Free Consultation</Link>
