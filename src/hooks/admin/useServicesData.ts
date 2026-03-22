@@ -89,7 +89,8 @@ export function useServicesData() {
       .upload(path, file, { upsert: true });
     if (uploadError) throw uploadError;
     const { data } = supabase.storage.from("services").getPublicUrl(path);
-    return data.publicUrl;
+    // Append cache-busting timestamp so browser fetches the new image
+    return `${data.publicUrl}?t=${Date.now()}`;
   };
 
   return {
