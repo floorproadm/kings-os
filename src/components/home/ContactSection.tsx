@@ -8,6 +8,7 @@ import { ChevronRight, ChevronLeft, Phone, CheckCircle2, Loader2 } from "lucide-
 import { supabase } from "@/integrations/supabase/client";
 import { HK_ORG_ID } from "@/lib/constants";
 import { formatPhone } from "@/lib/formatPhone";
+import { MovingBorderContainer } from "@/components/ui/moving-border";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -317,7 +318,12 @@ export default function ContactSection() {
           </div>
 
           {/* Right — Form */}
-          <div className="bg-background border border-gold/15 rounded-2xl p-8">
+          <MovingBorderContainer
+            duration={4000}
+            borderRadius="1rem"
+            containerClassName="w-full"
+            className="p-8 flex-col items-stretch"
+          >
             {submitted ? (
               <SuccessMessage name={form.firstName} />
             ) : (
@@ -535,7 +541,7 @@ export default function ContactSection() {
                 )}
               </form>
             )}
-          </div>
+          </MovingBorderContainer>
         </div>
       </div>
     </section>
