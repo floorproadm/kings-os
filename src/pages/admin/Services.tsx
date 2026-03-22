@@ -32,14 +32,6 @@ export default function AdminServices() {
     await updateService({ id: service.id, is_active: !service.is_active });
   };
 
-  const handleDelete = async (id: string) => {
-    if (deleteConfirm !== id) {
-      setDeleteConfirm(id);
-      return;
-    }
-    await deleteService(id);
-    setDeleteConfirm(null);
-  };
 
   if (isLoading) {
     return <div className="p-8 text-muted-foreground">Loading services...</div>;
