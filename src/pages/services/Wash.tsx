@@ -69,8 +69,8 @@ export default function WashService() {
           <h2 className="font-display text-2xl font-bold text-foreground text-center mb-10">What's Included</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f, i) => (
-              <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} className="elevated-card p-6 text-center">
-                <div className="w-12 h-12 mx-auto rounded-full bg-gold/10 flex items-center justify-center mb-4">{f.icon}</div>
+              <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} className="rounded-2xl border border-gold/15 bg-background p-6 text-center shadow-[0_0_15px_rgba(201,168,76,0.06)]">
+                <div className="w-12 h-12 mx-auto rounded-full bg-gold/10 border border-gold/25 flex items-center justify-center mb-4">{f.icon}</div>
                 <h3 className="font-display text-lg font-bold text-foreground mb-2">{f.title}</h3>
                 <p className="text-sm text-muted-foreground">{f.desc}</p>
               </motion.div>
