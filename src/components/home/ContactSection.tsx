@@ -385,6 +385,7 @@ export default function ContactSection() {
                       <input
                         className={inputCls}
                         placeholder="Overland Park, Shawnee, Olathe..."
+                        maxLength={100}
                         value={form.city}
                         onChange={(e) => set("city", e.target.value)}
                       />
