@@ -43,11 +43,11 @@ export default function DifferentialsSection() {
             <RevealCard
               className="rounded-xl h-full"
               overlay={
-                <div className="bg-gradient-to-br from-gold-light to-gold-dark h-full w-full rounded-xl p-6 text-center flex flex-col items-center justify-center">
+                <div className="bg-gradient-to-br from-gold-light to-gold-dark h-full w-full rounded-xl p-6 text-center flex flex-col items-center justify-center [word-break:keep-all]">
                   <div className="mx-auto w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mb-4">
                     <d.icon className="w-7 h-7 text-background" />
                   </div>
-                  <h3 className="font-display text-sm font-bold text-background mb-2">
+                  <h3 className="font-display text-sm font-bold text-background mb-2 text-balance">
                     {d.title}
                   </h3>
                   <p className="text-xs text-background/70 leading-relaxed">
@@ -56,15 +56,13 @@ export default function DifferentialsSection() {
                 </div>
               }
             >
-              <div className="bg-background rounded-xl p-6 text-center border border-border/30 shadow-lg shadow-black/10 h-full flex flex-col items-center justify-center">
+              <div className="bg-background rounded-xl p-6 text-center border border-border/30 shadow-lg shadow-black/10 h-full flex flex-col items-center justify-center [word-break:keep-all]">
                 <div className="mx-auto w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center mb-4">
                   <d.icon className="w-7 h-7 text-gold" />
                 </div>
-                <TextStaggerHover
-                  text={d.title}
-                  index={i}
-                  className="font-display text-sm font-bold text-foreground mb-2 justify-center"
-                />
+                <h3 className="font-display text-sm font-bold text-foreground mb-2 text-balance">
+                  {d.title}
+                </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {d.desc}
                 </p>
