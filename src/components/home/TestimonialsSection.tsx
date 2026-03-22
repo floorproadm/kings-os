@@ -83,7 +83,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section id="testimonials" className="section-padding bg-[sidebar-accent-foreground] bg-destructive-foreground">
+    <section id="testimonials" className="section-padding bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -117,8 +117,8 @@ export default function TestimonialsSection() {
         {/* Marquee */}
         <div className="relative overflow-hidden">
           {/* Fade edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-20 z-10 bg-gradient-to-r from-destructive-foreground to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-20 z-10 bg-gradient-to-l from-destructive-foreground to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-20 z-10 bg-gradient-to-r from-white to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-20 z-10 bg-gradient-to-l from-white to-transparent" />
 
           <div
             className="flex gap-4 animate-marquee hover:[animation-play-state:paused]"
