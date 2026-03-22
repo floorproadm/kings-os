@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, ChevronDown, Facebook, Instagram, Star } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoCrown from "@/assets/logo-crown.webp";
+import nextdoorIcon from "@/assets/nextdoor-icon.png";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 import { useScroll } from "@/components/ui/use-scroll";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
