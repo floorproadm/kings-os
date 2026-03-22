@@ -7,10 +7,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 export default function AdminServices() {
-  const { services, isLoading, updateService, deleteService, uploadImage } = useServicesData();
+  const { services, isLoading, updateService, uploadImage } = useServicesData();
   const [editingService, setEditingService] = useState<Service | null>(null);
   const [showNew, setShowNew] = useState(false);
-  const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
   const handleImageUpload = async (service: Service) => {
     const input = document.createElement("input");
