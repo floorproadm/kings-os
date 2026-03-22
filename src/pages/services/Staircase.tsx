@@ -68,21 +68,21 @@ export default function StaircaseService() {
               ))}
             </div>
             <div className="grid gap-4">
-              <div className="elevated-card p-5 flex gap-4 items-start">
+              <div className="bg-background border border-gold/15 rounded-xl p-5 flex gap-4 items-start">
                 <TrendingUp className="w-6 h-6 text-gold flex-shrink-0" />
                 <div>
                   <h3 className="font-display font-bold text-foreground mb-1">Increase Home Value</h3>
                   <p className="text-sm text-muted-foreground">Custom staircases can add 10-15% to your home's value</p>
                 </div>
               </div>
-              <div className="elevated-card p-5 flex gap-4 items-start">
+              <div className="bg-background border border-gold/15 rounded-xl p-5 flex gap-4 items-start">
                 <Shield className="w-6 h-6 text-gold flex-shrink-0" />
                 <div>
                   <h3 className="font-display font-bold text-foreground mb-1">Safety First</h3>
                   <p className="text-sm text-muted-foreground">All work meets or exceeds local building codes</p>
                 </div>
               </div>
-              <div className="elevated-card p-5 flex gap-4 items-start">
+              <div className="bg-background border border-gold/15 rounded-xl p-5 flex gap-4 items-start">
                 <Sparkles className="w-6 h-6 text-gold flex-shrink-0" />
                 <div>
                   <h3 className="font-display font-bold text-foreground mb-1">Custom Design</h3>
@@ -100,7 +100,7 @@ export default function StaircaseService() {
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">Popular Staircase <span className="gold-gradient-text">Styles</span></h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {p.styles.map((s, i) => (
-              <div key={i} className="elevated-card p-6 text-center">
+              <div key={i} className="bg-background border border-gold/15 rounded-xl p-6 text-center">
                 <h3 className="font-display font-bold text-foreground mb-2">{s.name}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{s.desc}</p>
                 <div className="flex flex-wrap gap-1.5 justify-center">
