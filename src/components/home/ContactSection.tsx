@@ -7,6 +7,7 @@ import { useState } from "react";
 import { ChevronRight, ChevronLeft, Phone, CheckCircle2, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { HK_ORG_ID } from "@/lib/constants";
+import { formatPhone } from "@/lib/formatPhone";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -331,6 +332,7 @@ export default function ContactSection() {
                         <input
                           className={inputCls}
                           placeholder="Thiago"
+                          maxLength={50}
                           value={form.firstName}
                           onChange={(e) => set("firstName", e.target.value)}
                         />
@@ -342,6 +344,7 @@ export default function ContactSection() {
                         <input
                           className={inputCls}
                           placeholder="Reis"
+                          maxLength={50}
                           value={form.lastName}
                           onChange={(e) => set("lastName", e.target.value)}
                         />
@@ -356,6 +359,7 @@ export default function ContactSection() {
                         type="email"
                         className={inputCls}
                         placeholder="you@example.com"
+                        maxLength={100}
                         value={form.email}
                         onChange={(e) => set("email", e.target.value)}
                       />
@@ -370,7 +374,7 @@ export default function ContactSection() {
                         className={inputCls}
                         placeholder="(913) 000-0000"
                         value={form.phone}
-                        onChange={(e) => set("phone", e.target.value)}
+                        onChange={(e) => set("phone", formatPhone(e.target.value))}
                       />
                       {errors.phone && (
                         <span className="text-red-400 text-xs">{errors.phone}</span>
@@ -381,6 +385,7 @@ export default function ContactSection() {
                       <input
                         className={inputCls}
                         placeholder="Overland Park, Shawnee, Olathe..."
+                        maxLength={100}
                         value={form.city}
                         onChange={(e) => set("city", e.target.value)}
                       />
@@ -426,6 +431,7 @@ export default function ContactSection() {
                       <input
                         className={inputCls}
                         placeholder="e.g. 500 sq ft (Length × Width)"
+                        maxLength={50}
                         value={form.squareFootage}
                         onChange={(e) => set("squareFootage", e.target.value)}
                       />

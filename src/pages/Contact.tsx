@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { HK_ORG_ID } from "@/lib/constants";
 import { useToast } from "@/hooks/use-toast";
 import { blurIn } from "@/lib/animations";
+import { formatPhone } from "@/lib/formatPhone";
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
@@ -88,21 +89,21 @@ export default function Contact() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">Name *</label>
-                      <input type="text" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
+                      <input type="text" required maxLength={100} value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
                     </div>
                     <div>
                       <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">Phone *</label>
-                      <input type="tel" required value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
+                      <input type="tel" required value={form.phone} onChange={e => setForm({...form, phone: formatPhone(e.target.value)})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">Email (Optional)</label>
-                      <input type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
+                      <input type="email" maxLength={100} value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
                     </div>
                     <div>
                       <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">City (Optional)</label>
-                      <input type="text" value={form.city} onChange={e => setForm({...form, city: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
+                      <input type="text" maxLength={100} value={form.city} onChange={e => setForm({...form, city: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
                     </div>
                   </div>
                   <div>

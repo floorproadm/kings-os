@@ -12,6 +12,7 @@ import { useState, useEffect, useRef } from "react";
 import { X, Phone, CheckCircle2, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { HK_ORG_ID } from "@/lib/constants";
+import { formatPhone } from "@/lib/formatPhone";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -186,6 +187,7 @@ export default function LeadCapturePopup() {
                   <input
                     className={inputCls}
                     placeholder="Your name *"
+                    maxLength={100}
                     value={form.name}
                     onChange={(e) => set("name", e.target.value)}
                   />
@@ -200,7 +202,7 @@ export default function LeadCapturePopup() {
                     className={inputCls}
                     placeholder="Phone number *"
                     value={form.phone}
-                    onChange={(e) => set("phone", e.target.value)}
+                    onChange={(e) => set("phone", formatPhone(e.target.value))}
                   />
                   {errors.phone && (
                     <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
@@ -210,6 +212,7 @@ export default function LeadCapturePopup() {
                 <input
                   className={inputCls}
                   placeholder="Your zipcode"
+                  maxLength={10}
                   value={form.zipcode}
                   onChange={(e) => set("zipcode", e.target.value)}
                 />

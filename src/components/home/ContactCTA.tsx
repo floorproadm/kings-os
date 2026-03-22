@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { HK_ORG_ID } from "@/lib/constants";
+import { formatPhone } from "@/lib/formatPhone";
 
 const services = [
   "Hardwood Floor Installation",
@@ -93,16 +94,16 @@ export default function ContactCTA() {
             transition={{ duration: 0.5 }}
             className="elevated-card p-6 sm:p-8 space-y-4"
           >
-            <input required placeholder="Your Name *" value={form.name} onChange={(e) => update("name", e.target.value)} className={inputCls} />
-            <input required type="email" placeholder="Email Address *" value={form.email} onChange={(e) => update("email", e.target.value)} className={inputCls} />
-            <input placeholder="Phone Number" value={form.phone} onChange={(e) => update("phone", e.target.value)} className={inputCls} />
+            <input required placeholder="Your Name *" maxLength={100} value={form.name} onChange={(e) => update("name", e.target.value)} className={inputCls} />
+            <input required type="email" placeholder="Email Address *" maxLength={100} value={form.email} onChange={(e) => update("email", e.target.value)} className={inputCls} />
+            <input type="tel" placeholder="Phone Number" value={form.phone} onChange={(e) => update("phone", formatPhone(e.target.value))} className={inputCls} />
             <select value={form.service} onChange={(e) => update("service", e.target.value)} className={inputCls}>
               <option value="">Select a Service</option>
               {services.map((s) => (
                 <option key={s} value={s}>{s}</option>
               ))}
             </select>
-            <textarea rows={4} placeholder="Tell us about your project..." value={form.message} onChange={(e) => update("message", e.target.value)} className={`${inputCls} resize-none`} />
+            <textarea rows={4} placeholder="Tell us about your project..." maxLength={1000} value={form.message} onChange={(e) => update("message", e.target.value)} className={`${inputCls} resize-none`} />
             <Button type="submit" variant="gold" size="xl" className="w-full" disabled={loading}>
               {loading ? "Sending..." : (
                 <>
