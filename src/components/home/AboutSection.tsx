@@ -57,12 +57,14 @@ export default function AboutSection() {
               />
             </div>
 
-            <div className="mt-4 lg:mt-8 p-4 elevated-card inline-block">
-              <p className="font-display font-bold text-foreground text-lg">
-                T. Reis
-              </p>
-              <p className="text-gold text-sm">Founder & Operator — Thiago Reis</p>
-            </div>
+            <GradientBlobCard className="mt-4 lg:mt-8 inline-block">
+              <div className="p-4">
+                <p className="font-display font-bold text-foreground text-lg">
+                  T. Reis
+                </p>
+                <p className="text-gold text-sm">Founder & Operator — Thiago Reis</p>
+              </div>
+            </GradientBlobCard>
 
             <div className="mt-8">
               <p className="text-sm text-muted-foreground mb-3 flex items-center gap-2">
