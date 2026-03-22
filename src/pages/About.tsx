@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Crown, Heart, Eye, Users, Star, CheckCircle } from "lucide-react";
 import Layout from "@/components/Layout";
 import craftsman from "@/assets/craftsman.jpg";
+import { blurIn } from "@/lib/animations";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
