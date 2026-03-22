@@ -344,6 +344,7 @@ export default function ContactSection() {
                         <input
                           className={inputCls}
                           placeholder="Reis"
+                          maxLength={50}
                           value={form.lastName}
                           onChange={(e) => set("lastName", e.target.value)}
                         />
