@@ -64,7 +64,7 @@ export default function Header() {
               href="https://instagram.com/hardwoodkingsinc"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-7 h-7 bg-foreground/10 text-muted-foreground flex items-center justify-center rounded hover:bg-gold/20 hover:text-gold transition-colors"
+              className="w-7 h-7 bg-background/15 text-background/70 flex items-center justify-center rounded hover:bg-background/25 hover:text-background transition-colors"
             >
               <Instagram className="w-3.5 h-3.5" />
             </a>
@@ -72,7 +72,7 @@ export default function Header() {
               href="https://facebook.com/hardwoodkingsinc"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-7 h-7 bg-foreground/10 text-muted-foreground flex items-center justify-center rounded hover:bg-gold/20 hover:text-gold transition-colors"
+              className="w-7 h-7 bg-background/15 text-background/70 flex items-center justify-center rounded hover:bg-background/25 hover:text-background transition-colors"
             >
               <Facebook className="w-3.5 h-3.5" />
             </a>
