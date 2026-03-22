@@ -29,7 +29,7 @@ export default function DifferentialsSection() {
           </h2>
         </div>
 
-        <HoverSlider className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        <HoverSlider className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {differentials.map((d, i) =>
           <motion.div
             key={i}
