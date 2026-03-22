@@ -106,7 +106,7 @@ export default function DeckService() {
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto">Give your outdoor space the refresh it deserves. Get a free estimate today.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact"><Button variant="gold" size="xl">Get Your Free Estimate</Button></Link>
-            <a href="tel:9139153193"><Button variant="outline" size="xl">Call (913) 915-3193</Button></a>
+            <a href="tel:9139153193"><Button variant="outline" size="xl" className="border-2 border-gold/30 text-gold hover:bg-gold/10 hover:border-gold/25 gold-gradient-text transition-colors">Call (913) 915-3193</Button></a>
           </div>
         </div>
       </section>
