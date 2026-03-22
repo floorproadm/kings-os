@@ -541,7 +541,7 @@ export default function ContactSection() {
                 )}
               </form>
             )}
-          </div>
+          </MovingBorderContainer>
         </div>
       </div>
     </section>
