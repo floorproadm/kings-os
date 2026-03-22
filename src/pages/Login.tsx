@@ -82,30 +82,6 @@ export default function Login() {
               Painel administrativo para gerenciamento de leads, serviços e parceiros.
             </motion.p>
 
-            {/* Stats pills */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.75 }}
-              className="hidden md:flex gap-3 mt-8"
-            >
-              {[
-                { label: "Since", value: "2001" },
-                { label: "KC Area", value: "#1" },
-              ].map((s) => (
-                <div
-                  key={s.label}
-                  className="px-4 py-2 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10"
-                >
-                  <span className="block text-xs text-primary-foreground/50 uppercase tracking-wider">
-                    {s.label}
-                  </span>
-                  <span className="block text-lg font-bold text-primary-foreground font-display">
-                    {s.value}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
           </div>
         </div>
 
