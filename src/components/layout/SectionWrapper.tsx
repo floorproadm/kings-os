@@ -18,7 +18,7 @@ export default function SectionWrapper({
       id={id}
       className={cn(
         "section-padding",
-        darkMode ? "bg-background" : "bg-[hsl(43,73%,86%)]",
+        darkMode ? "bg-background" : "bg-white text-black",
         className
       )}
     >
