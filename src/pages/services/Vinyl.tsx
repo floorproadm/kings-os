@@ -96,7 +96,7 @@ export default function VinylService() {
                 <span className="text-muted-foreground">{c.hardwood}</span>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
