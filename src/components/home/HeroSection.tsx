@@ -114,7 +114,7 @@ export default function HeroSection() {
   const media = useHeroMedia();
 
   return (
-    <section className="relative h-[100svh] md:h-[90vh] lg:h-[80vh] flex items-end bg-black overflow-hidden">
+    <section className="relative h-[100svh] md:h-[110vh] lg:h-[80vh] flex items-end bg-black overflow-hidden">
       <HeroBackground media={media} />
       
       {/* Gradient overlays */}
