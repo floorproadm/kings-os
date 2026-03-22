@@ -65,7 +65,7 @@ export default function DualCTABar({
         {/* Divider */}
         <span
           className={`text-sm font-light ${
-            isDark ? "text-[#F5F0E8]/30" : "text-[#1A1A0F]/40"
+            isDark ? "text-foreground/30" : "text-background/40"
           } hidden sm:block`}
         >
           or
