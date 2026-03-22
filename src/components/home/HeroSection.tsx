@@ -114,14 +114,14 @@ export default function HeroSection() {
   const media = useHeroMedia();
 
   return (
-    <section className="relative h-[100svh] md:h-[110vh] lg:h-[80vh] flex items-end bg-black overflow-hidden">
+    <section className="relative h-[115svh] md:h-[110vh] lg:h-[80vh] flex items-end bg-black overflow-hidden">
       <HeroBackground media={media} />
       
       {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent via-15% to-black to-90%" />
       <div className="absolute inset-0 md:hidden bg-gradient-to-r from-black/60 via-transparent to-black/60" />
 
-      <div className="relative container mx-auto px-4 md:px-6 lg:px-8 pb-12 md:pb-16 lg:pb-32 pt-0 md:pt-0 lg:pt-60 md:mt-auto">
+      <div className="relative container mx-auto px-4 md:px-6 lg:px-8 pb-6 md:pb-16 lg:pb-32 pt-0 md:pt-0 lg:pt-60 md:mt-auto">
         <motion.div className="max-w-3xl" initial="hidden" animate="visible">
           <motion.p
             variants={fadeUp}
