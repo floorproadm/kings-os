@@ -374,7 +374,7 @@ export default function ContactSection() {
                         className={inputCls}
                         placeholder="(913) 000-0000"
                         value={form.phone}
-                        onChange={(e) => set("phone", e.target.value)}
+                        onChange={(e) => set("phone", formatPhone(e.target.value))}
                       />
                       {errors.phone && (
                         <span className="text-red-400 text-xs">{errors.phone}</span>
