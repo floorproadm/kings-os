@@ -82,7 +82,7 @@ export default function Builders() {
         </div>
       </section>
 
-      <section className="section-padding bg-gradient-to-r from-[#fccf93]/80 via-gold/70 to-[#51351e]/80">
+      <section className="section-padding bg-gradient-to-r from-gold-light/80 via-gold/70 to-gold-dark/80">
         <div className="container mx-auto text-center">
           <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">Ready to Partner with Hardwood Kings?</h2>
           <p className="text-primary-foreground/80 mb-8">Work with a flooring team that understands construction timelines.</p>

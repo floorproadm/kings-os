@@ -96,10 +96,10 @@ export default function DualCTABar({
 //
 // export function StickyCallBar() {
 //   return (
-//     <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-[#C9A84C] py-3 px-4 shadow-2xl">
+//     <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-gold py-3 px-4 shadow-2xl">
 //       <a
 //         href="tel:+19139153193"
-//         className="flex items-center justify-center gap-2 text-[#1A1A0F] font-bold text-base"
+//         className="flex items-center justify-center gap-2 text-background font-bold text-base"
 //       >
 //         <Phone size={18} />
 //         Call Thiago: (913) 915-3193

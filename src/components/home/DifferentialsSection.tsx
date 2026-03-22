@@ -23,7 +23,7 @@ export default function DifferentialsSection() {
     <section className="section-padding bg-destructive-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-gold-dark leading-tight text-center bg-[#29291e]/0">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-gold-dark leading-tight text-center">
             We Don't Just Meet Expectations.{" "}
             <span className="text-gold">We Exceed Them.</span>
           </h2>
@@ -43,14 +43,14 @@ export default function DifferentialsSection() {
             <RevealCard
               className="rounded-xl h-full"
               overlay={
-                <div className="bg-gradient-to-br from-[#fccf93] to-[#51351e] h-full w-full rounded-xl p-6 text-center flex flex-col items-center justify-center">
+                <div className="bg-gradient-to-br from-gold-light to-gold-dark h-full w-full rounded-xl p-6 text-center flex flex-col items-center justify-center">
                   <div className="mx-auto w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mb-4">
-                    <d.icon className="w-7 h-7 text-[#1A1A0F]" />
+                    <d.icon className="w-7 h-7 text-background" />
                   </div>
-                  <h3 className="font-display text-sm font-bold text-[#1A1A0F] mb-2">
+                  <h3 className="font-display text-sm font-bold text-background mb-2">
                     {d.title}
                   </h3>
-                  <p className="text-xs text-[#1A1A0F]/70 leading-relaxed">
+                  <p className="text-xs text-background/70 leading-relaxed">
                     {d.desc}
                   </p>
                 </div>
