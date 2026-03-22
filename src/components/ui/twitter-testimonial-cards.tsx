@@ -83,8 +83,8 @@ export default function StackedCards({ cards }: StackedCardsProps) {
   };
 
   const defaultClassNames = [
-    "[grid-area:stack] hover:-translate-y-6 before:absolute before:w-full before:rounded-2xl before:outline-1 before:outline-border before:h-full before:content-[''] before:bg-blend-overlay before:bg-background/60 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-500 hover:grayscale-0 before:left-0 before:top-0",
-    "[grid-area:stack] translate-x-6 sm:translate-x-10 translate-y-4 sm:translate-y-7 hover:-translate-y-1 before:absolute before:w-full before:rounded-2xl before:outline-1 before:outline-border before:h-full before:content-[''] before:bg-blend-overlay before:bg-background/60 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-500 hover:grayscale-0 before:left-0 before:top-0",
+    "[grid-area:stack] hover:-translate-y-6 before:absolute before:w-full before:rounded-2xl before:h-full before:content-[''] before:bg-[#1A1A0F]/70 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-500 hover:grayscale-0 before:left-0 before:top-0 before:z-10",
+    "[grid-area:stack] translate-x-6 sm:translate-x-10 translate-y-4 sm:translate-y-7 hover:-translate-y-1 before:absolute before:w-full before:rounded-2xl before:h-full before:content-[''] before:bg-[#1A1A0F]/70 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-500 hover:grayscale-0 before:left-0 before:top-0 before:z-10",
     "[grid-area:stack] translate-x-12 sm:translate-x-20 translate-y-8 sm:translate-y-14 hover:translate-y-4 sm:hover:translate-y-8",
   ];
 
