@@ -202,7 +202,7 @@ export default function LeadCapturePopup() {
                     className={inputCls}
                     placeholder="Phone number *"
                     value={form.phone}
-                    onChange={(e) => set("phone", e.target.value)}
+                    onChange={(e) => set("phone", formatPhone(e.target.value))}
                   />
                   {errors.phone && (
                     <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
