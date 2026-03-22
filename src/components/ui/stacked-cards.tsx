@@ -5,38 +5,22 @@ import { cn } from "@/lib/utils";
 
 interface StackedCardProps {
   className?: string;
+  style?: React.CSSProperties;
   children: React.ReactNode;
-  onHover?: () => void;
-  onLeave?: () => void;
-  isActive?: boolean;
-  onTap?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
-function StackedCard({
-  className,
-  children,
-  onHover,
-  onLeave,
-  isActive,
-  onTap,
-}: StackedCardProps) {
-  const handleClick = (e: React.MouseEvent | React.TouchEvent) => {
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice && !isActive) {
-      e.preventDefault();
-      onTap?.();
-    }
-  };
-
+function StackedCard({ className, style, children, onMouseEnter, onMouseLeave }: StackedCardProps) {
   return (
     <div
       className={cn(
-        "transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer",
+        "transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer [grid-area:stack]",
         className
       )}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
-      onClick={handleClick}
+      style={style}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {children}
     </div>
@@ -50,68 +34,46 @@ interface StackedCardsProps {
 
 export function StackedCards({ children, className }: StackedCardsProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-  const getCardClassName = (index: number, total: number) => {
-    const focusedIndex = hoveredIndex ?? activeIndex;
-    const offsetX = index * 12;
-    const offsetY = index * 24;
-
-    let extra = "";
-
-    // When a back card is focused, push cards in front further out
-    if (focusedIndex !== null && focusedIndex < index) {
-      const push = (index - focusedIndex) * 16;
-      extra = ` !translate-y-[${offsetY + push}px]`;
-    }
-
-    const base = `[grid-area:stack]`;
-    const isTop = index === total - 1;
-
-    if (isTop) {
-      return cn(
-        base,
-        `translate-x-[${offsetX}px] translate-y-[${offsetY}px]`,
-        focusedIndex !== null && focusedIndex < index
-          ? "!translate-y-[" + (offsetY + 20) + "px]"
-          : "hover:translate-y-[" + (offsetY - 8) + "px]"
-      );
-    }
-
-    return cn(
-      base,
-      "before:absolute before:w-full before:h-full before:content-[''] before:bg-background/50 before:rounded-xl before:left-0 before:top-0 before:transition-opacity before:duration-500",
-      "grayscale-[80%] hover:before:opacity-0 hover:grayscale-0",
-      `hover:-translate-y-2`
-    );
-  };
+  const total = children.length;
 
   return (
     <div className={cn("grid place-items-start", className)}>
-      {children.map((child, index) => (
-        <StackedCard
-          key={index}
-          className={getCardClassName(index, children.length)}
-          onHover={() => setHoveredIndex(index)}
-          onLeave={() => setHoveredIndex(null)}
-          isActive={activeIndex === index}
-          onTap={() => setActiveIndex(index)}
-          style={{
-            transform: `translateX(${index * 12}px) translateY(${
-              hoveredIndex !== null && hoveredIndex < index
-                ? index * 24 + 20
-                : hoveredIndex === index
-                ? index * 24 - 8
-                : index * 24
-            }px)`,
-            zIndex: index,
-          } as React.CSSProperties}
-        >
-          {child}
-        </StackedCard>
-      ))}
+      {children.map((child, index) => {
+        const isHovered = hoveredIndex === index;
+        const isBehindHovered = hoveredIndex !== null && hoveredIndex < index;
+        const offsetX = index * 14;
+        const baseY = index * 28;
+
+        let y = baseY;
+        if (isHovered) y = baseY - 10;
+        if (isBehindHovered) y = baseY + (index - hoveredIndex!) * 18;
+
+        const isTop = index === total - 1;
+        const showOverlay = !isTop && !isHovered;
+
+        return (
+          <StackedCard
+            key={index}
+            style={{
+              transform: `translateX(${offsetX}px) translateY(${y}px)`,
+              zIndex: index,
+            }}
+            className={cn(
+              isHovered && "grayscale-0",
+              !isTop && !isHovered && "grayscale-[60%]"
+            )}
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            <div className="relative">
+              {child}
+              {showOverlay && (
+                <div className="absolute inset-0 bg-background/40 rounded-xl transition-opacity duration-500 pointer-events-none" />
+              )}
+            </div>
+          </StackedCard>
+        );
+      })}
     </div>
   );
 }
-
-export { StackedCard };
