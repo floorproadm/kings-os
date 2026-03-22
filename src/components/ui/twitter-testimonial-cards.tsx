@@ -35,7 +35,7 @@ function TestimonialCard({
   return (
     <div
       className={cn(
-        "relative rounded-2xl border border-border/30 bg-card p-6 transition-all duration-500 cursor-pointer shadow-lg",
+        "relative rounded-2xl border border-gold/20 bg-[#1A1A0F] p-6 transition-all duration-500 cursor-pointer shadow-lg shadow-black/20",
         className
       )}
       onMouseEnter={onHover}
