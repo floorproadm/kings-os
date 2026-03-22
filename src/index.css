@@ -89,7 +89,7 @@
   }
 
   .gold-gradient-bg {
-    @apply bg-gradient-to-r from-[#fccf93] via-gold to-[#51351e];
+    @apply bg-gradient-to-r from-[#fccf93]/80 via-gold/70 to-[#51351e]/80;
   }
 
   .gold-border {
