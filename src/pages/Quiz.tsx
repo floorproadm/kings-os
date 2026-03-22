@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { ChevronRight, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { formatPhone } from "@/lib/formatPhone";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -192,7 +193,7 @@ export default function Quiz() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <input type="text" placeholder="Name" required value={contact.name} onChange={e => setContact({...contact, name: e.target.value})} className="w-full h-11 px-4 rounded-lg bg-input border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-gold/50" />
                   <input type="email" placeholder="Email" required value={contact.email} onChange={e => setContact({...contact, email: e.target.value})} className="w-full h-11 px-4 rounded-lg bg-input border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-gold/50" />
-                  <input type="tel" placeholder="Phone (optional)" value={contact.phone} onChange={e => setContact({...contact, phone: e.target.value})} className="w-full h-11 px-4 rounded-lg bg-input border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-gold/50" />
+                  <input type="tel" placeholder="(913) 000-0000" value={contact.phone} onChange={e => setContact({...contact, phone: formatPhone(e.target.value)})} className="w-full h-11 px-4 rounded-lg bg-input border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-gold/50" />
                   <Button variant="gold" size="xl" className="w-full" type="submit">
                     Get My Floor Recommendations
                   </Button>
