@@ -105,10 +105,10 @@ export default function TestimonialsSection() {
             <span className="text-xs text-muted-foreground hidden sm:inline">Based on 10 reviews</span>
           </div>
 
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-gold-dark">
+          <motion.h2 initial={{ opacity: 0, y: 20, filter: "blur(10px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut" }} className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-gold-dark">
             What Our Clients Are{" "}
             <span className="text-gold">Saying</span>
-          </h2>
+          </motion.h2>
           <p className="text-muted-foreground mt-3 max-w-xl mx-auto text-sm sm:text-base">
             Real reviews from real homeowners — verified on Google.
           </p>

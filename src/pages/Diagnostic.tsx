@@ -81,7 +81,7 @@ export default function Diagnostic() {
 
       <section className="section-padding bg-secondary/50">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">The Diagnostic <span className="gold-gradient-text">Process</span></h2>
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl font-bold text-foreground text-center mb-12">The Diagnostic <span className="gold-gradient-text">Process</span></motion.h2>
           <div className="space-y-6">
             {steps.map((s, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="elevated-card p-6 flex gap-6 items-start">

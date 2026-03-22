@@ -12,9 +12,9 @@ export default function B2BProcess() {
   return (
     <section className="section-padding bg-background">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-12">
+        <motion.h2 initial={{ opacity: 0, y: 20, filter: "blur(10px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut" }} className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-12">
           Our Simple <span className="gold-gradient-text">4-Step Process</span>
-        </h2>
+        </motion.h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((s, i) => (
             <motion.div

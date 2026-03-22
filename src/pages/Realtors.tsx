@@ -53,7 +53,7 @@ export default function Realtors() {
 
       <section className="section-padding">
         <div className="container mx-auto">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-4">Turn Problem Properties into <span className="gold-gradient-text">Premium Listings</span></h2>
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl font-bold text-foreground text-center mb-4">Turn Problem Properties into <span className="gold-gradient-text">Premium Listings</span></motion.h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">Scratched or outdated floors can turn buyers away. Our services transform those floors into a major selling feature.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {cards.map((c, i) => (

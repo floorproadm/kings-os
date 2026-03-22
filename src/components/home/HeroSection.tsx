@@ -48,7 +48,7 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.h1
-            variants={fadeUp}
+            variants={blurInHero}
             custom={1}
             className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6 text-center mx-0 px-0">
             

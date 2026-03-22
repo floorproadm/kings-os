@@ -13,9 +13,9 @@ export default function B2BHero() {
           Trade Partnerships
         </motion.p>
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.5 }}
+          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ delay: 0.15, duration: 0.7, ease: "easeOut" }}
           className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-4"
         >
           Partner With Johnson County's Premier{" "}

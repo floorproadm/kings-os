@@ -184,9 +184,9 @@ export default function Services() {
       {/* Bottom CTA */}
       <section className="section-padding gold-gradient-bg text-center">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-primary-foreground mb-4">
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl sm:text-4xl font-bold text-primary-foreground mb-4">
             Ready to Start? Get Your Free Estimate
-          </h2>
+          </motion.h2>
           <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
             Call us today for a free in-home consultation.
           </p>

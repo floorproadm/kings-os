@@ -108,7 +108,7 @@ export default function About() {
       {/* CTA */}
       <section className="section-padding bg-gradient-to-r from-gold-light/80 via-gold/70 to-gold-dark/80">
         <div className="container mx-auto text-center">
-          <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">Ready to Transform Your Floors?</h2>
+          <motion.h2 variants={blurIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-display text-3xl font-bold text-primary-foreground mb-4">Ready to Transform Your Floors?</motion.h2>
           <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">Request your free in-home consultation today.</p>
           <Button variant="default" size="xl" className="bg-background text-foreground hover:bg-background/90" asChild>
             <Link to="/contact">Get Your Free Consultation</Link>

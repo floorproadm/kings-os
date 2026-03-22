@@ -36,7 +36,7 @@ export default function WashService() {
       {/* Hero */}
       <section className="relative py-20 bg-gradient-to-br from-secondary via-background to-secondary overflow-hidden">
         <div className="container mx-auto px-6 text-center relative z-10">
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <motion.h1 initial={{ opacity: 0, y: 20, filter: "blur(10px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ duration: 0.7, ease: "easeOut" }} className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Wash & <span className="gold-gradient-text">Polish</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-muted-foreground max-w-2xl mx-auto mb-8">

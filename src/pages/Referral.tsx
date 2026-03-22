@@ -37,9 +37,9 @@ export default function Referral() {
             <Gift className="w-8 h-8 text-gold" />
           </motion.div>
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.5 }}
+            variants={blurIn}
+            initial="hidden"
+            animate="visible"
             className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4"
           >
             Refer a Friend. <span className="gold-gradient-text">Earn 5%.</span>
