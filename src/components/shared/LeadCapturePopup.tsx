@@ -212,6 +212,7 @@ export default function LeadCapturePopup() {
                 <input
                   className={inputCls}
                   placeholder="Your zipcode"
+                  maxLength={10}
                   value={form.zipcode}
                   onChange={(e) => set("zipcode", e.target.value)}
                 />

@@ -103,7 +103,7 @@ export default function ContactCTA() {
                 <option key={s} value={s}>{s}</option>
               ))}
             </select>
-            <textarea rows={4} placeholder="Tell us about your project..." value={form.message} onChange={(e) => update("message", e.target.value)} className={`${inputCls} resize-none`} />
+            <textarea rows={4} placeholder="Tell us about your project..." maxLength={1000} value={form.message} onChange={(e) => update("message", e.target.value)} className={`${inputCls} resize-none`} />
             <Button type="submit" variant="gold" size="xl" className="w-full" disabled={loading}>
               {loading ? "Sending..." : (
                 <>

@@ -68,18 +68,18 @@ export default function B2BForm() {
           className="bg-background rounded-2xl p-6 sm:p-8 space-y-4 border border-border/30 shadow-2xl"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <input required placeholder="Your Name *" value={form.name} onChange={(e) => update("name", e.target.value)} className={inputCls} />
-            <input placeholder="Company Name" value={form.company} onChange={(e) => update("company", e.target.value)} className={inputCls} />
+            <input required placeholder="Your Name *" maxLength={100} value={form.name} onChange={(e) => update("name", e.target.value)} className={inputCls} />
+            <input placeholder="Company Name" maxLength={100} value={form.company} onChange={(e) => update("company", e.target.value)} className={inputCls} />
           </div>
           <select value={form.role} onChange={(e) => update("role", e.target.value)} className={inputCls}>
             <option value="">Select Your Role</option>
             {roles.map((r) => <option key={r} value={r}>{r}</option>)}
           </select>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <input required type="email" placeholder="Email *" value={form.email} onChange={(e) => update("email", e.target.value)} className={inputCls} />
-            <input placeholder="Phone" value={form.phone} onChange={(e) => update("phone", e.target.value)} className={inputCls} />
+            <input required type="email" placeholder="Email *" maxLength={100} value={form.email} onChange={(e) => update("email", e.target.value)} className={inputCls} />
+            <input type="tel" placeholder="Phone" value={form.phone} onChange={(e) => update("phone", formatPhone(e.target.value))} className={inputCls} />
           </div>
-          <textarea rows={4} placeholder="Tell us about your needs..." value={form.message} onChange={(e) => update("message", e.target.value)} className={`${inputCls} resize-none`} />
+          <textarea rows={4} placeholder="Tell us about your needs..." maxLength={1000} value={form.message} onChange={(e) => update("message", e.target.value)} className={`${inputCls} resize-none`} />
           <Button type="submit" variant="gold" size="xl" className="w-full" disabled={loading}>
             {loading ? "Sending..." : <><Send className="w-4 h-4 mr-2" /> Submit Partnership Request</>}
           </Button>

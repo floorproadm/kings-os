@@ -99,11 +99,11 @@ export default function Contact() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">Email (Optional)</label>
-                      <input type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
+                      <input type="email" maxLength={100} value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
                     </div>
                     <div>
                       <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">City (Optional)</label>
-                      <input type="text" value={form.city} onChange={e => setForm({...form, city: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
+                      <input type="text" maxLength={100} value={form.city} onChange={e => setForm({...form, city: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
                     </div>
                   </div>
                   <div>

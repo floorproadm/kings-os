@@ -431,6 +431,7 @@ export default function ContactSection() {
                       <input
                         className={inputCls}
                         placeholder="e.g. 500 sq ft (Length × Width)"
+                        maxLength={50}
                         value={form.squareFootage}
                         onChange={(e) => set("squareFootage", e.target.value)}
                       />
