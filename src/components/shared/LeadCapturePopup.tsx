@@ -38,7 +38,7 @@ function hasCookie() {
 // ─── Input style ──────────────────────────────────────────────────────────────
 
 const inputCls =
-  "w-full bg-[#F5F0E8] border border-[#C9A84C]/30 rounded-lg px-4 py-3 text-[#1A1A0F] text-sm placeholder:text-[#1A1A0F]/40 focus:outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C]/40 transition-all duration-200";
+  "w-full bg-foreground border border-gold/30 rounded-lg px-4 py-3 text-background text-sm placeholder:text-background/40 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200";
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -145,7 +145,7 @@ export default function LeadCapturePopup() {
         {/* Close button */}
         <button
           onClick={dismiss}
-          className="absolute top-4 right-4 text-[#F5F0E8]/40 hover:text-[#F5F0E8] transition-colors z-10"
+          className="absolute top-4 right-4 text-foreground/40 hover:text-foreground transition-colors z-10"
           aria-label="Close"
         >
           <X size={18} />
@@ -155,14 +155,14 @@ export default function LeadCapturePopup() {
           {submitted ? (
             /* ── Success ──────────────────────────────────── */
             <div className="flex flex-col items-center text-center py-4 gap-4">
-              <div className="w-16 h-16 rounded-full bg-[#C9A84C]/15 border-2 border-[#C9A84C] flex items-center justify-center">
-                <CheckCircle2 size={28} className="text-[#C9A84C]" />
+              <div className="w-16 h-16 rounded-full bg-gold/15 border-2 border-gold flex items-center justify-center">
+                <CheckCircle2 size={28} className="text-gold" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-[#F5F0E8] mb-1">
+                <h3 className="text-xl font-bold text-foreground mb-1">
                   You're on the list!
                 </h3>
-                <p className="text-[#F5F0E8]/60 text-sm">
+                <p className="text-foreground/60 text-sm">
                   Thiago will call you within 2 hours to schedule.
                 </p>
               </div>
@@ -172,10 +172,10 @@ export default function LeadCapturePopup() {
             <>
               {/* Header */}
               <div className="mb-6">
-                <h2 className="text-2xl font-bold text-[#F5F0E8] leading-tight">
-                  Get a <span className="text-[#C9A84C]">Free In-Home Estimate</span>
+                <h2 className="text-2xl font-bold text-foreground leading-tight">
+                  Get a <span className="text-gold">Free In-Home Estimate</span>
                 </h2>
-                <p className="text-[#F5F0E8]/50 text-sm mt-2">
+                <p className="text-foreground/50 text-sm mt-2">
                   No commitment. No pressure. Just expert advice from Thiago.
                 </p>
               </div>
@@ -231,19 +231,19 @@ export default function LeadCapturePopup() {
 
                 {/* Trust signal */}
                 <div className="flex items-center justify-center gap-2 pt-1">
-                  <Phone size={12} className="text-[#F5F0E8]/30" />
-                  <p className="text-[#F5F0E8]/30 text-xs">
+                  <Phone size={12} className="text-foreground/30" />
+                  <p className="text-foreground/30 text-xs">
                     Or call directly:{" "}
                     <a
                       href="tel:+19139153193"
-                      className="text-[#C9A84C]/70 hover:text-[#C9A84C] underline underline-offset-2"
+                      className="text-gold/70 hover:text-gold underline underline-offset-2"
                     >
                       (913) 915-3193
                     </a>
                   </p>
                 </div>
 
-                <p className="text-[#F5F0E8]/20 text-xs text-center">
+                <p className="text-foreground/20 text-xs text-center">
                   We respect your privacy. No spam, ever.
                 </p>
               </form>

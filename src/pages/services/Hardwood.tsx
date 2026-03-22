@@ -84,14 +84,14 @@ export default function HardwoodService() {
                   <h3 className="font-display font-bold text-foreground text-sm mb-1">{s.title}</h3>
                   <p className="text-xs text-foreground/60">{s.desc}</p>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#fccf93] via-gold to-[#51351e]" />
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-gold-light via-gold to-gold-dark" />
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-gradient-to-r from-[#fccf93]/80 via-gold/70 to-[#51351e]/80">
+      <section className="section-padding bg-gradient-to-r from-gold-light/80 via-gold/70 to-gold-dark/80">
         <div className="container mx-auto text-center">
           <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">{p.ctaTitle}</h2>
           <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">{p.ctaSubtitle}</p>
