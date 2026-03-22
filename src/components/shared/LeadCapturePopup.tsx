@@ -210,11 +210,16 @@ export default function LeadCapturePopup() {
                 </div>
 
                 <input
+                  type="tel"
+                  inputMode="numeric"
                   className={inputCls}
                   placeholder="Your zipcode"
-                  maxLength={10}
+                  maxLength={5}
                   value={form.zipcode}
-                  onChange={(e) => set("zipcode", e.target.value)}
+                  onChange={(e) => {
+                    const digits = e.target.value.replace(/\D/g, "").slice(0, 5);
+                    set("zipcode", digits);
+                  }}
                 />
 
                 <button
