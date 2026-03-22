@@ -58,15 +58,15 @@ function StepIndicator({ current }: { current: 1 | 2 }) {
         <div
           className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
             current >= 1
-              ? "bg-[#C9A84C] text-[#1A1A0F]"
-              : "border-2 border-[#C9A84C]/40 text-[#C9A84C]/40"
+              ? "bg-gold text-background"
+              : "border-2 border-gold/40 text-gold/40"
           }`}
         >
           {current > 1 ? <CheckCircle2 size={16} /> : "1"}
         </div>
         <span
           className={`text-sm font-semibold tracking-wide ${
-            current >= 1 ? "text-[#F5F0E8]" : "text-[#F5F0E8]/40"
+            current >= 1 ? "text-foreground" : "text-foreground/40"
           }`}
         >
           The Basics
@@ -76,7 +76,7 @@ function StepIndicator({ current }: { current: 1 | 2 }) {
       {/* Connector */}
       <div
         className={`h-px w-12 transition-all duration-500 ${
-          current > 1 ? "bg-[#C9A84C]" : "bg-[#C9A84C]/20"
+          current > 1 ? "bg-gold" : "bg-gold/20"
         }`}
       />
 
@@ -85,15 +85,15 @@ function StepIndicator({ current }: { current: 1 | 2 }) {
         <div
           className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
             current >= 2
-              ? "bg-[#C9A84C] text-[#1A1A0F]"
-              : "border-2 border-[#C9A84C]/40 text-[#C9A84C]/40"
+              ? "bg-gold text-background"
+              : "border-2 border-gold/40 text-gold/40"
           }`}
         >
           2
         </div>
         <span
           className={`text-sm font-semibold tracking-wide ${
-            current >= 2 ? "text-[#F5F0E8]" : "text-[#F5F0E8]/40"
+            current >= 2 ? "text-foreground" : "text-foreground/40"
           }`}
         >
           Project Details
@@ -116,9 +116,9 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-xs font-semibold tracking-widest uppercase text-[#C9A84C]">
+      <label className="text-xs font-semibold tracking-widest uppercase text-gold">
         {label}
-        {required && <span className="text-[#C9A84C] ml-0.5">*</span>}
+        {required && <span className="text-gold ml-0.5">*</span>}
       </label>
       {children}
     </div>
@@ -126,7 +126,7 @@ function Field({
 }
 
 const inputCls =
-  "w-full bg-[#111108] border border-[#C9A84C]/25 rounded-md px-4 py-3 text-[#F5F0E8] text-sm placeholder:text-[#F5F0E8]/30 focus:outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C]/40 transition-all duration-200";
+  "w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200";
 
 // ─── Radio Group ─────────────────────────────────────────────────────────────
 
@@ -148,8 +148,8 @@ function RadioGroup({
           onClick={() => onChange(val)}
           className={`flex-1 py-3 rounded-md border text-sm font-semibold transition-all duration-200 ${
             value === val
-              ? "bg-[#C9A84C] border-[#C9A84C] text-[#1A1A0F]"
-              : "bg-transparent border-[#C9A84C]/25 text-[#F5F0E8]/60 hover:border-[#C9A84C]/60 hover:text-[#F5F0E8]"
+              ? "bg-gold border-gold text-background"
+              : "bg-transparent border-gold/25 text-foreground/60 hover:border-gold/60 hover:text-foreground"
           }`}
         >
           {label}
@@ -164,22 +164,22 @@ function RadioGroup({
 function SuccessMessage({ name }: { name: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-16 gap-6 text-center">
-      <div className="w-20 h-20 rounded-full bg-[#C9A84C]/15 border-2 border-[#C9A84C] flex items-center justify-center">
-        <CheckCircle2 size={36} className="text-[#C9A84C]" />
+      <div className="w-20 h-20 rounded-full bg-gold/15 border-2 border-gold flex items-center justify-center">
+        <CheckCircle2 size={36} className="text-gold" />
       </div>
       <div>
-        <h3 className="text-2xl font-bold text-[#F5F0E8] mb-2">
+        <h3 className="text-2xl font-bold text-foreground mb-2">
           Got it, {name}!
         </h3>
-        <p className="text-[#F5F0E8]/60 text-sm leading-relaxed max-w-xs">
+        <p className="text-foreground/60 text-sm leading-relaxed max-w-xs">
           Thiago will reach out within{" "}
-          <span className="text-[#C9A84C] font-semibold">2 hours</span> to
+          <span className="text-gold font-semibold">2 hours</span> to
           schedule your free in-home estimate.
         </p>
       </div>
       <a
         href="tel:+19139153193"
-        className="flex items-center gap-2 text-[#C9A84C] text-sm font-semibold hover:text-[#F5E6C0] transition-colors"
+        className="flex items-center gap-2 text-gold text-sm font-semibold hover:text-gold-light transition-colors"
       >
         <Phone size={14} />
         Need it faster? Call (913) 915-3193
@@ -292,12 +292,12 @@ export default function ContactSection() {
 
           {/* Left — Copy */}
           <div className="lg:sticky lg:top-24">
-            <p className="text-[#C9A84C] text-xs font-bold tracking-[0.2em] uppercase mb-4">
+            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">
               Free Estimate
             </p>
-            <h2 className="text-4xl lg:text-5xl font-bold text-[#F5F0E8] leading-tight mb-6">
+            <h2 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
               Let's Build Something{" "}
-              <span className="text-[#C9A84C]">Beautiful,</span>{" "}
+              <span className="text-gold">Beautiful,</span>{" "}
               Together.
             </h2>
             <ul className="space-y-3 mb-4 lg:mb-10">
@@ -306,8 +306,8 @@ export default function ContactSection() {
                 "Clear communication from first call to final coat",
                 "Work you can trust, backed by 24+ years",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-[#F5F0E8]/70 text-sm">
-                  <span className="text-[#C9A84C] mt-0.5 text-base leading-none">✦</span>
+                <li key={item} className="flex items-start gap-3 text-foreground/70 text-sm">
+                  <span className="text-gold mt-0.5 text-base leading-none">✦</span>
                   {item}
                 </li>
               ))}
@@ -316,7 +316,7 @@ export default function ContactSection() {
           </div>
 
           {/* Right — Form */}
-          <div className="bg-[#111108] border border-[#C9A84C]/15 rounded-2xl p-8">
+          <div className="bg-background border border-gold/15 rounded-2xl p-8">
             {submitted ? (
               <SuccessMessage name={form.firstName} />
             ) : (
@@ -502,7 +502,7 @@ export default function ContactSection() {
                       <button
                         type="button"
                         onClick={() => setStep(1)}
-                        className="flex items-center gap-1.5 px-4 py-3 border border-[#C9A84C]/30 text-[#F5F0E8]/60 hover:text-[#F5F0E8] hover:border-[#C9A84C]/60 rounded-full text-sm font-semibold transition-all duration-200"
+                        className="flex items-center gap-1.5 px-4 py-3 border border-gold/30 text-foreground/60 hover:text-foreground hover:border-gold/60 rounded-full text-sm font-semibold transition-all duration-200"
                       >
                         <ChevronLeft size={16} />
                         Back
