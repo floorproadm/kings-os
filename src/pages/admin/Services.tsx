@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus, GripVertical, Pencil, Trash2, Image, Eye, EyeOff } from "lucide-react";
+import { Plus, Pencil, Image, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useServicesData, Service } from "@/hooks/admin/useServicesData";
 import ServiceFormDialog from "@/components/admin/ServiceFormDialog";
