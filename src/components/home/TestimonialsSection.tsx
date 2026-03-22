@@ -83,7 +83,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section id="testimonials" className="section-padding bg-[sidebar-accent-foreground] bg-destructive-foreground">
+    <section id="testimonials" className="section-padding bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
