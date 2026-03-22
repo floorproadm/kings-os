@@ -68,7 +68,7 @@ export default function Referral() {
         </div>
       </section>
 
-      <section className="section-padding bg-gradient-to-r from-[#fccf93] via-gold to-[#51351e]">
+      <section className="section-padding bg-gradient-to-r from-[#fccf93]/80 via-gold/70 to-[#51351e]/80">
         <div className="container mx-auto text-center">
           <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">Start Referring Today</h2>
           <p className="text-primary-foreground/80 mb-8">There's no limit to how much you can earn.</p>

@@ -33,7 +33,7 @@ export default function DualCTABar({
       className={`w-full py-5 px-4 ${
         isDark
           ? "bg-[#111108] border-y border-[#C9A84C]/15"
-          : "bg-gradient-to-r from-[#fccf93] via-gold to-[#51351e]"
+          : "bg-gradient-to-r from-[#fccf93]/80 via-gold/70 to-[#51351e]/80"
       }`}
     >
       <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
