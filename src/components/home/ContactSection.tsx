@@ -8,6 +8,7 @@ import { ChevronRight, ChevronLeft, Phone, CheckCircle2, Loader2 } from "lucide-
 import { supabase } from "@/integrations/supabase/client";
 import { HK_ORG_ID } from "@/lib/constants";
 import { formatPhone } from "@/lib/formatPhone";
+import { MovingBorderContainer } from "@/components/ui/moving-border";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
