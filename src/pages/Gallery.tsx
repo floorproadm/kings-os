@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { ImageIcon, Loader2, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { blurIn } from "@/lib/animations";
 
 const CATEGORIES = [
   { value: "all", label: "All" },
