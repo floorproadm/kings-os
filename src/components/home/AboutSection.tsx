@@ -16,7 +16,8 @@ export default function AboutSection() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}>
+            transition={{ duration: 0.6 }}
+            className="text-center lg:text-left">
             
             <p className="text-gold text-sm tracking-[0.2em] uppercase font-semibold mb-4">
               About Us
