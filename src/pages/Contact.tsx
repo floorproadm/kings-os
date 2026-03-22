@@ -81,33 +81,33 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
             {/* Form */}
             <div className="lg:col-span-3">
-              <div className="elevated-card p-8">
+              <div className="bg-background border border-gold/15 rounded-2xl p-8">
                 <h2 className="font-display text-2xl font-bold text-foreground mb-1">Get Your Free Flooring Estimate</h2>
                 <p className="text-sm text-muted-foreground mb-6">Takes less than 60 seconds</p>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm text-muted-foreground mb-1 block">Name *</label>
-                      <input type="text" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="w-full h-11 px-4 rounded-lg bg-input border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-gold/50" />
+                      <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">Name *</label>
+                      <input type="text" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
                     </div>
                     <div>
-                      <label className="text-sm text-muted-foreground mb-1 block">Phone *</label>
-                      <input type="tel" required value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} className="w-full h-11 px-4 rounded-lg bg-input border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-gold/50" />
+                      <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">Phone *</label>
+                      <input type="tel" required value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm text-muted-foreground mb-1 block">Email (Optional)</label>
-                      <input type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="w-full h-11 px-4 rounded-lg bg-input border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-gold/50" />
+                      <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">Email (Optional)</label>
+                      <input type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
                     </div>
                     <div>
-                      <label className="text-sm text-muted-foreground mb-1 block">City (Optional)</label>
-                      <input type="text" value={form.city} onChange={e => setForm({...form, city: e.target.value})} className="w-full h-11 px-4 rounded-lg bg-input border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-gold/50" />
+                      <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">City (Optional)</label>
+                      <input type="text" value={form.city} onChange={e => setForm({...form, city: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200" />
                     </div>
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground mb-1 block">Service Needed</label>
-                    <select value={form.service} onChange={e => setForm({...form, service: e.target.value})} className="w-full h-11 px-4 rounded-lg bg-input border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-gold/50">
+                    <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">Service Needed</label>
+                    <select value={form.service} onChange={e => setForm({...form, service: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200 cursor-pointer">
                       <option value="">Select a service</option>
                       <option>Hardwood Floor Installation</option>
                       <option>Sanding & Refinishing</option>
@@ -117,8 +117,8 @@ export default function Contact() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground mb-1 block">Project Timeline</label>
-                    <select value={form.timeline} onChange={e => setForm({...form, timeline: e.target.value})} className="w-full h-11 px-4 rounded-lg bg-input border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-gold/50">
+                    <label className="text-xs font-bold tracking-[0.15em] uppercase text-muted-foreground mb-1.5 block">Project Timeline</label>
+                    <select value={form.timeline} onChange={e => setForm({...form, timeline: e.target.value})} className="w-full bg-background border border-gold/25 rounded-md px-4 py-3 text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all duration-200 cursor-pointer">
                       <option value="">Select timeline</option>
                       <option>ASAP</option>
                       <option>This month</option>
