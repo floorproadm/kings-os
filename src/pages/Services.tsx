@@ -6,10 +6,26 @@ import {
   TreePine, Paintbrush, ArrowUpDown, Trash2, Layers, Fence, Sparkles,
 } from "lucide-react";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1, y: 0, transition: { delay: i * 0.08, duration: 0.5 },
+const cardVariants = {
+  hidden: (i: number) => ({
+    opacity: 0,
+    x: i % 2 === 0 ? -60 : 60,
+    y: 20,
+  }),
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+};
+
+const bulletVariants = {
+  hidden: { opacity: 0, x: -15 },
+  visible: (j: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { delay: 0.3 + j * 0.08, duration: 0.4 },
   }),
 };
 
