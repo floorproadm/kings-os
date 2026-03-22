@@ -108,7 +108,7 @@ export default function Header() {
               <button className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 Services <ChevronDown className="w-3.5 h-3.5" />
               </button>
-              <div className="absolute top-full left-0 mt-1 w-64 bg-card/70 backdrop-blur-xl border border-border/40 rounded-xl shadow-2xl shadow-black/30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
+              <div className="absolute top-full left-0 mt-1 w-64 bg-background/40 backdrop-blur-2xl backdrop-saturate-150 border border-white/10 rounded-xl shadow-2xl shadow-black/40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
                 {services.map((s) => (
                   <Link
                     key={s.path}
@@ -153,7 +153,7 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div className="lg:hidden bg-card/70 backdrop-blur-xl border-t border-border/30 px-4 py-4 space-y-1">
+          <div className="lg:hidden bg-background/40 backdrop-blur-2xl backdrop-saturate-150 border-t border-white/10 px-4 py-4 space-y-1">
             {navLinks.map((l) => (
               <Link
                 key={l.path}
