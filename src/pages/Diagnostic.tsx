@@ -96,15 +96,25 @@ export default function Diagnostic() {
         </div>
       </section>
 
-      <section className="section-padding">
-        <div className="container mx-auto max-w-2xl text-center">
-          <p className="text-sm text-muted-foreground italic mb-8">
-            "This service is for homeowners ready to invest in a permanent solution. If you're comparing prices from multiple contractors, this may not be the right fit."
-          </p>
-          <Button variant="gold" size="xl" asChild>
-            <Link to="/contact">Apply for Diagnostic</Link>
-          </Button>
+      <section className="relative section-padding overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gold-dark via-gold to-gold-light opacity-85" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(252,207,147,0.3),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(81,53,30,0.4),transparent_60%)]" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+        <div className="relative container mx-auto max-w-2xl text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <p className="text-xs uppercase tracking-[0.3em] text-background/60 font-semibold mb-4">Premium Diagnostic</p>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-background mb-5">Ready for a Permanent Solution?</h2>
+            <div className="w-16 h-[2px] bg-background/30 mx-auto mb-5" />
+            <p className="text-background/70 mb-10 max-w-lg mx-auto text-sm leading-relaxed italic">"This service is for homeowners ready to invest in a permanent solution. If you're comparing prices from multiple contractors, this may not be the right fit."</p>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.5 }}>
+            <Button size="xl" className="bg-background text-foreground hover:bg-background/90 shadow-lg shadow-black/20" asChild>
+              <Link to="/contact">Apply for Diagnostic</Link>
+            </Button>
+          </motion.div>
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       </section>
     </Layout>
   );

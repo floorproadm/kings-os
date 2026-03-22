@@ -99,14 +99,28 @@ export default function Realtors() {
         </div>
       </section>
 
-      <section className="section-padding bg-gradient-to-r from-gold-light/80 via-gold/70 to-gold-dark/80">
-        <div className="container mx-auto text-center">
-          <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">Ready to Partner with Us?</h2>
-          <p className="text-primary-foreground/80 mb-8">Get your custom realtor pricing sheet within 48 hours.</p>
-          <Button variant="default" size="xl" className="bg-background text-foreground hover:bg-background/90" asChild>
-            <Link to="/contact">Get Realtor Pricing</Link>
-          </Button>
+      <section className="relative section-padding overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gold-dark via-gold to-gold-light opacity-85" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(252,207,147,0.3),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(81,53,30,0.4),transparent_60%)]" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+        <div className="relative container mx-auto text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <p className="text-xs uppercase tracking-[0.3em] text-background/60 font-semibold mb-4">Realtor Program</p>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-background mb-5">Ready to Partner with Us?</h2>
+            <div className="w-16 h-[2px] bg-background/30 mx-auto mb-5" />
+            <p className="text-background/70 mb-10 max-w-lg mx-auto text-sm leading-relaxed">Get your custom realtor pricing sheet within 48 hours.</p>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.5 }} className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="xl" className="bg-background text-foreground hover:bg-background/90 shadow-lg shadow-black/20" asChild>
+              <Link to="/contact">Get Realtor Pricing</Link>
+            </Button>
+            <Button variant="outline" size="xl" className="bg-transparent border-2 border-background/40 text-background hover:bg-background/10 hover:border-background/70 transition-all" asChild>
+              <a href="tel:9139153193">Call (913) 915-3193</a>
+            </Button>
+          </motion.div>
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       </section>
     </Layout>
   );
