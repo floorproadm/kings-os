@@ -68,21 +68,21 @@ export default function StaircaseService() {
               ))}
             </div>
             <div className="grid gap-4">
-              <div className="elevated-card p-5 flex gap-4 items-start">
+              <div className="bg-background border border-gold/15 rounded-xl p-5 flex gap-4 items-start">
                 <TrendingUp className="w-6 h-6 text-gold flex-shrink-0" />
                 <div>
                   <h3 className="font-display font-bold text-foreground mb-1">Increase Home Value</h3>
                   <p className="text-sm text-muted-foreground">Custom staircases can add 10-15% to your home's value</p>
                 </div>
               </div>
-              <div className="elevated-card p-5 flex gap-4 items-start">
+              <div className="bg-background border border-gold/15 rounded-xl p-5 flex gap-4 items-start">
                 <Shield className="w-6 h-6 text-gold flex-shrink-0" />
                 <div>
                   <h3 className="font-display font-bold text-foreground mb-1">Safety First</h3>
                   <p className="text-sm text-muted-foreground">All work meets or exceeds local building codes</p>
                 </div>
               </div>
-              <div className="elevated-card p-5 flex gap-4 items-start">
+              <div className="bg-background border border-gold/15 rounded-xl p-5 flex gap-4 items-start">
                 <Sparkles className="w-6 h-6 text-gold flex-shrink-0" />
                 <div>
                   <h3 className="font-display font-bold text-foreground mb-1">Custom Design</h3>
