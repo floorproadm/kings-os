@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { HK_ORG_ID } from "@/lib/constants";
 import { motion } from "framer-motion";
+import { formatPhone } from "@/lib/formatPhone";
 
 const roles = ["Realtor", "Builder", "Property Manager", "Other"];
 
