@@ -129,8 +129,8 @@ export default function Services() {
               key={i}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
+              viewport={{ once: true, margin: "-50px" }}
+              variants={cardVariants}
               custom={i}
               className={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center elevated-card overflow-hidden ${
                 i % 2 === 1 ? "lg:direction-rtl" : ""
