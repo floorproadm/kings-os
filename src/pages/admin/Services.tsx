@@ -99,14 +99,6 @@ export default function AdminServices() {
               >
                 <Pencil className="w-4 h-4" />
               </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className={`h-8 w-8 ${deleteConfirm === s.id ? "text-red-500" : ""}`}
-                onClick={() => handleDelete(s.id)}
-              >
-                <Trash2 className="w-4 h-4" />
-              </Button>
             </div>
           </div>
         ))}
