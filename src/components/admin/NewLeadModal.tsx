@@ -161,9 +161,10 @@ export function NewLeadModal({ open, onOpenChange, onSuccess }: NewLeadModalProp
               </Label>
               <Input
                 id="nl-phone"
+                type="tel"
                 value={form.phone}
-                onChange={(e) => handleChange("phone", e.target.value)}
-                placeholder="(XXX) XXX-XXXX"
+                onChange={(e) => handleChange("phone", formatPhone(e.target.value))}
+                placeholder="(913) 000-0000"
                 className={errors.phone ? "border-destructive" : ""}
               />
               {errors.phone && (

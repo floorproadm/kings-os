@@ -70,7 +70,7 @@ export function NewPartnerDialog({ open, onOpenChange, onSubmit }: Props) {
           <div className="grid grid-cols-2 gap-3">
             <div>
               <Label>Phone</Label>
-              <Input value={form.phone} onChange={(e) => setForm(f => ({ ...f, phone: e.target.value }))} placeholder="(555) 123-4567" />
+              <Input type="tel" value={form.phone} onChange={(e) => setForm(f => ({ ...f, phone: formatPhone(e.target.value) }))} placeholder="(913) 000-0000" />
             </div>
             <div>
               <Label>Email</Label>
