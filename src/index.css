@@ -50,13 +50,13 @@
     --dark-surface: 0 0% 3%;
     --dark-elevated: 0 0% 7%;
 
-    --sidebar-background: 60 27% 8%;
-    --sidebar-foreground: 37 39% 94%;
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
     --sidebar-primary: 44 54% 54%;
-    --sidebar-primary-foreground: 60 27% 8%;
-    --sidebar-accent: 60 15% 14%;
-    --sidebar-accent-foreground: 37 39% 94%;
-    --sidebar-border: 60 10% 20%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 18%;
     --sidebar-ring: 44 54% 54%;
   }
 }
