@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { formatPhone } from "@/lib/formatPhone";
 import { Partner, STAGE_CONFIG, PIPELINE_STAGES, PARTNER_TYPES, isAtRisk } from "@/hooks/admin/usePartnersData";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -116,7 +117,7 @@ export function PartnerDetailPanel({ partner, onBack, onUpdate, onDelete }: Prop
           <div><Label>Company</Label><Input value={form.company_name} onChange={e => setForm(f => ({ ...f, company_name: e.target.value }))} /></div>
           <div><Label>Contact</Label><Input value={form.contact_name || ""} onChange={e => setForm(f => ({ ...f, contact_name: e.target.value }))} /></div>
           <div className="grid grid-cols-2 gap-3">
-            <div><Label>Phone</Label><Input value={form.phone || ""} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} /></div>
+            <div><Label>Phone</Label><Input type="tel" value={form.phone || ""} onChange={e => setForm(f => ({ ...f, phone: formatPhone(e.target.value) }))} placeholder="(913) 000-0000" /></div>
             <div><Label>Email</Label><Input value={form.email || ""} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} /></div>
           </div>
           <div className="grid grid-cols-2 gap-3">
