@@ -59,14 +59,19 @@ export default function AboutSection() {
             </div>
 
             <div className="flex justify-center lg:justify-start">
-              <GradientBlobCard className="mt-4 lg:mt-8 inline-block">
-                <div className="p-4">
+              <MovingBorderContainer
+                duration={3000}
+                borderRadius="0.75rem"
+                containerClassName="mt-4 lg:mt-8"
+                className="p-4"
+              >
+                <div>
                   <p className="font-display font-bold text-foreground text-lg">
                     T. Reis
                   </p>
                   <p className="text-gold text-sm">Founder & Operator — Thiago Reis</p>
                 </div>
-              </GradientBlobCard>
+              </MovingBorderContainer>
             </div>
 
             <div className="mt-8">
