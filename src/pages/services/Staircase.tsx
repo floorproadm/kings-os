@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { blurIn } from "@/lib/animations";
 import { CheckCircle, Shield, TrendingUp, Sparkles } from "lucide-react";
 import { FeatureSteps } from "@/components/ui/feature-steps";
 import serviceStaircase from "@/assets/service-staircase.jpg";
