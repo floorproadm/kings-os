@@ -67,7 +67,7 @@ export default function VinylService() {
           <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">Perfect for Every <span className="gold-gradient-text">Room</span></h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {p.rooms.map((r, i) => (
-              <div key={i} className="elevated-card p-5">
+              <div key={i} className="bg-background border border-gold/15 rounded-xl p-5">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-display font-bold text-foreground">{r.room}</h3>
                   <span className="text-xs px-2 py-0.5 rounded-full bg-gold/10 text-gold">{r.tag}</span>
@@ -83,7 +83,7 @@ export default function VinylService() {
       <section className="section-padding">
         <div className="container mx-auto max-w-4xl">
           <h2 className="font-display text-2xl font-bold text-foreground text-center mb-8">Vinyl vs. Hardwood <span className="gold-gradient-text">Comparison</span></h2>
-          <div className="elevated-card overflow-hidden">
+          <div className="bg-background border border-gold/15 rounded-xl overflow-hidden">
             <div className="grid grid-cols-3 bg-gold/10 p-4 text-sm font-semibold text-foreground">
               <span>Feature</span>
               <span className="text-gold">Luxury Vinyl ✅</span>
