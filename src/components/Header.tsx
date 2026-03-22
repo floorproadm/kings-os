@@ -49,16 +49,16 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <a
               href="sms:+19139153193?body=Hi! I'm interested in a flooring estimate from your website."
-              className="flex items-center gap-1.5 text-muted-foreground hover:text-gold transition-colors"
+              className="flex items-center gap-1.5 text-background/70 hover:text-background transition-colors"
             >
               <Phone className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Call or Text:</span>
-              <span className="font-semibold text-foreground">(913) 915-3193</span>
+              <span className="font-semibold text-background">(913) 915-3193</span>
             </a>
           </div>
           <div className="flex items-center gap-2">
-            <span className="hidden md:inline text-xs text-muted-foreground">
-              Serving <strong className="text-foreground">Johnson County, KS</strong>
+            <span className="hidden md:inline text-xs text-background/70">
+              Serving <strong className="text-background">Johnson County, KS</strong>
             </span>
             <a
               href="https://instagram.com/hardwoodkingsinc"
