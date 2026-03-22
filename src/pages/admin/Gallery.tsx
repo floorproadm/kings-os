@@ -230,9 +230,9 @@ export default function AdminGallery() {
   const categoryEmoji = (cat: string) =>
     CATEGORIES.find((c) => c.value === cat)?.emoji || "";
 
-  const counts: Record<string, number> = { all: images.length };
+  const counts: Record<string, number> = { all: allImages.length };
   CATEGORIES.forEach((c) => {
-    counts[c.value] = images.filter((i) => i.category === c.value).length;
+    counts[c.value] = allImages.filter((i) => i.category === c.value).length;
   });
 
   return (
