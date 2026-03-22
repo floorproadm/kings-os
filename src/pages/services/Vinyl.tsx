@@ -83,7 +83,7 @@ export default function VinylService() {
       <section className="section-padding">
         <div className="container mx-auto max-w-4xl">
           <h2 className="font-display text-2xl font-bold text-foreground text-center mb-8">Vinyl vs. Hardwood <span className="gold-gradient-text">Comparison</span></h2>
-          <div className="elevated-card overflow-hidden">
+          <div className="bg-background border border-gold/15 rounded-xl overflow-hidden">
             <div className="grid grid-cols-3 bg-gold/10 p-4 text-sm font-semibold text-foreground">
               <span>Feature</span>
               <span className="text-gold">Luxury Vinyl ✅</span>
