@@ -12,12 +12,12 @@ const cardVariants = {
     x: i % 2 === 0 ? -60 : 60,
     y: 20,
   }),
-  visible: {
+  visible: (i: number) => ({
     opacity: 1,
     x: 0,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
+    transition: { duration: 0.6 },
+  }),
 };
 
 const bulletVariants = {
