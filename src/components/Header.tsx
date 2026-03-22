@@ -153,7 +153,7 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div className="lg:hidden bg-card border-t border-border/30 px-4 py-4 space-y-1">
+          <div className="lg:hidden bg-card/70 backdrop-blur-xl border-t border-border/30 px-4 py-4 space-y-1">
             {navLinks.map((l) => (
               <Link
                 key={l.path}
