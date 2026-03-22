@@ -187,6 +187,7 @@ export default function LeadCapturePopup() {
                   <input
                     className={inputCls}
                     placeholder="Your name *"
+                    maxLength={100}
                     value={form.name}
                     onChange={(e) => set("name", e.target.value)}
                   />
