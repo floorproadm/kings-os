@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus, GripVertical, Pencil, Trash2, Image, Eye, EyeOff } from "lucide-react";
+import { Plus, Pencil, Image, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useServicesData, Service } from "@/hooks/admin/useServicesData";
 import ServiceFormDialog from "@/components/admin/ServiceFormDialog";
@@ -7,10 +7,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 export default function AdminServices() {
-  const { services, isLoading, updateService, deleteService, uploadImage } = useServicesData();
+  const { services, isLoading, updateService, uploadImage } = useServicesData();
   const [editingService, setEditingService] = useState<Service | null>(null);
   const [showNew, setShowNew] = useState(false);
-  const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
   const handleImageUpload = async (service: Service) => {
     const input = document.createElement("input");
@@ -33,14 +32,6 @@ export default function AdminServices() {
     await updateService({ id: service.id, is_active: !service.is_active });
   };
 
-  const handleDelete = async (id: string) => {
-    if (deleteConfirm !== id) {
-      setDeleteConfirm(id);
-      return;
-    }
-    await deleteService(id);
-    setDeleteConfirm(null);
-  };
 
   if (isLoading) {
     return <div className="p-8 text-muted-foreground">Loading services...</div>;
@@ -107,14 +98,6 @@ export default function AdminServices() {
                 onClick={() => setEditingService(s)}
               >
                 <Pencil className="w-4 h-4" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className={`h-8 w-8 ${deleteConfirm === s.id ? "text-red-500" : ""}`}
-                onClick={() => handleDelete(s.id)}
-              >
-                <Trash2 className="w-4 h-4" />
               </Button>
             </div>
           </div>
