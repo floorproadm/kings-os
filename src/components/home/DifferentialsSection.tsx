@@ -23,7 +23,7 @@ export default function DifferentialsSection() {
     <section className="section-padding bg-destructive-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-gold-dark leading-tight text-center bg-[#29291e]/0">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-gold-dark leading-tight text-center">
             We Don't Just Meet Expectations.{" "}
             <span className="text-gold">We Exceed Them.</span>
           </h2>
