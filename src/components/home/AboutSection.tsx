@@ -58,21 +58,23 @@ export default function AboutSection() {
               />
             </div>
 
-            <GradientBlobCard className="mt-4 lg:mt-8 inline-block">
-              <div className="p-4">
-                <p className="font-display font-bold text-foreground text-lg">
-                  T. Reis
-                </p>
-                <p className="text-gold text-sm">Founder & Operator — Thiago Reis</p>
-              </div>
-            </GradientBlobCard>
+            <div className="flex justify-center lg:justify-start">
+              <GradientBlobCard className="mt-4 lg:mt-8 inline-block">
+                <div className="p-4">
+                  <p className="font-display font-bold text-foreground text-lg">
+                    T. Reis
+                  </p>
+                  <p className="text-gold text-sm">Founder & Operator — Thiago Reis</p>
+                </div>
+              </GradientBlobCard>
+            </div>
 
             <div className="mt-8">
-              <p className="text-sm text-muted-foreground mb-3 flex items-center gap-2">
+              <p className="text-sm text-muted-foreground mb-3 flex items-center justify-center lg:justify-start gap-2">
                 <MapPin className="w-4 h-4 text-gold" />
                 Proudly serving Johnson County, KS
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2">
                 {areas.map((a) =>
                 <span
                   key={a}
