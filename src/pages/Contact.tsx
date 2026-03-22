@@ -189,10 +189,18 @@ export default function Contact() {
           <h2 className="font-display text-2xl font-bold text-foreground text-center mb-8">Have Questions Before Booking?</h2>
           <div className="space-y-4">
             {faqs.map((f, i) => (
-              <div key={i} className="elevated-card p-5">
-                <p className="font-semibold text-foreground mb-1">{f.q}</p>
-                <p className="text-sm text-muted-foreground">{f.a}</p>
-              </div>
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i}
+                className="relative rounded-2xl border border-gold/20 bg-background p-5 flex gap-4 items-center overflow-hidden shadow-[0_0_15px_rgba(201,168,76,0.08)]"
+              >
+                <div className="w-10 h-10 rounded-full bg-gold/15 border border-gold/30 flex items-center justify-center shrink-0">
+                  <CheckCircle className="w-5 h-5 text-gold" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-display font-bold text-foreground text-sm mb-1">{f.q}</h3>
+                  <p className="text-xs text-foreground/60">{f.a}</p>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-gold-light via-gold to-gold-dark" />
+              </motion.div>
             ))}
           </div>
         </div>
