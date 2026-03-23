@@ -46,7 +46,7 @@ export default function ServicesSection() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("services")
-        .select("id, title, description, icon_name, image_url, display_order")
+        .select("id, title, description, icon_name, image_url, link_url, display_order")
         .eq("is_active", true)
         .order("display_order", { ascending: true });
       if (error) throw error;
