@@ -36,6 +36,7 @@ interface ServiceRow {
   description: string;
   icon_name: string;
   image_url: string | null;
+  link_url: string | null;
   display_order: number;
 }
 
