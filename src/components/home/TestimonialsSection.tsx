@@ -117,8 +117,8 @@ export default function TestimonialsSection() {
         {/* Marquee */}
         <div className="relative overflow-hidden">
           {/* Fade edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-16 z-10 bg-gradient-to-r from-white to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-16 z-10 bg-gradient-to-l from-white to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-6 sm:w-10 z-10 bg-gradient-to-r from-white to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-6 sm:w-10 z-10 bg-gradient-to-l from-white to-transparent" />
 
           <div
             className="flex gap-4 animate-marquee hover:[animation-play-state:paused]"
