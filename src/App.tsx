@@ -24,9 +24,7 @@ import SandingService from "./pages/services/Sanding";
 import HardwoodService from "./pages/services/Hardwood";
 import VinylService from "./pages/services/Vinyl";
 import StaircaseService from "./pages/services/Staircase";
-import DemolitionService from "./pages/services/Demolition";
 import DeckService from "./pages/services/Deck";
-import WashService from "./pages/services/Wash";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 
