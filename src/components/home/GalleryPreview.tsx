@@ -113,15 +113,11 @@ export default function GalleryPreview() {
           )}
         </motion.div>
 
-        {/* View All Link */}
         {images.length > 0 && (
-          <div className="text-center mt-8">
-            <Link
-              to="/gallery"
-              className="inline-flex items-center gap-2 text-gold font-semibold hover:underline"
-            >
-              View Full Gallery →
-            </Link>
+          <div className="text-center mt-10">
+            <Button variant="gold" size="lg" asChild>
+              <Link to="/gallery">View Full Gallery</Link>
+            </Button>
           </div>
         )}
       </div>
