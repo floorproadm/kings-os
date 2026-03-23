@@ -24,9 +24,7 @@ import SandingService from "./pages/services/Sanding";
 import HardwoodService from "./pages/services/Hardwood";
 import VinylService from "./pages/services/Vinyl";
 import StaircaseService from "./pages/services/Staircase";
-import DemolitionService from "./pages/services/Demolition";
 import DeckService from "./pages/services/Deck";
-import WashService from "./pages/services/Wash";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -80,9 +78,7 @@ const App = () => (
             <Route path="/services/hardwood" element={<HardwoodService />} />
             <Route path="/services/vinyl" element={<VinylService />} />
             <Route path="/services/staircase" element={<StaircaseService />} />
-            <Route path="/services/demolition" element={<DemolitionService />} />
             <Route path="/services/deck" element={<DeckService />} />
-            <Route path="/services/wash" element={<WashService />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<AdminRoute><Suspense fallback={<AdminFallback />}><Dashboard /></Suspense></AdminRoute>} />
             <Route path="/admin/leads" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminLeads /></Suspense></AdminRoute>} />

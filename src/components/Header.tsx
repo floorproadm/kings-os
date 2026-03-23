@@ -13,10 +13,8 @@ const services = [
   { name: "Hardwood Floor Installation", path: "/services/hardwood" },
   { name: "Sanding, Staining & Refinishing", path: "/services/sanding" },
   { name: "Staircase Design & Finishing", path: "/services/staircase" },
-  { name: "Demolition & Replacement", path: "/services/demolition" },
   { name: "Vinyl & Engineered Wood", path: "/services/vinyl" },
   { name: "Deck & Handrail Refinishing", path: "/services/deck" },
-  { name: "Wash & Polish", path: "/services/wash" },
 ];
 
 const navLinks = [
