@@ -72,7 +72,7 @@ export default function ServicesSection() {
         <div className="flex flex-wrap justify-center gap-5">
           {items.map((s, i) => {
             const Icon = iconMap[s.icon_name] ?? Sparkles;
-            return (
+            const card = (
               <motion.div
                 key={s.id}
                 initial="hidden"
@@ -80,9 +80,8 @@ export default function ServicesSection() {
                 viewport={{ once: true }}
                 variants={fadeUp}
                 custom={i}
-                className="elevated-card group hover:border-gold/40 transition-colors duration-300 cursor-default overflow-hidden relative w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.875rem)] xl:w-[calc(25%-0.9375rem)]"
+                className="elevated-card group hover:border-gold/40 transition-colors duration-300 cursor-pointer overflow-hidden relative w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.875rem)] xl:w-[calc(25%-0.9375rem)]"
               >
-                {/* Background image with gradient overlay */}
                 {serviceBgMap[s.title] && (
                   <>
                     <img
@@ -95,7 +94,6 @@ export default function ServicesSection() {
                   </>
                 )}
 
-                {/* Service image (uploaded by admin) */}
                 {s.image_url && (
                   <div className="relative w-full h-40 overflow-hidden">
                     <img
@@ -108,7 +106,6 @@ export default function ServicesSection() {
                 )}
 
                 <div className="relative p-6">
-                  {/* Icon fallback when no image */}
                   {!s.image_url && (
                     <div className="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center text-gold mb-4 group-hover:bg-gold/20 transition-colors">
                       <Icon className="w-6 h-6" />
@@ -123,6 +120,12 @@ export default function ServicesSection() {
                 </div>
               </motion.div>
             );
+
+            return s.link_url ? (
+              <Link key={s.id} to={s.link_url} className="contents">
+                {card}
+              </Link>
+            ) : card;
           })}
         </div>
       </div>
