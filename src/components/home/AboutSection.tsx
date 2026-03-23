@@ -59,19 +59,12 @@ export default function AboutSection() {
             </div>
 
             <div className="flex justify-center lg:justify-start">
-              <MovingBorderContainer
-                duration={3000}
-                borderRadius="0.75rem"
-                containerClassName="mt-4 lg:mt-8"
-                className="p-4"
-              >
-                <div>
-                  <p className="font-display font-bold text-foreground text-lg">
-                    T. Reis
-                  </p>
-                  <p className="text-gold text-sm">Founder & Operator — Thiago Reis</p>
-                </div>
-              </MovingBorderContainer>
+              <div className="mt-4 lg:mt-8 rounded-xl border-2 border-gold/30 bg-background/80 backdrop-blur-sm p-4 inline-block">
+                <p className="font-display font-bold text-foreground text-lg">
+                  T. Reis
+                </p>
+                <p className="text-gold text-sm">Founder & Operator — Thiago Reis</p>
+              </div>
             </div>
 
             <div className="mt-8">
