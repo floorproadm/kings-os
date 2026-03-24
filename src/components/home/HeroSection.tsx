@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
+console.log('[Hero] Component loaded');
+
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
@@ -37,6 +39,7 @@ function useHeroMedia() {
   });
 
   useEffect(() => {
+    console.log('[Hero] Fetching hero media...');
     supabase
       .from("hero_media")
       .select("device, media_type, media_url")
@@ -46,6 +49,7 @@ function useHeroMedia() {
         (data as any[])?.forEach((item) => {
           map[item.device] = item;
         });
+        console.log('[Hero] Media loaded:', map);
         setMedia(map);
       });
   }, []);
@@ -54,57 +58,53 @@ function useHeroMedia() {
 }
 
 function HeroBackground({ media }: { media: Record<string, HeroMedia | null> }) {
-  const fallbackSrc = "/videos/hero-bg.mp4";
+  const fallbackSrc = "/images/hero-bg.jpg";
 
-  // Render all three sources, show/hide via CSS breakpoints
+  // If DB has image overrides, use them; otherwise use static fallback image
+  const mobileSrc = media.mobile?.media_url || fallbackSrc;
+  const tabletSrc = media.tablet?.media_url || fallbackSrc;
+  const desktopSrc = media.desktop?.media_url || fallbackSrc;
+
+  // Check if DB media is video type
+  const mobileIsVideo = media.mobile?.media_type === "video";
+  const tabletIsVideo = media.tablet?.media_type === "video";
+  const desktopIsVideo = media.desktop?.media_type === "video";
+
   return (
     <>
-      {/* Mobile: visible < md */}
-      {media.mobile ? (
-        media.mobile.media_type === "video" ? (
-          <video autoPlay loop muted playsInline
-            className="absolute inset-0 w-full h-full object-cover md:hidden"
-            src={media.mobile.media_url} />
-        ) : (
-          <img src={media.mobile.media_url} alt="Hero"
-            className="absolute inset-0 w-full h-full object-cover md:hidden" />
-        )
-      ) : (
+      {/* Mobile */}
+      {mobileIsVideo ? (
         <video autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-contain object-[center_30%] md:hidden"
-          src={fallbackSrc} />
+          className="absolute inset-0 w-full h-full object-cover md:hidden"
+          src={mobileSrc} />
+      ) : (
+        <img src={mobileSrc} alt="Hardwood flooring"
+          className="absolute inset-0 w-full h-full object-cover md:hidden"
+          width={1920} height={1280} />
       )}
 
-      {/* Tablet: visible md to lg */}
-      {media.tablet ? (
-        media.tablet.media_type === "video" ? (
-          <video autoPlay loop muted playsInline
-            className="absolute inset-0 w-full h-full object-cover object-[center_40%] hidden md:block lg:hidden"
-            src={media.tablet.media_url} />
-        ) : (
-          <img src={media.tablet.media_url} alt="Hero"
-            className="absolute inset-0 w-full h-full object-cover object-[center_40%] hidden md:block lg:hidden" />
-        )
-      ) : (
+      {/* Tablet */}
+      {tabletIsVideo ? (
         <video autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-contain object-[center_80%] hidden md:block lg:hidden"
-          src={fallbackSrc} />
+          className="absolute inset-0 w-full h-full object-cover hidden md:block lg:hidden"
+          src={tabletSrc} />
+      ) : (
+        <img src={tabletSrc} alt="Hardwood flooring"
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover hidden md:block lg:hidden"
+          width={1920} height={1280} />
       )}
 
-      {/* Desktop: visible lg+ */}
-      {media.desktop ? (
-        media.desktop.media_type === "video" ? (
-          <video autoPlay loop muted playsInline
-            className="absolute inset-0 w-full h-full object-cover hidden lg:block"
-            src={media.desktop.media_url} />
-        ) : (
-          <img src={media.desktop.media_url} alt="Hero"
-            className="absolute inset-0 w-full h-full object-cover hidden lg:block" />
-        )
-      ) : (
+      {/* Desktop */}
+      {desktopIsVideo ? (
         <video autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-contain object-[100%_80%] hidden lg:block"
-          src={fallbackSrc} />
+          className="absolute inset-0 w-full h-full object-cover hidden lg:block"
+          src={desktopSrc} />
+      ) : (
+        <img src={desktopSrc} alt="Hardwood flooring"
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover hidden lg:block"
+          width={1920} height={1280} />
       )}
     </>
   );
@@ -114,26 +114,27 @@ export default function HeroSection() {
   const media = useHeroMedia();
 
   return (
-    <section className="relative h-[115svh] md:h-[110vh] lg:h-[80vh] flex items-end bg-black overflow-hidden">
+    <section className="relative h-svh md:h-[90vh] lg:h-[80vh] flex items-center bg-background overflow-hidden">
       <HeroBackground media={media} />
-      
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent via-15% to-black to-90%" />
-      <div className="absolute inset-0 md:hidden bg-gradient-to-r from-black/60 via-transparent to-black/60" />
 
-      <div className="relative container mx-auto px-4 md:px-6 lg:px-8 pb-6 md:pb-16 lg:pb-32 pt-0 md:pt-0 lg:pt-60 md:mt-auto">
-        <motion.div className="max-w-3xl" initial="hidden" animate="visible">
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/55" />
+      {/* Bottom gradient for smooth transition */}
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+
+      <div className="relative z-10 container mx-auto px-6 md:px-8 lg:px-8">
+        <motion.div className="max-w-3xl mx-auto text-center" initial="hidden" animate="visible">
           <motion.p
             variants={fadeUp}
             custom={0}
-            className="text-gold font-semibold text-sm lg:text-base tracking-[0.2em] uppercase mb-6 text-center">
+            className="text-gold font-semibold text-xs sm:text-sm lg:text-base tracking-[0.2em] uppercase mb-4 md:mb-6">
             T. Reis — Hardwood Specialist in Johnson County
           </motion.p>
 
           <motion.h1
             variants={blurInHero}
             custom={1}
-            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6 text-center mx-0 px-0">
+            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-4 md:mb-6">
             Elevate Your Home with Expert{" "}
             <span className="gold-gradient-text">Hardwood Flooring</span>
           </motion.h1>
@@ -141,18 +142,18 @@ export default function HeroSection() {
           <motion.p
             variants={fadeUp}
             custom={2}
-            className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-10 max-w-2xl text-center lg:mx-auto">
-            Installation · Refinishing · Stairs · Decks Johnson County, KS
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-6 md:mb-10 max-w-2xl mx-auto">
+            Installation · Refinishing · Stairs · Decks — Johnson County, KS
           </motion.p>
 
-          <motion.div variants={fadeUp} custom={3} className="gap-4 text-center items-center justify-center flex flex-col lg:flex-row">
-            <Button variant="gold" size="xl" asChild>
+          <motion.div variants={fadeUp} custom={3} className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center">
+            <Button variant="gold" size="xl" asChild className="w-full sm:w-auto">
               <a href="tel:+19139153193">
                 <Phone className="w-4 h-4 mr-2" />
                 Get Free Estimate
               </a>
             </Button>
-            <Button variant="goldOutline" size="xl" asChild>
+            <Button variant="goldOutline" size="xl" asChild className="w-full sm:w-auto">
               <a href="#gallery">
                 See Our Work
                 <ArrowDown className="w-4 h-4 ml-2" />
@@ -161,7 +162,6 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
       </div>
-
     </section>
   );
 }
