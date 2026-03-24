@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { ImageIcon, Loader2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ImageIcon, Loader2, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -24,6 +24,7 @@ interface GalleryImage {
 
 export default function GalleryPreview() {
   const [active, setActive] = useState(0);
+  const [lightbox, setLightbox] = useState<{ index: number; images: GalleryImage[] } | null>(null);
 
   const { data: images = [], isLoading } = useQuery({
     queryKey: ["gallery-images-public"],
@@ -39,6 +40,16 @@ export default function GalleryPreview() {
   });
 
   const filtered = images.filter((img) => img.category === CATEGORIES[active].value);
+
+  function openLightbox(index: number) {
+    setLightbox({ index, images: filtered });
+  }
+
+  function navigateLightbox(dir: 1 | -1) {
+    if (!lightbox) return;
+    const newIndex = (lightbox.index + dir + lightbox.images.length) % lightbox.images.length;
+    setLightbox({ ...lightbox, index: newIndex });
+  }
 
   return (
     <section id="gallery" className="section-padding bg-background">
@@ -93,10 +104,11 @@ export default function GalleryPreview() {
               </div>
             ))
           ) : (
-            filtered.slice(0, 8).map((img) => (
+            filtered.slice(0, 8).map((img, i) => (
               <div
                 key={img.id}
-                className="group relative aspect-[4/3] rounded-xl overflow-hidden elevated-card"
+                className="group relative aspect-[4/3] rounded-xl overflow-hidden elevated-card cursor-pointer"
+                onClick={() => openLightbox(i)}
               >
                 <img
                   src={img.image_url}
@@ -122,6 +134,52 @@ export default function GalleryPreview() {
           </div>
         )}
       </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+            onClick={() => setLightbox(null)}
+          >
+            <button
+              className="absolute top-4 right-4 text-white/80 hover:text-white z-10"
+              onClick={() => setLightbox(null)}
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white z-10"
+              onClick={(e) => { e.stopPropagation(); navigateLightbox(-1); }}
+            >
+              <ChevronLeft className="w-10 h-10" />
+            </button>
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white z-10"
+              onClick={(e) => { e.stopPropagation(); navigateLightbox(1); }}
+            >
+              <ChevronRight className="w-10 h-10" />
+            </button>
+            <motion.img
+              key={lightbox.index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              src={lightbox.images[lightbox.index].image_url}
+              alt={lightbox.images[lightbox.index].title || ""}
+              className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+            {lightbox.images[lightbox.index].title && (
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-center">
+                <p className="font-display font-bold text-lg">{lightbox.images[lightbox.index].title}</p>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
