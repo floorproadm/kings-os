@@ -1,40 +1,49 @@
 
 
-## Sugestoes de Melhoria — StatsBar + DualCTABar
+## Suggested Links for `/links` Page (QR Code Landing)
 
-Analisando o screenshot e o codigo atual, aqui estao melhorias que elevariam o design:
+Since this will be printed on **t-shirts, business cards, and yard signs**, the page needs to be clean, branded, and conversion-focused. Here are the recommended links:
 
-### StatsBar (bloco branco)
+### Primary (Conversion)
+1. **Get Your Free Estimate** → `/contact` — main CTA, should be the most prominent
+2. **Call Us** → `tel:9139153193` — direct phone call action
 
-1. **Separadores verticais entre stats** — Adicionar linhas divisorias douradas sutis (`border-r border-gold/20`) entre os 3 blocos para criar separacao visual clara e mais estrutura.
+### Portfolio & Trust
+3. **See Our Work** → `/gallery` — photo gallery builds trust instantly
+4. **Google Reviews** → external Google Reviews link — social proof
 
-2. **Icone dedicado para cada stat** — Substituir o numero puro por um pequeno icone acima (ex: escudo para experiencia, check-circle para projetos), dando mais hierarquia visual.
+### Services
+5. **Our Services** → `/services` — overview of all offerings
+6. **Floor Diagnostic Quiz** → `/quiz` or `/diagnostic` — interactive engagement
 
-3. **Fundo com textura sutil** — Trocar o `bg-white` puro por um leve pattern ou gradiente (`bg-gradient-to-b from-white to-gold/5`) para criar mais profundidade e conexao com a paleta dourada.
+### Social Media
+7. **Instagram** → Instagram profile
+8. **Facebook** → Facebook page
+9. **Nextdoor** → Nextdoor profile
 
-4. **Tipografia com mais contraste** — Aumentar o peso visual dos numeros (tracking mais aberto, tamanho maior no mobile) e usar uppercase nos labels para um look mais premium.
+### Referral
+10. **Refer & Earn** → `/referral` — referral program page
 
-### DualCTABar (bloco escuro)
-
-5. **Botoes empilhados no mobile com largura total** — Atualmente os botoes sao compactos. No mobile (390px), fazer `w-full` para ambos os CTAs, criando mais impacto e area de toque.
-
-6. **Glow sutil no botao dourado** — Adicionar `shadow-[0_0_20px_rgba(201,168,76,0.3)]` no botao principal para um efeito de brilho premium que destaca o CTA.
-
-7. **Label acima com tipografia refinada** — O "Ready to transform your floors?" poderia usar `uppercase tracking-[0.2em] text-xs` para ficar mais sofisticado, alinhado com o brand.
-
-### Transicao entre blocos
-
-8. **Remover separacao abrupta** — O corte branco/preto e muito duro. Adicionar uma faixa de gradiente de transicao ou unificar ambos num unico bloco com fundo escuro (stats com texto dourado sobre fundo preto).
+### Optional
+- **About Us** → `/about`
+- **B2B / Partners** → `/b2b` — if targeting contractors/realtors via yard signs
 
 ---
 
-### Implementacao sugerida
+## Technical Plan
 
-**Arquivos a editar:**
-- `src/components/home/StatsBar.tsx` — separadores, tipografia, fundo
-- `src/components/shared/DualCTABar.tsx` — botoes full-width mobile, glow, label styling
+**New file**: `src/pages/Links.tsx`
+- Mobile-first, full-screen branded page
+- Company logo at top, tagline below
+- Stacked link buttons with icons (similar to Linktree style)
+- Dark background matching brand colors (gold/dark theme)
+- No header/footer — standalone page optimized for QR scan
+- Subtle animation on load (fade-in stagger)
 
-Nenhuma mudanca em outros componentes, rotas ou backend.
+**Route**: Add `/links` route in `App.tsx`
 
-Qual dessas melhorias voce quer que eu implemente? Posso aplicar todas ou apenas as que preferir.
+**Design**: Clean, centered layout with gold-accented buttons on dark background. Logo prominent at top. Each link as a rounded button with icon.
 
+---
+
+Let me know which links you want to include (and any to remove/add) and I'll build it immediately.
