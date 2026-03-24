@@ -47,11 +47,6 @@ const links = [
     icon: ClipboardCheck,
   },
   {
-    label: "Refer & Earn",
-    href: "/referral",
-    icon: Gift,
-  },
-  {
     label: "Instagram",
     href: "https://instagram.com/kingshardwoodfloors",
     icon: Instagram,
