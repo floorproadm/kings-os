@@ -1,21 +1,8 @@
-// DualCTABar.tsx
-// Kings OS — Hardwood Kings Inc. · Johnson County, KS
-// Benchmark: Empire Today ("SCHEDULE IN-HOME APPOINTMENT | or CALL NOW")
-// Fase 2 — src/components/shared/DualCTABar.tsx
-//
-// Uso na Homepage (Index.tsx):
-//   Inserir após <StatsBar /> e após <Testimonials />
-//   <DualCTABar />
-//
-// Props opcionais:
-//   variant="dark"  → fundo #1A1A0F (default, entre seções dark)
-//   variant="gold"  → fundo #C9A84C com texto escuro (destaque máximo)
-
 import { Phone, Calendar } from "lucide-react";
 
 interface DualCTABarProps {
   variant?: "dark" | "gold";
-  label?: string; // texto acima dos botões
+  label?: string;
 }
 
 export default function DualCTABar({
@@ -30,39 +17,36 @@ export default function DualCTABar({
 
   return (
     <div
-      className={`w-full py-5 px-4 ${
+      className={`w-full py-6 px-4 ${
         isDark
           ? "bg-background border-y border-gold/15"
           : "bg-gradient-to-r from-gold-light/80 via-gold/70 to-gold-dark/80"
       }`}
     >
-      <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+      <div className="max-w-4xl mx-auto flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-8">
 
-        {/* Optional label */}
         {label && (
           <p
-            className={`text-sm font-semibold tracking-wide ${
-              isDark ? "text-foreground/60" : "text-background/70"
+            className={`text-xs font-semibold uppercase tracking-[0.2em] ${
+              isDark ? "text-foreground/50" : "text-background/60"
             } sm:mr-4`}
           >
             {label}
           </p>
         )}
 
-        {/* Primary CTA — Schedule / Estimate */}
         <button
           onClick={scrollToContact}
-          className={`flex items-center gap-2.5 font-bold text-sm px-7 py-3.5 rounded-full transition-all duration-200 shadow-lg ${
+          className={`w-full sm:w-auto flex items-center justify-center gap-2.5 font-bold text-sm px-7 py-3.5 rounded-full transition-all duration-200 ${
             isDark
-              ? "bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 text-primary-foreground shadow-gold/20"
-              : "bg-background hover:bg-muted text-foreground"
+              ? "bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 text-primary-foreground shadow-[0_0_20px_rgba(201,168,76,0.3)]"
+              : "bg-background hover:bg-muted text-foreground shadow-lg"
           }`}
         >
           <Calendar size={15} />
           Schedule Free Estimate
         </button>
 
-        {/* Divider */}
         <span
           className={`text-sm font-light ${
             isDark ? "text-foreground/30" : "text-background/40"
@@ -71,10 +55,9 @@ export default function DualCTABar({
           or
         </span>
 
-        {/* Secondary CTA — Call Now */}
         <a
           href="tel:+19139153193"
-          className={`flex items-center gap-2.5 font-bold text-sm px-6 py-3.5 rounded-full border-2 transition-all duration-200 ${
+          className={`w-full sm:w-auto flex items-center justify-center gap-2.5 font-bold text-sm px-6 py-3.5 rounded-full border-2 transition-all duration-200 ${
             isDark
               ? "border-gold/40 text-gold hover:border-gold hover:bg-gold/10"
               : "border-background/40 text-background hover:border-background hover:bg-background/10"
@@ -90,20 +73,3 @@ export default function DualCTABar({
     </div>
   );
 }
-
-// ─── Sticky bottom variant ─────────────────────────────────────────────────
-// Para usar como barra fixa no bottom em mobile:
-//
-// export function StickyCallBar() {
-//   return (
-//     <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-gold py-3 px-4 shadow-2xl">
-//       <a
-//         href="tel:+19139153193"
-//         className="flex items-center justify-center gap-2 text-background font-bold text-base"
-//       >
-//         <Phone size={18} />
-//         Call Thiago: (913) 915-3193
-//       </a>
-//     </div>
-//   );
-// }

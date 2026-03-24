@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Star } from "lucide-react";
+import { Shield, CheckCircle, Star } from "lucide-react";
 
 const stats = [
-{ end: 24, suffix: "+", label: "Years of Experience" },
-{ end: 1000, suffix: "+", label: "Projects Completed" },
-{ end: 5, suffix: "★", label: "Google Rating" }];
-
+  { end: 24, suffix: "+", label: "YEARS OF EXPERIENCE", icon: Shield },
+  { end: 1000, suffix: "+", label: "PROJECTS COMPLETED", icon: CheckCircle },
+  { end: 5, suffix: "★", label: "GOOGLE RATING", icon: Star },
+];
 
 function useCountUp(end: number, duration = 2000) {
   const [count, setCount] = useState(0);
@@ -16,7 +16,7 @@ function useCountUp(end: number, duration = 2000) {
     const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(
-      ([entry]) => {if (entry.isIntersecting) setStarted(true);},
+      ([entry]) => { if (entry.isIntersecting) setStarted(true); },
       { threshold: 0.5 }
     );
     observer.observe(el);
@@ -45,30 +45,38 @@ function useCountUp(end: number, duration = 2000) {
 
 export default function StatsBar() {
   return (
-    <section className="py-8 sm:py-10 bg-white">
+    <section className="py-10 sm:py-12 bg-gradient-to-b from-white to-gold/5">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-3 gap-4 text-center">
+        <div className="grid grid-cols-3 text-center">
           {stats.map((s, i) => {
             const { count, ref } = useCountUp(s.end);
+            const Icon = s.icon;
             return (
-              <div key={i} ref={ref}>
+              <div
+                key={i}
+                ref={ref}
+                className={`flex flex-col items-center gap-2 py-2 ${
+                  i < stats.length - 1 ? "border-r border-gold/20" : ""
+                }`}
+              >
+                <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-gold-dark/60" />
                 <div className="flex items-center justify-center gap-1">
-                  <span className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-gold-dark">
+                  <span className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-gold-dark tracking-wide">
                     {s.end === 1000 ? count.toLocaleString() : count}
                     {s.suffix !== "★" && s.suffix}
                   </span>
-                  {s.suffix === "★" &&
-                  <Star className="w-6 h-6 sm:w-8 sm:h-8 fill-gold-dark text-gold-dark" />
-                  }
+                  {s.suffix === "★" && (
+                    <Star className="w-6 h-6 sm:w-8 sm:h-8 fill-gold-dark text-gold-dark" />
+                  )}
                 </div>
-                <p className="text-sm sm:text-base text-gold-dark/70 mt-1 font-body">
+                <p className="text-[10px] sm:text-xs text-gold-dark/60 font-body uppercase tracking-[0.15em]">
                   {s.label}
                 </p>
-              </div>);
-
+              </div>
+            );
           })}
         </div>
       </div>
-    </section>);
-
+    </section>
+  );
 }
