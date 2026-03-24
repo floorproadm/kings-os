@@ -96,7 +96,7 @@ export default function Links() {
           </span>
         </div>
         <h1 className="font-display text-xl sm:text-2xl font-bold text-foreground tracking-wide">
-          Kings Hardwood Floors
+          Hardwood Kings Inc
         </h1>
         <p className="text-muted-foreground text-xs sm:text-sm mt-1 uppercase tracking-[0.25em]">
           Premium Flooring • Kansas City
@@ -168,7 +168,7 @@ export default function Links() {
         transition={{ delay: 1.2, duration: 0.6 }}
         className="mt-10 text-muted-foreground text-[10px] uppercase tracking-[0.3em]"
       >
-        © {new Date().getFullYear()} Kings Hardwood Floors
+        © {new Date().getFullYear()} Hardwood Kings Inc
       </motion.p>
     </div>
   );
