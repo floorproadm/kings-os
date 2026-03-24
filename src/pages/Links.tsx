@@ -11,6 +11,7 @@ import {
   MapPin,
   Gift,
 } from "lucide-react";
+import mascotImg from "@/assets/mascot.png";
 
 const links = [
   {
@@ -90,10 +91,8 @@ export default function Links() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="flex flex-col items-center mb-8"
       >
-        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-gold-light via-gold to-gold-dark flex items-center justify-center mb-4 shadow-[0_0_30px_rgba(201,168,76,0.3)]">
-          <span className="text-3xl sm:text-4xl font-display font-black text-background leading-none">
-            K
-          </span>
+        <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-4 shadow-[0_0_30px_rgba(201,168,76,0.3)]">
+          <img src={mascotImg} alt="Hardwood Kings Mascot" className="w-full h-full object-cover object-top" />
         </div>
         <h1 className="font-display text-xl sm:text-2xl font-bold text-foreground tracking-wide">
           Hardwood Kings Inc
