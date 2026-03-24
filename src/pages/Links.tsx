@@ -96,7 +96,7 @@ export default function Links() {
           </span>
         </div>
         <h1 className="font-display text-xl sm:text-2xl font-bold text-foreground tracking-wide">
-          Kings Hardwood Floors
+          Hardwood Kings Inc
         </h1>
         <p className="text-muted-foreground text-xs sm:text-sm mt-1 uppercase tracking-[0.25em]">
           Premium Flooring • Kansas City
