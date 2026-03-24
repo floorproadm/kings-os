@@ -28,6 +28,7 @@ import DeckService from "./pages/services/Deck";
 import Login from "./pages/Login";
 import Links from "./pages/Links";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ScrollToTop from "./components/ScrollToTop";
 
 const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
