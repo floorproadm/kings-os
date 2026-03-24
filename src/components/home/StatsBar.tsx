@@ -45,7 +45,7 @@ function useCountUp(end: number, duration = 2000) {
 
 export default function StatsBar() {
   return (
-    <section className="py-10 sm:py-12 bg-gradient-to-b from-white to-gold/5">
+    <section className="py-10 sm:py-12 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-3 text-center">
           {stats.map((s, i) => {
@@ -56,12 +56,12 @@ export default function StatsBar() {
                 key={i}
                 ref={ref}
                 className={`flex flex-col items-center gap-2 py-2 ${
-                  i < stats.length - 1 ? "border-r border-gold/20" : ""
+                  i < stats.length - 1 ? "border-r border-gold-dark/20" : ""
                 }`}
               >
-                <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-gold-dark/60" />
+                <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-gold-dark" strokeWidth={1.5} />
                 <div className="flex items-center justify-center gap-1">
-                  <span className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-gold-dark tracking-wide">
+                  <span className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-gold-dark">
                     {s.end === 1000 ? count.toLocaleString() : count}
                     {s.suffix !== "★" && s.suffix}
                   </span>
@@ -69,7 +69,7 @@ export default function StatsBar() {
                     <Star className="w-6 h-6 sm:w-8 sm:h-8 fill-gold-dark text-gold-dark" />
                   )}
                 </div>
-                <p className="text-[10px] sm:text-xs text-gold-dark/60 font-body uppercase tracking-[0.15em]">
+                <p className="text-[10px] sm:text-xs text-neutral-500 font-body uppercase tracking-[0.12em] leading-tight">
                   {s.label}
                 </p>
               </div>
