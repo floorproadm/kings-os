@@ -26,20 +26,14 @@ const links = [
     primary: true,
   },
   {
-    label: "See Our Work",
-    href: "/gallery",
-    icon: Images,
-  },
-  {
-    label: "Google Reviews",
-    href: "https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review",
-    icon: Star,
-    external: true,
-  },
-  {
     label: "Our Services",
     href: "/services",
     icon: Wrench,
+  },
+  {
+    label: "See Our Work",
+    href: "/gallery",
+    icon: Images,
   },
   {
     label: "Floor Diagnostic Quiz",
@@ -47,25 +41,30 @@ const links = [
     icon: ClipboardCheck,
   },
   {
+    label: "Google Reviews",
+    href: "https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review",
+    icon: Star,
+    external: true,
+  },
+];
+
+const socials = [
+  {
     label: "Instagram",
     href: "https://instagram.com/kingshardwoodfloors",
     icon: Instagram,
-    external: true,
   },
   {
     label: "Facebook",
     href: "https://facebook.com/kingshardwoodfloors",
     icon: Facebook,
-    external: true,
   },
   {
     label: "Nextdoor",
     href: "https://nextdoor.com/pages/kings-hardwood-floors",
     icon: MapPin,
-    external: true,
   },
 ];
-
 const container = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.07, delayChildren: 0.3 } },
