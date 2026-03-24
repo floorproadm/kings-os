@@ -168,7 +168,7 @@ export default function Links() {
         transition={{ delay: 1.2, duration: 0.6 }}
         className="mt-10 text-muted-foreground text-[10px] uppercase tracking-[0.3em]"
       >
-        © {new Date().getFullYear()} Kings Hardwood Floors
+        © {new Date().getFullYear()} Hardwood Kings Inc
       </motion.p>
     </div>
   );
