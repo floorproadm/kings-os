@@ -128,7 +128,7 @@ export default function GalleryPreview() {
 
         {images.length > 0 && (
           <div className="text-center mt-10">
-            <Button variant="gold" size="lg" asChild>
+            <Button variant="gold" size="lg" className="px-10 py-[calc(0.75rem+3px)]" asChild>
               <Link to="/gallery">View Full Gallery</Link>
             </Button>
           </div>
