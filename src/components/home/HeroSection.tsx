@@ -114,11 +114,13 @@ export default function HeroSection() {
   const media = useHeroMedia();
 
   return (
-    <section className="relative h-[85svh] md:h-[85vh] lg:h-[80vh] flex items-center bg-background overflow-hidden">
+    <section className="relative h-svh md:h-[90vh] lg:h-[80vh] flex items-center bg-background overflow-hidden">
       <HeroBackground media={media} />
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/55" />
+      {/* Bottom gradient for smooth transition */}
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
       <div className="relative z-10 container mx-auto px-6 md:px-8 lg:px-8">
         <motion.div className="max-w-3xl mx-auto text-center" initial="hidden" animate="visible">
