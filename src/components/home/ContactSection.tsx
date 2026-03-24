@@ -315,12 +315,7 @@ export default function ContactSection() {
           </div>
 
           {/* Right — Form */}
-          <MovingBorderContainer
-            duration={10000}
-            borderRadius="1rem"
-            containerClassName="w-full"
-            className="p-8 flex-col items-stretch"
-          >
+          <div className="w-full rounded-2xl border border-border/30 bg-background p-8 flex flex-col items-stretch">
             {submitted ? (
               <SuccessMessage name={form.firstName} />
             ) : (
