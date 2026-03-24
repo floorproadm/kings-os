@@ -26,20 +26,14 @@ const links = [
     primary: true,
   },
   {
-    label: "See Our Work",
-    href: "/gallery",
-    icon: Images,
-  },
-  {
-    label: "Google Reviews",
-    href: "https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review",
-    icon: Star,
-    external: true,
-  },
-  {
     label: "Our Services",
     href: "/services",
     icon: Wrench,
+  },
+  {
+    label: "See Our Work",
+    href: "/gallery",
+    icon: Images,
   },
   {
     label: "Floor Diagnostic Quiz",
@@ -47,25 +41,30 @@ const links = [
     icon: ClipboardCheck,
   },
   {
+    label: "Google Reviews",
+    href: "https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review",
+    icon: Star,
+    external: true,
+  },
+];
+
+const socials = [
+  {
     label: "Instagram",
     href: "https://instagram.com/kingshardwoodfloors",
     icon: Instagram,
-    external: true,
   },
   {
     label: "Facebook",
     href: "https://facebook.com/kingshardwoodfloors",
     icon: Facebook,
-    external: true,
   },
   {
     label: "Nextdoor",
     href: "https://nextdoor.com/pages/kings-hardwood-floors",
     icon: MapPin,
-    external: true,
   },
 ];
-
 const container = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.07, delayChildren: 0.3 } },
@@ -139,7 +138,30 @@ export default function Links() {
         })}
       </motion.div>
 
-      {/* Footer */}
+      {/* Social Icons */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.6 }}
+        className="flex items-center gap-4 mt-8"
+      >
+        {socials.map((s) => {
+          const Icon = s.icon;
+          return (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-11 h-11 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold/10 hover:border-gold/60 transition-all duration-300"
+              aria-label={s.label}
+            >
+              <Icon size={18} strokeWidth={2} />
+            </a>
+          );
+        })}
+      </motion.div>
+
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
