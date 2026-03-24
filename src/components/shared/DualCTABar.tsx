@@ -1,4 +1,4 @@
-import { Phone, Calendar } from "lucide-react";
+import { Phone, Calendar, ArrowRight } from "lucide-react";
 
 interface DualCTABarProps {
   variant?: "dark" | "gold";
@@ -17,19 +17,19 @@ export default function DualCTABar({
 
   return (
     <div
-      className={`w-full py-6 px-4 ${
+      className={`w-full py-5 px-4 ${
         isDark
-          ? "bg-background border-y border-gold/15"
+          ? "bg-background border-y border-gold/10"
           : "bg-gradient-to-r from-gold-light/80 via-gold/70 to-gold-dark/80"
       }`}
     >
-      <div className="max-w-4xl mx-auto flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-8">
+      <div className="max-w-3xl mx-auto flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
 
         {label && (
           <p
-            className={`text-xs font-semibold uppercase tracking-[0.2em] ${
-              isDark ? "text-foreground/50" : "text-background/60"
-            } sm:mr-4`}
+            className={`text-[10px] font-semibold uppercase tracking-[0.25em] ${
+              isDark ? "text-foreground/40" : "text-background/50"
+            } sm:mr-2`}
           >
             {label}
           </p>
@@ -37,37 +37,33 @@ export default function DualCTABar({
 
         <button
           onClick={scrollToContact}
-          className={`w-full sm:w-auto flex items-center justify-center gap-2.5 font-bold text-sm px-7 py-3.5 rounded-full transition-all duration-200 ${
+          className={`group w-full sm:w-auto flex items-center justify-center gap-2 font-bold text-sm px-8 py-3 rounded-full transition-all duration-300 ${
             isDark
-              ? "bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:opacity-90 text-primary-foreground shadow-[0_0_20px_rgba(201,168,76,0.3)]"
+              ? "bg-gradient-to-r from-gold-dark via-gold to-gold-light hover:shadow-[0_0_28px_rgba(201,168,76,0.4)] text-primary-foreground shadow-[0_0_16px_rgba(201,168,76,0.2)]"
               : "bg-background hover:bg-muted text-foreground shadow-lg"
           }`}
         >
-          <Calendar size={15} />
-          Schedule Free Estimate
+          <Calendar size={14} strokeWidth={2.5} />
+          Free Estimate
+          <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
         </button>
 
-        <span
-          className={`text-sm font-light ${
-            isDark ? "text-foreground/30" : "text-background/40"
-          } hidden sm:block`}
-        >
-          or
-        </span>
+        <div className={`hidden sm:flex items-center gap-3 ${isDark ? "text-foreground/20" : "text-background/30"}`}>
+          <div className="w-4 h-px bg-current" />
+          <span className="text-[10px] uppercase tracking-[0.2em] font-medium">or</span>
+          <div className="w-4 h-px bg-current" />
+        </div>
 
         <a
           href="tel:+19139153193"
-          className={`w-full sm:w-auto flex items-center justify-center gap-2.5 font-bold text-sm px-6 py-3.5 rounded-full border-2 transition-all duration-200 ${
+          className={`w-full sm:w-auto flex items-center justify-center gap-2 font-semibold text-sm px-6 py-3 rounded-full border transition-all duration-300 ${
             isDark
-              ? "border-gold/40 text-gold hover:border-gold hover:bg-gold/10"
+              ? "border-gold/25 text-gold hover:border-gold/60 hover:bg-gold/5"
               : "border-background/40 text-background hover:border-background hover:bg-background/10"
           }`}
         >
-          <Phone size={15} />
-          <span>
-            CALL NOW{" "}
-            <span className="font-extrabold">(913) 915-3193</span>
-          </span>
+          <Phone size={14} strokeWidth={2.5} />
+          <span className="tracking-wide">(913) 915-3193</span>
         </a>
       </div>
     </div>
