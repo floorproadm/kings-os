@@ -99,7 +99,7 @@ export default function Links() {
           Hardwood Kings Inc
         </h1>
         <p className="text-muted-foreground text-xs sm:text-sm mt-1 uppercase tracking-[0.25em]">
-          Premium Flooring • Kansas City
+          Premium Flooring Solutions in Johnson County and Beyond
         </p>
       </motion.div>
 
