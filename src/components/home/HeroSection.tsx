@@ -1,10 +1,7 @@
 import { motion } from "framer-motion";
 import { Phone, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-
-console.log('[Hero] Component loaded');
+import heroBg from "@/assets/hero-bg.jpg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -25,100 +22,20 @@ const blurInHero = {
   })
 };
 
-interface HeroMedia {
-  device: string;
-  media_type: string;
-  media_url: string;
-}
-
-function useHeroMedia() {
-  const [media, setMedia] = useState<Record<string, HeroMedia | null>>({
-    desktop: null,
-    tablet: null,
-    mobile: null,
-  });
-
-  useEffect(() => {
-    console.log('[Hero] Fetching hero media...');
-    supabase
-      .from("hero_media")
-      .select("device, media_type, media_url")
-      .eq("is_active", true)
-      .then(({ data }) => {
-        const map: Record<string, HeroMedia | null> = { desktop: null, tablet: null, mobile: null };
-        (data as any[])?.forEach((item) => {
-          map[item.device] = item;
-        });
-        console.log('[Hero] Media loaded:', map);
-        setMedia(map);
-      });
-  }, []);
-
-  return media;
-}
-
-function HeroBackground({ media }: { media: Record<string, HeroMedia | null> }) {
-  const fallbackSrc = "/images/hero-bg.jpg";
-
-  // If DB has image overrides, use them; otherwise use static fallback image
-  const mobileSrc = media.mobile?.media_url || fallbackSrc;
-  const tabletSrc = media.tablet?.media_url || fallbackSrc;
-  const desktopSrc = media.desktop?.media_url || fallbackSrc;
-
-  // Check if DB media is video type
-  const mobileIsVideo = media.mobile?.media_type === "video";
-  const tabletIsVideo = media.tablet?.media_type === "video";
-  const desktopIsVideo = media.desktop?.media_type === "video";
-
-  return (
-    <>
-      {/* Mobile */}
-      {mobileIsVideo ? (
-        <video autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover md:hidden"
-          src={mobileSrc} />
-      ) : (
-        <img src={mobileSrc} alt="Hardwood flooring"
-          className="absolute inset-0 w-full h-full object-cover md:hidden"
-          width={1920} height={1280} />
-      )}
-
-      {/* Tablet */}
-      {tabletIsVideo ? (
-        <video autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover hidden md:block lg:hidden"
-          src={tabletSrc} />
-      ) : (
-        <img src={tabletSrc} alt="Hardwood flooring"
-          loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover hidden md:block lg:hidden"
-          width={1920} height={1280} />
-      )}
-
-      {/* Desktop */}
-      {desktopIsVideo ? (
-        <video autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover hidden lg:block"
-          src={desktopSrc} />
-      ) : (
-        <img src={desktopSrc} alt="Hardwood flooring"
-          loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover hidden lg:block"
-          width={1920} height={1280} />
-      )}
-    </>
-  );
-}
-
 export default function HeroSection() {
-  const media = useHeroMedia();
-
   return (
     <section className="relative h-svh md:h-[90vh] lg:h-[80vh] flex items-end md:items-center bg-background overflow-hidden">
-      <HeroBackground media={media} />
+      {/* Static background image */}
+      <img
+        src={heroBg}
+        alt="Hardwood flooring and staircase craftsmanship"
+        className="absolute inset-0 w-full h-full object-cover"
+        width={1920}
+        height={1280}
+      />
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/55" />
+      {/* 60% dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/60" />
       {/* Bottom gradient for smooth transition */}
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
