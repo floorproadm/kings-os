@@ -138,7 +138,30 @@ export default function Links() {
         })}
       </motion.div>
 
-      {/* Footer */}
+      {/* Social Icons */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.6 }}
+        className="flex items-center gap-4 mt-8"
+      >
+        {socials.map((s) => {
+          const Icon = s.icon;
+          return (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-11 h-11 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold/10 hover:border-gold/60 transition-all duration-300"
+              aria-label={s.label}
+            >
+              <Icon size={18} strokeWidth={2} />
+            </a>
+          );
+        })}
+      </motion.div>
+
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
