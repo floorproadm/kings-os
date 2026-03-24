@@ -7,7 +7,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
 
 const CATEGORIES = [
-  { value: "hardwood", label: "Hardwood" },
   { value: "sanding", label: "Sanding & Refinishing" },
   { value: "vinyl", label: "Vinyl & LVP" },
   { value: "staircase", label: "Staircases" },
