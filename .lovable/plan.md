@@ -1,49 +1,26 @@
 
 
-## Suggested Links for `/links` Page (QR Code Landing)
+## Plano: Gerar Planilha de Auditoria Kings OS
 
-Since this will be printed on **t-shirts, business cards, and yard signs**, the page needs to be clean, branded, and conversion-focused. Here are the recommended links:
+Gerar um arquivo Excel (`Kings_OS_Audit.xlsx`) com 3 abas usando openpyxl:
 
-### Primary (Conversion)
-1. **Get Your Free Estimate** → `/contact` — main CTA, should be the most prominent
-2. **Call Us** → `tel:9139153193` — direct phone call action
+### Aba 1 — Paginas Publicas (20 rotas)
+Colunas: Rota | Pagina | Arquivo | Tipo | CTA Principal | Formulario | Supabase | Status
 
-### Portfolio & Trust
-3. **See Our Work** → `/gallery` — photo gallery builds trust instantly
-4. **Google Reviews** → external Google Reviews link — social proof
+Todas as 20 rotas publicas do App.tsx mapeadas com detalhes de funcionalidade.
 
-### Services
-5. **Our Services** → `/services` — overview of all offerings
-6. **Floor Diagnostic Quiz** → `/quiz` or `/diagnostic` — interactive engagement
+### Aba 2 — Paginas Admin (7 rotas)
+Colunas: Rota | Pagina | Arquivo | Protegida | Funcionalidade | Supabase | Status
 
-### Social Media
-7. **Instagram** → Instagram profile
-8. **Facebook** → Facebook page
-9. **Nextdoor** → Nextdoor profile
+Todas as 7 rotas admin protegidas.
 
-### Referral
-10. **Refer & Earn** → `/referral` — referral program page
+### Aba 3 — Observacoes
+- Arquivos sem rota: `Demolition.tsx`, `Wash.tsx` (existem em `/services/` mas nao estao no App.tsx)
+- Links externos pendentes na pagina `/links`
+- Componentes compartilhados principais
 
-### Optional
-- **About Us** → `/about`
-- **B2B / Partners** → `/b2b` — if targeting contractors/realtors via yard signs
+### Detalhes Tecnicos
+- Script Python com openpyxl
+- Formatacao profissional: headers em negrito com fundo dourado, colunas ajustadas, bordas
+- Output: `/mnt/documents/Kings_OS_Audit.xlsx`
 
----
-
-## Technical Plan
-
-**New file**: `src/pages/Links.tsx`
-- Mobile-first, full-screen branded page
-- Company logo at top, tagline below
-- Stacked link buttons with icons (similar to Linktree style)
-- Dark background matching brand colors (gold/dark theme)
-- No header/footer — standalone page optimized for QR scan
-- Subtle animation on load (fade-in stagger)
-
-**Route**: Add `/links` route in `App.tsx`
-
-**Design**: Clean, centered layout with gold-accented buttons on dark background. Logo prominent at top. Each link as a rounded button with icon.
-
----
-
-Let me know which links you want to include (and any to remove/add) and I'll build it immediately.
