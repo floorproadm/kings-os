@@ -286,7 +286,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="bg-background py-24 px-4"
+      className="bg-background py-14 sm:py-24 px-4"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
@@ -294,7 +294,7 @@ export default function ContactSection() {
 
           {/* Left — Copy */}
           <div className="lg:sticky lg:top-24">
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-4 sm:mb-6">
               Let's Build Something{" "}
               <span className="text-gold">Beautiful,</span>{" "}
               Together.
