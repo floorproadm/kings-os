@@ -52,7 +52,7 @@ export default function Header() {
             >
               <Phone className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Call or Text:</span>
-              <span className="font-semibold text-background">(913) 915-3193</span>
+              <span className="font-semibold text-background text-[14px]">(913) 915-3193</span>
             </a>
           </div>
           <div className="flex items-center gap-2">
