@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, ChevronDown, Facebook, Instagram, Star } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoCrown from "@/assets/logo-crown.webp";
-import nextdoorIcon from "@/assets/nextdoor-icon.png";
+import nextdoorIcon from "@/assets/nextdoor-icon-mono.png";
 import { useSiteConfig } from "@/contexts/SiteConfigContext";
 import { useScroll } from "@/components/ui/use-scroll";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
@@ -66,7 +66,7 @@ export default function Header() {
               className="w-7 h-7 bg-background/15 text-background/70 flex items-center justify-center rounded hover:bg-background/25 hover:text-background transition-colors"
               aria-label="Nextdoor"
             >
-              <img src={nextdoorIcon} alt="Nextdoor" className="w-4 h-4 rounded-sm brightness-0 opacity-70" />
+              <img src={nextdoorIcon} alt="Nextdoor" className="w-5 h-5 opacity-70" />
             </a>
             <a
               href="https://www.instagram.com/hardwoodkingsinc/"
