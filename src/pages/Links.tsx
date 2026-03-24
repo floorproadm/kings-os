@@ -31,7 +31,7 @@ const links = [
     icon: Images,
   },
   {
-    label: "Google Reviews ★ 5.0",
+    label: "Google Reviews",
     href: "https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review",
     icon: Star,
     external: true,
