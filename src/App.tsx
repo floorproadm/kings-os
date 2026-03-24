@@ -26,6 +26,7 @@ import VinylService from "./pages/services/Vinyl";
 import StaircaseService from "./pages/services/Staircase";
 import DeckService from "./pages/services/Deck";
 import Login from "./pages/Login";
+import Links from "./pages/Links";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
