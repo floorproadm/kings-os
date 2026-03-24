@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone } from "lucide-react";
+import { Phone, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -146,11 +146,17 @@ export default function HeroSection() {
             Installation · Refinishing · Stairs · Decks — Johnson County, KS
           </motion.p>
 
-          <motion.div variants={fadeUp} custom={3} className="mt-6 sm:mt-8 flex justify-center">
-            <Button variant="gold" size="lg" asChild className="w-full max-w-sm sm:w-auto hover:opacity-90 transition-all duration-200">
+          <motion.div variants={fadeUp} custom={3} className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center">
+            <Button variant="gold" size="xl" asChild className="w-full sm:w-auto">
               <a href="tel:+19139153193">
                 <Phone className="w-4 h-4 mr-2" />
                 Get Free Estimate
+              </a>
+            </Button>
+            <Button variant="goldOutline" size="xl" asChild className="w-full sm:w-auto">
+              <a href="#gallery">
+                See Our Work
+                <ArrowDown className="w-4 h-4 ml-2" />
               </a>
             </Button>
           </motion.div>
