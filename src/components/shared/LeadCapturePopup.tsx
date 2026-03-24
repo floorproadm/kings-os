@@ -68,18 +68,22 @@ export default function LeadCapturePopup() {
   useEffect(() => {
     if (hasCookie()) return;
 
-    // 12-second delay trigger
-    timerRef.current = setTimeout(show, 12000);
+    // 30-second delay trigger
+    timerRef.current = setTimeout(show, 30000);
 
-    // Exit intent trigger (mouse leaves top of viewport)
-    const handleMouseOut = (e: MouseEvent) => {
-      if (e.clientY <= 0) show();
+    // Scroll trigger — when user reaches the Differentials section
+    const handleScroll = () => {
+      const section = document.getElementById("differentials");
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.75) show();
+      }
     };
-    document.addEventListener("mouseleave", handleMouseOut);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
-      document.removeEventListener("mouseleave", handleMouseOut);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
