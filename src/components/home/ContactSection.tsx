@@ -294,9 +294,6 @@ export default function ContactSection() {
 
           {/* Left — Copy */}
           <div className="lg:sticky lg:top-24">
-            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">
-              Free Estimate
-            </p>
             <h2 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
               Let's Build Something{" "}
               <span className="text-gold">Beautiful,</span>{" "}
