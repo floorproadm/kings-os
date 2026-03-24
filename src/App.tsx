@@ -26,6 +26,7 @@ import VinylService from "./pages/services/Vinyl";
 import StaircaseService from "./pages/services/Staircase";
 import DeckService from "./pages/services/Deck";
 import Login from "./pages/Login";
+import Links from "./pages/Links";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
@@ -79,6 +80,7 @@ const App = () => (
             <Route path="/services/vinyl" element={<VinylService />} />
             <Route path="/services/staircase" element={<StaircaseService />} />
             <Route path="/services/deck" element={<DeckService />} />
+            <Route path="/links" element={<Links />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<AdminRoute><Suspense fallback={<AdminFallback />}><Dashboard /></Suspense></AdminRoute>} />
             <Route path="/admin/leads" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminLeads /></Suspense></AdminRoute>} />
