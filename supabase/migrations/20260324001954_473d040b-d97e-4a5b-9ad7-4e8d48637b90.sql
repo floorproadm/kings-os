@@ -1,0 +1,3 @@
+UPDATE hero_media SET media_url = 'https://dsvchllbyarjjmcmyzan.supabase.co/storage/v1/object/public/hero-media/hero-desktop-optimized.webm', updated_at = now() WHERE id = '9f8c4a42-8807-43b8-8756-a2e07e4cc1ca';
+UPDATE hero_media SET media_url = 'https://dsvchllbyarjjmcmyzan.supabase.co/storage/v1/object/public/hero-media/hero-mobile-optimized.webm', updated_at = now() WHERE id = 'e06f907f-a496-4b6b-9924-486f27324ecd';
+UPDATE hero_media SET media_url = 'https://dsvchllbyarjjmcmyzan.supabase.co/storage/v1/object/public/hero-media/hero-tablet-optimized.webm', updated_at = now() WHERE id = '1f115bbf-c38a-4999-9a87-4562a10bbd2f';
