@@ -66,7 +66,7 @@ export default function Header() {
               className="w-7 h-7 bg-background/15 text-background/70 flex items-center justify-center rounded hover:bg-background/25 hover:text-background transition-colors"
               aria-label="Nextdoor"
             >
-              <img src={nextdoorIcon} alt="Nextdoor" className="w-4 h-4 rounded-sm brightness-0 invert opacity-70" />
+              <img src={nextdoorIcon} alt="Nextdoor" className="w-4 h-4 rounded-sm brightness-0 opacity-70" />
             </a>
             <a
               href="https://www.instagram.com/hardwoodkingsinc/"
