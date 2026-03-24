@@ -83,31 +83,59 @@ const item = {
 
 export default function Links() {
   return (
-    <div className="min-h-[100dvh] bg-background flex flex-col items-center px-4 py-10 sm:py-14">
-      {/* Logo & Branding */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="flex flex-col items-center mb-8"
-      >
-        <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-4 shadow-[0_0_30px_rgba(201,168,76,0.3)]">
-          <img src={mascotImg} alt="Hardwood Kings Mascot" className="w-full h-full object-cover object-top" />
+    <div className="min-h-[100dvh] bg-background flex flex-col items-center">
+      {/* Hero — Ane-style: large image + gradient blend */}
+      <section className="relative w-full max-w-lg mx-auto">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative aspect-[3/4] overflow-hidden"
+        >
+          <img
+            src={mascotImg}
+            alt="Hardwood Kings Mascot"
+            className="w-full h-full object-cover object-top"
+            loading="eager"
+            fetchPriority="high"
+          />
+          {/* Bottom gradient blend into background */}
+          <div
+            className="absolute inset-x-0 bottom-0 h-[60%]"
+            style={{
+              background:
+                "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.85) 30%, hsl(var(--background) / 0.4) 60%, transparent 100%)",
+            }}
+          />
+        </motion.div>
+
+        {/* Name overlay on gradient */}
+        <div className="absolute bottom-8 left-0 right-0 text-center z-10">
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="font-display text-2xl sm:text-3xl font-bold text-foreground tracking-wide"
+          >
+            Hardwood Kings Inc
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
+            className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-[0.25em] mt-2"
+          >
+            Premium Flooring Solutions in Johnson County and Beyond
+          </motion.p>
         </div>
-        <h1 className="font-display text-xl sm:text-2xl font-bold text-foreground tracking-wide">
-          Hardwood Kings Inc
-        </h1>
-        <p className="text-muted-foreground text-xs sm:text-sm mt-1 uppercase tracking-[0.25em]">
-          Premium Flooring Solutions in Johnson County and Beyond
-        </p>
-      </motion.div>
+      </section>
 
       {/* Links */}
       <motion.div
         variants={container}
         initial="hidden"
         animate="visible"
-        className="w-full max-w-sm flex flex-col gap-3"
+        className="w-full max-w-sm flex flex-col gap-3 px-4 -mt-2"
       >
         {links.map((link) => {
           const Icon = link.icon;
@@ -165,7 +193,7 @@ export default function Links() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}
-        className="mt-10 text-muted-foreground text-[10px] uppercase tracking-[0.3em]"
+        className="mt-10 mb-8 text-muted-foreground text-[10px] uppercase tracking-[0.3em]"
       >
         © {new Date().getFullYear()} Hardwood Kings Inc
       </motion.p>
