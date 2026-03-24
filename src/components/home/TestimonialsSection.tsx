@@ -93,17 +93,6 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-10">
           
-          {/* Google badge */}
-          <div className="inline-flex items-center gap-3 bg-background px-5 py-2.5 rounded-full border border-border/30 mb-6">
-            <GoogleIcon className="w-5 h-5" />
-            <span className="font-display font-bold text-foreground text-sm">EXCELLENT</span>
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, j) =>
-              <Star key={j} className="w-4 h-4 fill-[#FBBC05] text-[#FBBC05]" />
-              )}
-            </div>
-            <span className="text-xs text-muted-foreground hidden sm:inline">Based on 10 reviews</span>
-          </div>
 
           <motion.h2 initial={{ opacity: 0, y: 20, filter: "blur(10px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut" }} className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-gold-dark">
             What Our Clients Are{" "}
