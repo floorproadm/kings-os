@@ -39,7 +39,7 @@ export default function HeroSection() {
       {/* Bottom gradient for smooth transition */}
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
-      <div className="relative z-10 container mx-auto px-6 md:px-8 lg:px-8 pb-20 md:pb-0">
+      <div className="relative z-10 container mx-auto px-6 md:px-8 lg:px-8 pb-32 md:pb-0">
         <motion.div className="max-w-3xl mx-auto text-center" initial="hidden" animate="visible">
           <motion.p
             variants={fadeUp}
