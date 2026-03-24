@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, ArrowDown } from "lucide-react";
+import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
