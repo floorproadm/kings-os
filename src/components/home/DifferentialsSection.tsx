@@ -20,7 +20,7 @@ const differentials = [
 
 export default function DifferentialsSection() {
   return (
-    <section className="section-padding bg-white">
+    <section id="differentials" className="section-padding bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <motion.h2 initial={{ opacity: 0, y: 20, filter: "blur(10px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut" }} className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-gold-dark leading-tight text-center">
