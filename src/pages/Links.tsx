@@ -100,6 +100,7 @@ export default function Links() {
           className="relative aspect-[3/4] overflow-hidden"
         >
           <video
+            ref={videoRef}
             src="/videos/hero-links.mp4"
             autoPlay
             loop
