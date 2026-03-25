@@ -83,6 +83,12 @@ const item = {
 };
 
 export default function Links() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
   return (
     <div className="min-h-[100dvh] bg-background flex flex-col items-center">
       {/* Hero — Ane-style: large image + gradient blend */}
