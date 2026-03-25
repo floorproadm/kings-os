@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Calendar,
@@ -82,6 +83,12 @@ const item = {
 };
 
 export default function Links() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
   return (
     <div className="min-h-[100dvh] bg-background flex flex-col items-center">
       {/* Hero — Ane-style: large image + gradient blend */}
@@ -93,6 +100,7 @@ export default function Links() {
           className="relative aspect-[3/4] overflow-hidden"
         >
           <video
+            ref={videoRef}
             src="/videos/hero-links.mp4"
             autoPlay
             loop
