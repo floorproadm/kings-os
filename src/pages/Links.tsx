@@ -44,7 +44,7 @@ const links = [
   },
   {
     label: "Google Reviews",
-    href: "https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review",
+    href: "https://www.google.com/search?sca_esv=4b9c4fb793c57767&sxsrf=ANbL-n7cOZ7uQPmccmFYtMEaVF7Z4UzlNw:1774403775773&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOVv4CiFKtVRPgHwths1eRQRnIa8AYUHTR0oOwamHtOFz1EoMxua9eaufrcexoxR-qSWWkFmMVewmb_C_2CacFlFuEgmPV8FYZk27y6TLVvsOiTkizA%3D%3D&q=Hardwood+Kings+INC+Reviews&sa=X&ved=2ahUKEwidyPiV-bmTAxW_MlkFHSxeHVcQ0bkNegQIJhAF&biw=1395&bih=1184&dpr=2#lrd=0x2da6a448c2c2e6e7:0x4a4e81dadcbc1cf6,1,,,,",
     icon: Star,
     external: true,
   },
