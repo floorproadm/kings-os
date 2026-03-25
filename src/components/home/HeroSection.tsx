@@ -60,7 +60,7 @@ export default function HeroSection() {
             variants={fadeUp}
             custom={2}
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-6 md:mb-10 max-w-2xl mx-auto">
-            Installation · Refinishing · Stairs · Decks — Johnson County, KS
+            Installation · Refinishing · Stairs · Decks
           </motion.p>
 
           <motion.div variants={fadeUp} custom={3} className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center">
