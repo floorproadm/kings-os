@@ -11,7 +11,7 @@ import {
   MapPin,
   Gift,
 } from "lucide-react";
-import mascotImg from "@/assets/mascot.png";
+
 
 const links = [
   {
@@ -92,12 +92,13 @@ export default function Links() {
           transition={{ duration: 0.8 }}
           className="relative aspect-[3/4] overflow-hidden"
         >
-          <img
-            src={mascotImg}
-            alt="Hardwood Kings Mascot"
+          <video
+            src="/videos/hero-links.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover object-top"
-            loading="eager"
-            fetchPriority="high"
           />
           {/* Bottom gradient blend into background */}
           <div
