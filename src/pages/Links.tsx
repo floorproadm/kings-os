@@ -53,17 +53,17 @@ const links = [
 const socials = [
   {
     label: "Instagram",
-    href: "https://instagram.com/kingshardwoodfloors",
+    href: "https://www.instagram.com/hardwoodkingsinc",
     icon: Instagram,
   },
   {
     label: "Facebook",
-    href: "https://facebook.com/kingshardwoodfloors",
+    href: "https://www.facebook.com/share/1TgnVjJb2Z/?mibextid=wwXIfr",
     icon: Facebook,
   },
   {
     label: "Nextdoor",
-    href: "https://nextdoor.com/pages/kings-hardwood-floors",
+    href: "https://nextdoor.com/pages/hardwood-kings-inc-long-branch-nj/",
     icon: MapPin,
   },
 ];
