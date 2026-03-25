@@ -86,7 +86,13 @@ export default function Links() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    videoRef.current?.play().catch(() => {});
+    const v = videoRef.current;
+    if (v) {
+      v.muted = true;
+      v.setAttribute("muted", "");
+      v.setAttribute("playsinline", "");
+      v.play().catch(() => {});
+    }
   }, []);
 
   return (
