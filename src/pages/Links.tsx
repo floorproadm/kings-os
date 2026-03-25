@@ -11,7 +11,7 @@ import {
   MapPin,
   Gift,
 } from "lucide-react";
-import mascotImg from "@/assets/mascot.png";
+
 
 const links = [
   {
