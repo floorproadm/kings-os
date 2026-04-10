@@ -22,7 +22,7 @@ const faqs = [
 
 const whyPoints = [
   { title: "Free In-Home Flooring Estimate", desc: "Fast response from experienced flooring professionals" },
-  { title: "23+ Years of Flooring Experience", desc: "Trusted craftsmanship and expert installation" },
+  { title: "24+ Years of Flooring Experience", desc: "Trusted craftsmanship and expert installation" },
   { title: "Licensed, Insured & Professional Team", desc: "Reliable service you can trust in your home" },
   { title: "Most Projects Completed in 3–5 Days", desc: "Efficient work with beautiful results" },
   { title: "Save Up to 40% with Refinishing", desc: "Restore your floors instead of replacing them" },
