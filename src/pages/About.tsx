@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Crown, Heart, Eye, Users, ClipboardCheck, Hammer, Sparkles } from "lucide-react";
 import Layout from "@/components/Layout";
-import craftsman from "@/assets/craftsman.jpg";
+import founderPhoto from "@/assets/thiago-reis.png";
 import { blurIn } from "@/lib/animations";
 
 const fadeUp = {
@@ -57,7 +57,7 @@ export default function About() {
               </motion.div>
             </motion.div>
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <img src={craftsman} alt="T. Reis - Founder of Hardwood Kings" className="rounded-2xl shadow-2xl shadow-black/30" />
+              <img src={founderPhoto} alt="T. Reis - Founder of Hardwood Kings" className="rounded-2xl shadow-2xl shadow-black/30" />
             </motion.div>
           </div>
         </div>
