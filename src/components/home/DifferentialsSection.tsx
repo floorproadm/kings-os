@@ -14,8 +14,7 @@ const differentials = [
 { icon: Clock, title: "We're Always On Time", desc: "Punctuality is non-negotiable. We respect your schedule and deliver when promised." },
 
 { icon: Home, title: "We Respect Your Space", desc: "Your home is treated with the same care we'd give our own. Clean jobsite, every time." },
-{ icon: ShieldCheck, title: "You Can Trust Us in Your Home", desc: "Our team is professional, vetted, and committed to earning your confidence." },
-{ icon: Gem, title: "We Use Premium Materials", desc: "Only the best products make the cut. Quality materials for lasting results." }];
+{ icon: ShieldCheck, title: "You Can Trust Us in Your Home", desc: "Our team is professional, vetted, and committed to earning your confidence." }];
 
 
 export default function DifferentialsSection() {
