@@ -113,11 +113,11 @@ export default function About() {
       {/* Stats */}
       <section className="section-padding-sm">
         <div className="container mx-auto">
-          <div className="grid grid-cols-3 gap-4 text-center">
+          <div className="flex flex-col sm:flex-row sm:justify-center gap-4 text-center">
             {stats.map((s, i) => (
-              <div key={i} className="elevated-card p-6">
+              <div key={i} className="elevated-card p-5 sm:p-6 flex sm:flex-col items-center sm:items-center gap-3 sm:gap-1 sm:min-w-[160px]">
                 <div className="text-3xl font-display font-bold text-gold">{s.value}</div>
-                <p className="text-sm text-muted-foreground mt-1">{s.label}</p>
+                <p className="text-sm text-muted-foreground">{s.label}</p>
               </div>
             ))}
           </div>
