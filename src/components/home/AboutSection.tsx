@@ -46,16 +46,6 @@ export default function AboutSection() {
                 alt="Thiago Reis — Founder of Hardwood Kings"
                 className="w-full rounded-2xl object-cover"
               />
-              <div className="absolute inset-0 rounded-2xl pointer-events-none"
-                style={{
-                  background: `
-                    linear-gradient(to top, hsl(var(--background)) 0%, transparent 35%),
-                    linear-gradient(to bottom, hsl(var(--background)) 0%, transparent 35%),
-                    linear-gradient(to left, hsl(var(--background)) 0%, transparent 30%),
-                    linear-gradient(to right, hsl(var(--background)) 0%, transparent 30%)
-                  `
-                }}
-              />
             </div>
 
             <div className="flex justify-center lg:justify-start">
@@ -97,16 +87,6 @@ export default function AboutSection() {
                 src={founderImg}
                 alt="Thiago Reis — Founder of Hardwood Kings"
                 className="w-full rounded-2xl object-cover"
-              />
-              <div className="absolute inset-0 rounded-2xl pointer-events-none"
-                style={{
-                  background: `
-                    linear-gradient(to top, hsl(var(--background)) 0%, transparent 25%),
-                    linear-gradient(to bottom, hsl(var(--background)) 0%, transparent 25%),
-                    linear-gradient(to left, hsl(var(--background)) 0%, transparent 20%),
-                    linear-gradient(to right, hsl(var(--background)) 0%, transparent 20%)
-                  `
-                }}
               />
             </div>
           </motion.div>
