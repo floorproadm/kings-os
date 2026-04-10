@@ -35,7 +35,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              24+ Years of Craftsmanship · Johnson County, KS
+              24+ Years of Craftsmanship
             </p>
             <p className="text-xs text-gold font-display italic">
               Your Vision, Our Craftsmanship
