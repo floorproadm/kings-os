@@ -33,13 +33,6 @@ const stats = [
 export default function About() {
   return (
     <Layout>
-      <section className="section-padding bg-secondary/50">
-        <div className="container mx-auto text-center">
-          <motion.h1 variants={blurIn} initial="hidden" animate="visible" className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-4">
-            About <span className="gold-gradient-text">Hardwood Kings</span>
-          </motion.h1>
-        </div>
-      </section>
 
       {/* Founder Story */}
       <section className="section-padding">
