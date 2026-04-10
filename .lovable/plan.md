@@ -1,26 +1,27 @@
 
 
-## Plano: Gerar Planilha de Auditoria Kings OS
+## Plan: Rewrite the About Page with Thiago's Own Words
 
-Gerar um arquivo Excel (`Kings_OS_Audit.xlsx`) com 3 abas usando openpyxl:
+### What changes
 
-### Aba 1 — Paginas Publicas (20 rotas)
-Colunas: Rota | Pagina | Arquivo | Tipo | CTA Principal | Formulario | Supabase | Status
+**Founder Story section** — Replace the current text with the content Thiago provided, keeping it authentic and direct:
+- "Hi, my name is T. Reis, owner of Hardwood Kings Inc."
+- 24 years of hands-on experience
+- Specialties: hardwood installation, refinishing, vinyl, stairs, handrails
+- Clear standard: preparation, execution, finish — step by step
+- "Most floors don't need to be replaced. They need the right process and the right professional."
+- CTA: professional evaluation
 
-Todas as 20 rotas publicas do App.tsx mapeadas com detalhes de funcionalidade.
+**New section: "Our Approach"** — Add a visual step-by-step section between the founder story and values, highlighting the 3-step process (Preparation, Execution, Finish) with icons and short descriptions. This brings the "clear standard" message to life visually.
 
-### Aba 2 — Paginas Admin (7 rotas)
-Colunas: Rota | Pagina | Arquivo | Protegida | Funcionalidade | Supabase | Status
+**Promise section** — Update to incorporate the key quote: *"Most floors don't need to be replaced. They need the right process and the right professional."*
 
-Todas as 7 rotas admin protegidas.
+**Stats** — Update "23+" to "24+" years to match the new copy.
 
-### Aba 3 — Observacoes
-- Arquivos sem rota: `Demolition.tsx`, `Wash.tsx` (existem em `/services/` mas nao estao no App.tsx)
-- Links externos pendentes na pagina `/links`
-- Componentes compartilhados principais
+### Technical details
 
-### Detalhes Tecnicos
-- Script Python com openpyxl
-- Formatacao profissional: headers em negrito com fundo dourado, colunas ajustadas, bordas
-- Output: `/mnt/documents/Kings_OS_Audit.xlsx`
+- File: `src/pages/About.tsx`
+- Add 3 process step cards using existing `elevated-card` styling and Lucide icons (ClipboardCheck, Hammer, Sparkles)
+- Keep all existing animations (fadeUp, blurIn)
+- No new dependencies
 
