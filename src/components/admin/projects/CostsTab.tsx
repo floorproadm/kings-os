@@ -29,6 +29,48 @@ export function CostsTab({ materialCosts, laborEntries, onAddMaterial, onAddLabo
   );
 }
 
+/* ── Extracted form components (stable references, no remount) ── */
+
+function MaterialForm({ desc, vendor, amount, date, onDescChange, onVendorChange, onAmountChange, onDateChange, onSave, onCancel, isEdit }: {
+  desc: string; vendor: string; amount: string; date: string;
+  onDescChange: (v: string) => void; onVendorChange: (v: string) => void; onAmountChange: (v: string) => void; onDateChange: (v: string) => void;
+  onSave: () => void; onCancel: () => void; isEdit?: boolean;
+}) {
+  return (
+    <div className="grid grid-cols-2 gap-2 p-3 rounded-lg border bg-muted/30">
+      <div className="col-span-2"><Label className="text-[10px]">Description *</Label><Input value={desc} onChange={(e) => onDescChange(e.target.value)} className="h-8 text-xs" /></div>
+      <div><Label className="text-[10px]">Vendor</Label><Input value={vendor} onChange={(e) => onVendorChange(e.target.value)} className="h-8 text-xs" /></div>
+      <div><Label className="text-[10px]">Amount ($) *</Label><Input type="number" value={amount} onChange={(e) => onAmountChange(e.target.value)} className="h-8 text-xs" /></div>
+      <div className="col-span-2"><Label className="text-[10px]">Date</Label><Input type="date" value={date} onChange={(e) => onDateChange(e.target.value)} className="h-8 text-xs" /></div>
+      <div className="col-span-2 flex gap-2">
+        <Button size="sm" className="flex-1 h-7 text-xs gap-1" onClick={onSave}><Check className="w-3 h-3" />{isEdit ? "Update" : "Save"}</Button>
+        <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={onCancel}><X className="w-3 h-3" />Cancel</Button>
+      </div>
+    </div>
+  );
+}
+
+function LaborForm({ name, days, rate, date, onNameChange, onDaysChange, onRateChange, onDateChange, onSave, onCancel, isEdit }: {
+  name: string; days: string; rate: string; date: string;
+  onNameChange: (v: string) => void; onDaysChange: (v: string) => void; onRateChange: (v: string) => void; onDateChange: (v: string) => void;
+  onSave: () => void; onCancel: () => void; isEdit?: boolean;
+}) {
+  return (
+    <div className="grid grid-cols-2 gap-2 p-3 rounded-lg border bg-muted/30">
+      <div className="col-span-2"><Label className="text-[10px]">Worker Name *</Label><Input value={name} onChange={(e) => onNameChange(e.target.value)} className="h-8 text-xs" /></div>
+      <div><Label className="text-[10px]">Days *</Label><Input type="number" value={days} onChange={(e) => onDaysChange(e.target.value)} className="h-8 text-xs" /></div>
+      <div><Label className="text-[10px]">Daily Rate ($) *</Label><Input type="number" value={rate} onChange={(e) => onRateChange(e.target.value)} className="h-8 text-xs" /></div>
+      <div className="col-span-2"><Label className="text-[10px]">Date</Label><Input type="date" value={date} onChange={(e) => onDateChange(e.target.value)} className="h-8 text-xs" /></div>
+      <div className="col-span-2 flex gap-2">
+        <Button size="sm" className="flex-1 h-7 text-xs gap-1" onClick={onSave}><Check className="w-3 h-3" />{isEdit ? "Update" : "Save"}</Button>
+        <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={onCancel}><X className="w-3 h-3" />Cancel</Button>
+      </div>
+    </div>
+  );
+}
+
+/* ── Sections ── */
+
 function MaterialsSection({ items, onAdd, onDelete, onUpdate }: { items: MaterialCost[]; onAdd: Props["onAddMaterial"]; onDelete: (id: string) => void; onUpdate?: Props["onUpdateMaterial"] }) {
   const [show, setShow] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -46,11 +88,8 @@ function MaterialsSection({ items, onAdd, onDelete, onUpdate }: { items: Materia
   };
 
   const startEdit = (c: MaterialCost) => {
-    setEditingId(c.id);
-    setDesc(c.description);
-    setVendor(c.vendor || "");
-    setAmount(String(Number(c.amount)));
-    setDate(c.purchased_at || "");
+    setEditingId(c.id); setShow(false);
+    setDesc(c.description); setVendor(c.vendor || ""); setAmount(String(Number(c.amount))); setDate(c.purchased_at || "");
   };
 
   const handleSaveEdit = async (id: string) => {
@@ -59,31 +98,18 @@ function MaterialsSection({ items, onAdd, onDelete, onUpdate }: { items: Materia
     setEditingId(null); resetForm();
   };
 
-  const MaterialForm = ({ onSave, onCancel, isEdit }: { onSave: () => void; onCancel: () => void; isEdit?: boolean }) => (
-    <div className="grid grid-cols-2 gap-2 p-3 rounded-lg border bg-muted/30">
-      <div className="col-span-2"><Label className="text-[10px]">Description *</Label><Input value={desc} onChange={(e) => setDesc(e.target.value)} className="h-8 text-xs" /></div>
-      <div><Label className="text-[10px]">Vendor</Label><Input value={vendor} onChange={(e) => setVendor(e.target.value)} className="h-8 text-xs" /></div>
-      <div><Label className="text-[10px]">Amount ($) *</Label><Input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} className="h-8 text-xs" /></div>
-      <div className="col-span-2"><Label className="text-[10px]">Date</Label><Input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="h-8 text-xs" /></div>
-      <div className="col-span-2 flex gap-2">
-        <Button size="sm" className="flex-1 h-7 text-xs gap-1" onClick={onSave}><Check className="w-3 h-3" />{isEdit ? "Update" : "Save"}</Button>
-        <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={onCancel}><X className="w-3 h-3" />Cancel</Button>
-      </div>
-    </div>
-  );
-
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <h4 className="text-xs font-semibold">Material Costs</h4>
-        <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={() => { setShow(!show); setEditingId(null); }}><Plus className="w-3 h-3" /> Add</Button>
+        <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={() => { setShow(!show); setEditingId(null); resetForm(); }}><Plus className="w-3 h-3" /> Add</Button>
       </div>
-      {show && <MaterialForm onSave={handleAdd} onCancel={() => { setShow(false); resetForm(); }} />}
+      {show && <MaterialForm desc={desc} vendor={vendor} amount={amount} date={date} onDescChange={setDesc} onVendorChange={setVendor} onAmountChange={setAmount} onDateChange={setDate} onSave={handleAdd} onCancel={() => { setShow(false); resetForm(); }} />}
       {items.length === 0 ? <p className="text-xs text-muted-foreground text-center py-4">No material costs</p> : (
         <div className="space-y-1.5">
           {items.map((c) => (
             editingId === c.id ? (
-              <MaterialForm key={c.id} onSave={() => handleSaveEdit(c.id)} onCancel={() => { setEditingId(null); resetForm(); }} isEdit />
+              <MaterialForm key={c.id} desc={desc} vendor={vendor} amount={amount} date={date} onDescChange={setDesc} onVendorChange={setVendor} onAmountChange={setAmount} onDateChange={setDate} onSave={() => handleSaveEdit(c.id)} onCancel={() => { setEditingId(null); resetForm(); }} isEdit />
             ) : (
               <div key={c.id} className="flex items-center justify-between p-2.5 rounded-lg border bg-card text-xs group">
                 <div>
@@ -122,53 +148,35 @@ function LaborSection({ items, onAdd, onDelete, onUpdate }: { items: LaborEntry[
 
   const handleAdd = async () => {
     if (!name || !days || !rate) return;
-    const d = parseFloat(days);
-    const r = parseFloat(rate);
+    const d = parseFloat(days); const r = parseFloat(rate);
     await onAdd({ worker_name: name, days_worked: d, daily_rate: r, total_cost: d * r, work_date: date || undefined });
     resetForm(); setShow(false);
   };
 
   const startEdit = (l: LaborEntry) => {
-    setEditingId(l.id);
-    setName(l.worker_name);
-    setDays(String(Number(l.days_worked)));
-    setRate(String(Number(l.daily_rate)));
-    setDate(l.work_date || "");
+    setEditingId(l.id); setShow(false);
+    setName(l.worker_name); setDays(String(Number(l.days_worked))); setRate(String(Number(l.daily_rate))); setDate(l.work_date || "");
   };
 
   const handleSaveEdit = async (id: string) => {
     if (!onUpdate || !name || !days || !rate) return;
-    const d = parseFloat(days);
-    const r = parseFloat(rate);
+    const d = parseFloat(days); const r = parseFloat(rate);
     await onUpdate(id, { worker_name: name, days_worked: d, daily_rate: r, total_cost: d * r, work_date: date || undefined });
     setEditingId(null); resetForm();
   };
-
-  const LaborForm = ({ onSave, onCancel, isEdit }: { onSave: () => void; onCancel: () => void; isEdit?: boolean }) => (
-    <div className="grid grid-cols-2 gap-2 p-3 rounded-lg border bg-muted/30">
-      <div className="col-span-2"><Label className="text-[10px]">Worker Name *</Label><Input value={name} onChange={(e) => setName(e.target.value)} className="h-8 text-xs" /></div>
-      <div><Label className="text-[10px]">Days *</Label><Input type="number" value={days} onChange={(e) => setDays(e.target.value)} className="h-8 text-xs" /></div>
-      <div><Label className="text-[10px]">Daily Rate ($) *</Label><Input type="number" value={rate} onChange={(e) => setRate(e.target.value)} className="h-8 text-xs" /></div>
-      <div className="col-span-2"><Label className="text-[10px]">Date</Label><Input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="h-8 text-xs" /></div>
-      <div className="col-span-2 flex gap-2">
-        <Button size="sm" className="flex-1 h-7 text-xs gap-1" onClick={onSave}><Check className="w-3 h-3" />{isEdit ? "Update" : "Save"}</Button>
-        <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={onCancel}><X className="w-3 h-3" />Cancel</Button>
-      </div>
-    </div>
-  );
 
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <h4 className="text-xs font-semibold">Labor Payroll</h4>
-        <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={() => { setShow(!show); setEditingId(null); }}><Plus className="w-3 h-3" /> Add</Button>
+        <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={() => { setShow(!show); setEditingId(null); resetForm(); }}><Plus className="w-3 h-3" /> Add</Button>
       </div>
-      {show && <LaborForm onSave={handleAdd} onCancel={() => { setShow(false); resetForm(); }} />}
+      {show && <LaborForm name={name} days={days} rate={rate} date={date} onNameChange={setName} onDaysChange={setDays} onRateChange={setRate} onDateChange={setDate} onSave={handleAdd} onCancel={() => { setShow(false); resetForm(); }} />}
       {items.length === 0 ? <p className="text-xs text-muted-foreground text-center py-4">No labor entries</p> : (
         <div className="space-y-1.5">
           {items.map((l) => (
             editingId === l.id ? (
-              <LaborForm key={l.id} onSave={() => handleSaveEdit(l.id)} onCancel={() => { setEditingId(null); resetForm(); }} isEdit />
+              <LaborForm key={l.id} name={name} days={days} rate={rate} date={date} onNameChange={setName} onDaysChange={setDays} onRateChange={setRate} onDateChange={setDate} onSave={() => handleSaveEdit(l.id)} onCancel={() => { setEditingId(null); resetForm(); }} isEdit />
             ) : (
               <div key={l.id} className="flex items-center justify-between p-2.5 rounded-lg border bg-card text-xs group">
                 <div>
