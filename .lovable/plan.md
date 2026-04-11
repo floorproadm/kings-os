@@ -1,90 +1,68 @@
 
 
-# Invoice Maker PRO — Plano de Implementação
+# Invoice Settings — Customização do Invoice no Settings
 
-## O que muda
+## Problema atual
 
-Transformar a aba simples de Invoices em um **Invoice Maker completo** com line items detalhados, preview profissional, exportação PDF, edição inline e status automático.
+O InvoicePreview tem dados da empresa **hardcoded** ("Hardwood Kings", "Premium Hardwood Flooring", "hardwoodkings.com"). Não há como customizar logo, tagline, website, endereço da empresa, nem termos padrão de pagamento.
 
----
+## O que adicionar
 
-## 1. Database — Nova tabela `invoice_items`
+Uma nova seção **"Invoice Settings"** na página de Settings com:
 
-Nova tabela para line items de cada invoice:
+### 1. Database — Nova tabela `invoice_settings`
 
-| Coluna | Tipo | Notas |
-|--------|------|-------|
+| Coluna | Tipo | Default |
+|--------|------|---------|
 | id | uuid PK | |
-| org_id | uuid | default HK org |
-| invoice_id | uuid FK → invoices | |
-| description | text | Ex: "Hardwood Installation" |
-| quantity | numeric | Ex: 500 (sqft) |
-| unit | text | Ex: "sqft", "unit", "hour" |
-| unit_price | numeric | Ex: 6.50 |
-| total | numeric | qty x unit_price (calculado no frontend) |
-| display_order | integer | ordem das linhas |
+| org_id | uuid | HK org |
+| logo_url | text | null |
+| company_name | text | org.name |
+| tagline | text | null (ex: "Premium Hardwood Flooring") |
+| website | text | null |
+| company_address | text | null |
+| company_phone | text | null |
+| company_email | text | null |
+| accent_color | text | '#c9a84c' (gold) |
+| default_notes | text | null (termos padrão que aparecem em todo invoice) |
+| footer_text | text | 'Thank you for choosing Hardwood Kings!' |
 
-Também adicionar colunas na tabela `invoices` existente:
-- `notes` (text) — termos de pagamento, observações
-- `client_name` (text) — nome do cliente (auto-preenchido do lead)
-- `client_email` (text)
-- `client_address` (text)
+RLS: org-scoped (mesmo padrão).
 
-RLS: org-scoped (mesmo padrão das demais tabelas).
+### 2. Settings Page — Card "Invoice Branding"
 
----
+Novo card na página de Settings com:
+- **Upload de logo** (upload para Supabase Storage → salva URL)
+- **Company name, tagline, website, endereço, phone, email** — inputs editáveis
+- **Accent color** — color picker (cor da barra e títulos do invoice)
+- **Default payment terms/notes** — textarea com termos padrão
+- **Footer message** — texto do rodapé do invoice
+- **Preview mini** — pequena pré-visualização ao lado mostrando como fica
 
-## 2. Frontend — Componentes novos
+### 3. InvoicePreview — Usar dados dinâmicos
 
-### 2.1 InvoicesTab refatorada
-- Lista de invoices com **status badges coloridos** e progress bar (paid/total)
-- Botão de **editar** (lápis) em cada invoice — abre o Invoice Editor
-- Status automático: badge "OVERDUE" se `due_date < hoje` e status != paid
-- Cálculo `amount` = soma dos line items
+Substituir os valores hardcoded por dados da `invoice_settings`:
+- Logo da empresa no header (se configurado)
+- Nome, tagline, website, endereço vindos do settings
+- Cor de destaque dinâmica (barra, títulos)
+- Notes padrão pré-preenchidos ao criar novo invoice
+- Footer text customizado
 
-### 2.2 InvoiceEditorDialog (novo)
-Modal/Dialog grande para criar e editar invoices:
-- **Header**: Invoice #, status selector, due date
-- **Client info**: nome, email, endereço (auto-fill do projeto/lead)
-- **Line items table**: description, qty, unit, unit price, total (calculado)
-  - Botão "+ Add Line" para adicionar linhas
-  - Trash para remover
-  - Drag ou setas para reordenar
-- **Footer**: Subtotal, Notes/Terms, botões Save e Preview
+### 4. InvoiceEditorDialog — Auto-fill notes
 
-### 2.3 InvoicePreview (novo)
-Preview estilizado do invoice como documento profissional:
-- Logo da empresa (Hardwood Kings)
-- Dados da empresa (nome, phone, email do SiteConfig)
-- Dados do cliente
-- Tabela de line items formatada
-- Subtotal e Total
-- Termos de pagamento
-- Botão **"Export PDF"** que usa `window.print()` com CSS `@media print` para gerar PDF limpo
+Ao criar novo invoice, pré-preencher o campo `notes` com o `default_notes` do settings.
 
-### 2.4 Status automático
-- No hook `useProjectDetails`, ao carregar invoices, checar se `due_date < hoje` e `status != 'paid'` → marcar visualmente como overdue
-- Semáforo visual: Draft (cinza), Sent (azul), Paid (verde), Overdue (vermelho pulsante)
+## Ordem de implementação
 
----
+1. Migration: criar `invoice_settings` + storage bucket para logos
+2. Card "Invoice Branding" no Settings com upload + inputs + save
+3. Atualizar InvoicePreview para buscar e usar invoice_settings
+4. Atualizar InvoiceEditorDialog para auto-fill default_notes
 
-## 3. Estrutura de arquivos
+## Arquivos afetados
 
-```text
-src/components/admin/projects/
-  InvoicesTab.tsx              — refatorada (lista + status)
-  InvoiceEditorDialog.tsx      — modal de criação/edição com line items
-  InvoicePreview.tsx           — preview profissional + PDF export
-src/hooks/admin/useProjectDetails.ts  — novos métodos (CRUD invoice_items, update invoice)
-```
-
----
-
-## 4. Ordem de implementação
-
-1. Migration: criar `invoice_items` + adicionar colunas em `invoices`
-2. Hook: CRUD de invoice_items + updateInvoice
-3. InvoiceEditorDialog com line items
-4. InvoicePreview com dados da empresa e export PDF
-5. Refatorar InvoicesTab com edição, status automático e progress bar
+- `supabase/migrations/` — nova migration
+- `src/pages/admin/Settings.tsx` — novo card Invoice Branding
+- `src/components/admin/projects/InvoicePreview.tsx` — dados dinâmicos
+- `src/components/admin/projects/InvoiceEditorDialog.tsx` — auto-fill notes
 
