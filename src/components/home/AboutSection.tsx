@@ -31,7 +31,7 @@ export default function AboutSection() {
                 Hardwood Kings was built through over 24 years of hands-on
                 experience in hardwood flooring installation, refinishing, stairs,
                 and decks. Every technique we use has been refined through
-                thousands of projects across Johnson County.
+                thousands of projects across Monmouth County NJ and now Johnson County KS.
               </p>
               <p>
                 Our founder is directly involved in every project — from
