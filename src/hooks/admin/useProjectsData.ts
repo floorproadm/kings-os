@@ -66,7 +66,7 @@ export function useProjectsData() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: async ({ id, ...updates }: { id: string } & Partial<Project>) => {
+    mutationFn: async ({ id, lead_name, ...updates }: { id: string } & Partial<Project>) => {
       const { error } = await supabase.from("projects").update(updates).eq("id", id);
       if (error) throw error;
     },
