@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { useInvoicesData } from "@/hooks/admin/useInvoicesData";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
