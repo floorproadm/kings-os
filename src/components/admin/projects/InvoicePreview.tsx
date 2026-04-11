@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Printer } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Invoice, Payment } from "@/hooks/admin/useProjectDetails";
+import { useInvoiceSettings } from "@/hooks/admin/useInvoiceSettings";
 
 interface LineItem {
   description: string;
@@ -23,6 +24,17 @@ interface Props {
 export function InvoicePreview({ open, onOpenChange, invoice, payments }: Props) {
   const [items, setItems] = useState<LineItem[]>([]);
   const printRef = useRef<HTMLDivElement>(null);
+  const { settings } = useInvoiceSettings();
+
+  const companyName = settings?.company_name || "Hardwood Kings";
+  const tagline = settings?.tagline || "Premium Hardwood Flooring";
+  const websiteText = settings?.website || "hardwoodkings.com";
+  const accent = settings?.accent_color || "#c9a84c";
+  const footerMsg = settings?.footer_text || "Thank you for choosing Hardwood Kings!";
+  const logoUrl = settings?.logo_url || null;
+  const companyAddr = settings?.company_address || null;
+  const companyPhone = settings?.company_phone || null;
+  const companyEmail = settings?.company_email || null;
 
   useEffect(() => {
     if (!open || !invoice) return;
@@ -30,8 +42,8 @@ export function InvoicePreview({ open, onOpenChange, invoice, payments }: Props)
   }, [open, invoice]);
 
   const loadItems = async (invoiceId: string) => {
-    const { data } = await supabase.from("invoice_items" as any).select("*").eq("invoice_id", invoiceId).order("display_order");
-    setItems((data as any[] || []).map((d: any) => ({
+    const { data } = await supabase.from("invoice_items").select("*").eq("invoice_id", invoiceId).order("display_order");
+    setItems((data || []).map((d) => ({
       description: d.description, quantity: Number(d.quantity), unit: d.unit,
       unit_price: Number(d.unit_price), total: Number(d.total),
     })));
@@ -39,7 +51,7 @@ export function InvoicePreview({ open, onOpenChange, invoice, payments }: Props)
 
   if (!invoice) return null;
 
-  const inv = invoice as any;
+  const inv = invoice as unknown as Record<string, unknown>;
   const subtotal = items.reduce((s, i) => s + i.total, 0);
   const totalPaid = payments.filter(p => p.invoice_id === invoice.id).reduce((s, p) => s + Number(p.amount), 0);
   const balanceDue = subtotal - totalPaid;
@@ -53,15 +65,11 @@ export function InvoicePreview({ open, onOpenChange, invoice, payments }: Props)
       <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; padding: 40px; font-size: 13px; }
-        .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; border-bottom: 3px solid #c9a84c; padding-bottom: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; border-bottom: 3px solid ${accent}; padding-bottom: 20px; }
         .company-name { font-size: 22px; font-weight: 800; color: #1a1a0f; letter-spacing: -0.5px; }
         .company-detail { font-size: 11px; color: #666; margin-top: 2px; }
-        .invoice-title { font-size: 28px; font-weight: 800; color: #c9a84c; text-align: right; }
+        .invoice-title { font-size: 28px; font-weight: 800; color: ${accent}; text-align: right; }
         .invoice-meta { text-align: right; font-size: 11px; color: #666; margin-top: 4px; }
-        .client-section { margin-bottom: 24px; }
-        .section-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #999; margin-bottom: 6px; }
-        .client-name { font-size: 14px; font-weight: 600; }
-        .client-detail { font-size: 11px; color: #666; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
         th { background: #1a1a0f; color: #f5e6c0; font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px; text-align: left; }
         th:nth-child(2), th:nth-child(4), th:nth-child(5) { text-align: right; }
@@ -74,6 +82,7 @@ export function InvoicePreview({ open, onOpenChange, invoice, payments }: Props)
         .totals-row.balance { color: ${balanceDue > 0 ? "#dc2626" : "#16a34a"}; }
         .notes { margin-top: 32px; padding-top: 16px; border-top: 1px solid #eee; font-size: 11px; color: #666; }
         .footer { margin-top: 48px; text-align: center; font-size: 10px; color: #999; }
+        .logo { height: 40px; margin-bottom: 4px; }
       </style></head><body>
       ${printContent.innerHTML}
       </body></html>`);
@@ -95,16 +104,20 @@ export function InvoicePreview({ open, onOpenChange, invoice, payments }: Props)
 
         <div ref={printRef} className="bg-white text-black rounded-lg p-6">
           {/* Header */}
-          <div className="header" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24, borderBottom: "3px solid #c9a84c", paddingBottom: 16 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24, borderBottom: `3px solid ${accent}`, paddingBottom: 16 }}>
             <div>
-              <div className="company-name" style={{ fontSize: 20, fontWeight: 800, color: "#1a1a0f" }}>Hardwood Kings</div>
-              <div className="company-detail" style={{ fontSize: 11, color: "#666", marginTop: 2 }}>Premium Hardwood Flooring</div>
-              <div className="company-detail" style={{ fontSize: 11, color: "#666" }}>hardwoodkings.com</div>
+              {logoUrl && <img src={logoUrl} alt="" style={{ height: 36, marginBottom: 4, objectFit: "contain" }} />}
+              <div style={{ fontSize: 20, fontWeight: 800, color: "#1a1a0f" }}>{companyName}</div>
+              {tagline && <div style={{ fontSize: 11, color: "#666", marginTop: 2 }}>{tagline}</div>}
+              {websiteText && <div style={{ fontSize: 11, color: "#666" }}>{websiteText}</div>}
+              {companyAddr && <div style={{ fontSize: 11, color: "#666" }}>{companyAddr}</div>}
+              {companyPhone && <div style={{ fontSize: 11, color: "#666" }}>{companyPhone}</div>}
+              {companyEmail && <div style={{ fontSize: 11, color: "#666" }}>{companyEmail}</div>}
             </div>
             <div style={{ textAlign: "right" }}>
-              <div className="invoice-title" style={{ fontSize: 24, fontWeight: 800, color: "#c9a84c" }}>INVOICE</div>
+              <div style={{ fontSize: 24, fontWeight: 800, color: accent }}>INVOICE</div>
               <div style={{ fontSize: 11, color: "#666", marginTop: 4 }}>#{invoice.invoice_number}</div>
-              {inv.due_date && <div style={{ fontSize: 11, color: "#666" }}>Due: {new Date(inv.due_date).toLocaleDateString()}</div>}
+              {inv.due_date && <div style={{ fontSize: 11, color: "#666" }}>Due: {new Date(inv.due_date as string).toLocaleDateString()}</div>}
               <div style={{ fontSize: 10, marginTop: 4, padding: "2px 8px", borderRadius: 4, display: "inline-block", background: invoice.status === "paid" ? "#dcfce7" : invoice.status === "sent" ? "#dbeafe" : "#f3f4f6", color: invoice.status === "paid" ? "#16a34a" : invoice.status === "sent" ? "#2563eb" : "#666" }}>
                 {invoice.status.toUpperCase()}
               </div>
@@ -115,9 +128,9 @@ export function InvoicePreview({ open, onOpenChange, invoice, payments }: Props)
           {(inv.client_name || inv.client_email || inv.client_address) && (
             <div style={{ marginBottom: 24 }}>
               <div style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#999", marginBottom: 6 }}>BILL TO</div>
-              {inv.client_name && <div style={{ fontSize: 14, fontWeight: 600 }}>{inv.client_name}</div>}
-              {inv.client_email && <div style={{ fontSize: 11, color: "#666" }}>{inv.client_email}</div>}
-              {inv.client_address && <div style={{ fontSize: 11, color: "#666" }}>{inv.client_address}</div>}
+              {inv.client_name && <div style={{ fontSize: 14, fontWeight: 600 }}>{String(inv.client_name)}</div>}
+              {inv.client_email && <div style={{ fontSize: 11, color: "#666" }}>{String(inv.client_email)}</div>}
+              {inv.client_address && <div style={{ fontSize: 11, color: "#666" }}>{String(inv.client_address)}</div>}
             </div>
           )}
 
@@ -165,12 +178,12 @@ export function InvoicePreview({ open, onOpenChange, invoice, payments }: Props)
           {/* Notes */}
           {inv.notes && (
             <div style={{ marginTop: 32, paddingTop: 16, borderTop: "1px solid #eee", fontSize: 11, color: "#666" }}>
-              <strong>Notes:</strong> {inv.notes}
+              <strong>Notes:</strong> {String(inv.notes)}
             </div>
           )}
 
           <div style={{ marginTop: 48, textAlign: "center", fontSize: 10, color: "#999" }}>
-            Thank you for choosing Hardwood Kings!
+            {footerMsg}
           </div>
         </div>
       </DialogContent>
