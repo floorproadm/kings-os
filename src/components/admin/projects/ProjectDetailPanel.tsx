@@ -113,6 +113,8 @@ export function ProjectDetailPanel({ project, isOpen, onClose, onStatusChange }:
                 onAddMaterial={addMaterialCost}
                 onAddLabor={addLaborEntry}
                 onDelete={deleteRecord}
+                onUpdateMaterial={updateMaterialCost}
+                onUpdateLabor={updateLaborEntry}
               />
             </TabsContent>
 
