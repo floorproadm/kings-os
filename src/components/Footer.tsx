@@ -8,7 +8,7 @@ const serviceLinks = [
   { name: "Staircase Finishing", path: "/services/staircase" },
   { name: "Vinyl & Engineered Wood", path: "/services/vinyl" },
   { name: "Deck & Handrail", path: "/services/deck" },
-  { name: "Wash & Polish", path: "/services/wash" },
+  
 ];
 
 const quickLinks = [
