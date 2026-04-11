@@ -88,33 +88,92 @@ export type Database = {
         }
         Relationships: []
       }
+      invoice_items: {
+        Row: {
+          created_at: string
+          description: string
+          display_order: number
+          id: string
+          invoice_id: string
+          org_id: string
+          quantity: number
+          total: number
+          unit: string
+          unit_price: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          display_order?: number
+          id?: string
+          invoice_id: string
+          org_id?: string
+          quantity?: number
+          total?: number
+          unit?: string
+          unit_price?: number
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          display_order?: number
+          id?: string
+          invoice_id?: string
+          org_id?: string
+          quantity?: number
+          total?: number
+          unit?: string
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoice_items_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       invoices: {
         Row: {
           amount: number
+          client_address: string | null
+          client_email: string | null
+          client_name: string | null
           created_at: string
           due_date: string | null
           id: string
           invoice_number: string
+          notes: string | null
           org_id: string
           project_id: string
           status: string
         }
         Insert: {
           amount?: number
+          client_address?: string | null
+          client_email?: string | null
+          client_name?: string | null
           created_at?: string
           due_date?: string | null
           id?: string
           invoice_number?: string
+          notes?: string | null
           org_id?: string
           project_id: string
           status?: string
         }
         Update: {
           amount?: number
+          client_address?: string | null
+          client_email?: string | null
+          client_name?: string | null
           created_at?: string
           due_date?: string | null
           id?: string
           invoice_number?: string
+          notes?: string | null
           org_id?: string
           project_id?: string
           status?: string
