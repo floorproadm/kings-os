@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AdminSidebar } from "./AdminSidebar";
 import { AdminHeader } from "./AdminHeader";
+import { AdminBottomNav } from "./AdminBottomNav";
 
 const pageTitles: Record<string, string> = {
   "/admin": "Dashboard",
