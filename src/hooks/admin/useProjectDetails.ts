@@ -177,6 +177,20 @@ export function useProjectDetails(projectId: string | null) {
     invalidate();
   };
 
+  const updateMaterialCost = async (id: string, input: { description: string; vendor?: string; amount: number; purchased_at?: string }) => {
+    const { error } = await supabase.from("material_costs").update(input).eq("id", id);
+    if (error) { toast.error(error.message); return; }
+    toast.success("Material cost updated");
+    invalidate();
+  };
+
+  const updateLaborEntry = async (id: string, input: { worker_name: string; days_worked: number; daily_rate: number; total_cost: number; work_date?: string; notes?: string }) => {
+    const { error } = await supabase.from("labor_payroll").update(input).eq("id", id);
+    if (error) { toast.error(error.message); return; }
+    toast.success("Labor entry updated");
+    invalidate();
+  };
+
   // KPI calculations
   const totalMaterials = materialCosts.reduce((s, c) => s + Number(c.amount), 0);
   const totalLabor = laborEntries.reduce((s, c) => s + Number(c.total_cost), 0);
@@ -212,6 +226,8 @@ export function useProjectDetails(projectId: string | null) {
     addPayment,
     deleteRecord,
     updateMeasurement,
+    updateMaterialCost,
+    updateLaborEntry,
     invalidate,
   };
 }
