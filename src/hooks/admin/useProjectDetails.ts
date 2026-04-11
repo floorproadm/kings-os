@@ -211,6 +211,7 @@ export function useProjectDetails(projectId: string | null) {
     addInvoice,
     addPayment,
     deleteRecord,
+    updateMeasurement,
     invalidate,
   };
 }
