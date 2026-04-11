@@ -51,7 +51,7 @@ export function InvoicePreview({ open, onOpenChange, invoice, payments }: Props)
 
   if (!invoice) return null;
 
-  const inv = invoice as Record<string, unknown>;
+  const inv = invoice as unknown as Record<string, unknown>;
   const subtotal = items.reduce((s, i) => s + i.total, 0);
   const totalPaid = payments.filter(p => p.invoice_id === invoice.id).reduce((s, p) => s + Number(p.amount), 0);
   const balanceDue = subtotal - totalPaid;
