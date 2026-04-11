@@ -310,7 +310,7 @@ const defaultConfig: SiteConfig = {
       "Custom Design & Craftsmanship",
       "Premium Hardwood Materials",
       "Built for Safety & Code Compliance",
-      "Complete Staircase Transformation",
+      
       "Increase Your Home's Value",
       "Professional Installation & Refinishing",
     ],
