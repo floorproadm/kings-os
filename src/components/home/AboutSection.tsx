@@ -34,7 +34,7 @@ export default function AboutSection() {
                 thousands of projects across Monmouth County NJ and now Johnson County KS.
               </p>
               <p>
-                Our founder is directly involved in every project — from
+                Thiago is directly involved in every project — from
                 evaluation to final finish — ensuring the same standard of
                 quality that built our reputation.
               </p>
