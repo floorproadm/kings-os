@@ -27,7 +27,8 @@ export default function Invoices() {
   const [editingInvoice, setEditingInvoice] = useState<Invoice | null>(null);
   const [editingProjectId, setEditingProjectId] = useState("");
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewInvoiceId, setPreviewInvoiceId] = useState("");
+  const [previewInvoice, setPreviewInvoice] = useState<Invoice | null>(null);
+  const [previewPayments, setPreviewPayments] = useState<import("@/hooks/admin/useProjectDetails").Payment[]>([]);
 
   const filtered = useMemo(() => {
     return invoices.filter((inv) => {
@@ -57,8 +58,12 @@ export default function Invoices() {
     setEditorOpen(true);
   };
 
-  const handlePreview = (invoiceId: string) => {
-    setPreviewInvoiceId(invoiceId);
+  const handlePreview = async (invoiceId: string) => {
+    const found = invoices.find((i) => i.id === invoiceId);
+    if (!found) return;
+    setPreviewInvoice(found as unknown as Invoice);
+    const { data: pmts } = await supabase.from("payments").select("*").eq("invoice_id", invoiceId);
+    setPreviewPayments((pmts ?? []) as import("@/hooks/admin/useProjectDetails").Payment[]);
     setPreviewOpen(true);
   };
 
@@ -180,11 +185,12 @@ export default function Invoices() {
           onPreview={handlePreview}
         />
       )}
-      {previewOpen && previewInvoiceId && (
+      {previewOpen && previewInvoice && (
         <InvoicePreview
           open={previewOpen}
           onOpenChange={setPreviewOpen}
-          invoiceId={previewInvoiceId}
+          invoice={previewInvoice}
+          payments={previewPayments}
         />
       )}
     </div>
