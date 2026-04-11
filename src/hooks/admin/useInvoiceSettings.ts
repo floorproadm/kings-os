@@ -54,13 +54,14 @@ export function useInvoiceSettings() {
     if (settings?.id) {
       const { error } = await supabase
         .from("invoice_settings")
-        .update(values as Record<string, unknown>)
+        .update(values)
         .eq("id", settings.id);
       if (error) throw error;
     } else {
+      const payload = { ...values, org_id: orgId };
       const { error } = await supabase
         .from("invoice_settings")
-        .insert({ ...values, org_id: orgId } as Record<string, unknown>);
+        .insert(payload);
       if (error) throw error;
     }
     await load();
