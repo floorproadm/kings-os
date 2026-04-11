@@ -120,11 +120,12 @@ export function ProjectDetailPanel({ project, isOpen, onClose, onStatusChange }:
 
             <TabsContent value="invoices">
               <InvoicesTab
+                projectId={project!.id}
                 invoices={invoices}
                 payments={payments}
-                onAddInvoice={addInvoice}
                 onAddPayment={addPayment}
                 onDelete={deleteRecord}
+                onRefresh={invalidate}
               />
             </TabsContent>
           </Tabs>
