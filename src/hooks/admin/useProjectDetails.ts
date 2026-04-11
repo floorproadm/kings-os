@@ -226,6 +226,8 @@ export function useProjectDetails(projectId: string | null) {
     addPayment,
     deleteRecord,
     updateMeasurement,
+    updateMaterialCost,
+    updateLaborEntry,
     invalidate,
   };
 }
