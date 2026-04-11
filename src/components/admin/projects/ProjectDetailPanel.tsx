@@ -19,7 +19,7 @@ interface Props {
 }
 
 export function ProjectDetailPanel({ project, isOpen, onClose, onStatusChange }: Props) {
-  const { measurements, materialCosts, laborEntries, invoices, payments, kpis, addMeasurement, addMaterialCost, addLaborEntry, addInvoice, addPayment, deleteRecord } = useProjectDetails(project?.id || null);
+  const { measurements, materialCosts, laborEntries, invoices, payments, kpis, addMeasurement, addMaterialCost, addLaborEntry, addInvoice, addPayment, deleteRecord, updateMeasurement } = useProjectDetails(project?.id || null);
 
   if (!project) return null;
 
@@ -103,7 +103,7 @@ export function ProjectDetailPanel({ project, isOpen, onClose, onStatusChange }:
             </TabsList>
 
             <TabsContent value="measurements">
-              <MeasurementsTab measurements={measurements} onAdd={addMeasurement} onDelete={(id) => deleteRecord("measurements", id)} />
+              <MeasurementsTab measurements={measurements} onAdd={addMeasurement} onDelete={(id) => deleteRecord("measurements", id)} onUpdate={updateMeasurement} />
             </TabsContent>
 
             <TabsContent value="costs">
