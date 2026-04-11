@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Building2, Lock, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import HeroMediaManager from "@/components/admin/HeroMediaManager";
+
 
 export default function SettingsPage() {
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ export default function SettingsPage() {
         </CardContent>
       </Card>
 
-      <HeroMediaManager />
+      
 
       <Card className="bg-card border-border">
         <CardContent className="pt-6">
