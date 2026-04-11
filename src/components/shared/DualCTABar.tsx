@@ -27,9 +27,9 @@ export default function DualCTABar({
 
         {label && (
           <p
-            className={`text-[10px] font-semibold uppercase tracking-[0.25em] ${
-              isDark ? "text-foreground/40" : "text-background/50"
-            } sm:mr-2`}
+            className={`text-xs font-bold uppercase tracking-[0.2em] ${
+              isDark ? "text-gold/70" : "text-background/70"
+            } sm:mr-3`}
           >
             {label}
           </p>
