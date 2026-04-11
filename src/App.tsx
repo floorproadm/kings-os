@@ -38,6 +38,7 @@ const AdminSettings = lazy(() => import("./pages/admin/Settings"));
 const AdminGallery = lazy(() => import("./pages/admin/Gallery"));
 const AdminPartners = lazy(() => import("./pages/admin/Partners"));
 const AdminServices = lazy(() => import("./pages/admin/Services"));
+const AdminProjects = lazy(() => import("./pages/admin/Projects"));
 
 const queryClient = new QueryClient();
 
@@ -85,6 +86,7 @@ const App = () => (
             <Route path="/links" element={<Links />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<AdminRoute><Suspense fallback={<AdminFallback />}><Dashboard /></Suspense></AdminRoute>} />
+            <Route path="/admin/projects" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminProjects /></Suspense></AdminRoute>} />
             <Route path="/admin/leads" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminLeads /></Suspense></AdminRoute>} />
             <Route path="/admin/referrals" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminReferrals /></Suspense></AdminRoute>} />
             <Route path="/admin/gallery" element={<AdminRoute><Suspense fallback={<AdminFallback />}><AdminGallery /></Suspense></AdminRoute>} />
