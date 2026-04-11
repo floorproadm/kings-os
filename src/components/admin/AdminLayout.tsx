@@ -5,6 +5,7 @@ import { AdminHeader } from "./AdminHeader";
 
 const pageTitles: Record<string, string> = {
   "/admin": "Dashboard",
+  "/admin/projects": "Projects",
   "/admin/leads": "Leads",
   "/admin/referrals": "Referrals",
   "/admin/partners": "Partners",
