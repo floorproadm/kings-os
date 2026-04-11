@@ -9,6 +9,7 @@ import { Trash2, Plus, Eye } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { Invoice } from "@/hooks/admin/useProjectDetails";
+import { useInvoiceSettings } from "@/hooks/admin/useInvoiceSettings";
 
 export interface LineItem {
   id?: string;
