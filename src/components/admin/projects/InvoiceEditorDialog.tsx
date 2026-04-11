@@ -31,6 +31,7 @@ interface Props {
 
 export function InvoiceEditorDialog({ open, onOpenChange, projectId, invoice, onSaved, onPreview }: Props) {
   const isEdit = !!invoice;
+  const { settings } = useInvoiceSettings();
 
   const [num, setNum] = useState("");
   const [status, setStatus] = useState("draft");
@@ -59,7 +60,8 @@ export function InvoiceEditorDialog({ open, onOpenChange, projectId, invoice, on
   }, [open, invoice]);
 
   const resetForm = () => {
-    setNum(""); setStatus("draft"); setDueDate(""); setClientName(""); setClientEmail(""); setClientAddress(""); setNotes("");
+    setNum(""); setStatus("draft"); setDueDate(""); setClientName(""); setClientEmail(""); setClientAddress("");
+    setNotes(settings?.default_notes || "");
     setItems([{ description: "", quantity: 1, unit: "sqft", unit_price: 0, total: 0 }]);
   };
 
