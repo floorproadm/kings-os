@@ -28,14 +28,15 @@ export default function AboutSection() {
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed font-body">
               <p>
-                Hardwood Kings is a family-owned business with more than 24 years
-                of experience in hardwood flooring installation, refinishing, and
-                staircase design. We bring old-world craftsmanship to modern homes
-                across Johnson County.
+                Hardwood Kings was built through over 24 years of hands-on
+                experience in hardwood flooring installation, refinishing, stairs,
+                and decks. Every technique we use has been refined through
+                thousands of projects across Johnson County.
               </p>
               <p>
-                Every project is personally overseen by our founder, ensuring the
-                same standard of excellence that built our reputation.
+                Our founder is directly involved in every project — from
+                evaluation to final finish — ensuring the same standard of
+                quality that built our reputation.
               </p>
             </div>
 
