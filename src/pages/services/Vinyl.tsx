@@ -83,19 +83,21 @@ export default function VinylService() {
       <section className="section-padding">
         <div className="container mx-auto max-w-4xl">
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display text-2xl font-bold text-foreground text-center mb-8">Vinyl vs. Hardwood <span className="gold-gradient-text">Comparison</span></motion.h2>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-background border border-gold/15 rounded-xl overflow-hidden">
-            <div className="grid grid-cols-3 bg-gold/10 p-4 text-sm font-semibold text-foreground">
-              <span>Feature</span>
-              <span className="text-gold">Luxury Vinyl ✅</span>
-              <span>Hardwood</span>
-            </div>
-            {p.comparison.map((c, i) => (
-              <div key={i} className={`grid grid-cols-3 p-4 text-sm ${i % 2 === 0 ? 'bg-card' : 'bg-secondary/30'}`}>
-                <span className="text-foreground font-medium">{c.feature}</span>
-                <span className="text-gold">{c.vinyl}</span>
-                <span className="text-muted-foreground">{c.hardwood}</span>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-background border border-gold/15 rounded-xl overflow-x-auto">
+            <div className="min-w-[420px]">
+              <div className="grid grid-cols-3 bg-gold/10 p-3 sm:p-4 text-xs sm:text-sm font-semibold text-foreground">
+                <span>Feature</span>
+                <span className="text-gold">Luxury Vinyl ✅</span>
+                <span>Hardwood</span>
               </div>
-            ))}
+              {p.comparison.map((c, i) => (
+                <div key={i} className={`grid grid-cols-3 p-3 sm:p-4 text-xs sm:text-sm ${i % 2 === 0 ? 'bg-card' : 'bg-secondary/30'}`}>
+                  <span className="text-foreground font-medium">{c.feature}</span>
+                  <span className="text-gold">{c.vinyl}</span>
+                  <span className="text-muted-foreground">{c.hardwood}</span>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
