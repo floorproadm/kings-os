@@ -1,0 +1,23 @@
+{
+  "name": "Kings OS",
+  "short_name": "Kings OS",
+  "description": "Hardwood Kings — Admin Dashboard",
+  "start_url": "/admin",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#1A1A0F",
+  "theme_color": "#1A1A0F",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
