@@ -114,16 +114,29 @@ export default function StaircaseService() {
 
       {/* Safety */}
       <section className="section-padding bg-secondary/50">
-        <div className="container mx-auto max-w-3xl text-center">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-8">Safety & <span className="gold-gradient-text">Code Compliance</span></h2>
-          <div className="grid grid-cols-2 gap-4">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-12">
+            <p className="text-gold font-semibold text-xs uppercase tracking-[0.2em] mb-3">Built to Last</p>
+            <h2 className="font-display text-3xl font-bold text-foreground">Safety & <span className="gold-gradient-text">Code Compliance</span></h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {p.safety.map((s, i) => (
-              <div key={i} className="flex items-center gap-2 text-sm text-foreground">
-                <CheckCircle className="w-4 h-4 text-gold" /> {s}
-              </div>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.4 }}
+                className="bg-background border border-gold/15 rounded-xl p-5 flex items-start gap-4"
+              >
+                <div className="w-9 h-9 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-4.5 h-4.5 text-gold" />
+                </div>
+                <span className="text-foreground font-medium text-sm leading-relaxed">{s}</span>
+              </motion.div>
             ))}
           </div>
-          <p className="text-xs text-muted-foreground mt-6">Every project includes a detailed safety inspection and compliance verification.</p>
+          <p className="text-xs text-muted-foreground mt-8 text-center">Every project includes a detailed safety inspection and compliance verification.</p>
         </div>
       </section>
 
