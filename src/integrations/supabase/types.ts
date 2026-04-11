@@ -88,6 +88,108 @@ export type Database = {
         }
         Relationships: []
       }
+      invoices: {
+        Row: {
+          amount: number
+          created_at: string
+          due_date: string | null
+          id: string
+          invoice_number: string
+          org_id: string
+          project_id: string
+          status: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          invoice_number?: string
+          org_id?: string
+          project_id: string
+          status?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          invoice_number?: string
+          org_id?: string
+          project_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoices_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoices_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      labor_payroll: {
+        Row: {
+          created_at: string
+          daily_rate: number
+          days_worked: number
+          id: string
+          notes: string | null
+          org_id: string
+          project_id: string
+          total_cost: number
+          work_date: string | null
+          worker_name: string
+        }
+        Insert: {
+          created_at?: string
+          daily_rate?: number
+          days_worked?: number
+          id?: string
+          notes?: string | null
+          org_id?: string
+          project_id: string
+          total_cost?: number
+          work_date?: string | null
+          worker_name?: string
+        }
+        Update: {
+          created_at?: string
+          daily_rate?: number
+          days_worked?: number
+          id?: string
+          notes?: string | null
+          org_id?: string
+          project_id?: string
+          total_cost?: number
+          work_date?: string | null
+          worker_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "labor_payroll_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "labor_payroll_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       leads: {
         Row: {
           address: string | null
@@ -140,6 +242,111 @@ export type Database = {
             columns: ["org_id"]
             isOneToOne: false
             referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      material_costs: {
+        Row: {
+          amount: number
+          created_at: string
+          description: string
+          id: string
+          org_id: string
+          project_id: string
+          purchased_at: string | null
+          receipt_url: string | null
+          vendor: string | null
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          description?: string
+          id?: string
+          org_id?: string
+          project_id: string
+          purchased_at?: string | null
+          receipt_url?: string | null
+          vendor?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          description?: string
+          id?: string
+          org_id?: string
+          project_id?: string
+          purchased_at?: string | null
+          receipt_url?: string | null
+          vendor?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "material_costs_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "material_costs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      measurements: {
+        Row: {
+          created_at: string
+          extras_value: number | null
+          handrail_ft: number | null
+          id: string
+          notes: string | null
+          org_id: string
+          project_id: string
+          sqft: number | null
+          stairs_count: number | null
+          total_value: number | null
+        }
+        Insert: {
+          created_at?: string
+          extras_value?: number | null
+          handrail_ft?: number | null
+          id?: string
+          notes?: string | null
+          org_id?: string
+          project_id: string
+          sqft?: number | null
+          stairs_count?: number | null
+          total_value?: number | null
+        }
+        Update: {
+          created_at?: string
+          extras_value?: number | null
+          handrail_ft?: number | null
+          id?: string
+          notes?: string | null
+          org_id?: string
+          project_id?: string
+          sqft?: number | null
+          stairs_count?: number | null
+          total_value?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "measurements_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "measurements_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
             referencedColumns: ["id"]
           },
         ]
@@ -245,6 +452,54 @@ export type Database = {
           },
         ]
       }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          invoice_id: string
+          method: string | null
+          notes: string | null
+          org_id: string
+          payment_date: string | null
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          id?: string
+          invoice_id: string
+          method?: string | null
+          notes?: string | null
+          org_id?: string
+          payment_date?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          invoice_id?: string
+          method?: string | null
+          notes?: string | null
+          org_id?: string
+          payment_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string | null
@@ -270,6 +525,66 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "profiles_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          address: string | null
+          completed_date: string | null
+          created_at: string
+          id: string
+          lead_id: string | null
+          notes: string | null
+          org_id: string
+          scheduled_date: string | null
+          status: string
+          title: string
+          total_value: number | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          completed_date?: string | null
+          created_at?: string
+          id?: string
+          lead_id?: string | null
+          notes?: string | null
+          org_id?: string
+          scheduled_date?: string | null
+          status?: string
+          title: string
+          total_value?: number | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          completed_date?: string | null
+          created_at?: string
+          id?: string
+          lead_id?: string | null
+          notes?: string | null
+          org_id?: string
+          scheduled_date?: string | null
+          status?: string
+          title?: string
+          total_value?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "projects_org_id_fkey"
             columns: ["org_id"]
             isOneToOne: false
             referencedRelation: "organizations"

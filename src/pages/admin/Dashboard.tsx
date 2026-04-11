@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { UserPlus, Users, Share2, Clock, BarChart3 } from "lucide-react";
+import { UserPlus, Users, Share2, Clock, BarChart3, FolderKanban } from "lucide-react";
 import { HK_ORG_ID } from "@/lib/constants";
 
 const statusColors: Record<string, string> = {
@@ -41,6 +41,7 @@ interface KPIs {
   totalLeads: number;
   activeReferrals: number;
   pending: number;
+  activeProjects: number;
 }
 
 interface SourceStat {
@@ -51,7 +52,7 @@ interface SourceStat {
 }
 
 export default function Dashboard() {
-  const [kpis, setKpis] = useState<KPIs>({ newThisWeek: 0, totalLeads: 0, activeReferrals: 0, pending: 0 });
+  const [kpis, setKpis] = useState<KPIs>({ newThisWeek: 0, totalLeads: 0, activeReferrals: 0, pending: 0, activeProjects: 0 });
   const [recentLeads, setRecentLeads] = useState<any[]>([]);
   const [allLeadsData, setAllLeadsData] = useState<any[]>([]);
 
@@ -62,9 +63,10 @@ export default function Dashboard() {
   const fetchData = async () => {
     const weekAgo = new Date(Date.now() - 7 * 86400000).toISOString();
 
-    const [allLeads, activeRef] = await Promise.all([
+    const [allLeads, activeRef, activeProj] = await Promise.all([
       supabase.from("leads").select("*").order("created_at", { ascending: false }),
       supabase.from("referral_codes").select("id", { count: "exact" }).eq("active", true),
+      supabase.from("projects").select("id", { count: "exact" }).in("status", ["planning", "in_progress"]),
     ]);
 
     const leads = allLeads.data || [];
@@ -75,6 +77,7 @@ export default function Dashboard() {
       totalLeads: leads.length,
       activeReferrals: activeRef.count || 0,
       pending: leads.filter((l) => l.status === "new" || l.status === "contacted").length,
+      activeProjects: activeProj.count || 0,
     });
   };
 
@@ -102,6 +105,7 @@ export default function Dashboard() {
   const kpiCards = [
     { label: "New This Week", value: kpis.newThisWeek, icon: UserPlus, color: "text-blue-400" },
     { label: "Total Leads", value: kpis.totalLeads, icon: Users, color: "text-gold" },
+    { label: "Active Projects", value: kpis.activeProjects, icon: FolderKanban, color: "text-purple-400" },
     { label: "Active Referrals", value: kpis.activeReferrals, icon: Share2, color: "text-green-400" },
     { label: "Pending Contact", value: kpis.pending, icon: Clock, color: "text-yellow-400" },
   ];

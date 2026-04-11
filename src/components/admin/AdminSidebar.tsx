@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, Share2, Settings, ExternalLink, ImageIcon, Handshake, Wrench } from "lucide-react";
+import { LayoutDashboard, Users, Share2, Settings, ExternalLink, ImageIcon, Handshake, Wrench, FolderKanban } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import {
@@ -16,6 +16,7 @@ import {
 
 const navItems = [
   { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
+  { title: "Projects", url: "/admin/projects", icon: FolderKanban },
   { title: "Leads", url: "/admin/leads", icon: Users },
   { title: "Partners", url: "/admin/partners", icon: Handshake },
   { title: "Referrals", url: "/admin/referrals", icon: Share2 },
