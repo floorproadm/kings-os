@@ -170,6 +170,13 @@ export function useProjectDetails(projectId: string | null) {
     invalidate();
   };
 
+  const updateMeasurement = async (id: string, input: Partial<Omit<Measurement, "id" | "created_at" | "project_id">>) => {
+    const { error } = await supabase.from("measurements").update(input).eq("id", id);
+    if (error) { toast.error(error.message); return; }
+    toast.success("Measurement updated");
+    invalidate();
+  };
+
   // KPI calculations
   const totalMaterials = materialCosts.reduce((s, c) => s + Number(c.amount), 0);
   const totalLabor = laborEntries.reduce((s, c) => s + Number(c.total_cost), 0);
