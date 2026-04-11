@@ -1,68 +1,51 @@
 
 
-# Invoice Settings — Customização do Invoice no Settings
+# Página dedicada de Invoices no Admin
 
-## Problema atual
+## O que será feito
 
-O InvoicePreview tem dados da empresa **hardcoded** ("Hardwood Kings", "Premium Hardwood Flooring", "hardwoodkings.com"). Não há como customizar logo, tagline, website, endereço da empresa, nem termos padrão de pagamento.
+Criar uma nova página `/admin/invoices` que lista **todos os invoices de todos os projetos** em uma visão centralizada, com filtros, busca e acesso rápido a preview/edição. Adicionar o link na sidebar e bottom nav.
 
-## O que adicionar
+## Arquivos a criar/editar
 
-Uma nova seção **"Invoice Settings"** na página de Settings com:
+### 1. `src/pages/admin/Invoices.tsx` (novo)
+- Busca todos os invoices via Supabase join com `projects` (para pegar título do projeto e cliente)
+- KPI strip no topo: Total Invoiced, Total Received, Outstanding, Overdue count
+- Filtros: status (draft/sent/paid/overdue), busca por número ou cliente
+- Tabela/lista com: #número, projeto, cliente, valor, status badge, due date, progress bar de pagamento
+- Ações: preview, editar, deletar
+- Integra os componentes existentes `InvoiceEditorDialog` e `InvoicePreview`
 
-### 1. Database — Nova tabela `invoice_settings`
+### 2. `src/components/admin/AdminSidebar.tsx`
+- Adicionar item "Invoices" com ícone `Receipt` entre Projects e Leads
 
-| Coluna | Tipo | Default |
-|--------|------|---------|
-| id | uuid PK | |
-| org_id | uuid | HK org |
-| logo_url | text | null |
-| company_name | text | org.name |
-| tagline | text | null (ex: "Premium Hardwood Flooring") |
-| website | text | null |
-| company_address | text | null |
-| company_phone | text | null |
-| company_email | text | null |
-| accent_color | text | '#c9a84c' (gold) |
-| default_notes | text | null (termos padrão que aparecem em todo invoice) |
-| footer_text | text | 'Thank you for choosing Hardwood Kings!' |
+### 3. `src/components/admin/AdminBottomNav.tsx`
+- Considerar adicionar Invoices ou manter o layout atual (5 itens é o limite ideal para mobile)
 
-RLS: org-scoped (mesmo padrão).
+### 4. `src/App.tsx`
+- Adicionar rota lazy `/admin/invoices`
 
-### 2. Settings Page — Card "Invoice Branding"
+### 5. Hook de dados
+- Criar `src/hooks/admin/useInvoicesData.ts` — busca todos invoices + payments com join no projeto, cálculo de KPIs globais, funções de delete/update status
 
-Novo card na página de Settings com:
-- **Upload de logo** (upload para Supabase Storage → salva URL)
-- **Company name, tagline, website, endereço, phone, email** — inputs editáveis
-- **Accent color** — color picker (cor da barra e títulos do invoice)
-- **Default payment terms/notes** — textarea com termos padrão
-- **Footer message** — texto do rodapé do invoice
-- **Preview mini** — pequena pré-visualização ao lado mostrando como fica
+## Estrutura da página
 
-### 3. InvoicePreview — Usar dados dinâmicos
-
-Substituir os valores hardcoded por dados da `invoice_settings`:
-- Logo da empresa no header (se configurado)
-- Nome, tagline, website, endereço vindos do settings
-- Cor de destaque dinâmica (barra, títulos)
-- Notes padrão pré-preenchidos ao criar novo invoice
-- Footer text customizado
-
-### 4. InvoiceEditorDialog — Auto-fill notes
-
-Ao criar novo invoice, pré-preencher o campo `notes` com o `default_notes` do settings.
+```text
+┌─────────────────────────────────┐
+│ KPI: Invoiced | Received | Due  │
+├─────────────────────────────────┤
+│ [Search] [Status filter]        │
+├─────────────────────────────────┤
+│ #001 | Project X | $2,500 | Sent│
+│ #002 | Project Y | $1,200 | Paid│
+│ ...                             │
+└─────────────────────────────────┘
+```
 
 ## Ordem de implementação
 
-1. Migration: criar `invoice_settings` + storage bucket para logos
-2. Card "Invoice Branding" no Settings com upload + inputs + save
-3. Atualizar InvoicePreview para buscar e usar invoice_settings
-4. Atualizar InvoiceEditorDialog para auto-fill default_notes
-
-## Arquivos afetados
-
-- `supabase/migrations/` — nova migration
-- `src/pages/admin/Settings.tsx` — novo card Invoice Branding
-- `src/components/admin/projects/InvoicePreview.tsx` — dados dinâmicos
-- `src/components/admin/projects/InvoiceEditorDialog.tsx` — auto-fill notes
+1. Hook `useInvoicesData` — query all invoices com join projects
+2. Página `Invoices.tsx` com lista, filtros e KPIs
+3. Rota no App.tsx + item na sidebar
+4. Integrar InvoiceEditorDialog e InvoicePreview existentes
 
