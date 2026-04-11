@@ -103,7 +103,7 @@ export function ProjectDetailPanel({ project, isOpen, onClose, onStatusChange }:
             </TabsList>
 
             <TabsContent value="measurements">
-              <MeasurementsTab measurements={measurements} onAdd={addMeasurement} onDelete={(id) => deleteRecord("measurements", id)} />
+              <MeasurementsTab measurements={measurements} onAdd={addMeasurement} onDelete={(id) => deleteRecord("measurements", id)} onUpdate={updateMeasurement} />
             </TabsContent>
 
             <TabsContent value="costs">
