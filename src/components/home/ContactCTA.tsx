@@ -39,7 +39,7 @@ export default function ContactCTA() {
       phone: form.phone || null,
       service: form.service || null,
       message: form.message || null,
-      source: "website",
+      source: "website-hero",
     });
     setLoading(false);
     if (error) {

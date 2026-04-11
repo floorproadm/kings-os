@@ -260,7 +260,7 @@ export default function ContactSection() {
       phone: form.phone,
       address: form.city,
       service: form.service,
-      source: "website",
+      source: "website-contact",
       status: "new",
       message: [
         `SF: ${form.squareFootage}`,
