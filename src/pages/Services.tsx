@@ -7,6 +7,16 @@ import {
   TreePine, Paintbrush, ArrowUpDown, Trash2, Layers, Fence, Sparkles,
 } from "lucide-react";
 
+const serviceImageMap: Record<string, string> = {
+  "Hardwood Floor Installation": "/images/services/hardwood-installation.jpg",
+  "Sanding, Staining & Refinishing": "/images/services/sanding-refinishing.jpg",
+  "Staircase Design & Finishing": "/images/services/staircase.jpg",
+  "Demolition & Replacement": "/images/services/demolition.jpg",
+  "Vinyl & Engineered Wood Installation": "/images/services/vinyl.jpg",
+  "Deck & Handrail Refinishing": "/images/services/deck.jpg",
+  "Wash & Polish": "/images/services/wash-polish.jpg",
+};
+
 const cardVariants = {
   hidden: (i: number) => ({
     opacity: 0,
