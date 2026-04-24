@@ -147,12 +147,23 @@ export default function Services() {
                 i % 2 === 1 ? "lg:direction-rtl" : ""
               }`}
             >
-              {/* Image placeholder */}
-              <div className={`aspect-[4/3] bg-card flex items-center justify-center ${i % 2 === 1 ? "lg:order-2" : ""}`}>
-                <div className="text-center">
-                  <ImageIcon className="w-12 h-12 text-gold/30 mx-auto mb-2" />
-                  <span className="text-sm text-muted-foreground">Photo coming soon</span>
-                </div>
+              {/* Image */}
+              <div className={`aspect-[4/3] bg-card overflow-hidden ${i % 2 === 1 ? "lg:order-2" : ""}`}>
+                {serviceImageMap[s.title] ? (
+                  <img
+                    src={serviceImageMap[s.title]}
+                    alt={s.title}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="text-center">
+                      <ImageIcon className="w-12 h-12 text-gold/30 mx-auto mb-2" />
+                      <span className="text-sm text-muted-foreground">Photo coming soon</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Content */}
