@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import { Phone, CheckCircle, ImageIcon } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Phone, CheckCircle, ImageIcon, ArrowRight } from "lucide-react";
 import { blurIn } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
@@ -181,10 +182,10 @@ export default function Services() {
                   ))}
                 </ul>
                 <Button variant="gold" size="lg" asChild>
-                  <a href="tel:+19139153193">
-                    <Phone className="w-4 h-4 mr-2" />
+                  <Link to="/quiz">
                     Get a Quote
-                  </a>
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
                 </Button>
               </div>
             </motion.div>
