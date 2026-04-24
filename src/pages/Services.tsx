@@ -1,21 +1,14 @@
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 import { Phone, CheckCircle, ImageIcon } from "lucide-react";
 import { blurIn } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
+import { supabase } from "@/integrations/supabase/client";
+import { serviceFallbackImageMap } from "@/constants/serviceImages";
 import {
   TreePine, Paintbrush, ArrowUpDown, Trash2, Layers, Fence, Sparkles,
 } from "lucide-react";
-
-const serviceImageMap: Record<string, string> = {
-  "Hardwood Floor Installation": "/images/services/hardwood-installation.jpg",
-  "Sanding, Staining & Refinishing": "/images/services/sanding-refinishing.jpg",
-  "Staircase Design & Finishing": "/images/services/staircase.jpg",
-  "Demolition & Replacement": "/images/services/demolition.jpg",
-  "Vinyl & Engineered Wood Installation": "/images/services/vinyl.jpg",
-  "Deck & Handrail Refinishing": "/images/services/deck.jpg",
-  "Wash & Polish": "/images/services/wash-polish.jpg",
-};
 
 const cardVariants = {
   hidden: (i: number) => ({
@@ -114,6 +107,23 @@ const services = [
 ];
 
 export default function Services() {
+  const { data: serviceRows } = useQuery({
+    queryKey: ["public-services"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("services")
+        .select("title, image_url")
+        .eq("is_active", true);
+
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const serviceImageMap = Object.fromEntries(
+    (serviceRows ?? []).map((service) => [service.title, service.image_url]),
+  ) as Record<string, string | null>;
+
   return (
     <Layout>
       {/* Hero */}
@@ -149,9 +159,9 @@ export default function Services() {
             >
               {/* Image */}
               <div className={`aspect-[4/3] bg-card overflow-hidden ${i % 2 === 1 ? "lg:order-2" : ""}`}>
-                {serviceImageMap[s.title] ? (
+                {serviceImageMap[s.title] || serviceFallbackImageMap[s.title] ? (
                   <img
-                    src={serviceImageMap[s.title]}
+                    src={serviceImageMap[s.title] ?? serviceFallbackImageMap[s.title]}
                     alt={s.title}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                     loading="lazy"
