@@ -5,6 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ArrowRight, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -25,6 +32,7 @@ type QuizFormData = {
   belowGrade: string;
   livingDuringRefinish: string;
   stairsIncluded: string;
+  stairsCount: string;
   squareFootage: string;
   timeline: string;
   budget: string;
@@ -124,6 +132,7 @@ const Quiz = () => {
     belowGrade: "",
     livingDuringRefinish: "",
     stairsIncluded: "",
+    stairsCount: "",
     squareFootage: "",
     timeline: "",
     budget: "",
@@ -214,7 +223,13 @@ const Quiz = () => {
         formData.subfloor ? `Subfloor: ${formData.subfloor}` : null,
         formData.belowGrade ? `BelowGrade: ${formData.belowGrade}` : null,
         formData.livingDuringRefinish ? `LivingDuringRefinish: ${formData.livingDuringRefinish}` : null,
-        formData.stairsIncluded ? `Stairs: ${formData.stairsIncluded}` : null,
+        formData.stairsIncluded
+          ? `Stairs: ${formData.stairsIncluded}${
+              formData.stairsIncluded === "yes" && formData.stairsCount
+                ? ` (${formData.stairsCount} steps)`
+                : ""
+            }`
+          : null,
         formData.location ? `Location: ${formData.location}` : null,
         needsConsultation() ? "NEEDS_CONSULTATION" : null,
       ]
@@ -671,13 +686,45 @@ const Quiz = () => {
                         ].map((opt) =>
                           optionCard(
                             formData.stairsIncluded === opt.value,
-                            () => setFormData((prev) => ({ ...prev, stairsIncluded: opt.value })),
+                            () =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                stairsIncluded: opt.value,
+                                stairsCount: opt.value === "yes" ? prev.stairsCount : "",
+                              })),
                             opt.label,
                             undefined,
                             true,
                           ),
                         )}
                       </div>
+
+                      {formData.stairsIncluded === "yes" && (
+                        <div className="mt-4">
+                          <Label className="text-foreground font-medium block mb-2 text-center">
+                            How many steps?
+                          </Label>
+                          <Select
+                            value={formData.stairsCount}
+                            onValueChange={(value) =>
+                              setFormData((prev) => ({ ...prev, stairsCount: value }))
+                            }
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select number of steps" />
+                            </SelectTrigger>
+                            <SelectContent className="max-h-72">
+                              {Array.from({ length: 25 }, (_, i) => i + 1).map((n) => (
+                                <SelectItem key={n} value={String(n)}>
+                                  {n} {n === 1 ? "step" : "steps"}
+                                </SelectItem>
+                              ))}
+                              <SelectItem value="25+">25+ steps</SelectItem>
+                              <SelectItem value="not-sure">Not sure</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
                     </div>
 
                     <div className="text-center">
