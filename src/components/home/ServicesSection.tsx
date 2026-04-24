@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { serviceFallbackImageMap } from "@/constants/serviceImages";
 import {
   TreePine, Paintbrush, ArrowUpDown, Trash2, Layers, Fence, Sparkles,
   Hammer, Wrench, Home, Shield, Star, Zap,
@@ -11,16 +12,6 @@ import type { LucideIcon } from "lucide-react";
 const iconMap: Record<string, LucideIcon> = {
   TreePine, Paintbrush, ArrowUpDown, Trash2, Layers, Fence, Sparkles,
   Hammer, Wrench, Home, Shield, Star, Zap,
-};
-
-const serviceBgMap: Record<string, string> = {
-  "Hardwood Floor Installation": "/images/services/hardwood-installation.jpg",
-  "Sanding, Staining & Refinishing": "/images/services/sanding-refinishing.jpg",
-  "Staircase Design & Finishing": "/images/services/staircase.jpg",
-  "Demolition & Replacement": "/images/services/demolition.jpg",
-  "Vinyl & Engineered Wood Installation": "/images/services/vinyl.jpg",
-  "Deck & Handrail Refinishing": "/images/services/deck.jpg",
-  "Wash & Polish": "/images/services/wash-polish.jpg",
 };
 
 const fadeUp = {
@@ -82,10 +73,10 @@ export default function ServicesSection() {
                 custom={i}
                 className="elevated-card group hover:border-gold/40 transition-colors duration-300 cursor-pointer overflow-hidden relative w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.875rem)] xl:w-[calc(25%-0.9375rem)]"
               >
-                {serviceBgMap[s.title] && (
+                {serviceFallbackImageMap[s.title] && (
                   <>
                     <img
-                      src={serviceBgMap[s.title]}
+                      src={serviceFallbackImageMap[s.title]}
                       alt=""
                       className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60 transition-opacity duration-500 group-hover:scale-105"
                       loading="lazy"
