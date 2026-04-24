@@ -7,7 +7,7 @@ import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { serviceFallbackImageMap } from "@/constants/serviceImages";
 import {
-  TreePine, Paintbrush, ArrowUpDown, Trash2, Layers, Fence, Sparkles,
+  TreePine, Paintbrush, ArrowUpDown, Layers, Fence,
 } from "lucide-react";
 
 const cardVariants = {
@@ -65,16 +65,6 @@ const services = [
     ],
   },
   {
-    icon: Trash2,
-    title: "Demolition & Replacement",
-    bullets: [
-      "Full removal of old flooring",
-      "Carpet, tile, laminate tearout",
-      "Subfloor inspection & repair",
-      "Clean & responsible disposal",
-    ],
-  },
-  {
     icon: Layers,
     title: "Vinyl & Engineered Wood Installation",
     bullets: [
@@ -92,16 +82,6 @@ const services = [
       "Weather-resistant finish application",
       "Handrail restoration & replacement",
       "Extends the life of your deck",
-    ],
-  },
-  {
-    icon: Sparkles,
-    title: "Wash & Polish",
-    bullets: [
-      "Professional deep cleaning",
-      "Scratch & scuff removal",
-      "Protective polish application",
-      "Restores natural shine",
     ],
   },
 ];
@@ -137,7 +117,7 @@ export default function Services() {
             <span className="gold-gradient-text">Johnson County</span>
           </motion.h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            7 specialized services delivered with 24+ years of craftsmanship.
+            5 specialized services delivered with 24+ years of craftsmanship.
           </p>
         </div>
       </section>
